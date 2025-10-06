@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id        String   @id @default(cuid())
+  name      String
+  ownerName String
+  segment   String?
+  region    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  opportunities Opportunity[]
+}
+
+model Opportunity {
+  id                 String   @id @default(cuid())
+  accountId          String
+  account            Account  @relation(fields: [accountId], references: [id])
+  name               String
+  renewalDate        DateTime
+  quarterKey         String   // e.g., FY26-Q1
+  expiringArrCents   Int
+  stage              String?
+  probability        Float?
+  healthScore        Int?
+  riskFlag           Boolean  @default(false)
+  productFamily      String?
+  termMonths         Int?
+  sourceSystemId     String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model ForecastSnapshot {
+  id             String   @id @default(cuid())
+  scopeType      String   // 'RM' | 'Manager'
+  scopeName      String   // e.g., RM name or team name
+  quarterKey     String   // FYxx-Qx (target quarter)
+  periodKey      String   // YYYY-WW or YYYY-MM (when updated)
+  forQuarter     String   // 'CQ' | 'NQ'
+  bestCents      Int
+  worstCents     Int
+  callCents      Int
+  confidencePct  Int?
+  notes          String?
+  createdAt      DateTime @default(now())
+  createdBy      String   // who entered this snapshot (free text for MVP)
+  dataVersionId  String?
+}
+
+model DataVersion {
+  id           String   @id @default(cuid())
+  source       String   // 'CSV'
+  ingestedAt   DateTime @default(now())
+  hash         String
+  recordsCount Int
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  actor      String   // user free text
+  action     String
+  entityType String
+  entityId   String
+  beforeJson String?
+  afterJson  String?
+  createdAt  DateTime @default(now())
+}
+
