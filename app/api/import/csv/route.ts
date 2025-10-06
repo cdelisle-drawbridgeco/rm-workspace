@@ -25,11 +25,21 @@ export async function POST(req: NextRequest) {
   for (const line of lines) {
     if (!line.trim()) continue;
     const [accName, oppName, renewalDate, arrUsd, stage, prob, health, risk, product, term, owner, region, segment] = line.split(',').map(s => s.trim());
-    const account = await prisma.account.upsert({
-      where: { name: accName },
-      create: { name: accName, ownerName: owner, region, segment },
-      update: { ownerName: owner, region, segment }
+    let account = await prisma.account.findFirst({
+      where: { name: accName }
     });
+    
+    if (!account) {
+      account = await prisma.account.create({
+        data: { name: accName, ownerName: owner, region, segment }
+      });
+    } else {
+      // Update existing account if needed
+      account = await prisma.account.update({
+        where: { id: account.id },
+        data: { ownerName: owner, region, segment }
+      });
+    }
     const dt = new Date(renewalDate);
     const cents = Math.round(parseFloat(arrUsd) * 100);
     await prisma.opportunity.create({
