@@ -7,7 +7,25 @@ type Account = {
   name: string;
   ownerName: string;
   segment: string | null;
-  opportunities: { id: string; name: string; expiringArrCents: number; renewalDate: string }[];
+  region: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+  opportunities: {
+    id: string;
+    accountId: string;
+    name: string;
+    renewalDate: Date;
+    quarterKey: string;
+    expiringArrCents: number;
+    stage: string | null;
+    probability: number | null;
+    healthScore: number | null;
+    riskFlag: boolean | null;
+    productFamily: string | null;
+    termMonths: number | null;
+    createdAt: Date;
+    updatedAt: Date;
+  }[];
 };
 
 function formatUsd(cents: number): string {

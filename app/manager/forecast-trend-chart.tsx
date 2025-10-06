@@ -6,11 +6,25 @@ interface Account {
   id: string;
   name: string;
   ownerName: string;
+  segment: string | null;
+  region: string | null;
+  createdAt: Date;
+  updatedAt: Date;
   opportunities: Array<{
     id: string;
+    accountId: string;
     name: string;
+    renewalDate: Date;
     quarterKey: string;
     expiringArrCents: number;
+    stage: string | null;
+    probability: number | null;
+    healthScore: number | null;
+    riskFlag: boolean | null;
+    productFamily: string | null;
+    termMonths: number | null;
+    createdAt: Date;
+    updatedAt: Date;
   }>;
 }
 
