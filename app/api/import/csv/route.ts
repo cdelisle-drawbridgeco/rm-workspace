@@ -60,6 +60,9 @@ export async function POST(req: NextRequest) {
     created++;
   }
 
-  return NextResponse.text(`Imported ${created} opportunities`);
+  return new NextResponse(`Imported ${created} opportunities`, {
+    status: 200,
+    headers: { 'Content-Type': 'text/plain' }
+  });
 }
 
