@@ -1,6 +1,8 @@
 import { prisma } from '@/lib/db';
 import VpDashboard from './vp-dashboard';
 
+export const dynamic = 'force-dynamic';
+
 function getCurrentQuarter(): string {
   const now = new Date();
   const year = now.getUTCFullYear();
