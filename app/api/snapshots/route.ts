@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = (await req.json().catch(() => null)) as any;
     if (!body) return new NextResponse('Bad JSON', { status: 400 });
-    const { scopeType = 'RM', scopeName, best, worst, call, confidencePct, notes, quarterKey } = body;
+    const { scopeType = 'RM', scopeName, best, worst, call, confidencePct, confidence, notes, quarterKey } = body;
     if (!scopeName) return new NextResponse('Missing scopeName', { status: 400 });
     const b = Number(best);
     const w = Number(worst);
@@ -43,6 +43,7 @@ export async function POST(req: NextRequest) {
         worstCents: toCents(w),
         callCents: toCents(c),
         confidencePct: confidencePct != null ? Number(confidencePct) : null,
+        confidence: confidence || null,
         notes: notes || null,
         createdBy: scopeName
       }

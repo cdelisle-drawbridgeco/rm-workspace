@@ -157,8 +157,11 @@ async function main() {
   }
   
   // Create snapshots for each account/quarter combination
+  const confidenceOptions = ['Commit', 'Likely', 'Upside', 'At Risk', 'Churn'];
   for (const [accountName, quarterMap] of oppsByAccountAndQuarter) {
     for (const [quarterKey, arrUpCents] of quarterMap) {
+      // Randomly assign confidence levels for variety
+      const confidence = confidenceOptions[Math.floor(Math.random() * confidenceOptions.length)];
       snapshots.push(
         prisma.forecastSnapshot.create({
           data: {
@@ -171,6 +174,7 @@ async function main() {
             worstCents: arrUpCents, // Set equal to ARR up
             callCents: arrUpCents, // Set equal to ARR up
             confidencePct: 75,
+            confidence: confidence,
             notes: 'Initial seed - Best/Worst/Call = ARR up for testing',
             createdBy: 'Seed Script'
           }

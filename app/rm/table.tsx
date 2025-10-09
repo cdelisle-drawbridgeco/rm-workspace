@@ -62,8 +62,8 @@ export default function AccountTable({
   const [selectedRM, setSelectedRM] = useState<string>('All');
   const [selectedQuarter, setSelectedQuarter] = useState<string>('CQ');
   
-  const [drafts, setDrafts] = useState<Record<string, { best: string; worst: string; call: string; notes: string }>>(() => {
-    const d: Record<string, { best: string; worst: string; call: string; notes: string }> = {};
+  const [drafts, setDrafts] = useState<Record<string, { best: string; worst: string; call: string; confidence: string; notes: string }>>(() => {
+    const d: Record<string, { best: string; worst: string; call: string; confidence: string; notes: string }> = {};
     for (const a of accounts) {
       const accountSnapshots = latestByAccount[a.name];
       const currentQuarterKey = selectedQuarter === 'CQ' ? quarters.cq : selectedQuarter === 'NQ' ? quarters.nq : quarters.fq;
@@ -72,6 +72,7 @@ export default function AccountTable({
         best: latest && latest.bestUsd > 0 ? formatCurrency(String(latest.bestUsd)) : '',
         worst: latest && latest.worstUsd > 0 ? formatCurrency(String(latest.worstUsd)) : '',
         call: latest && latest.callUsd > 0 ? formatCurrency(String(latest.callUsd)) : '',
+        confidence: latest && latest.confidence ? String(latest.confidence) : '',
         notes: latest ? String(latest.notes) : ''
       };
     }
@@ -109,6 +110,7 @@ export default function AccountTable({
       best: row.best,
       worst: row.worst,
       call: row.call,
+      confidence: row.confidence,
       notes: row.notes
     });
     
@@ -134,6 +136,7 @@ export default function AccountTable({
         best: parseCurrency(row.best),
         worst: parseCurrency(row.worst),
         call: parseCurrency(row.call),
+        confidence: row.confidence || null,
         notes: row.notes || null,
         quarterKey: currentQuarterKey
       })
@@ -244,16 +247,17 @@ export default function AccountTable({
         <table className="min-w-full divide-y divide-gray-200">
           <thead>
             <tr className="bg-gray-100 text-left text-sm font-semibold">
-              <th className="p-2 w-64">Account</th>
-              <th className="p-2">RM</th>
-              <th className="p-2">Client Type</th>
-              <th className="p-2 w-20">Opps</th>
-              <th className="p-2">ARR Up (sum)</th>
-              <th className="p-2">Best (USD)</th>
-              <th className="p-2">Worst (USD)</th>
-              <th className="p-2">Call (USD)</th>
-              <th className="p-2">Notes</th>
-              <th className="p-2">Actions</th>
+              <th className="p-2 w-56">Account</th>
+              <th className="p-2 w-24">RM</th>
+              <th className="p-2 w-28">Client Type</th>
+              <th className="p-2 w-16">Opps</th>
+              <th className="p-2 w-32">ARR Up (sum)</th>
+              <th className="p-2 w-28">Best (USD)</th>
+              <th className="p-2 w-28">Worst (USD)</th>
+              <th className="p-2 w-28">Call (USD)</th>
+              <th className="p-2 w-32">Confidence</th>
+              <th className="p-2 w-48">Notes</th>
+              <th className="p-2 w-20">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100 text-sm">
@@ -296,11 +300,12 @@ export default function AccountTable({
                       <td className="p-2 text-blue-600">{formatUsdFromDollars(rmTotals.call)}</td>
                       <td className="p-2">-</td>
                       <td className="p-2">-</td>
+                      <td className="p-2">-</td>
                     </tr>
                     {/* Account Rows */}
                     {expandedRMs[rm] && rmAccounts.map(acc => {
                       const sumArr = acc.opportunities.reduce((s, o) => s + o.expiringArrCents, 0);
-                      const d = drafts[acc.id] || { best: '', worst: '', call: '', notes: '' };
+                      const d = drafts[acc.id] || { best: '', worst: '', call: '', confidence: '', notes: '' };
                       return (
                         <React.Fragment key={acc.id}>
                           <tr className="bg-gray-50 hover:bg-gray-100">
@@ -316,7 +321,7 @@ export default function AccountTable({
                             <td className="p-2 font-medium">{formatUsd(sumArr)}</td>
                             <td className="p-2">
                               <input 
-                                className="w-24 rounded border p-1" 
+                                className="w-full rounded border p-1" 
                                 placeholder="$0"
                                 value={d.best} 
                                 onChange={e => {
@@ -332,7 +337,7 @@ export default function AccountTable({
                             </td>
                             <td className="p-2">
                               <input 
-                                className="w-24 rounded border p-1" 
+                                className="w-full rounded border p-1" 
                                 placeholder="$0"
                                 value={d.worst} 
                                 onChange={e => {
@@ -348,7 +353,7 @@ export default function AccountTable({
                             </td>
                             <td className="p-2">
                               <input 
-                                className="w-24 rounded border p-1" 
+                                className="w-full rounded border p-1" 
                                 placeholder="$0"
                                 value={d.call} 
                                 onChange={e => {
@@ -363,6 +368,20 @@ export default function AccountTable({
                               />
                             </td>
                             <td className="p-2">
+                              <select 
+                                className="w-full rounded border p-1" 
+                                value={d.confidence} 
+                                onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], confidence: e.target.value } }))}
+                              >
+                                <option value="">Select confidence...</option>
+                                <option value="Commit">Commit (&lt;90%)</option>
+                                <option value="Likely">Likely (60-90%)</option>
+                                <option value="Upside">Upside (&gt;60%)</option>
+                                <option value="At Risk">At Risk</option>
+                                <option value="Churn">Churn</option>
+                              </select>
+                            </td>
+                            <td className="p-2">
                               <input 
                                 className="w-full rounded border p-1" 
                                 placeholder="Notes" 
@@ -371,12 +390,12 @@ export default function AccountTable({
                               />
                             </td>
                             <td className="p-2">
-                              <button className="rounded bg-blue-600 px-3 py-1 text-white hover:bg-blue-700" onClick={() => saveRow(acc)}>Save</button>
+                              <button className="rounded bg-blue-600 px-2 py-1 text-xs text-white hover:bg-blue-700" onClick={() => saveRow(acc)}>Save</button>
                             </td>
                           </tr>
                           {expanded[acc.id] && (
                             <tr key={`${acc.id}-expanded`}>
-                              <td colSpan={10} className="bg-gray-100 p-3 pl-12">
+                              <td colSpan={11} className="bg-gray-100 p-3 pl-12">
                                 <div className="text-xs font-semibold text-gray-600">Opportunities</div>
                                 <div className="mt-2 grid grid-cols-4 gap-2 text-xs">
                                   {acc.opportunities.map(o => (
@@ -400,7 +419,7 @@ export default function AccountTable({
               // Single RM view
               filteredAccounts.map(acc => {
                 const sumArr = acc.opportunities.reduce((s, o) => s + o.expiringArrCents, 0);
-                const d = drafts[acc.id] || { best: '', worst: '', call: '', notes: '' };
+                const d = drafts[acc.id] || { best: '', worst: '', call: '', confidence: '', notes: '' };
                 return (
                   <React.Fragment key={acc.id}>
                     <tr className="hover:bg-gray-50">
@@ -416,7 +435,7 @@ export default function AccountTable({
                       <td className="p-2 font-medium">{formatUsd(sumArr)}</td>
                       <td className="p-2">
                         <input 
-                          className="w-24 rounded border p-1" 
+                          className="w-full rounded border p-1" 
                           placeholder="$0"
                           value={d.best} 
                           onChange={e => {
@@ -432,7 +451,7 @@ export default function AccountTable({
                       </td>
                       <td className="p-2">
                         <input 
-                          className="w-24 rounded border p-1" 
+                          className="w-full rounded border p-1" 
                           placeholder="$0"
                           value={d.worst} 
                           onChange={e => {
@@ -448,7 +467,7 @@ export default function AccountTable({
                       </td>
                       <td className="p-2">
                         <input 
-                          className="w-24 rounded border p-1" 
+                          className="w-full rounded border p-1" 
                           placeholder="$0"
                           value={d.call} 
                           onChange={e => {
@@ -463,6 +482,20 @@ export default function AccountTable({
                         />
                       </td>
                       <td className="p-2">
+                        <select 
+                          className="w-full rounded border p-1" 
+                          value={d.confidence} 
+                          onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], confidence: e.target.value } }))}
+                        >
+                          <option value="">Select confidence...</option>
+                          <option value="Commit">Commit (&lt;90%)</option>
+                          <option value="Likely">Likely (60-90%)</option>
+                          <option value="Upside">Upside (&gt;60%)</option>
+                          <option value="At Risk">At Risk</option>
+                          <option value="Churn">Churn</option>
+                        </select>
+                      </td>
+                      <td className="p-2">
                         <input 
                           className="w-full rounded border p-1" 
                           placeholder="Notes" 
@@ -471,12 +504,12 @@ export default function AccountTable({
                         />
                       </td>
                       <td className="p-2">
-                        <button className="rounded bg-blue-600 px-3 py-1 text-white hover:bg-blue-700" onClick={() => saveRow(acc)}>Save</button>
+                        <button className="rounded bg-blue-600 px-2 py-1 text-xs text-white hover:bg-blue-700" onClick={() => saveRow(acc)}>Save</button>
                       </td>
                     </tr>
                     {expanded[acc.id] && (
                       <tr key={`${acc.id}-expanded`}>
-                        <td colSpan={10} className="bg-gray-50 p-3">
+                        <td colSpan={11} className="bg-gray-50 p-3">
                           <div className="text-xs font-semibold text-gray-600">Opportunities</div>
                           <div className="mt-2 grid grid-cols-4 gap-2 text-xs">
                             {acc.opportunities.map(o => (

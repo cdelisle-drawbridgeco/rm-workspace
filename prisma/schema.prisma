@@ -48,6 +48,7 @@ model ForecastSnapshot {
   worstCents     Int
   callCents      Int
   confidencePct  Int?
+  confidence     String?  // 'Commit', 'Likely', 'Upside', 'At Risk', 'Churn'
   notes          String?
   createdAt      DateTime @default(now())
   createdBy      String   // who entered this snapshot (free text for MVP)
@@ -72,4 +73,6 @@ model AuditLog {
   afterJson  String?
   createdAt  DateTime @default(now())
 }
+
+
 
