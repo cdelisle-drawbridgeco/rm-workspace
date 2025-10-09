@@ -35,10 +35,10 @@ async function getData() {
   const fq = getFollowingQuarter();
   
   // Get snapshots for all quarters
-  const latestByAccount = new Map<string, Record<string, { bestUsd: number; worstUsd: number; callUsd: number; notes: string }>>();
+  const latestByAccount = new Map<string, Record<string, { bestUsd: number; worstUsd: number; callUsd: number; confidence: string; notes: string }>>();
   
   for (const accountName of names) {
-    const accountSnapshots: Record<string, { bestUsd: number; worstUsd: number; callUsd: number; notes: string }> = {};
+    const accountSnapshots: Record<string, { bestUsd: number; worstUsd: number; callUsd: number; confidence: string; notes: string }> = {};
     
     for (const quarter of [cq, nq, fq]) {
       const latestSnap = await prisma.forecastSnapshot.findFirst({
@@ -57,6 +57,7 @@ async function getData() {
           bestUsd: (latestSnap.bestCents || 0) / 100,
           worstUsd: (latestSnap.worstCents || 0) / 100,
           callUsd: (latestSnap.callCents || 0) / 100,
+          confidence: latestSnap.confidence || '',
           notes: latestSnap.notes || ''
         };
       }
