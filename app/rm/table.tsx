@@ -54,7 +54,7 @@ export default function AccountTable({
   quarters
 }: {
   accounts: Account[];
-  latestByAccount: Record<string, Record<string, { bestUsd: number; worstUsd: number; callUsd: number; notes: string }>>;
+  latestByAccount: Record<string, Record<string, { bestUsd: number; worstUsd: number; callUsd: number; confidence: string; notes: string }>>;
   quarters: { cq: string; nq: string; fq: string };
 }) {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
