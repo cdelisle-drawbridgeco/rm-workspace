@@ -30,10 +30,20 @@ function getFollowingQuarter(): string {
 
 async function getData() {
   try {
+    // Use a more defensive query - get accounts and owners separately if needed
     const accounts = await prisma.account.findMany({ 
       include: { 
         opportunities: true,
-        owner: true
+        owner: {
+          select: {
+            id: true,
+            firstName: true,
+            lastName: true,
+            email: true,
+            username: true,
+            isActive: true
+          }
+        }
       } 
     });
     
@@ -42,6 +52,7 @@ async function getData() {
     
     if (validAccounts.length !== accounts.length) {
       console.warn(`Warning: ${accounts.length - validAccounts.length} accounts found without owners`);
+      console.warn('Accounts without owners:', accounts.filter(acc => acc.owner === null).map(a => a.name));
     }
     
     const names = validAccounts.map(a => a.name);
