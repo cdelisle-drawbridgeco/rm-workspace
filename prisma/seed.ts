@@ -83,6 +83,14 @@ async function main() {
     'Vista Equity Partners'
   ];
 
+  // Find Jake Myers (he will own all Growth accounts)
+  const jakeMyers = users.find(u => u.firstName === 'Jake' && u.lastName === 'Myers');
+  if (!jakeMyers) {
+    throw new Error('Jake Myers not found in users');
+  }
+
+  // Create accounts - we'll assign segments and owners after creating opportunities
+  // For now, create accounts with temporary owners (will update after)
   const accounts = await Promise.all(
     companyNames.map(async (name, i) => {
       const owner = users[i % users.length];
@@ -90,7 +98,7 @@ async function main() {
         data: {
           name: name,
           ownerId: owner.id,
-          segment: i < 10 ? 'Hedge Fund' : 'Private Equity',
+          segment: i < 10 ? 'Hedge Fund' : 'Private Equity', // Temporary, will update
           region: ['NA', 'EMEA', 'APAC'][i % 3]
         }
       });
@@ -195,6 +203,41 @@ async function main() {
   }
   
   await Promise.all(opps);
+  
+  // Calculate total ARR per account and update segments/owners based on business logic
+  // Rule: Accounts with total ARR < $20k are 'Growth' and owned by Jake Myers
+  const allOpps = await prisma.opportunity.findMany();
+  const arrByAccount = new Map<string, number>();
+  
+  for (const opp of allOpps) {
+    const currentArr = arrByAccount.get(opp.accountId) || 0;
+    arrByAccount.set(opp.accountId, currentArr + opp.expiringArrCents);
+  }
+  
+  // Update accounts: assign segment and owner based on total ARR
+  for (const account of accounts) {
+    const totalArrCents = arrByAccount.get(account.id) || 0;
+    const totalArrDollars = totalArrCents / 100;
+    const isGrowth = totalArrDollars < 20_000;
+    
+    await prisma.account.update({
+      where: { id: account.id },
+      data: {
+        segment: isGrowth ? 'Growth' : 'Enterprise',
+        ownerId: isGrowth ? jakeMyers.id : account.ownerId // Jake Myers for Growth, keep original for Enterprise
+      }
+    });
+    
+    // If account is Growth, update all its opportunities to ensure they're under Jake Myers
+    if (isGrowth) {
+      await prisma.opportunity.updateMany({
+        where: { accountId: account.id },
+        data: {
+          // Opportunities are already linked to account, so they'll inherit the account's owner
+        }
+      });
+    }
+  }
   
   // Create account-level snapshots for all quarters with Best/Worst/Call = ARR up for renewal
   const snapshots: any[] = [];
