@@ -57,32 +57,59 @@ async function main() {
     })
   );
 
-  // Create ~20 accounts distributed across the RMs
+  // Create accounts with hedge fund and private equity company names
+  const companyNames = [
+    // Hedge Funds
+    'Blackstone Capital Partners',
+    'Bridgewater Associates',
+    'Renaissance Technologies',
+    'Two Sigma Investments',
+    'Citadel LLC',
+    'Millennium Management',
+    'AQR Capital Management',
+    'D.E. Shaw & Co.',
+    'Point72 Asset Management',
+    'Tiger Global Management',
+    // Private Equity
+    'KKR & Co.',
+    'Apollo Global Management',
+    'Carlyle Group',
+    'TPG Capital',
+    'Bain Capital',
+    'Warburg Pincus',
+    'General Atlantic',
+    'Silver Lake Partners',
+    'Thoma Bravo',
+    'Vista Equity Partners'
+  ];
+
   const accounts = await Promise.all(
-    Array.from({ length: 20 }).map(async (_, i) => {
+    companyNames.map(async (name, i) => {
       const owner = users[i % users.length];
       return prisma.account.create({
         data: {
-          name: `Acme ${i + 1}`,
+          name: name,
           ownerId: owner.id,
-          segment: i % 2 === 0 ? 'Mid-Market' : 'Enterprise',
+          segment: i < 10 ? 'Hedge Fund' : 'Private Equity',
           region: ['NA', 'EMEA', 'APAC'][i % 3]
         }
       });
     })
   );
 
-  // Create opportunities spread across 3 quarters (CQ, NQ, FQ)
-  const now = new Date();
+  // Create opportunities for 2026 quarters
+  const year2026 = 2026;
   const opps: any[] = [];
   
-  // Current Quarter (CQ) - ~50 opportunities
-  for (let i = 0; i < 50; i++) {
-    const account = accounts[i % accounts.length];
-    const monthsOffset = i % 3; // spread over current quarter
-    const renewal = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + monthsOffset, 15));
-    const quarterKey = toQuarterKey(renewal);
-    const expiringArrCents = (Math.floor(Math.random() * 90_000) + 10_000) * 100; // $10k-$100k
+  // Q1 2026 (FY26-Q1) - Current Quarter
+  for (let i = 0; i < accounts.length; i++) {
+    const account = accounts[i];
+    // Spread renewal dates across Q1 (Jan, Feb, Mar)
+    const month = i % 3; // 0=Jan, 1=Feb, 2=Mar
+    const renewal = new Date(Date.UTC(year2026, month, 15));
+    const quarterKey = 'FY26-Q1';
+    // $800k to $1.05M in cents
+    const expiringArrCents = Math.floor((Math.random() * 250_000 + 800_000) * 100);
     const probability = Math.round((0.5 + Math.random() * 0.5) * 100) / 100;
     const healthScore = Math.floor(50 + Math.random() * 50);
     const riskFlag = healthScore < 65 || probability < 0.6;
@@ -90,11 +117,11 @@ async function main() {
       prisma.opportunity.create({
         data: {
           accountId: account.id,
-          name: `CQ Renewal ${i + 1}`,
+          name: `${account.name} - Q1 Renewal`,
           renewalDate: renewal,
           quarterKey,
           expiringArrCents,
-          stage: ['Renewal - Identified', 'Negotiation', 'Closed Won', 'Closed Lost'][i % 4],
+          stage: ['Renewal - Identified', 'Negotiation', 'Closed Won'][i % 3],
           probability,
           healthScore,
           riskFlag,
@@ -105,12 +132,15 @@ async function main() {
     );
   }
   
-  // Next Quarter (NQ) - 1 opportunity per RM
-  for (let i = 0; i < 5; i++) {
-    const account = accounts[i * 4]; // One account per RM
-    const renewal = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 3 + (i % 3), 15));
-    const quarterKey = toQuarterKey(renewal);
-    const expiringArrCents = (Math.floor(Math.random() * 90_000) + 10_000) * 100;
+  // Q2 2026 (FY26-Q2) - Next Quarter
+  for (let i = 0; i < accounts.length; i++) {
+    const account = accounts[i];
+    // Spread renewal dates across Q2 (Apr, May, Jun)
+    const month = 3 + (i % 3); // 3=Apr, 4=May, 5=Jun
+    const renewal = new Date(Date.UTC(year2026, month, 15));
+    const quarterKey = 'FY26-Q2';
+    // $800k to $1.05M in cents
+    const expiringArrCents = Math.floor((Math.random() * 250_000 + 800_000) * 100);
     const probability = Math.round((0.5 + Math.random() * 0.5) * 100) / 100;
     const healthScore = Math.floor(50 + Math.random() * 50);
     const riskFlag = healthScore < 65 || probability < 0.6;
@@ -118,7 +148,7 @@ async function main() {
       prisma.opportunity.create({
         data: {
           accountId: account.id,
-          name: `NQ Renewal ${i + 1}`,
+          name: `${account.name} - Q2 Renewal`,
           renewalDate: renewal,
           quarterKey,
           expiringArrCents,
@@ -133,12 +163,15 @@ async function main() {
     );
   }
   
-  // Following Quarter (FQ) - 1 opportunity per RM
-  for (let i = 0; i < 5; i++) {
-    const account = accounts[i * 4]; // One account per RM
-    const renewal = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 6 + (i % 3), 15));
-    const quarterKey = toQuarterKey(renewal);
-    const expiringArrCents = (Math.floor(Math.random() * 90_000) + 10_000) * 100;
+  // Q3 2026 (FY26-Q3) - Following Quarter
+  for (let i = 0; i < accounts.length; i++) {
+    const account = accounts[i];
+    // Spread renewal dates across Q3 (Jul, Aug, Sep)
+    const month = 6 + (i % 3); // 6=Jul, 7=Aug, 8=Sep
+    const renewal = new Date(Date.UTC(year2026, month, 15));
+    const quarterKey = 'FY26-Q3';
+    // $800k to $1.05M in cents
+    const expiringArrCents = Math.floor((Math.random() * 250_000 + 800_000) * 100);
     const probability = Math.round((0.5 + Math.random() * 0.5) * 100) / 100;
     const healthScore = Math.floor(50 + Math.random() * 50);
     const riskFlag = healthScore < 65 || probability < 0.6;
@@ -146,7 +179,7 @@ async function main() {
       prisma.opportunity.create({
         data: {
           accountId: account.id,
-          name: `FQ Renewal ${i + 1}`,
+          name: `${account.name} - Q3 Renewal`,
           renewalDate: renewal,
           quarterKey,
           expiringArrCents,
@@ -185,11 +218,19 @@ async function main() {
   }
   
   // Create snapshots for each account/quarter combination
+  // Best/Worst/Call are all set equal to the opportunity value (ARR up for renewal)
   const confidenceOptions = ['Commit', 'Likely', 'Upside', 'At Risk', 'Churn'];
   for (const [accountName, quarterMap] of oppsByAccountAndQuarter) {
     for (const [quarterKey, arrUpCents] of quarterMap) {
       // Randomly assign confidence levels for variety
       const confidence = confidenceOptions[Math.floor(Math.random() * confidenceOptions.length)];
+      
+      // Determine forQuarter based on quarter key
+      let forQuarter = 'CQ';
+      if (quarterKey === 'FY26-Q1') forQuarter = 'CQ';
+      else if (quarterKey === 'FY26-Q2') forQuarter = 'NQ';
+      else if (quarterKey === 'FY26-Q3') forQuarter = 'FQ';
+      
       snapshots.push(
         prisma.forecastSnapshot.create({
           data: {
@@ -197,13 +238,13 @@ async function main() {
             scopeName: accountName,
             quarterKey: quarterKey,
             periodKey: periodKeyWeek(new Date()),
-            forQuarter: quarterKey.includes('Q1') || quarterKey.includes('Q2') ? 'CQ' : 'NQ',
+            forQuarter: forQuarter,
             bestCents: arrUpCents, // Set equal to ARR up
             worstCents: arrUpCents, // Set equal to ARR up
             callCents: arrUpCents, // Set equal to ARR up
             confidencePct: 75,
             confidence: confidence,
-            notes: 'Initial seed - Best/Worst/Call = ARR up for testing',
+            notes: 'Seed data - Best/Worst/Call = ARR up for renewal',
             createdBy: 'Seed Script'
           }
         })
