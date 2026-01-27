@@ -37,11 +37,15 @@ function main() {
 
   console.log('DATABASE_URL is configured (format validated)');
   console.log('Generating Prisma Client...');
-  exec('npx prisma generate');
+  
+  // Ensure environment variables are passed to child processes
+  const env = { ...process.env, DATABASE_URL: cleanUrl };
+  
+  exec('npx prisma generate', { env });
 
   console.log('Attempting to deploy migrations...');
   try {
-    execSync('npx prisma migrate deploy', { encoding: 'utf-8', stdio: 'inherit' });
+    execSync('npx prisma migrate deploy', { encoding: 'utf-8', stdio: 'inherit', env });
     console.log('Migrations deployed successfully');
   } catch (error) {
     const errorOutput = error.stderr?.toString() || error.stdout?.toString() || '';
@@ -72,7 +76,8 @@ function main() {
           console.log(`Marking ${migration} as applied...`);
           execSync(`npx prisma migrate resolve --applied ${migration}`, { 
             encoding: 'utf-8', 
-            stdio: 'inherit' 
+            stdio: 'inherit',
+            env
           });
         } catch (resolveError) {
           console.log(`Note: Could not resolve ${migration} (may already be applied)`);
@@ -80,7 +85,7 @@ function main() {
       }
       
       console.log('Retrying migration deploy...');
-      execSync('npx prisma migrate deploy', { encoding: 'utf-8', stdio: 'inherit' });
+      execSync('npx prisma migrate deploy', { encoding: 'utf-8', stdio: 'inherit', env });
     } else {
       console.error('Migration failed with error:');
       console.error(errorOutput);
