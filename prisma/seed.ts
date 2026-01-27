@@ -296,13 +296,15 @@ async function main() {
     const accountIndex = companyNames.indexOf(account.name);
     const companyType = accountIndex < 10 ? 'Hedge Fund' : 'Private Equity';
     
-    // Determine new owner: Growth accounts go to Jake Myers, Enterprise accounts keep original owner
-    // BUT: if the account is currently owned by Michael Bealey and it's a PE account, reassign to Mike Sullivan
+    // Determine new owner with priority:
+    // 1. Growth accounts -> Jake Myers
+    // 2. PE accounts owned by Michael Bealey -> Mike Sullivan (Michael only gets PortCo)
+    // 3. Otherwise keep original owner
     let newOwnerId = account.ownerId;
     if (isGrowth) {
       newOwnerId = jakeMyers.id;
-    } else if (account.ownerId === michaelBealey.id && companyType === 'Private Equity') {
-      // Reassign PE accounts from Michael Bealey to Mike Sullivan
+    } else if (companyType === 'Private Equity' && account.ownerId === michaelBealey.id) {
+      // CRITICAL: Michael Bealey should NEVER own PE accounts - only PortCo
       newOwnerId = mikeSullivan.id;
       console.log(`${account.name}: Reassigning PE account from Michael Bealey to Mike Sullivan`);
     }
