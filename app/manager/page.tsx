@@ -29,12 +29,20 @@ function getFollowingQuarter(): string {
 }
 
 async function getData() {
-  const accounts = await prisma.account.findMany({ 
-    include: { 
-      opportunities: true,
-      owner: true
-    } 
-  });
+  try {
+    const accounts = await prisma.account.findMany({ 
+      include: { 
+        opportunities: true,
+        owner: true
+      } 
+    });
+    
+    // Filter out any accounts without owners (defensive check)
+    const validAccounts = accounts.filter(acc => acc.owner !== null);
+    
+    if (validAccounts.length !== accounts.length) {
+      console.warn(`Warning: ${accounts.length - validAccounts.length} accounts found without owners`);
+    }
   const quarters = {
     cq: getCurrentQuarter(),
     nq: getNextQuarter(),
@@ -87,12 +95,16 @@ async function getData() {
     }
   }
 
-  return { 
-    accounts, 
-    latestByAccount: Object.fromEntries(latestByAccount), 
-    vpForecasts: Object.fromEntries(vpForecasts),
-    quarters 
-  };
+    return { 
+      accounts: validAccounts, 
+      latestByAccount: Object.fromEntries(latestByAccount), 
+      vpForecasts: Object.fromEntries(vpForecasts),
+      quarters 
+    };
+  } catch (error) {
+    console.error('Error fetching accounts:', error);
+    throw error;
+  }
 }
 
 export default async function VpPage() {
