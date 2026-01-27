@@ -13,7 +13,8 @@ type Account = {
     username: string | null;
     isActive: boolean;
   };
-  segment: string | null;
+  segment: string | null; // Company type: Hedge Fund or Private Equity
+  businessSegment: string | null; // Business segment: Growth or Enterprise
   region: string | null;
   createdAt: Date;
   updatedAt: Date;
@@ -261,6 +262,7 @@ export default function AccountTable({
               <th className="p-2 w-56">Account</th>
               <th className="p-2 w-24">RM</th>
               <th className="p-2 w-28">Client Type</th>
+              <th className="p-2 w-28">Segment</th>
               <th className="p-2 w-16">Opps</th>
               <th className="p-2 w-32">ARR Up (sum)</th>
               <th className="p-2 w-28">Best (USD)</th>
@@ -304,6 +306,7 @@ export default function AccountTable({
                       </td>
                       <td className="p-2">{rm}</td>
                       <td className="p-2">-</td>
+                      <td className="p-2">-</td>
                       <td className="p-2">{rmAccounts.length}</td>
                       <td className="p-2">{formatUsd(rmTotals.arrUp)}</td>
                       <td className="p-2 text-green-600">{formatUsdFromDollars(rmTotals.best)}</td>
@@ -327,7 +330,8 @@ export default function AccountTable({
                               {acc.name}
                             </td>
                             <td className="p-2">{acc.owner ? `${acc.owner.firstName} ${acc.owner.lastName}` : 'N/A'}</td>
-                            <td className="p-2">{acc.segment}</td>
+                            <td className="p-2">{acc.segment || '-'}</td>
+                            <td className="p-2">{acc.businessSegment || '-'}</td>
                             <td className="p-2">{acc.opportunities.length}</td>
                             <td className="p-2 font-medium">{formatUsd(sumArr)}</td>
                             <td className="p-2">
@@ -406,7 +410,7 @@ export default function AccountTable({
                           </tr>
                           {expanded[acc.id] && (
                             <tr key={`${acc.id}-expanded`}>
-                              <td colSpan={11} className="bg-gray-100 p-3 pl-12">
+                              <td colSpan={12} className="bg-gray-100 p-3 pl-12">
                                 <div className="text-xs font-semibold text-gray-600">Opportunities</div>
                                 <div className="mt-2 grid grid-cols-4 gap-2 text-xs">
                                   {acc.opportunities.map(o => (
@@ -441,7 +445,8 @@ export default function AccountTable({
                         {acc.name}
                       </td>
                       <td className="p-2">{acc.owner ? `${acc.owner.firstName} ${acc.owner.lastName}` : 'N/A'}</td>
-                      <td className="p-2">{acc.segment}</td>
+                      <td className="p-2">{acc.segment || '-'}</td>
+                      <td className="p-2">{acc.businessSegment || '-'}</td>
                       <td className="p-2 w-20">{acc.opportunities.length}</td>
                       <td className="p-2 font-medium">{formatUsd(sumArr)}</td>
                       <td className="p-2">
@@ -520,7 +525,7 @@ export default function AccountTable({
                     </tr>
                     {expanded[acc.id] && (
                       <tr key={`${acc.id}-expanded`}>
-                        <td colSpan={11} className="bg-gray-50 p-3">
+                        <td colSpan={12} className="bg-gray-50 p-3">
                           <div className="text-xs font-semibold text-gray-600">Opportunities</div>
                           <div className="mt-2 grid grid-cols-4 gap-2 text-xs">
                             {acc.opportunities.map(o => (

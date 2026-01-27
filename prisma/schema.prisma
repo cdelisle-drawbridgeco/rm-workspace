@@ -24,15 +24,16 @@ model User {
 }
 
 model Account {
-  id        String   @id @default(cuid())
-  name      String
-  ownerId   String
-  owner     User     @relation(fields: [ownerId], references: [id])
-  segment   String?
-  region    String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  opportunities Opportunity[]
+  id              String   @id @default(cuid())
+  name            String
+  ownerId         String
+  owner           User     @relation(fields: [ownerId], references: [id])
+  segment         String?  // Company type: 'Hedge Fund' | 'Private Equity'
+  businessSegment String?  // Business segment: 'Growth' | 'Enterprise'
+  region          String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  opportunities   Opportunity[]
 }
 
 model Opportunity {

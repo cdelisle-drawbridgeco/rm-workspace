@@ -224,19 +224,27 @@ async function main() {
     arrByAccount.set(opp.accountId, currentArr + opp.expiringArrCents);
   }
   
-  // Update accounts: assign segment and owner based on total ARR
-  console.log('\n=== Updating account segments and owners ===');
+  // Update accounts: assign businessSegment and owner based on total ARR
+  // Keep segment as Hedge Fund/Private Equity (company type)
+  console.log('\n=== Updating account business segments and owners ===');
   for (const account of accounts) {
     const totalArrCents = arrByAccount.get(account.id) || 0;
     const totalArrDollars = totalArrCents / 100;
     const isGrowth = totalArrDollars < 20_000;
     
-    console.log(`${account.name}: Total ARR = $${totalArrDollars.toLocaleString()}, Segment = ${isGrowth ? 'Growth' : 'Enterprise'}, Owner = ${isGrowth ? 'Jake Myers' : 'Original'}`);
+    // Determine company type (Hedge Fund or Private Equity) based on account name/index
+    const companyType = account.name.includes('Capital') || account.name.includes('Partners') || 
+                       account.name.includes('Group') || account.name.includes('Equity') ||
+                       companyNames.indexOf(account.name) >= 10 
+                       ? 'Private Equity' : 'Hedge Fund';
+    
+    console.log(`${account.name}: Total ARR = $${totalArrDollars.toLocaleString()}, Company Type = ${companyType}, Business Segment = ${isGrowth ? 'Growth' : 'Enterprise'}, Owner = ${isGrowth ? 'Jake Myers' : 'Original'}`);
     
     await prisma.account.update({
       where: { id: account.id },
       data: {
-        segment: isGrowth ? 'Growth' : 'Enterprise',
+        segment: companyType, // Keep as Hedge Fund or Private Equity
+        businessSegment: isGrowth ? 'Growth' : 'Enterprise', // Business segment based on ARR
         ownerId: isGrowth ? jakeMyers.id : account.ownerId // Jake Myers for Growth, keep original for Enterprise
       }
     });
