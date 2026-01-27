@@ -50,10 +50,26 @@ async function getData() {
   };
 
   // Get latest snapshots for each account and quarter
-  const latestByAccount = new Map<string, Record<string, { bestUsd: number; worstUsd: number; callUsd: number; notes: string }>>();
+  const latestByAccount = new Map<string, Record<string, { 
+    bestUsd: number; 
+    worstUsd: number; 
+    callUsd: number; 
+    grossCallUsd: number;
+    priceIncreaseUsd: number;
+    expansionUsd: number;
+    notes: string 
+  }>>();
   
   for (const account of accounts) {
-    const accountSnapshots: Record<string, { bestUsd: number; worstUsd: number; callUsd: number; notes: string }> = {};
+    const accountSnapshots: Record<string, { 
+      bestUsd: number; 
+      worstUsd: number; 
+      callUsd: number; 
+      grossCallUsd: number;
+      priceIncreaseUsd: number;
+      expansionUsd: number;
+      notes: string 
+    }> = {};
     
     for (const quarter of Object.values(quarters)) {
       const latestSnap = await prisma.forecastSnapshot.findFirst({
@@ -66,6 +82,9 @@ async function getData() {
           bestUsd: (latestSnap.bestCents || 0) / 100,
           worstUsd: (latestSnap.worstCents || 0) / 100,
           callUsd: (latestSnap.callCents || 0) / 100,
+          grossCallUsd: (latestSnap.grossCallCents || 0) / 100,
+          priceIncreaseUsd: (latestSnap.priceIncreaseCents || 0) / 100,
+          expansionUsd: (latestSnap.expansionCents || 0) / 100,
           notes: latestSnap.notes || ''
         };
       }
@@ -77,7 +96,15 @@ async function getData() {
   }
 
   // Get VP forecasts for each quarter
-  const vpForecasts = new Map<string, { bestUsd: number; worstUsd: number; callUsd: number; notes: string }>();
+  const vpForecasts = new Map<string, { 
+    bestUsd: number; 
+    worstUsd: number; 
+    callUsd: number; 
+    grossCallUsd: number;
+    priceIncreaseUsd: number;
+    expansionUsd: number;
+    notes: string 
+  }>();
   
   for (const quarter of Object.values(quarters)) {
     const vpSnap = await prisma.forecastSnapshot.findFirst({
@@ -90,6 +117,9 @@ async function getData() {
         bestUsd: (vpSnap.bestCents || 0) / 100,
         worstUsd: (vpSnap.worstCents || 0) / 100,
         callUsd: (vpSnap.callCents || 0) / 100,
+        grossCallUsd: (vpSnap.grossCallCents || 0) / 100,
+        priceIncreaseUsd: (vpSnap.priceIncreaseCents || 0) / 100,
+        expansionUsd: (vpSnap.expansionCents || 0) / 100,
         notes: vpSnap.notes || ''
       });
     }

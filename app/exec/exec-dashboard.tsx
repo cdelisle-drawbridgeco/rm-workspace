@@ -57,12 +57,29 @@ export default function ExecDashboard({
   quarters
 }: {
   accounts: Account[];
-  latestByAccount: Record<string, Record<string, { bestUsd: number; worstUsd: number; callUsd: number; notes: string }>>;
-  vpForecasts: Record<string, { bestUsd: number; worstUsd: number; callUsd: number; notes: string }>;
+  latestByAccount: Record<string, Record<string, { 
+    bestUsd: number; 
+    worstUsd: number; 
+    callUsd: number; 
+    grossCallUsd: number;
+    priceIncreaseUsd: number;
+    expansionUsd: number;
+    notes: string 
+  }>>;
+  vpForecasts: Record<string, { 
+    bestUsd: number; 
+    worstUsd: number; 
+    callUsd: number; 
+    grossCallUsd: number;
+    priceIncreaseUsd: number;
+    expansionUsd: number;
+    notes: string 
+  }>;
   quarters: Quarters;
 }) {
   const [selectedQuarter, setSelectedQuarter] = useState<string>('CQ');
   const [expandedRMs, setExpandedRMs] = useState<Record<string, boolean>>({});
+  const [expandedCallComponents, setExpandedCallComponents] = useState<{ rm?: boolean; vp?: boolean }>({});
 
   // Filter accounts by quarter
   const currentQuarterKey = selectedQuarter === 'CQ' ? quarters.cq : selectedQuarter === 'NQ' ? quarters.nq : quarters.fq;
@@ -90,7 +107,7 @@ export default function ExecDashboard({
       .filter(o => o.quarterKey === currentQuarterKey)
       .reduce((s, o) => s + o.expiringArrCents, 0), 0);
   
-  let rmBest = 0, rmWorst = 0, rmCall = 0;
+  let rmBest = 0, rmWorst = 0, rmCall = 0, rmGrossCall = 0, rmPriceIncrease = 0, rmExpansion = 0;
   for (const a of quarterAccounts) {
     const accountSnapshots = latestByAccount[a.name];
     const latest = accountSnapshots?.[currentQuarterKey];
@@ -98,6 +115,9 @@ export default function ExecDashboard({
       rmBest += latest.bestUsd || 0;
       rmWorst += latest.worstUsd || 0;
       rmCall += latest.callUsd || 0;
+      rmGrossCall += latest.grossCallUsd || 0;
+      rmPriceIncrease += latest.priceIncreaseUsd || 0;
+      rmExpansion += latest.expansionUsd || 0;
     }
   }
 
@@ -106,6 +126,9 @@ export default function ExecDashboard({
   const vpBest = vpForecast?.bestUsd || 0;
   const vpWorst = vpForecast?.worstUsd || 0;
   const vpCall = vpForecast?.callUsd || 0;
+  const vpGrossCall = vpForecast?.grossCallUsd || 0;
+  const vpPriceIncrease = vpForecast?.priceIncreaseUsd || 0;
+  const vpExpansion = vpForecast?.expansionUsd || 0;
 
   const rmRenewalRate = totalArrUpCents > 0 ? (rmCall * 100) / (totalArrUpCents / 100) : 0;
   const vpRenewalRate = totalArrUpCents > 0 ? (vpCall * 100) / (totalArrUpCents / 100) : 0;
@@ -154,6 +177,28 @@ export default function ExecDashboard({
         <div className="rounded border bg-white p-3">
           <div className="text-xs text-gray-600">VP Call</div>
           <div className="text-lg font-semibold text-blue-600">{formatUsdFromDollars(vpCall)}</div>
+          <button 
+            className="mt-1 text-xs text-blue-500 hover:text-blue-700"
+            onClick={() => setExpandedCallComponents({ ...expandedCallComponents, vp: !expandedCallComponents.vp })}
+          >
+            {expandedCallComponents.vp ? '▾ Hide' : '▸ Show'} Components
+          </button>
+          {expandedCallComponents.vp && (
+            <div className="mt-2 space-y-1 text-xs">
+              <div className="flex justify-between">
+                <span className="text-gray-600">Gross Call:</span>
+                <span className="font-medium">{formatUsdFromDollars(vpGrossCall)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-600">Price Increase:</span>
+                <span className="font-medium text-green-600">{formatUsdFromDollars(vpPriceIncrease)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-600">Expansion:</span>
+                <span className="font-medium text-purple-600">{formatUsdFromDollars(vpExpansion)}</span>
+              </div>
+            </div>
+          )}
         </div>
         <div className="rounded border bg-white p-3">
           <div className="text-xs text-gray-600">VP Renewal Rate</div>
@@ -181,6 +226,28 @@ export default function ExecDashboard({
             <div>
               <div className="text-sm font-medium text-gray-700">Call</div>
               <div className="text-lg font-semibold text-blue-600">{formatUsdFromDollars(vpCall)}</div>
+              <button 
+                className="mt-1 text-xs text-blue-500 hover:text-blue-700"
+                onClick={() => setExpandedCallComponents({ ...expandedCallComponents, vp: !expandedCallComponents.vp })}
+              >
+                {expandedCallComponents.vp ? '▾ Hide' : '▸ Show'} Components
+              </button>
+              {expandedCallComponents.vp && (
+                <div className="mt-2 space-y-1 text-xs">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Gross Call:</span>
+                    <span className="font-medium">{formatUsdFromDollars(vpGrossCall)}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Price Increase:</span>
+                    <span className="font-medium text-green-600">{formatUsdFromDollars(vpPriceIncrease)}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Expansion:</span>
+                    <span className="font-medium text-purple-600">{formatUsdFromDollars(vpExpansion)}</span>
+                  </div>
+                </div>
+              )}
             </div>
             <div>
               <div className="text-sm font-medium text-gray-700">Spread</div>
@@ -222,7 +289,7 @@ export default function ExecDashboard({
                     .filter(o => o.quarterKey === currentQuarterKey)
                     .reduce((s, o) => s + o.expiringArrCents, 0), 0);
                 
-                let rmBest = 0, rmWorst = 0, rmCall = 0;
+                let rmBest = 0, rmWorst = 0, rmCall = 0, rmGrossCall = 0, rmPriceIncrease = 0, rmExpansion = 0;
                 for (const acc of rmAccounts) {
                   const accountSnapshots = latestByAccount[acc.name];
                   const latest = accountSnapshots?.[currentQuarterKey];
@@ -230,11 +297,15 @@ export default function ExecDashboard({
                     rmBest += latest.bestUsd || 0;
                     rmWorst += latest.worstUsd || 0;
                     rmCall += latest.callUsd || 0;
+                    rmGrossCall += latest.grossCallUsd || 0;
+                    rmPriceIncrease += latest.priceIncreaseUsd || 0;
+                    rmExpansion += latest.expansionUsd || 0;
                   }
                 }
                 
                 const rmRenewalRate = rmArrUpCents > 0 ? (rmCall * 100) / (rmArrUpCents / 100) : 0;
                 const rmSpread = Math.max(0, rmBest - rmWorst);
+                const rmKey = `rm-${rm}`;
 
                 return (
                   <React.Fragment key={rm}>
@@ -253,7 +324,31 @@ export default function ExecDashboard({
                       <td className="p-2">{formatUsd(rmArrUpCents)}</td>
                       <td className="p-2 text-green-600">{formatUsdFromDollars(rmBest)}</td>
                       <td className="p-2 text-red-600">{formatUsdFromDollars(rmWorst)}</td>
-                      <td className="p-2 text-blue-600">{formatUsdFromDollars(rmCall)}</td>
+                      <td className="p-2">
+                        <div className="text-blue-600">{formatUsdFromDollars(rmCall)}</div>
+                        <button 
+                          className="mt-1 text-xs text-blue-500 hover:text-blue-700"
+                          onClick={() => setExpandedCallComponents({ ...expandedCallComponents, [rmKey]: !expandedCallComponents[rmKey as keyof typeof expandedCallComponents] })}
+                        >
+                          {expandedCallComponents[rmKey as keyof typeof expandedCallComponents] ? '▾ Hide' : '▸ Show'} Components
+                        </button>
+                        {expandedCallComponents[rmKey as keyof typeof expandedCallComponents] && (
+                          <div className="mt-1 space-y-0.5 text-xs">
+                            <div className="flex justify-between text-gray-600">
+                              <span>Gross:</span>
+                              <span className="font-medium">{formatUsdFromDollars(rmGrossCall)}</span>
+                            </div>
+                            <div className="flex justify-between text-green-600">
+                              <span>Price Inc:</span>
+                              <span className="font-medium">{formatUsdFromDollars(rmPriceIncrease)}</span>
+                            </div>
+                            <div className="flex justify-between text-purple-600">
+                              <span>Expansion:</span>
+                              <span className="font-medium">{formatUsdFromDollars(rmExpansion)}</span>
+                            </div>
+                          </div>
+                        )}
+                      </td>
                       <td className="p-2">{rmRenewalRate.toFixed(1)}%</td>
                       <td className="p-2">{formatUsdFromDollars(rmSpread)}</td>
                     </tr>

@@ -57,12 +57,29 @@ export default function VpDashboard({
   quarters
 }: {
   accounts: Account[];
-  latestByAccount: Record<string, Record<string, { bestUsd: number; worstUsd: number; callUsd: number; notes: string }>>;
-  vpForecasts: Record<string, { bestUsd: number; worstUsd: number; callUsd: number; notes: string }>;
+  latestByAccount: Record<string, Record<string, { 
+    bestUsd: number; 
+    worstUsd: number; 
+    callUsd: number; 
+    grossCallUsd: number;
+    priceIncreaseUsd: number;
+    expansionUsd: number;
+    notes: string 
+  }>>;
+  vpForecasts: Record<string, { 
+    bestUsd: number; 
+    worstUsd: number; 
+    callUsd: number; 
+    grossCallUsd: number;
+    priceIncreaseUsd: number;
+    expansionUsd: number;
+    notes: string 
+  }>;
   quarters: Quarters;
 }) {
   const [selectedQuarter, setSelectedQuarter] = useState<string>('CQ');
   const [expandedRMs, setExpandedRMs] = useState<Record<string, boolean>>({});
+  const [expandedCallComponents, setExpandedCallComponents] = useState<Record<string, boolean>>({});
   const [vpForecasts, setVpForecasts] = useState<Record<string, { best: string; worst: string; call: string; notes: string }>>(() => {
     const forecasts: Record<string, { best: string; worst: string; call: string; notes: string }> = {};
     Object.values(quarters).forEach(quarter => {
@@ -116,7 +133,7 @@ export default function VpDashboard({
       .filter(o => o.quarterKey === currentQuarterKey)
       .reduce((s, o) => s + o.expiringArrCents, 0), 0);
   
-  let bestUsdTotal = 0, worstUsdTotal = 0, callUsdTotal = 0;
+  let bestUsdTotal = 0, worstUsdTotal = 0, callUsdTotal = 0, grossCallTotal = 0, priceIncreaseTotal = 0, expansionTotal = 0;
   for (const a of quarterAccounts) {
     const accountSnapshots = latestByAccount[a.name];
     const latest = accountSnapshots?.[currentQuarterKey];
@@ -124,6 +141,9 @@ export default function VpDashboard({
       bestUsdTotal += latest.bestUsd || 0;
       worstUsdTotal += latest.worstUsd || 0;
       callUsdTotal += latest.callUsd || 0;
+      grossCallTotal += latest.grossCallUsd || 0;
+      priceIncreaseTotal += latest.priceIncreaseUsd || 0;
+      expansionTotal += latest.expansionUsd || 0;
     }
   }
 
@@ -209,6 +229,28 @@ export default function VpDashboard({
         <div className="rounded border bg-white p-3">
           <div className="text-xs text-gray-600">Call</div>
           <div className="text-lg font-semibold text-blue-600">{formatUsdFromDollars(callUsdTotal)}</div>
+          <button 
+            className="mt-1 text-xs text-blue-500 hover:text-blue-700"
+            onClick={() => setExpandedCallComponents({ ...expandedCallComponents, summary: !expandedCallComponents.summary })}
+          >
+            {expandedCallComponents.summary ? '▾ Hide' : '▸ Show'} Components
+          </button>
+          {expandedCallComponents.summary && (
+            <div className="mt-2 space-y-1 text-xs">
+              <div className="flex justify-between">
+                <span className="text-gray-600">Gross Call:</span>
+                <span className="font-medium">{formatUsdFromDollars(grossCallTotal)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-600">Price Increase:</span>
+                <span className="font-medium text-green-600">{formatUsdFromDollars(priceIncreaseTotal)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-600">Expansion:</span>
+                <span className="font-medium text-purple-600">{formatUsdFromDollars(expansionTotal)}</span>
+              </div>
+            </div>
+          )}
         </div>
         <div className="rounded border bg-white p-3">
           <div className="text-xs text-gray-600">Renewal Rate</div>
@@ -344,7 +386,7 @@ export default function VpDashboard({
                   .filter(o => o.quarterKey === currentQuarterKey)
                   .reduce((s, o) => s + o.expiringArrCents, 0), 0);
               
-              let rmBest = 0, rmWorst = 0, rmCall = 0;
+              let rmBest = 0, rmWorst = 0, rmCall = 0, rmGrossCall = 0, rmPriceIncrease = 0, rmExpansion = 0;
               for (const acc of rmAccounts) {
                 const accountSnapshots = latestByAccount[acc.name];
                 const latest = accountSnapshots?.[currentQuarterKey];
@@ -352,11 +394,15 @@ export default function VpDashboard({
                   rmBest += latest.bestUsd || 0;
                   rmWorst += latest.worstUsd || 0;
                   rmCall += latest.callUsd || 0;
+                  rmGrossCall += latest.grossCallUsd || 0;
+                  rmPriceIncrease += latest.priceIncreaseUsd || 0;
+                  rmExpansion += latest.expansionUsd || 0;
                 }
               }
               
               const rmRenewalRate = rmArrUpCents > 0 ? (rmCall * 100) / (rmArrUpCents / 100) : 0;
               const rmSpread = Math.max(0, rmBest - rmWorst);
+              const rmKey = `rm-${rm}`;
 
               return (
                 <React.Fragment key={rm}>
@@ -375,7 +421,31 @@ export default function VpDashboard({
                     <td className="p-2">{formatUsd(rmArrUpCents)}</td>
                     <td className="p-2 text-green-600">{formatUsdFromDollars(rmBest)}</td>
                     <td className="p-2 text-red-600">{formatUsdFromDollars(rmWorst)}</td>
-                    <td className="p-2 text-blue-600">{formatUsdFromDollars(rmCall)}</td>
+                    <td className="p-2">
+                      <div className="text-blue-600">{formatUsdFromDollars(rmCall)}</div>
+                      <button 
+                        className="mt-1 text-xs text-blue-500 hover:text-blue-700"
+                        onClick={() => setExpandedCallComponents({ ...expandedCallComponents, [rmKey]: !expandedCallComponents[rmKey] })}
+                      >
+                        {expandedCallComponents[rmKey] ? '▾ Hide' : '▸ Show'} Components
+                      </button>
+                      {expandedCallComponents[rmKey] && (
+                        <div className="mt-1 space-y-0.5 text-xs">
+                          <div className="flex justify-between text-gray-600">
+                            <span>Gross:</span>
+                            <span className="font-medium">{formatUsdFromDollars(rmGrossCall)}</span>
+                          </div>
+                          <div className="flex justify-between text-green-600">
+                            <span>Price Inc:</span>
+                            <span className="font-medium">{formatUsdFromDollars(rmPriceIncrease)}</span>
+                          </div>
+                          <div className="flex justify-between text-purple-600">
+                            <span>Expansion:</span>
+                            <span className="font-medium">{formatUsdFromDollars(rmExpansion)}</span>
+                          </div>
+                        </div>
+                      )}
+                    </td>
                     <td className="p-2">{rmRenewalRate.toFixed(1)}%</td>
                     <td className="p-2">{formatUsdFromDollars(rmSpread)}</td>
                   </tr>
