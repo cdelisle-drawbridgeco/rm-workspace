@@ -78,13 +78,18 @@ async function getData() {
       });
       
       if (latestSnap) {
+        // Handle both old and new schema - if new fields don't exist, default to 0 or derive from callCents
+        const grossCallCents = (latestSnap as any).grossCallCents ?? latestSnap.callCents ?? 0;
+        const priceIncreaseCents = (latestSnap as any).priceIncreaseCents ?? 0;
+        const expansionCents = (latestSnap as any).expansionCents ?? 0;
+        
         accountSnapshots[quarter] = {
           bestUsd: (latestSnap.bestCents || 0) / 100,
           worstUsd: (latestSnap.worstCents || 0) / 100,
           callUsd: (latestSnap.callCents || 0) / 100,
-          grossCallUsd: (latestSnap.grossCallCents || 0) / 100,
-          priceIncreaseUsd: (latestSnap.priceIncreaseCents || 0) / 100,
-          expansionUsd: (latestSnap.expansionCents || 0) / 100,
+          grossCallUsd: grossCallCents / 100,
+          priceIncreaseUsd: priceIncreaseCents / 100,
+          expansionUsd: expansionCents / 100,
           notes: latestSnap.notes || ''
         };
       }
@@ -113,13 +118,18 @@ async function getData() {
     });
     
     if (vpSnap) {
+      // Handle both old and new schema - if new fields don't exist, default to 0 or derive from callCents
+      const grossCallCents = (vpSnap as any).grossCallCents ?? vpSnap.callCents ?? 0;
+      const priceIncreaseCents = (vpSnap as any).priceIncreaseCents ?? 0;
+      const expansionCents = (vpSnap as any).expansionCents ?? 0;
+      
       vpForecasts.set(quarter, {
         bestUsd: (vpSnap.bestCents || 0) / 100,
         worstUsd: (vpSnap.worstCents || 0) / 100,
         callUsd: (vpSnap.callCents || 0) / 100,
-        grossCallUsd: (vpSnap.grossCallCents || 0) / 100,
-        priceIncreaseUsd: (vpSnap.priceIncreaseCents || 0) / 100,
-        expansionUsd: (vpSnap.expansionCents || 0) / 100,
+        grossCallUsd: grossCallCents / 100,
+        priceIncreaseUsd: priceIncreaseCents / 100,
+        expansionUsd: expansionCents / 100,
         notes: vpSnap.notes || ''
       });
     }
