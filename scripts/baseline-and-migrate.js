@@ -53,10 +53,18 @@ function main() {
 
   console.log('Attempting to deploy migrations...');
   try {
-    execSync('npx prisma migrate deploy', { encoding: 'utf-8', stdio: 'inherit', env });
+    const output = execSync('npx prisma migrate deploy', { encoding: 'utf-8', stdio: 'pipe', env });
+    console.log(output);
     console.log('Migrations deployed successfully');
   } catch (error) {
-    const errorOutput = error.stderr?.toString() || error.stdout?.toString() || '';
+    // Capture error output - when stdio is 'pipe', output goes to stdout/stderr properties
+    const stdout = error.stdout?.toString() || '';
+    const stderr = error.stderr?.toString() || '';
+    const errorOutput = stdout + stderr + (error.message || '');
+    
+    // Output the error for visibility
+    if (stdout) console.log(stdout);
+    if (stderr) console.error(stderr);
     
     if (errorOutput.includes('P1012') || errorOutput.includes('the URL must start with the protocol')) {
       console.error('ERROR: DATABASE_URL is not properly configured!');
@@ -64,7 +72,7 @@ function main() {
       process.exit(1);
     }
     
-    if (errorOutput.includes('P3005') || errorOutput.includes('database schema is not empty')) {
+    if (errorOutput.includes('P3005') || errorOutput.includes('database schema is not empty') || errorOutput.includes('The database schema is not empty')) {
       console.log('Database needs baselining. Marking existing migrations as applied...');
       
       // Get list of migration directories (exclude the new user model migration)
