@@ -93,7 +93,7 @@ function main() {
       }
       
       console.log('Retrying migration deploy...');
-      execSync('npx prisma migrate deploy', { encoding: 'utf-8', stdio: 'inherit', env });
+      execSync('npx prisma migrate deploy', { encoding: 'utf-8', stdio: 'pipe', env });
     } else {
       console.error('Migration failed with error:');
       console.error(errorOutput);
