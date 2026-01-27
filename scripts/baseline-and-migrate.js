@@ -17,6 +17,21 @@ function exec(command, options = {}) {
 }
 
 function main() {
+  // Check if DATABASE_URL is set
+  if (!process.env.DATABASE_URL) {
+    console.error('ERROR: DATABASE_URL environment variable is not set!');
+    console.error('Please configure DATABASE_URL in your Vercel project settings.');
+    process.exit(1);
+  }
+
+  // Validate DATABASE_URL format
+  if (!process.env.DATABASE_URL.startsWith('postgresql://') && 
+      !process.env.DATABASE_URL.startsWith('postgres://')) {
+    console.error('ERROR: DATABASE_URL must start with postgresql:// or postgres://');
+    console.error('Current DATABASE_URL format is invalid.');
+    process.exit(1);
+  }
+
   console.log('Generating Prisma Client...');
   exec('npx prisma generate');
 
@@ -26,6 +41,12 @@ function main() {
     console.log('Migrations deployed successfully');
   } catch (error) {
     const errorOutput = error.stderr?.toString() || error.stdout?.toString() || '';
+    
+    if (errorOutput.includes('P1012') || errorOutput.includes('the URL must start with the protocol')) {
+      console.error('ERROR: DATABASE_URL is not properly configured!');
+      console.error('Please check your Vercel environment variables.');
+      process.exit(1);
+    }
     
     if (errorOutput.includes('P3005') || errorOutput.includes('database schema is not empty')) {
       console.log('Database needs baselining. Marking existing migrations as applied...');
