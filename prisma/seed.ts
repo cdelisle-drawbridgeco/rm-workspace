@@ -57,7 +57,13 @@ async function main() {
     })
   );
 
-  // Create accounts with hedge fund and private equity company names
+  // Find Michael Bealey (he will own all PortCo accounts)
+  const michaelBealey = users.find(u => u.firstName === 'Michael' && u.lastName === 'Bealey');
+  if (!michaelBealey) {
+    throw new Error('Michael Bealey not found in users');
+  }
+
+  // Create accounts with hedge fund, private equity, and portfolio company names
   const companyNames = [
     // Hedge Funds
     'Blackstone Capital Partners',
@@ -83,6 +89,20 @@ async function main() {
     'Vista Equity Partners'
   ];
 
+  // Portfolio Companies (PE-backed companies) - for Michael Bealey
+  const portCoNames = [
+    'TechFlow Solutions', // Software/SaaS
+    'MediCare Analytics', // Healthcare tech
+    'CloudScale Infrastructure', // Cloud services
+    'DataVault Security', // Cybersecurity
+    'RetailEdge Platform', // E-commerce
+    'FinTech Innovations', // Financial services
+    'SupplyChain Pro', // Logistics
+    'HealthTech Systems', // Healthcare
+    'EduTech Learning', // Education
+    'EnergyGrid Solutions' // Energy/Utilities
+  ];
+
   // Find Jake Myers (he will own all Growth accounts)
   const jakeMyers = users.find(u => u.firstName === 'Jake' && u.lastName === 'Myers');
   if (!jakeMyers) {
@@ -91,7 +111,7 @@ async function main() {
 
   // Create accounts - we'll assign segments and owners after creating opportunities
   // For now, create accounts with temporary owners (will update after)
-  const accounts = await Promise.all(
+  const hedgeFundAndPEAccounts = await Promise.all(
     companyNames.map(async (name, i) => {
       const owner = users[i % users.length];
       return prisma.account.create({
@@ -105,12 +125,31 @@ async function main() {
     })
   );
 
+  // Create Portfolio Company accounts - all assigned to Michael Bealey
+  const portCoAccounts = await Promise.all(
+    portCoNames.map(async (name, i) => {
+      return prisma.account.create({
+        data: {
+          name: name,
+          ownerId: michaelBealey.id,
+          segment: 'PortCo', // Portfolio Company
+          businessSegment: 'PortCo', // Also PortCo for segment
+          region: ['NA', 'EMEA', 'APAC'][i % 3]
+        }
+      });
+    })
+  );
+
+  // Combine all accounts
+  const accounts = [...hedgeFundAndPEAccounts, ...portCoAccounts];
+
   // Create opportunities for 2026 quarters
   const year2026 = 2026;
   const opps: any[] = [];
   
   // Q1 2026 (FY26-Q1) - Current Quarter
   // Create mix: some accounts with smaller values to ensure some are under $20k total
+  // Create opportunities for all accounts (hedge funds, PE, and PortCos)
   for (let i = 0; i < accounts.length; i++) {
     const account = accounts[i];
     // Spread renewal dates across Q1 (Jan, Feb, Mar)
@@ -225,9 +264,15 @@ async function main() {
   }
   
   // Update accounts: assign businessSegment and owner based on total ARR
-  // Keep segment as Hedge Fund/Private Equity (company type)
+  // Keep segment as Hedge Fund/Private Equity/PortCo (company type)
   console.log('\n=== Updating account business segments and owners ===');
   for (const account of accounts) {
+    // Skip PortCo accounts - they're already set correctly
+    if (account.segment === 'PortCo') {
+      console.log(`${account.name}: PortCo account - already assigned to Michael Bealey`);
+      continue;
+    }
+
     const totalArrCents = arrByAccount.get(account.id) || 0;
     const totalArrDollars = totalArrCents / 100;
     const isGrowth = totalArrDollars < 20_000;
