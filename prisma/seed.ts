@@ -232,11 +232,10 @@ async function main() {
     const totalArrDollars = totalArrCents / 100;
     const isGrowth = totalArrDollars < 20_000;
     
-    // Determine company type (Hedge Fund or Private Equity) based on account name/index
-    const companyType = account.name.includes('Capital') || account.name.includes('Partners') || 
-                       account.name.includes('Group') || account.name.includes('Equity') ||
-                       companyNames.indexOf(account.name) >= 10 
-                       ? 'Private Equity' : 'Hedge Fund';
+    // Determine company type (Hedge Fund or Private Equity) based on original index
+    // First 10 companies (index 0-9) are Hedge Funds, last 10 (index 10-19) are Private Equity
+    const accountIndex = companyNames.indexOf(account.name);
+    const companyType = accountIndex < 10 ? 'Hedge Fund' : 'Private Equity';
     
     console.log(`${account.name}: Total ARR = $${totalArrDollars.toLocaleString()}, Company Type = ${companyType}, Business Segment = ${isGrowth ? 'Growth' : 'Enterprise'}, Owner = ${isGrowth ? 'Jake Myers' : 'Original'}`);
     
