@@ -109,11 +109,19 @@ async function main() {
     throw new Error('Jake Myers not found in users');
   }
 
+  // Find Mike Sullivan (he will get any PE accounts that were assigned to Michael Bealey)
+  const mikeSullivan = users.find(u => u.firstName === 'Mike' && u.lastName === 'Sullivan');
+  if (!mikeSullivan) {
+    throw new Error('Mike Sullivan not found in users');
+  }
+
   // Create accounts - we'll assign segments and owners after creating opportunities
   // For now, create accounts with temporary owners (will update after)
+  // Exclude Michael Bealey from initial assignment since he only gets PortCo accounts
+  const availableUsers = users.filter(u => u.id !== michaelBealey.id);
   const hedgeFundAndPEAccounts = await Promise.all(
     companyNames.map(async (name, i) => {
-      const owner = users[i % users.length];
+      const owner = availableUsers[i % availableUsers.length];
       return prisma.account.create({
         data: {
           name: name,
@@ -288,14 +296,25 @@ async function main() {
     const accountIndex = companyNames.indexOf(account.name);
     const companyType = accountIndex < 10 ? 'Hedge Fund' : 'Private Equity';
     
-    console.log(`${account.name}: Total ARR = $${totalArrDollars.toLocaleString()}, Company Type = ${companyType}, Business Segment = ${isGrowth ? 'Growth' : 'Enterprise'}, Owner = ${isGrowth ? 'Jake Myers' : 'Original'}`);
+    // Determine new owner: Growth accounts go to Jake Myers, Enterprise accounts keep original owner
+    // BUT: if the account is currently owned by Michael Bealey and it's a PE account, reassign to Mike Sullivan
+    let newOwnerId = account.ownerId;
+    if (isGrowth) {
+      newOwnerId = jakeMyers.id;
+    } else if (account.ownerId === michaelBealey.id && companyType === 'Private Equity') {
+      // Reassign PE accounts from Michael Bealey to Mike Sullivan
+      newOwnerId = mikeSullivan.id;
+      console.log(`${account.name}: Reassigning PE account from Michael Bealey to Mike Sullivan`);
+    }
+    
+    console.log(`${account.name}: Total ARR = $${totalArrDollars.toLocaleString()}, Company Type = ${companyType}, Business Segment = ${isGrowth ? 'Growth' : 'Enterprise'}, Owner = ${isGrowth ? 'Jake Myers' : (newOwnerId === mikeSullivan.id ? 'Mike Sullivan' : 'Original')}`);
     
     await prisma.account.update({
       where: { id: account.id },
       data: {
         segment: companyType, // Keep as Hedge Fund or Private Equity
         businessSegment: isGrowth ? 'Growth' : 'Enterprise', // Business segment based on ARR
-        ownerId: isGrowth ? jakeMyers.id : account.ownerId // Jake Myers for Growth, keep original for Enterprise
+        ownerId: newOwnerId
       }
     });
   }
