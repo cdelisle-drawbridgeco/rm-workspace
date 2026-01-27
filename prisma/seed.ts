@@ -206,10 +206,10 @@ async function main() {
   
   // Calculate total ARR per account and update segments/owners based on business logic
   // Rule: Accounts with total ARR < $20k are 'Growth' and owned by Jake Myers
-  const allOpps = await prisma.opportunity.findMany();
+  const allOpportunities = await prisma.opportunity.findMany();
   const arrByAccount = new Map<string, number>();
   
-  for (const opp of allOpps) {
+  for (const opp of allOpportunities) {
     const currentArr = arrByAccount.get(opp.accountId) || 0;
     arrByAccount.set(opp.accountId, currentArr + opp.expiringArrCents);
   }
