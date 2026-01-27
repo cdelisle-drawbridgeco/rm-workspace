@@ -110,14 +110,18 @@ async function main() {
   const opps: any[] = [];
   
   // Q1 2026 (FY26-Q1) - Current Quarter
+  // Create mix: some accounts with smaller values to ensure some are under $20k total
   for (let i = 0; i < accounts.length; i++) {
     const account = accounts[i];
     // Spread renewal dates across Q1 (Jan, Feb, Mar)
     const month = i % 3; // 0=Jan, 1=Feb, 2=Mar
     const renewal = new Date(Date.UTC(year2026, month, 15));
     const quarterKey = 'FY26-Q1';
-    // $8,000 to $105,000 in cents
-    const expiringArrCents = Math.floor((Math.random() * 97_000 + 8_000) * 100);
+    // First 10 accounts get smaller values to ensure some are under $20k total (3 opps * ~$6k = ~$18k)
+    // Remaining accounts get larger values ($20k-$105k)
+    const expiringArrCents = i < 10 
+      ? Math.floor((Math.random() * 5_000 + 3_000) * 100) // $3k-$8k per opp (total $9k-$24k, some will be <$20k)
+      : Math.floor((Math.random() * 85_000 + 20_000) * 100); // $20k-$105k
     const probability = Math.round((0.5 + Math.random() * 0.5) * 100) / 100;
     const healthScore = Math.floor(50 + Math.random() * 50);
     const riskFlag = healthScore < 65 || probability < 0.6;
@@ -147,8 +151,11 @@ async function main() {
     const month = 3 + (i % 3); // 3=Apr, 4=May, 5=Jun
     const renewal = new Date(Date.UTC(year2026, month, 15));
     const quarterKey = 'FY26-Q2';
-    // $8,000 to $105,000 in cents
-    const expiringArrCents = Math.floor((Math.random() * 97_000 + 8_000) * 100);
+    // First 10 accounts get smaller values to ensure some are under $20k total (3 opps * ~$6k = ~$18k)
+    // Remaining accounts get larger values ($20k-$105k)
+    const expiringArrCents = i < 10 
+      ? Math.floor((Math.random() * 5_000 + 3_000) * 100) // $3k-$8k per opp (total $9k-$24k, some will be <$20k)
+      : Math.floor((Math.random() * 85_000 + 20_000) * 100); // $20k-$105k
     const probability = Math.round((0.5 + Math.random() * 0.5) * 100) / 100;
     const healthScore = Math.floor(50 + Math.random() * 50);
     const riskFlag = healthScore < 65 || probability < 0.6;
@@ -178,8 +185,11 @@ async function main() {
     const month = 6 + (i % 3); // 6=Jul, 7=Aug, 8=Sep
     const renewal = new Date(Date.UTC(year2026, month, 15));
     const quarterKey = 'FY26-Q3';
-    // $8,000 to $105,000 in cents
-    const expiringArrCents = Math.floor((Math.random() * 97_000 + 8_000) * 100);
+    // First 10 accounts get smaller values to ensure some are under $20k total (3 opps * ~$6k = ~$18k)
+    // Remaining accounts get larger values ($20k-$105k)
+    const expiringArrCents = i < 10 
+      ? Math.floor((Math.random() * 5_000 + 3_000) * 100) // $3k-$8k per opp (total $9k-$24k, some will be <$20k)
+      : Math.floor((Math.random() * 85_000 + 20_000) * 100); // $20k-$105k
     const probability = Math.round((0.5 + Math.random() * 0.5) * 100) / 100;
     const healthScore = Math.floor(50 + Math.random() * 50);
     const riskFlag = healthScore < 65 || probability < 0.6;
@@ -215,10 +225,13 @@ async function main() {
   }
   
   // Update accounts: assign segment and owner based on total ARR
+  console.log('\n=== Updating account segments and owners ===');
   for (const account of accounts) {
     const totalArrCents = arrByAccount.get(account.id) || 0;
     const totalArrDollars = totalArrCents / 100;
     const isGrowth = totalArrDollars < 20_000;
+    
+    console.log(`${account.name}: Total ARR = $${totalArrDollars.toLocaleString()}, Segment = ${isGrowth ? 'Growth' : 'Enterprise'}, Owner = ${isGrowth ? 'Jake Myers' : 'Original'}`);
     
     await prisma.account.update({
       where: { id: account.id },
@@ -227,17 +240,9 @@ async function main() {
         ownerId: isGrowth ? jakeMyers.id : account.ownerId // Jake Myers for Growth, keep original for Enterprise
       }
     });
-    
-    // If account is Growth, update all its opportunities to ensure they're under Jake Myers
-    if (isGrowth) {
-      await prisma.opportunity.updateMany({
-        where: { accountId: account.id },
-        data: {
-          // Opportunities are already linked to account, so they'll inherit the account's owner
-        }
-      });
-    }
   }
+  
+  console.log('\n=== Account updates complete ===\n');
   
   // Create account-level snapshots for all quarters with Best/Worst/Call = ARR up for renewal
   const snapshots: any[] = [];
