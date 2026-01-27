@@ -18,20 +18,24 @@ function exec(command, options = {}) {
 
 function main() {
   // Check if DATABASE_URL is set
-  if (!process.env.DATABASE_URL) {
+  const dbUrl = process.env.DATABASE_URL;
+  
+  if (!dbUrl) {
     console.error('ERROR: DATABASE_URL environment variable is not set!');
     console.error('Please configure DATABASE_URL in your Vercel project settings.');
     process.exit(1);
   }
 
   // Validate DATABASE_URL format
-  if (!process.env.DATABASE_URL.startsWith('postgresql://') && 
-      !process.env.DATABASE_URL.startsWith('postgres://')) {
+  const cleanUrl = dbUrl.trim();
+  if (!cleanUrl.startsWith('postgresql://') && !cleanUrl.startsWith('postgres://')) {
     console.error('ERROR: DATABASE_URL must start with postgresql:// or postgres://');
-    console.error('Current DATABASE_URL format is invalid.');
+    console.error(`Current DATABASE_URL value: ${cleanUrl.substring(0, 20)}...`);
+    console.error('Please check your Vercel environment variable configuration.');
     process.exit(1);
   }
 
+  console.log('DATABASE_URL is configured (format validated)');
   console.log('Generating Prisma Client...');
   exec('npx prisma generate');
 
