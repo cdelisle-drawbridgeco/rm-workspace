@@ -108,8 +108,8 @@ async function main() {
     const month = i % 3; // 0=Jan, 1=Feb, 2=Mar
     const renewal = new Date(Date.UTC(year2026, month, 15));
     const quarterKey = 'FY26-Q1';
-    // $800k to $1.05M in cents
-    const expiringArrCents = Math.floor((Math.random() * 250_000 + 800_000) * 100);
+    // $8,000 to $105,000 in cents
+    const expiringArrCents = Math.floor((Math.random() * 97_000 + 8_000) * 100);
     const probability = Math.round((0.5 + Math.random() * 0.5) * 100) / 100;
     const healthScore = Math.floor(50 + Math.random() * 50);
     const riskFlag = healthScore < 65 || probability < 0.6;
@@ -139,8 +139,8 @@ async function main() {
     const month = 3 + (i % 3); // 3=Apr, 4=May, 5=Jun
     const renewal = new Date(Date.UTC(year2026, month, 15));
     const quarterKey = 'FY26-Q2';
-    // $800k to $1.05M in cents
-    const expiringArrCents = Math.floor((Math.random() * 250_000 + 800_000) * 100);
+    // $8,000 to $105,000 in cents
+    const expiringArrCents = Math.floor((Math.random() * 97_000 + 8_000) * 100);
     const probability = Math.round((0.5 + Math.random() * 0.5) * 100) / 100;
     const healthScore = Math.floor(50 + Math.random() * 50);
     const riskFlag = healthScore < 65 || probability < 0.6;
@@ -170,8 +170,8 @@ async function main() {
     const month = 6 + (i % 3); // 6=Jul, 7=Aug, 8=Sep
     const renewal = new Date(Date.UTC(year2026, month, 15));
     const quarterKey = 'FY26-Q3';
-    // $800k to $1.05M in cents
-    const expiringArrCents = Math.floor((Math.random() * 250_000 + 800_000) * 100);
+    // $8,000 to $105,000 in cents
+    const expiringArrCents = Math.floor((Math.random() * 97_000 + 8_000) * 100);
     const probability = Math.round((0.5 + Math.random() * 0.5) * 100) / 100;
     const healthScore = Math.floor(50 + Math.random() * 50);
     const riskFlag = healthScore < 65 || probability < 0.6;
