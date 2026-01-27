@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && prisma migrate deploy && next build",
-    "vercel-build": "prisma generate && prisma migrate deploy && next build",
+    "vercel-build": "node scripts/baseline-and-migrate.js",
     "start": "next start",
     "lint": "next lint",
     "prisma:generate": "prisma generate",
