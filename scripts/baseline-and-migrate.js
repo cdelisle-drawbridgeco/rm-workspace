@@ -18,7 +18,7 @@ function exec(command, options = {}) {
 
 function main() {
   // Check if DATABASE_URL is set
-  const dbUrl = process.env.DATABASE_URL;
+  let dbUrl = process.env.DATABASE_URL;
   
   if (!dbUrl) {
     console.error('ERROR: DATABASE_URL environment variable is not set!');
@@ -26,12 +26,20 @@ function main() {
     process.exit(1);
   }
 
+  // Clean up the URL - remove "DATABASE_URL=" prefix if present (common mistake in Vercel)
+  dbUrl = dbUrl.trim();
+  if (dbUrl.startsWith('DATABASE_URL=')) {
+    dbUrl = dbUrl.substring('DATABASE_URL='.length).trim();
+    console.log('Note: Removed DATABASE_URL= prefix from environment variable');
+  }
+
   // Validate DATABASE_URL format
-  const cleanUrl = dbUrl.trim();
+  const cleanUrl = dbUrl;
   if (!cleanUrl.startsWith('postgresql://') && !cleanUrl.startsWith('postgres://')) {
     console.error('ERROR: DATABASE_URL must start with postgresql:// or postgres://');
-    console.error(`Current DATABASE_URL value: ${cleanUrl.substring(0, 20)}...`);
+    console.error(`Current DATABASE_URL value: ${cleanUrl.substring(0, 50)}...`);
     console.error('Please check your Vercel environment variable configuration.');
+    console.error('The value should be just the connection string, not "DATABASE_URL=connection_string"');
     process.exit(1);
   }
 
