@@ -6,7 +6,14 @@ import ForecastTrendChart from '../manager/forecast-trend-chart';
 interface Account {
   id: string;
   name: string;
-  ownerName: string;
+  owner: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string | null;
+    username: string | null;
+    isActive: boolean;
+  };
   segment: string | null;
   region: string | null;
   createdAt: Date;
@@ -65,7 +72,11 @@ export default function ExecDashboard({
 
   // Group accounts by RM
   const accountsByRM = quarterAccounts.reduce((acc, account) => {
-    const rm = account.ownerName;
+    if (!account.owner) {
+      console.warn(`Account ${account.name} has no owner`);
+      return acc;
+    }
+    const rm = `${account.owner.firstName} ${account.owner.lastName}`;
     if (!acc[rm]) acc[rm] = [];
     acc[rm].push(account);
     return acc;

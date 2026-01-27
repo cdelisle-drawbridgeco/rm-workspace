@@ -7,10 +7,27 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id          String   @id @default(cuid())
+  firstName   String
+  lastName    String
+  email       String?   @unique
+  username    String?   @unique
+  isActive    Boolean   @default(true)
+  profileId   String?   // Salesforce ProfileId
+  roleId      String?   // Salesforce RoleId
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  accounts    Account[]
+  
+  @@map("users")
+}
+
 model Account {
   id        String   @id @default(cuid())
   name      String
-  ownerName String
+  ownerId   String
+  owner     User     @relation(fields: [ownerId], references: [id])
   segment   String?
   region    String?
   createdAt DateTime @default(now())

@@ -20,7 +20,7 @@ build/
 .vercel
 
 # Prisma
-prisma/migrations/
+# Note: migrations should be committed to version control
 
 # IDE
 .vscode/
@@ -47,5 +47,7 @@ coverage/
 # Temporary folders
 tmp/
 temp/
+
+
 
 

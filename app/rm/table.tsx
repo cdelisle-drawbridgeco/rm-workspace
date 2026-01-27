@@ -5,7 +5,14 @@ import ForecastTrendChart from '../manager/forecast-trend-chart';
 type Account = {
   id: string;
   name: string;
-  ownerName: string;
+  owner: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string | null;
+    username: string | null;
+    isActive: boolean;
+  };
   segment: string | null;
   region: string | null;
   createdAt: Date;
@@ -93,7 +100,11 @@ export default function AccountTable({
 
   // Group accounts by RM (using filtered opportunities)
   const accountsByRM = quarterAccountsWithFilteredOpps.reduce((acc, account) => {
-    const rm = account.ownerName;
+    if (!account.owner) {
+      console.warn(`Account ${account.name} has no owner`);
+      return acc;
+    }
+    const rm = `${account.owner.firstName} ${account.owner.lastName}`;
     if (!acc[rm]) acc[rm] = [];
     acc[rm].push(account);
     return acc;
@@ -315,7 +326,7 @@ export default function AccountTable({
                               </button>
                               {acc.name}
                             </td>
-                            <td className="p-2">{acc.ownerName}</td>
+                            <td className="p-2">{acc.owner ? `${acc.owner.firstName} ${acc.owner.lastName}` : 'N/A'}</td>
                             <td className="p-2">{acc.segment}</td>
                             <td className="p-2">{acc.opportunities.length}</td>
                             <td className="p-2 font-medium">{formatUsd(sumArr)}</td>
@@ -429,7 +440,7 @@ export default function AccountTable({
                         </button>
                         {acc.name}
                       </td>
-                      <td className="p-2">{acc.ownerName}</td>
+                      <td className="p-2">{acc.owner ? `${acc.owner.firstName} ${acc.owner.lastName}` : 'N/A'}</td>
                       <td className="p-2">{acc.segment}</td>
                       <td className="p-2 w-20">{acc.opportunities.length}</td>
                       <td className="p-2 font-medium">{formatUsd(sumArr)}</td>

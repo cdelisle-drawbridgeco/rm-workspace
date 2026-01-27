@@ -5,7 +5,14 @@ import React, { useState } from 'react';
 interface Account {
   id: string;
   name: string;
-  ownerName: string;
+  owner: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string | null;
+    username: string | null;
+    isActive: boolean;
+  };
   segment: string | null;
   region: string | null;
   createdAt: Date;
@@ -81,8 +88,10 @@ export default function ForecastTrendChart({
     
     // Get selected quarter data as baseline, filtered by RM if specified
     const quarterAccounts = accounts.filter(acc => {
+      if (!acc.owner) return false;
       const hasQuarterOpps = acc.opportunities.some(opp => opp.quarterKey === targetQuarterKey);
-      const matchesRM = !selectedRM || selectedRM === 'All' || acc.ownerName === selectedRM;
+      const rmName = `${acc.owner.firstName} ${acc.owner.lastName}`;
+      const matchesRM = !selectedRM || selectedRM === 'All' || rmName === selectedRM;
       return hasQuarterOpps && matchesRM;
     });
 
@@ -126,8 +135,10 @@ export default function ForecastTrendChart({
   // Generate current quarter data (only for the selected quarter)
   const generateCurrentQuarterData = () => {
     const quarterAccounts = accounts.filter(acc => {
+      if (!acc.owner) return false;
       const hasQuarterOpps = acc.opportunities.some(opp => opp.quarterKey === targetQuarterKey);
-      const matchesRM = !selectedRM || selectedRM === 'All' || acc.ownerName === selectedRM;
+      const rmName = `${acc.owner.firstName} ${acc.owner.lastName}`;
+      const matchesRM = !selectedRM || selectedRM === 'All' || rmName === selectedRM;
       return hasQuarterOpps && matchesRM;
     });
 

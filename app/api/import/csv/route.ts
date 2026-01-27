@@ -25,19 +25,59 @@ export async function POST(req: NextRequest) {
   for (const line of lines) {
     if (!line.trim()) continue;
     const [accName, oppName, renewalDate, arrUsd, stage, prob, health, risk, product, term, owner, region, segment] = line.split(',').map(s => s.trim());
+    
+    // Find or create User based on owner name (format: "FirstName LastName")
+    let user = null;
+    if (owner) {
+      const nameParts = owner.trim().split(/\s+/);
+      const firstName = nameParts[0] || '';
+      const lastName = nameParts.slice(1).join(' ') || '';
+      
+      if (firstName && lastName) {
+        // Try to find existing user by first and last name
+        user = await prisma.user.findFirst({
+          where: {
+            firstName: { equals: firstName, mode: 'insensitive' },
+            lastName: { equals: lastName, mode: 'insensitive' }
+          }
+        });
+        
+        // If not found, create new user
+        if (!user) {
+          const email = `${firstName.toLowerCase()}.${lastName.toLowerCase().replace(/'/g, '')}@company.com`;
+          const username = `${firstName.toLowerCase()}.${lastName.toLowerCase().replace(/'/g, '')}`;
+          user = await prisma.user.create({
+            data: {
+              firstName,
+              lastName,
+              email,
+              username,
+              isActive: true
+            }
+          });
+        }
+      }
+    }
+    
+    // If no user found/created, skip this record
+    if (!user) {
+      console.warn(`Skipping record: Could not find or create user for owner "${owner}"`);
+      continue;
+    }
+    
     let account = await prisma.account.findFirst({
       where: { name: accName }
     });
     
     if (!account) {
       account = await prisma.account.create({
-        data: { name: accName, ownerName: owner, region, segment }
+        data: { name: accName, ownerId: user.id, region, segment }
       });
     } else {
       // Update existing account if needed
       account = await prisma.account.update({
         where: { id: account.id },
-        data: { ownerName: owner, region, segment }
+        data: { ownerId: user.id, region, segment }
       });
     }
     const dt = new Date(renewalDate);

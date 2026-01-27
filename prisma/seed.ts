@@ -24,16 +24,47 @@ function periodKeyWeek(d: Date): string {
 }
 
 async function main() {
-  const rms = ['Alex Lee', 'Jordan Kim', 'Taylor Chen', 'Sam Patel', 'Morgan Diaz'];
+  // Clear existing data
+  await prisma.forecastSnapshot.deleteMany({});
+  await prisma.opportunity.deleteMany({});
+  await prisma.account.deleteMany({});
+  await prisma.user.deleteMany({});
 
-  // Create ~20 accounts
+  // Create the 7 RMs (mimicking Salesforce User structure)
+  const rmNames = [
+    { firstName: 'Mike', lastName: 'Sullivan' },
+    { firstName: 'Tim', lastName: 'O\'Leary' },
+    { firstName: 'Jake', lastName: 'Myers' },
+    { firstName: 'Casey', lastName: 'Hays' },
+    { firstName: 'Keiran', lastName: 'Sloane' },
+    { firstName: 'Michael', lastName: 'Bealey' },
+    { firstName: 'Taylor', lastName: 'McGranahan' }
+  ];
+
+  const users = await Promise.all(
+    rmNames.map(async (rm) => {
+      const email = `${rm.firstName.toLowerCase()}.${rm.lastName.toLowerCase().replace(/'/g, '')}@company.com`;
+      const username = `${rm.firstName.toLowerCase()}.${rm.lastName.toLowerCase().replace(/'/g, '')}`;
+      return prisma.user.create({
+        data: {
+          firstName: rm.firstName,
+          lastName: rm.lastName,
+          email,
+          username,
+          isActive: true
+        }
+      });
+    })
+  );
+
+  // Create ~20 accounts distributed across the RMs
   const accounts = await Promise.all(
     Array.from({ length: 20 }).map(async (_, i) => {
-      const ownerName = rms[i % rms.length];
+      const owner = users[i % users.length];
       return prisma.account.create({
         data: {
           name: `Acme ${i + 1}`,
-          ownerName,
+          ownerId: owner.id,
           segment: i % 2 === 0 ? 'Mid-Market' : 'Enterprise',
           region: ['NA', 'EMEA', 'APAC'][i % 3]
         }
@@ -131,9 +162,6 @@ async function main() {
   }
   
   await Promise.all(opps);
-
-  // Clear existing snapshots first
-  await prisma.forecastSnapshot.deleteMany({});
   
   // Create account-level snapshots for all quarters with Best/Worst/Call = ARR up for renewal
   const snapshots: any[] = [];

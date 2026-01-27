@@ -29,7 +29,12 @@ function getFollowingQuarter(): string {
 }
 
 async function getData() {
-  const accounts = await prisma.account.findMany({ include: { opportunities: true } });
+  const accounts = await prisma.account.findMany({ 
+    include: { 
+      opportunities: true,
+      owner: true
+    } 
+  });
   const names = accounts.map(a => a.name);
   
   const cq = getCurrentQuarter();
