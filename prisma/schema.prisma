@@ -56,21 +56,24 @@ model Opportunity {
 }
 
 model ForecastSnapshot {
-  id             String   @id @default(cuid())
-  scopeType      String   // 'RM' | 'Manager'
-  scopeName      String   // e.g., RM name or team name
-  quarterKey     String   // FYxx-Qx (target quarter)
-  periodKey      String   // YYYY-WW or YYYY-MM (when updated)
-  forQuarter     String   // 'CQ' | 'NQ'
-  bestCents      Int
-  worstCents     Int
-  callCents      Int
-  confidencePct  Int?
-  confidence     String?  // 'Commit', 'Likely', 'Upside', 'At Risk', 'Churn'
-  notes          String?
-  createdAt      DateTime @default(now())
-  createdBy      String   // who entered this snapshot (free text for MVP)
-  dataVersionId  String?
+  id                 String   @id @default(cuid())
+  scopeType          String   // 'RM' | 'Manager'
+  scopeName          String   // e.g., RM name or team name
+  quarterKey         String   // FYxx-Qx (target quarter)
+  periodKey          String   // YYYY-WW or YYYY-MM (when updated)
+  forQuarter         String   // 'CQ' | 'NQ'
+  bestCents          Int
+  worstCents         Int
+  callCents          Int      // Computed: grossCallCents + priceIncreaseCents + expansionCents
+  grossCallCents     Int      // Base renewal (Gross Call)
+  priceIncreaseCents Int      // Price increase component
+  expansionCents     Int      // Expansion component
+  confidencePct      Int?
+  confidence         String?  // 'Commit', 'Likely', 'Upside', 'At Risk', 'Churn'
+  notes              String?
+  createdAt          DateTime @default(now())
+  createdBy          String   // who entered this snapshot (free text for MVP)
+  dataVersionId      String?
 }
 
 model DataVersion {

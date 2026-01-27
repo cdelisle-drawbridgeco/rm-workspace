@@ -62,7 +62,16 @@ export default function AccountTable({
   quarters
 }: {
   accounts: Account[];
-  latestByAccount: Record<string, Record<string, { bestUsd: number; worstUsd: number; callUsd: number; confidence: string; notes: string }>>;
+  latestByAccount: Record<string, Record<string, { 
+    bestUsd: number; 
+    worstUsd: number; 
+    callUsd: number; 
+    grossCallUsd: number;
+    priceIncreaseUsd: number;
+    expansionUsd: number;
+    confidence: string; 
+    notes: string 
+  }>>;
   quarters: { cq: string; nq: string; fq: string };
 }) {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
@@ -70,8 +79,24 @@ export default function AccountTable({
   const [selectedRM, setSelectedRM] = useState<string>('All');
   const [selectedQuarter, setSelectedQuarter] = useState<string>('CQ');
   
-  const [drafts, setDrafts] = useState<Record<string, { best: string; worst: string; call: string; confidence: string; notes: string }>>(() => {
-    const d: Record<string, { best: string; worst: string; call: string; confidence: string; notes: string }> = {};
+  const [drafts, setDrafts] = useState<Record<string, { 
+    best: string; 
+    worst: string; 
+    grossCall: string; 
+    priceIncrease: string; 
+    expansion: string; 
+    confidence: string; 
+    notes: string 
+  }>>(() => {
+    const d: Record<string, { 
+      best: string; 
+      worst: string; 
+      grossCall: string; 
+      priceIncrease: string; 
+      expansion: string; 
+      confidence: string; 
+      notes: string 
+    }> = {};
     for (const a of accounts) {
       const accountSnapshots = latestByAccount[a.name];
       const currentQuarterKey = selectedQuarter === 'CQ' ? quarters.cq : selectedQuarter === 'NQ' ? quarters.nq : quarters.fq;
@@ -79,7 +104,9 @@ export default function AccountTable({
       d[a.id] = {
         best: latest && latest.bestUsd > 0 ? formatCurrency(String(latest.bestUsd)) : '',
         worst: latest && latest.worstUsd > 0 ? formatCurrency(String(latest.worstUsd)) : '',
-        call: latest && latest.callUsd > 0 ? formatCurrency(String(latest.callUsd)) : '',
+        grossCall: latest && latest.grossCallUsd > 0 ? formatCurrency(String(latest.grossCallUsd)) : '',
+        priceIncrease: latest && latest.priceIncreaseUsd > 0 ? formatCurrency(String(latest.priceIncreaseUsd)) : '',
+        expansion: latest && latest.expansionUsd > 0 ? formatCurrency(String(latest.expansionUsd)) : '',
         confidence: latest && latest.confidence ? String(latest.confidence) : '',
         notes: latest ? String(latest.notes) : ''
       };
@@ -121,7 +148,9 @@ export default function AccountTable({
     console.log('Saving row for', a.name, 'with data:', {
       best: row.best,
       worst: row.worst,
-      call: row.call,
+      grossCall: row.grossCall,
+      priceIncrease: row.priceIncrease,
+      expansion: row.expansion,
       confidence: row.confidence,
       notes: row.notes
     });
@@ -138,7 +167,7 @@ export default function AccountTable({
     if (isNaN(num) || num === 0) return '';
     return num.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
   };
-    
+
     const res = await fetch('/api/snapshots', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -147,7 +176,9 @@ export default function AccountTable({
         scopeName: a.name,
         best: parseCurrency(row.best),
         worst: parseCurrency(row.worst),
-        call: parseCurrency(row.call),
+        grossCall: parseCurrency(row.grossCall),
+        priceIncrease: parseCurrency(row.priceIncrease),
+        expansion: parseCurrency(row.expansion),
         confidence: row.confidence || null,
         notes: row.notes || null,
         quarterKey: currentQuarterKey
@@ -267,7 +298,7 @@ export default function AccountTable({
               <th className="p-2 w-32">ARR Up (sum)</th>
               <th className="p-2 w-28">Best (USD)</th>
               <th className="p-2 w-28">Worst (USD)</th>
-              <th className="p-2 w-28">Call (USD)</th>
+              <th className="p-2 w-28">Call Total</th>
               <th className="p-2 w-32">Confidence</th>
               <th className="p-2 w-48">Notes</th>
               <th className="p-2 w-20">Actions</th>
@@ -319,7 +350,14 @@ export default function AccountTable({
                     {/* Account Rows */}
                     {expandedRMs[rm] && rmAccounts.map(acc => {
                       const sumArr = acc.opportunities.reduce((s, o) => s + o.expiringArrCents, 0);
-                      const d = drafts[acc.id] || { best: '', worst: '', call: '', confidence: '', notes: '' };
+                      const d = drafts[acc.id] || { best: '', worst: '', grossCall: '', priceIncrease: '', expansion: '', confidence: '', notes: '' };
+                      // Compute Call Total from components
+                      const parseCurrency = (val: string) => {
+                        const cleaned = val.replace(/[$,]/g, '');
+                        return Number(cleaned) || 0;
+                      };
+                      const callTotal = parseCurrency(d.grossCall) + parseCurrency(d.priceIncrease) + parseCurrency(d.expansion);
+                      const callTotalFormatted = callTotal > 0 ? formatCurrency(String(callTotal)) : '';
                       return (
                         <React.Fragment key={acc.id}>
                           <tr className="bg-gray-50 hover:bg-gray-100">
@@ -366,21 +404,56 @@ export default function AccountTable({
                                 }} 
                               />
                             </td>
-                            <td className="p-2">
-                              <input 
-                                className="w-full rounded border p-1" 
-                                placeholder="$0"
-                                value={d.call} 
-                                onChange={e => {
-                                  setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], call: e.target.value } }));
-                                }}
-                                onBlur={e => {
-                                  if (e.target.value && !e.target.value.includes('$')) {
-                                    const formatted = formatCurrency(e.target.value);
-                                    setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], call: formatted } }));
-                                  }
-                                }} 
-                              />
+                            <td className="p-2 align-top">
+                              {/* Call Total - non-editable, computed */}
+                              <div className="mb-1 rounded border bg-gray-100 p-1 text-center text-sm font-semibold text-blue-600">
+                                {callTotalFormatted || '$0'}
+                              </div>
+                              {/* Call Components - stacked below */}
+                              <div className="space-y-1">
+                                <input 
+                                  className="w-full rounded border border-blue-200 p-1 text-xs" 
+                                  placeholder="Gross Call"
+                                  value={d.grossCall} 
+                                  onChange={e => {
+                                    setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], grossCall: e.target.value } }));
+                                  }}
+                                  onBlur={e => {
+                                    if (e.target.value && !e.target.value.includes('$')) {
+                                      const formatted = formatCurrency(e.target.value);
+                                      setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], grossCall: formatted } }));
+                                    }
+                                  }} 
+                                />
+                                <input 
+                                  className="w-full rounded border border-blue-200 p-1 text-xs" 
+                                  placeholder="Price Increase"
+                                  value={d.priceIncrease} 
+                                  onChange={e => {
+                                    setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], priceIncrease: e.target.value } }));
+                                  }}
+                                  onBlur={e => {
+                                    if (e.target.value && !e.target.value.includes('$')) {
+                                      const formatted = formatCurrency(e.target.value);
+                                      setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], priceIncrease: formatted } }));
+                                    }
+                                  }} 
+                                />
+                                <input 
+                                  className="w-full rounded border border-blue-200 p-1 text-xs" 
+                                  placeholder="Expansion"
+                                  value={d.expansion} 
+                                  onChange={e => {
+                                    setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], expansion: e.target.value } }));
+                                  }}
+                                  onBlur={e => {
+                                    if (e.target.value && !e.target.value.includes('$')) {
+                                      const formatted = formatCurrency(e.target.value);
+                                      setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], expansion: formatted } }));
+                                    }
+                                  }} 
+                                />
+                              </div>
                             </td>
                             <td className="p-2">
                               <select 
@@ -410,7 +483,7 @@ export default function AccountTable({
                           </tr>
                           {expanded[acc.id] && (
                             <tr key={`${acc.id}-expanded`}>
-                              <td colSpan={12} className="bg-gray-100 p-3 pl-12">
+                              <td colSpan={12} className="bg-gray-100 p-3 pl-8">
                                 <div className="text-xs font-semibold text-gray-600">Opportunities</div>
                                 <div className="mt-2 grid grid-cols-4 gap-2 text-xs">
                                   {acc.opportunities.map(o => (
@@ -434,7 +507,14 @@ export default function AccountTable({
               // Single RM view
               filteredAccounts.map(acc => {
                 const sumArr = acc.opportunities.reduce((s, o) => s + o.expiringArrCents, 0);
-                const d = drafts[acc.id] || { best: '', worst: '', call: '', confidence: '', notes: '' };
+                const d = drafts[acc.id] || { best: '', worst: '', grossCall: '', priceIncrease: '', expansion: '', confidence: '', notes: '' };
+                // Compute Call Total from components
+                const parseCurrency = (val: string) => {
+                  const cleaned = val.replace(/[$,]/g, '');
+                  return Number(cleaned) || 0;
+                };
+                const callTotal = parseCurrency(d.grossCall) + parseCurrency(d.priceIncrease) + parseCurrency(d.expansion);
+                const callTotalFormatted = callTotal > 0 ? formatCurrency(String(callTotal)) : '';
                 return (
                   <React.Fragment key={acc.id}>
                     <tr className="hover:bg-gray-50">
@@ -481,21 +561,56 @@ export default function AccountTable({
                           }}
                         />
                       </td>
-                      <td className="p-2">
-                        <input 
-                          className="w-full rounded border p-1" 
-                          placeholder="$0"
-                          value={d.call} 
-                          onChange={e => {
-                            setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], call: e.target.value } }));
-                          }}
-                          onBlur={e => {
-                            if (e.target.value && !e.target.value.includes('$')) {
-                              const formatted = formatCurrency(e.target.value);
-                              setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], call: formatted } }));
-                            }
-                          }}
-                        />
+                      <td className="p-2 align-top">
+                        {/* Call Total - non-editable, computed */}
+                        <div className="mb-1 rounded border bg-gray-100 p-1 text-center text-sm font-semibold text-blue-600">
+                          {callTotalFormatted || '$0'}
+                        </div>
+                        {/* Call Components - stacked below */}
+                        <div className="space-y-1">
+                          <input 
+                            className="w-full rounded border border-blue-200 p-1 text-xs" 
+                            placeholder="Gross Call"
+                            value={d.grossCall} 
+                            onChange={e => {
+                              setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], grossCall: e.target.value } }));
+                            }}
+                            onBlur={e => {
+                              if (e.target.value && !e.target.value.includes('$')) {
+                                const formatted = formatCurrency(e.target.value);
+                                setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], grossCall: formatted } }));
+                              }
+                            }} 
+                          />
+                          <input 
+                            className="w-full rounded border border-blue-200 p-1 text-xs" 
+                            placeholder="Price Increase"
+                            value={d.priceIncrease} 
+                            onChange={e => {
+                              setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], priceIncrease: e.target.value } }));
+                            }}
+                            onBlur={e => {
+                              if (e.target.value && !e.target.value.includes('$')) {
+                                const formatted = formatCurrency(e.target.value);
+                                setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], priceIncrease: formatted } }));
+                              }
+                            }} 
+                          />
+                          <input 
+                            className="w-full rounded border border-blue-200 p-1 text-xs" 
+                            placeholder="Expansion"
+                            value={d.expansion} 
+                            onChange={e => {
+                              setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], expansion: e.target.value } }));
+                            }}
+                            onBlur={e => {
+                              if (e.target.value && !e.target.value.includes('$')) {
+                                const formatted = formatCurrency(e.target.value);
+                                setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], expansion: formatted } }));
+                              }
+                            }} 
+                          />
+                        </div>
                       </td>
                       <td className="p-2">
                         <select 

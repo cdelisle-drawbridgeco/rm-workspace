@@ -368,7 +368,10 @@ async function main() {
             forQuarter: forQuarter,
             bestCents: arrUpCents, // Set equal to ARR up
             worstCents: arrUpCents, // Set equal to ARR up
-            callCents: arrUpCents, // Set equal to ARR up
+            grossCallCents: arrUpCents, // All call value goes to Gross Call initially
+            priceIncreaseCents: 0, // No price increase in seed data
+            expansionCents: 0, // No expansion in seed data
+            callCents: arrUpCents, // Computed: grossCallCents + priceIncreaseCents + expansionCents
             confidencePct: 75,
             confidence: confidence,
             notes: 'Seed data - Best/Worst/Call = ARR up for renewal',
