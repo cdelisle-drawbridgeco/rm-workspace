@@ -156,11 +156,15 @@ async function main() {
     const month = i % 3; // 0=Jan, 1=Feb, 2=Mar
     const renewal = new Date(Date.UTC(year2026, month, 15));
     const quarterKey = 'FY26-Q1';
-    // First 10 accounts get smaller values to ensure some are under $20k total (3 opps * ~$6k = ~$18k)
-    // Remaining accounts get larger values ($20k-$105k)
-    const expiringArrCents = i < 10 
-      ? Math.floor((Math.random() * 5_000 + 3_000) * 100) // $3k-$8k per opp (total $9k-$24k, some will be <$20k)
-      : Math.floor((Math.random() * 85_000 + 20_000) * 100); // $20k-$105k
+    // Determine value based on account type
+    // PortCo accounts (index >= 20) get mid-range values
+    // First 10 hedge/PE accounts get smaller values to ensure some are under $20k total
+    // Remaining hedge/PE accounts get larger values
+    const expiringArrCents = i >= companyNames.length
+      ? Math.floor((Math.random() * 50_000 + 15_000) * 100) // PortCo: $15k-$65k
+      : i < 10 
+        ? Math.floor((Math.random() * 5_000 + 3_000) * 100) // $3k-$8k per opp (total $9k-$24k, some will be <$20k)
+        : Math.floor((Math.random() * 85_000 + 20_000) * 100); // $20k-$105k
     const probability = Math.round((0.5 + Math.random() * 0.5) * 100) / 100;
     const healthScore = Math.floor(50 + Math.random() * 50);
     const riskFlag = healthScore < 65 || probability < 0.6;
@@ -190,11 +194,12 @@ async function main() {
     const month = 3 + (i % 3); // 3=Apr, 4=May, 5=Jun
     const renewal = new Date(Date.UTC(year2026, month, 15));
     const quarterKey = 'FY26-Q2';
-    // First 10 accounts get smaller values to ensure some are under $20k total (3 opps * ~$6k = ~$18k)
-    // Remaining accounts get larger values ($20k-$105k)
-    const expiringArrCents = i < 10 
-      ? Math.floor((Math.random() * 5_000 + 3_000) * 100) // $3k-$8k per opp (total $9k-$24k, some will be <$20k)
-      : Math.floor((Math.random() * 85_000 + 20_000) * 100); // $20k-$105k
+    // Determine value based on account type
+    const expiringArrCents = i >= companyNames.length
+      ? Math.floor((Math.random() * 50_000 + 15_000) * 100) // PortCo: $15k-$65k
+      : i < 10 
+        ? Math.floor((Math.random() * 5_000 + 3_000) * 100) // $3k-$8k per opp (total $9k-$24k, some will be <$20k)
+        : Math.floor((Math.random() * 85_000 + 20_000) * 100); // $20k-$105k
     const probability = Math.round((0.5 + Math.random() * 0.5) * 100) / 100;
     const healthScore = Math.floor(50 + Math.random() * 50);
     const riskFlag = healthScore < 65 || probability < 0.6;
@@ -224,11 +229,12 @@ async function main() {
     const month = 6 + (i % 3); // 6=Jul, 7=Aug, 8=Sep
     const renewal = new Date(Date.UTC(year2026, month, 15));
     const quarterKey = 'FY26-Q3';
-    // First 10 accounts get smaller values to ensure some are under $20k total (3 opps * ~$6k = ~$18k)
-    // Remaining accounts get larger values ($20k-$105k)
-    const expiringArrCents = i < 10 
-      ? Math.floor((Math.random() * 5_000 + 3_000) * 100) // $3k-$8k per opp (total $9k-$24k, some will be <$20k)
-      : Math.floor((Math.random() * 85_000 + 20_000) * 100); // $20k-$105k
+    // Determine value based on account type
+    const expiringArrCents = i >= companyNames.length
+      ? Math.floor((Math.random() * 50_000 + 15_000) * 100) // PortCo: $15k-$65k
+      : i < 10 
+        ? Math.floor((Math.random() * 5_000 + 3_000) * 100) // $3k-$8k per opp (total $9k-$24k, some will be <$20k)
+        : Math.floor((Math.random() * 85_000 + 20_000) * 100); // $20k-$105k
     const probability = Math.round((0.5 + Math.random() * 0.5) * 100) / 100;
     const healthScore = Math.floor(50 + Math.random() * 50);
     const riskFlag = healthScore < 65 || probability < 0.6;
