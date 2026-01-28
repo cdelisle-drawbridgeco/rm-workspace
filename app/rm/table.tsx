@@ -290,21 +290,21 @@ export default function AccountTable({
         <table className="min-w-full divide-y divide-gray-200">
           <thead>
             <tr className="bg-gray-100 text-left text-sm font-semibold">
-              <th className="p-2 w-56">Account</th>
-              <th className="p-2 w-24">RM</th>
-              <th className="p-2 w-28">Client Type</th>
-              <th className="p-2 w-28">Segment</th>
-              <th className="p-2 w-16">Opps</th>
-              <th className="p-2 w-32">ARR Up (sum)</th>
-              <th className="p-2 w-28">Best (USD)</th>
-              <th className="p-2 w-28">Worst (USD)</th>
-              <th className="p-2 w-28">Call Total</th>
-              <th className="p-2 w-32">Confidence</th>
-              <th className="p-2 w-48">Notes</th>
-              <th className="p-2 w-20">Actions</th>
+              <th className="p-2 w-56 align-top">Account</th>
+              <th className="p-2 w-24 align-top">RM</th>
+              <th className="p-2 w-28 align-top">Client Type</th>
+              <th className="p-2 w-28 align-top">Segment</th>
+              <th className="p-2 w-16 align-top">Opps</th>
+              <th className="p-2 w-32 align-top">ARR Up (sum)</th>
+              <th className="p-2 w-28 align-top">Best (USD)</th>
+              <th className="p-2 w-28 align-top">Worst (USD)</th>
+              <th className="p-2 w-28 align-top">Call Total</th>
+              <th className="p-2 w-32 align-top">Confidence</th>
+              <th className="p-2 w-48 align-top">Notes</th>
+              <th className="p-2 w-20 align-top">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100 text-sm">
+          <tbody className="divide-y divide-gray-100 text-sm [&>tr>td]:align-top">
             {selectedRM === 'All' ? (
               // Grouped view
               rms.map(rm => {
@@ -374,7 +374,7 @@ export default function AccountTable({
                             <td className="p-2 font-medium">{formatUsd(sumArr)}</td>
                             <td className="p-2 align-top">
                               <input 
-                                className="w-full rounded border p-1" 
+                                className="w-full rounded border p-1 h-8" 
                                 placeholder="$0"
                                 value={d.best} 
                                 onChange={e => {
@@ -390,7 +390,7 @@ export default function AccountTable({
                             </td>
                             <td className="p-2 align-top">
                               <input 
-                                className="w-full rounded border p-1" 
+                                className="w-full rounded border p-1 h-8" 
                                 placeholder="$0"
                                 value={d.worst} 
                                 onChange={e => {
@@ -406,7 +406,7 @@ export default function AccountTable({
                             </td>
                             <td className="p-2 align-top">
                               {/* Call Total - non-editable, computed - aligned with Best/Worst */}
-                              <div className="mb-2 rounded border bg-gray-100 p-1 text-center text-sm font-semibold text-blue-600">
+                              <div className="mb-2 rounded border bg-gray-100 p-1 text-center text-sm font-semibold text-blue-600 h-8 flex items-center justify-center">
                                 {callTotalFormatted || '$0'}
                               </div>
                               {/* Call Components - labels to the left of inputs */}
@@ -466,7 +466,7 @@ export default function AccountTable({
                             </td>
                             <td className="p-2 align-top">
                               <select 
-                                className="w-full rounded border p-1" 
+                                className="w-full rounded border p-1 h-8" 
                                 value={d.confidence} 
                                 onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], confidence: e.target.value } }))}
                               >
@@ -480,14 +480,14 @@ export default function AccountTable({
                             </td>
                             <td className="p-2 align-top">
                               <input 
-                                className="w-full rounded border p-1" 
+                                className="w-full rounded border p-1 h-8" 
                                 placeholder="Notes" 
                                 value={d.notes} 
                                 onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], notes: e.target.value } }))} 
                               />
                             </td>
                             <td className="p-2 align-top">
-                              <button className="rounded bg-blue-600 px-2 py-1 text-xs text-white hover:bg-blue-700" onClick={() => saveRow(acc)}>Save</button>
+                              <button className="rounded bg-blue-600 px-2 py-1 text-xs text-white hover:bg-blue-700 h-8" onClick={() => saveRow(acc)}>Save</button>
                             </td>
                           </tr>
                           {expanded[acc.id] && (
@@ -540,7 +540,7 @@ export default function AccountTable({
                       <td className="p-2 align-top font-medium">{formatUsd(sumArr)}</td>
                       <td className="p-2 align-top">
                         <input 
-                          className="w-full rounded border p-1" 
+                          className="w-full rounded border p-1 h-8" 
                           placeholder="$0"
                           value={d.best} 
                           onChange={e => {
@@ -556,7 +556,7 @@ export default function AccountTable({
                       </td>
                       <td className="p-2 align-top">
                         <input 
-                          className="w-full rounded border p-1" 
+                          className="w-full rounded border p-1 h-8" 
                           placeholder="$0"
                           value={d.worst} 
                           onChange={e => {
@@ -572,7 +572,7 @@ export default function AccountTable({
                       </td>
                       <td className="p-2 align-top">
                         {/* Call Total - non-editable, computed - aligned with Best/Worst */}
-                        <div className="mb-2 rounded border bg-gray-100 p-1 text-center text-sm font-semibold text-blue-600">
+                        <div className="mb-2 rounded border bg-gray-100 p-1 text-center text-sm font-semibold text-blue-600 h-8 flex items-center justify-center">
                           {callTotalFormatted || '$0'}
                         </div>
                         {/* Call Components - labels to the left of inputs */}
@@ -632,7 +632,7 @@ export default function AccountTable({
                       </td>
                       <td className="p-2 align-top">
                         <select 
-                          className="w-full rounded border p-1" 
+                          className="w-full rounded border p-1 h-8" 
                           value={d.confidence} 
                           onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], confidence: e.target.value } }))}
                         >
@@ -646,14 +646,14 @@ export default function AccountTable({
                       </td>
                       <td className="p-2 align-top">
                         <input 
-                          className="w-full rounded border p-1" 
+                          className="w-full rounded border p-1 h-8" 
                           placeholder="Notes" 
                           value={d.notes} 
                           onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], notes: e.target.value } }))} 
                         />
                       </td>
                       <td className="p-2 align-top">
-                        <button className="rounded bg-blue-600 px-2 py-1 text-xs text-white hover:bg-blue-700" onClick={() => saveRow(acc)}>Save</button>
+                        <button className="rounded bg-blue-600 px-2 py-1 text-xs text-white hover:bg-blue-700 h-8" onClick={() => saveRow(acc)}>Save</button>
                       </td>
                     </tr>
                     {expanded[acc.id] && (
