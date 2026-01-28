@@ -326,7 +326,7 @@ export default function AccountTable({
                   <React.Fragment key={rm}>
                     {/* RM Summary Row */}
                     <tr className="bg-blue-50 font-semibold hover:bg-blue-100">
-                      <td className="p-2">
+                      <td className="p-2 align-top">
                         <button 
                           className="mr-2 text-blue-600" 
                           onClick={() => setExpandedRMs(x => ({ ...x, [rm]: !x[rm] }))}
@@ -335,17 +335,17 @@ export default function AccountTable({
                         </button>
                         {rm} (Total)
                       </td>
-                      <td className="p-2">{rm}</td>
-                      <td className="p-2">-</td>
-                      <td className="p-2">-</td>
-                      <td className="p-2">{rmAccounts.length}</td>
-                      <td className="p-2">{formatUsd(rmTotals.arrUp)}</td>
-                      <td className="p-2 text-green-600">{formatUsdFromDollars(rmTotals.best)}</td>
-                      <td className="p-2 text-red-600">{formatUsdFromDollars(rmTotals.worst)}</td>
-                      <td className="p-2 text-blue-600">{formatUsdFromDollars(rmTotals.call)}</td>
-                      <td className="p-2">-</td>
-                      <td className="p-2">-</td>
-                      <td className="p-2">-</td>
+                      <td className="p-2 align-top">{rm}</td>
+                      <td className="p-2 align-top">-</td>
+                      <td className="p-2 align-top">-</td>
+                      <td className="p-2 align-top">{rmAccounts.length}</td>
+                      <td className="p-2 align-top">{formatUsd(rmTotals.arrUp)}</td>
+                      <td className="p-2 align-top text-green-600">{formatUsdFromDollars(rmTotals.best)}</td>
+                      <td className="p-2 align-top text-red-600">{formatUsdFromDollars(rmTotals.worst)}</td>
+                      <td className="p-2 align-top text-blue-600">{formatUsdFromDollars(rmTotals.call)}</td>
+                      <td className="p-2 align-top">-</td>
+                      <td className="p-2 align-top">-</td>
+                      <td className="p-2 align-top">-</td>
                     </tr>
                     {/* Account Rows */}
                     {expandedRMs[rm] && rmAccounts.map(acc => {
@@ -361,7 +361,7 @@ export default function AccountTable({
                       return (
                         <React.Fragment key={acc.id}>
                           <tr className="bg-gray-50 hover:bg-gray-100">
-                            <td className="p-2 pl-8">
+                            <td className="p-2 pl-8 align-top">
                               <button className="mr-2 text-blue-600" onClick={() => setExpanded(x => ({ ...x, [acc.id]: !x[acc.id] }))}>
                                 {expanded[acc.id] ? '▾' : '▸'}
                               </button>
@@ -409,12 +409,12 @@ export default function AccountTable({
                               <div className="mb-2 rounded border bg-gray-100 p-1 text-center text-sm font-semibold text-blue-600">
                                 {callTotalFormatted || '$0'}
                               </div>
-                              {/* Call Components - stacked below with labels outside */}
+                              {/* Call Components - labels to the left of inputs */}
                               <div className="space-y-1.5">
-                                <div>
-                                  <label className="block text-xs text-gray-600 mb-0.5">Gross Call</label>
+                                <div className="flex items-center gap-2">
+                                  <label className="text-xs text-gray-600 w-20 flex-shrink-0">Gross Call:</label>
                                   <input 
-                                    className="w-full rounded border border-blue-200 p-1 text-xs" 
+                                    className="flex-1 rounded border border-blue-200 p-1 text-xs" 
                                     placeholder="$0"
                                     value={d.grossCall} 
                                     onChange={e => {
@@ -428,10 +428,10 @@ export default function AccountTable({
                                     }} 
                                   />
                                 </div>
-                                <div>
-                                  <label className="block text-xs text-gray-600 mb-0.5">Price Increase</label>
+                                <div className="flex items-center gap-2">
+                                  <label className="text-xs text-gray-600 w-20 flex-shrink-0">Price Inc:</label>
                                   <input 
-                                    className="w-full rounded border border-blue-200 p-1 text-xs" 
+                                    className="flex-1 rounded border border-blue-200 p-1 text-xs" 
                                     placeholder="$0"
                                     value={d.priceIncrease} 
                                     onChange={e => {
@@ -445,10 +445,10 @@ export default function AccountTable({
                                     }} 
                                   />
                                 </div>
-                                <div>
-                                  <label className="block text-xs text-gray-600 mb-0.5">Expansion</label>
+                                <div className="flex items-center gap-2">
+                                  <label className="text-xs text-gray-600 w-20 flex-shrink-0">Expansion:</label>
                                   <input 
-                                    className="w-full rounded border border-blue-200 p-1 text-xs" 
+                                    className="flex-1 rounded border border-blue-200 p-1 text-xs" 
                                     placeholder="$0"
                                     value={d.expansion} 
                                     onChange={e => {
@@ -464,7 +464,7 @@ export default function AccountTable({
                                 </div>
                               </div>
                             </td>
-                            <td className="p-2">
+                            <td className="p-2 align-top">
                               <select 
                                 className="w-full rounded border p-1" 
                                 value={d.confidence} 
@@ -478,7 +478,7 @@ export default function AccountTable({
                                 <option value="Churn">Churn</option>
                               </select>
                             </td>
-                            <td className="p-2">
+                            <td className="p-2 align-top">
                               <input 
                                 className="w-full rounded border p-1" 
                                 placeholder="Notes" 
@@ -486,7 +486,7 @@ export default function AccountTable({
                                 onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], notes: e.target.value } }))} 
                               />
                             </td>
-                            <td className="p-2">
+                            <td className="p-2 align-top">
                               <button className="rounded bg-blue-600 px-2 py-1 text-xs text-white hover:bg-blue-700" onClick={() => saveRow(acc)}>Save</button>
                             </td>
                           </tr>
@@ -527,17 +527,17 @@ export default function AccountTable({
                 return (
                   <React.Fragment key={acc.id}>
                     <tr className="hover:bg-gray-50">
-                      <td className="p-2">
+                      <td className="p-2 align-top">
                         <button className="mr-2 text-blue-600" onClick={() => setExpanded(x => ({ ...x, [acc.id]: !x[acc.id] }))}>
                           {expanded[acc.id] ? '▾' : '▸'}
                         </button>
                         {acc.name}
                       </td>
-                      <td className="p-2">{acc.owner ? `${acc.owner.firstName} ${acc.owner.lastName}` : 'N/A'}</td>
-                      <td className="p-2">{acc.segment || '-'}</td>
-                      <td className="p-2">{acc.businessSegment || '-'}</td>
-                      <td className="p-2 w-20">{acc.opportunities.length}</td>
-                      <td className="p-2 font-medium">{formatUsd(sumArr)}</td>
+                      <td className="p-2 align-top">{acc.owner ? `${acc.owner.firstName} ${acc.owner.lastName}` : 'N/A'}</td>
+                      <td className="p-2 align-top">{acc.segment || '-'}</td>
+                      <td className="p-2 align-top">{acc.businessSegment || '-'}</td>
+                      <td className="p-2 align-top w-20">{acc.opportunities.length}</td>
+                      <td className="p-2 align-top font-medium">{formatUsd(sumArr)}</td>
                       <td className="p-2 align-top">
                         <input 
                           className="w-full rounded border p-1" 
@@ -575,12 +575,12 @@ export default function AccountTable({
                         <div className="mb-2 rounded border bg-gray-100 p-1 text-center text-sm font-semibold text-blue-600">
                           {callTotalFormatted || '$0'}
                         </div>
-                        {/* Call Components - stacked below with labels outside */}
+                        {/* Call Components - labels to the left of inputs */}
                         <div className="space-y-1.5">
-                          <div>
-                            <label className="block text-xs text-gray-600 mb-0.5">Gross Call</label>
+                          <div className="flex items-center gap-2">
+                            <label className="text-xs text-gray-600 w-20 flex-shrink-0">Gross Call:</label>
                             <input 
-                              className="w-full rounded border border-blue-200 p-1 text-xs" 
+                              className="flex-1 rounded border border-blue-200 p-1 text-xs" 
                               placeholder="$0"
                               value={d.grossCall} 
                               onChange={e => {
@@ -594,10 +594,10 @@ export default function AccountTable({
                               }} 
                             />
                           </div>
-                          <div>
-                            <label className="block text-xs text-gray-600 mb-0.5">Price Increase</label>
+                          <div className="flex items-center gap-2">
+                            <label className="text-xs text-gray-600 w-20 flex-shrink-0">Price Inc:</label>
                             <input 
-                              className="w-full rounded border border-blue-200 p-1 text-xs" 
+                              className="flex-1 rounded border border-blue-200 p-1 text-xs" 
                               placeholder="$0"
                               value={d.priceIncrease} 
                               onChange={e => {
@@ -611,10 +611,10 @@ export default function AccountTable({
                               }} 
                             />
                           </div>
-                          <div>
-                            <label className="block text-xs text-gray-600 mb-0.5">Expansion</label>
+                          <div className="flex items-center gap-2">
+                            <label className="text-xs text-gray-600 w-20 flex-shrink-0">Expansion:</label>
                             <input 
-                              className="w-full rounded border border-blue-200 p-1 text-xs" 
+                              className="flex-1 rounded border border-blue-200 p-1 text-xs" 
                               placeholder="$0"
                               value={d.expansion} 
                               onChange={e => {
@@ -630,7 +630,7 @@ export default function AccountTable({
                           </div>
                         </div>
                       </td>
-                      <td className="p-2">
+                      <td className="p-2 align-top">
                         <select 
                           className="w-full rounded border p-1" 
                           value={d.confidence} 
@@ -644,7 +644,7 @@ export default function AccountTable({
                           <option value="Churn">Churn</option>
                         </select>
                       </td>
-                      <td className="p-2">
+                      <td className="p-2 align-top">
                         <input 
                           className="w-full rounded border p-1" 
                           placeholder="Notes" 
@@ -652,7 +652,7 @@ export default function AccountTable({
                           onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], notes: e.target.value } }))} 
                         />
                       </td>
-                      <td className="p-2">
+                      <td className="p-2 align-top">
                         <button className="rounded bg-blue-600 px-2 py-1 text-xs text-white hover:bg-blue-700" onClick={() => saveRow(acc)}>Save</button>
                       </td>
                     </tr>
