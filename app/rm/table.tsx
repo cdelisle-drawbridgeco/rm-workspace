@@ -372,7 +372,7 @@ export default function AccountTable({
                             <td className="p-2">{acc.businessSegment || '-'}</td>
                             <td className="p-2">{acc.opportunities.length}</td>
                             <td className="p-2 font-medium">{formatUsd(sumArr)}</td>
-                            <td className="p-2">
+                            <td className="p-2 align-top">
                               <input 
                                 className="w-full rounded border p-1" 
                                 placeholder="$0"
@@ -388,7 +388,7 @@ export default function AccountTable({
                                 }} 
                               />
                             </td>
-                            <td className="p-2">
+                            <td className="p-2 align-top">
                               <input 
                                 className="w-full rounded border p-1" 
                                 placeholder="$0"
@@ -405,54 +405,63 @@ export default function AccountTable({
                               />
                             </td>
                             <td className="p-2 align-top">
-                              {/* Call Total - non-editable, computed */}
-                              <div className="mb-1 rounded border bg-gray-100 p-1 text-center text-sm font-semibold text-blue-600">
+                              {/* Call Total - non-editable, computed - aligned with Best/Worst */}
+                              <div className="mb-2 rounded border bg-gray-100 p-1 text-center text-sm font-semibold text-blue-600">
                                 {callTotalFormatted || '$0'}
                               </div>
-                              {/* Call Components - stacked below */}
-                              <div className="space-y-1">
-                                <input 
-                                  className="w-full rounded border border-blue-200 p-1 text-xs" 
-                                  placeholder="Gross Call"
-                                  value={d.grossCall} 
-                                  onChange={e => {
-                                    setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], grossCall: e.target.value } }));
-                                  }}
-                                  onBlur={e => {
-                                    if (e.target.value && !e.target.value.includes('$')) {
-                                      const formatted = formatCurrency(e.target.value);
-                                      setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], grossCall: formatted } }));
-                                    }
-                                  }} 
-                                />
-                                <input 
-                                  className="w-full rounded border border-blue-200 p-1 text-xs" 
-                                  placeholder="Price Increase"
-                                  value={d.priceIncrease} 
-                                  onChange={e => {
-                                    setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], priceIncrease: e.target.value } }));
-                                  }}
-                                  onBlur={e => {
-                                    if (e.target.value && !e.target.value.includes('$')) {
-                                      const formatted = formatCurrency(e.target.value);
-                                      setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], priceIncrease: formatted } }));
-                                    }
-                                  }} 
-                                />
-                                <input 
-                                  className="w-full rounded border border-blue-200 p-1 text-xs" 
-                                  placeholder="Expansion"
-                                  value={d.expansion} 
-                                  onChange={e => {
-                                    setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], expansion: e.target.value } }));
-                                  }}
-                                  onBlur={e => {
-                                    if (e.target.value && !e.target.value.includes('$')) {
-                                      const formatted = formatCurrency(e.target.value);
-                                      setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], expansion: formatted } }));
-                                    }
-                                  }} 
-                                />
+                              {/* Call Components - stacked below with labels outside */}
+                              <div className="space-y-1.5">
+                                <div>
+                                  <label className="block text-xs text-gray-600 mb-0.5">Gross Call</label>
+                                  <input 
+                                    className="w-full rounded border border-blue-200 p-1 text-xs" 
+                                    placeholder="$0"
+                                    value={d.grossCall} 
+                                    onChange={e => {
+                                      setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], grossCall: e.target.value } }));
+                                    }}
+                                    onBlur={e => {
+                                      if (e.target.value && !e.target.value.includes('$')) {
+                                        const formatted = formatCurrency(e.target.value);
+                                        setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], grossCall: formatted } }));
+                                      }
+                                    }} 
+                                  />
+                                </div>
+                                <div>
+                                  <label className="block text-xs text-gray-600 mb-0.5">Price Increase</label>
+                                  <input 
+                                    className="w-full rounded border border-blue-200 p-1 text-xs" 
+                                    placeholder="$0"
+                                    value={d.priceIncrease} 
+                                    onChange={e => {
+                                      setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], priceIncrease: e.target.value } }));
+                                    }}
+                                    onBlur={e => {
+                                      if (e.target.value && !e.target.value.includes('$')) {
+                                        const formatted = formatCurrency(e.target.value);
+                                        setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], priceIncrease: formatted } }));
+                                      }
+                                    }} 
+                                  />
+                                </div>
+                                <div>
+                                  <label className="block text-xs text-gray-600 mb-0.5">Expansion</label>
+                                  <input 
+                                    className="w-full rounded border border-blue-200 p-1 text-xs" 
+                                    placeholder="$0"
+                                    value={d.expansion} 
+                                    onChange={e => {
+                                      setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], expansion: e.target.value } }));
+                                    }}
+                                    onBlur={e => {
+                                      if (e.target.value && !e.target.value.includes('$')) {
+                                        const formatted = formatCurrency(e.target.value);
+                                        setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], expansion: formatted } }));
+                                      }
+                                    }} 
+                                  />
+                                </div>
                               </div>
                             </td>
                             <td className="p-2">
@@ -529,7 +538,7 @@ export default function AccountTable({
                       <td className="p-2">{acc.businessSegment || '-'}</td>
                       <td className="p-2 w-20">{acc.opportunities.length}</td>
                       <td className="p-2 font-medium">{formatUsd(sumArr)}</td>
-                      <td className="p-2">
+                      <td className="p-2 align-top">
                         <input 
                           className="w-full rounded border p-1" 
                           placeholder="$0"
@@ -545,7 +554,7 @@ export default function AccountTable({
                           }}
                         />
                       </td>
-                      <td className="p-2">
+                      <td className="p-2 align-top">
                         <input 
                           className="w-full rounded border p-1" 
                           placeholder="$0"
@@ -562,54 +571,63 @@ export default function AccountTable({
                         />
                       </td>
                       <td className="p-2 align-top">
-                        {/* Call Total - non-editable, computed */}
-                        <div className="mb-1 rounded border bg-gray-100 p-1 text-center text-sm font-semibold text-blue-600">
+                        {/* Call Total - non-editable, computed - aligned with Best/Worst */}
+                        <div className="mb-2 rounded border bg-gray-100 p-1 text-center text-sm font-semibold text-blue-600">
                           {callTotalFormatted || '$0'}
                         </div>
-                        {/* Call Components - stacked below */}
-                        <div className="space-y-1">
-                          <input 
-                            className="w-full rounded border border-blue-200 p-1 text-xs" 
-                            placeholder="Gross Call"
-                            value={d.grossCall} 
-                            onChange={e => {
-                              setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], grossCall: e.target.value } }));
-                            }}
-                            onBlur={e => {
-                              if (e.target.value && !e.target.value.includes('$')) {
-                                const formatted = formatCurrency(e.target.value);
-                                setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], grossCall: formatted } }));
-                              }
-                            }} 
-                          />
-                          <input 
-                            className="w-full rounded border border-blue-200 p-1 text-xs" 
-                            placeholder="Price Increase"
-                            value={d.priceIncrease} 
-                            onChange={e => {
-                              setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], priceIncrease: e.target.value } }));
-                            }}
-                            onBlur={e => {
-                              if (e.target.value && !e.target.value.includes('$')) {
-                                const formatted = formatCurrency(e.target.value);
-                                setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], priceIncrease: formatted } }));
-                              }
-                            }} 
-                          />
-                          <input 
-                            className="w-full rounded border border-blue-200 p-1 text-xs" 
-                            placeholder="Expansion"
-                            value={d.expansion} 
-                            onChange={e => {
-                              setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], expansion: e.target.value } }));
-                            }}
-                            onBlur={e => {
-                              if (e.target.value && !e.target.value.includes('$')) {
-                                const formatted = formatCurrency(e.target.value);
-                                setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], expansion: formatted } }));
-                              }
-                            }} 
-                          />
+                        {/* Call Components - stacked below with labels outside */}
+                        <div className="space-y-1.5">
+                          <div>
+                            <label className="block text-xs text-gray-600 mb-0.5">Gross Call</label>
+                            <input 
+                              className="w-full rounded border border-blue-200 p-1 text-xs" 
+                              placeholder="$0"
+                              value={d.grossCall} 
+                              onChange={e => {
+                                setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], grossCall: e.target.value } }));
+                              }}
+                              onBlur={e => {
+                                if (e.target.value && !e.target.value.includes('$')) {
+                                  const formatted = formatCurrency(e.target.value);
+                                  setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], grossCall: formatted } }));
+                                }
+                              }} 
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-xs text-gray-600 mb-0.5">Price Increase</label>
+                            <input 
+                              className="w-full rounded border border-blue-200 p-1 text-xs" 
+                              placeholder="$0"
+                              value={d.priceIncrease} 
+                              onChange={e => {
+                                setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], priceIncrease: e.target.value } }));
+                              }}
+                              onBlur={e => {
+                                if (e.target.value && !e.target.value.includes('$')) {
+                                  const formatted = formatCurrency(e.target.value);
+                                  setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], priceIncrease: formatted } }));
+                                }
+                              }} 
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-xs text-gray-600 mb-0.5">Expansion</label>
+                            <input 
+                              className="w-full rounded border border-blue-200 p-1 text-xs" 
+                              placeholder="$0"
+                              value={d.expansion} 
+                              onChange={e => {
+                                setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], expansion: e.target.value } }));
+                              }}
+                              onBlur={e => {
+                                if (e.target.value && !e.target.value.includes('$')) {
+                                  const formatted = formatCurrency(e.target.value);
+                                  setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], expansion: formatted } }));
+                                }
+                              }} 
+                            />
+                          </div>
                         </div>
                       </td>
                       <td className="p-2">
