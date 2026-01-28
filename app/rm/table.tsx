@@ -78,6 +78,7 @@ export default function AccountTable({
   const [expandedRMs, setExpandedRMs] = useState<Record<string, boolean>>({});
   const [selectedRM, setSelectedRM] = useState<string>('All');
   const [selectedQuarter, setSelectedQuarter] = useState<string>('CQ');
+  const [savingStatus, setSavingStatus] = useState<Record<string, 'saving' | 'saved' | null>>({});
   
   const [drafts, setDrafts] = useState<Record<string, { 
     best: string; 
@@ -141,53 +142,66 @@ export default function AccountTable({
   const rms = Object.keys(accountsByRM).sort();
   const filteredAccounts = selectedRM === 'All' ? quarterAccountsWithFilteredOpps : accountsByRM[selectedRM] || [];
 
-  async function saveRow(a: Account) {
+  async function saveRow(a: Account, showAlert = false) {
     const row = drafts[a.id];
     if (!row) return;
     
-    console.log('Saving row for', a.name, 'with data:', {
-      best: row.best,
-      worst: row.worst,
-      grossCall: row.grossCall,
-      priceIncrease: row.priceIncrease,
-      expansion: row.expansion,
-      confidence: row.confidence,
-      notes: row.notes
-    });
+    // Set saving status
+    setSavingStatus(prev => ({ ...prev, [a.id]: 'saving' }));
     
     // Parse currency values (remove $ and commas)
-  const parseCurrency = (val: string) => {
-    const cleaned = val.replace(/[$,]/g, '');
-    return Number(cleaned) || 0;
-  };
+    const parseCurrency = (val: string) => {
+      const cleaned = val.replace(/[$,]/g, '');
+      return Number(cleaned) || 0;
+    };
 
-  const formatCurrency = (val: string) => {
-    const cleaned = val.replace(/[$,]/g, '');
-    const num = Number(cleaned);
-    if (isNaN(num) || num === 0) return '';
-    return num.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-  };
+    const formatCurrency = (val: string) => {
+      const cleaned = val.replace(/[$,]/g, '');
+      const num = Number(cleaned);
+      if (isNaN(num) || num === 0) return '';
+      return num.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    };
 
-    const res = await fetch('/api/snapshots', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        scopeType: 'Account',
-        scopeName: a.name,
-        best: parseCurrency(row.best),
-        worst: parseCurrency(row.worst),
-        grossCall: parseCurrency(row.grossCall),
-        priceIncrease: parseCurrency(row.priceIncrease),
-        expansion: parseCurrency(row.expansion),
-        confidence: row.confidence || null,
-        notes: row.notes || null,
-        quarterKey: currentQuarterKey
-      })
-    });
-    if (!res.ok) {
-      alert(`Save failed: ${await res.text()}`);
-    } else {
-      alert('Saved successfully!');
+    try {
+      const res = await fetch('/api/snapshots', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          scopeType: 'Account',
+          scopeName: a.name,
+          best: parseCurrency(row.best),
+          worst: parseCurrency(row.worst),
+          grossCall: parseCurrency(row.grossCall),
+          priceIncrease: parseCurrency(row.priceIncrease),
+          expansion: parseCurrency(row.expansion),
+          confidence: row.confidence || null,
+          notes: row.notes || null,
+          quarterKey: currentQuarterKey
+        })
+      });
+
+      if (!res.ok) {
+        const errorText = await res.text();
+        setSavingStatus(prev => ({ ...prev, [a.id]: null }));
+        if (showAlert) {
+          alert(`Save failed: ${errorText}`);
+        }
+      } else {
+        setSavingStatus(prev => ({ ...prev, [a.id]: 'saved' }));
+        // Clear saved status after 2 seconds
+        setTimeout(() => {
+          setSavingStatus(prev => ({ ...prev, [a.id]: null }));
+        }, 2000);
+        if (showAlert) {
+          alert('Saved successfully!');
+        }
+      }
+    } catch (error) {
+      console.error('Save error:', error);
+      setSavingStatus(prev => ({ ...prev, [a.id]: null }));
+      if (showAlert) {
+        alert('Save failed. Please try again.');
+      }
     }
   }
 
@@ -301,7 +315,6 @@ export default function AccountTable({
               <th className="p-2 w-28 align-top">Call Total</th>
               <th className="p-2 w-32 align-top">Confidence</th>
               <th className="p-2 w-48 align-top">Notes</th>
-              <th className="p-2 w-20 align-top">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100 text-sm [&>tr>td]:align-top">
@@ -345,7 +358,6 @@ export default function AccountTable({
                       <td className="p-2 align-top text-blue-600">{formatUsdFromDollars(rmTotals.call)}</td>
                       <td className="p-2 align-top">-</td>
                       <td className="p-2 align-top">-</td>
-                      <td className="p-2 align-top">-</td>
                     </tr>
                     {/* Account Rows */}
                     {expandedRMs[rm] && rmAccounts.map(acc => {
@@ -385,6 +397,8 @@ export default function AccountTable({
                                     const formatted = formatCurrency(e.target.value);
                                     setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], best: formatted } }));
                                   }
+                                  // Auto-save on blur
+                                  saveRow(acc);
                                 }} 
                               />
                             </td>
@@ -401,6 +415,8 @@ export default function AccountTable({
                                     const formatted = formatCurrency(e.target.value);
                                     setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], worst: formatted } }));
                                   }
+                                  // Auto-save on blur
+                                  saveRow(acc);
                                 }} 
                               />
                             </td>
@@ -425,6 +441,8 @@ export default function AccountTable({
                                         const formatted = formatCurrency(e.target.value);
                                         setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], grossCall: formatted } }));
                                       }
+                                      // Auto-save on blur
+                                      saveRow(acc);
                                     }} 
                                   />
                                 </div>
@@ -442,6 +460,8 @@ export default function AccountTable({
                                         const formatted = formatCurrency(e.target.value);
                                         setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], priceIncrease: formatted } }));
                                       }
+                                      // Auto-save on blur
+                                      saveRow(acc);
                                     }} 
                                   />
                                 </div>
@@ -459,6 +479,8 @@ export default function AccountTable({
                                         const formatted = formatCurrency(e.target.value);
                                         setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], expansion: formatted } }));
                                       }
+                                      // Auto-save on blur
+                                      saveRow(acc);
                                     }} 
                                   />
                                 </div>
@@ -469,6 +491,7 @@ export default function AccountTable({
                                 className="w-full rounded border p-1 h-8" 
                                 value={d.confidence} 
                                 onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], confidence: e.target.value } }))}
+                                onBlur={() => saveRow(acc)}
                               >
                                 <option value="">Select confidence...</option>
                                 <option value="Commit">Commit (&lt;90%)</option>
@@ -479,20 +502,26 @@ export default function AccountTable({
                               </select>
                             </td>
                             <td className="p-2 align-top">
-                              <input 
-                                className="w-full rounded border p-1 h-8" 
-                                placeholder="Notes" 
-                                value={d.notes} 
-                                onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], notes: e.target.value } }))} 
-                              />
-                            </td>
-                            <td className="p-2 align-top">
-                              <button className="rounded bg-blue-600 px-2 py-1 text-xs text-white hover:bg-blue-700 h-8" onClick={() => saveRow(acc)}>Save</button>
+                              <div className="flex items-center gap-1">
+                                <input 
+                                  className="flex-1 rounded border p-1 h-8" 
+                                  placeholder="Notes" 
+                                  value={d.notes} 
+                                  onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], notes: e.target.value } }))} 
+                                  onBlur={() => saveRow(acc)}
+                                />
+                                {savingStatus[acc.id] === 'saving' && (
+                                  <span className="text-xs text-gray-500">Saving...</span>
+                                )}
+                                {savingStatus[acc.id] === 'saved' && (
+                                  <span className="text-xs text-green-600">✓</span>
+                                )}
+                              </div>
                             </td>
                           </tr>
                           {expanded[acc.id] && (
                             <tr key={`${acc.id}-expanded`}>
-                              <td colSpan={12} className="bg-gray-100 p-3 pl-8">
+                              <td colSpan={11} className="bg-gray-100 p-3 pl-8">
                                 <div className="text-xs font-semibold text-gray-600">Opportunities</div>
                                 <div className="mt-2 grid grid-cols-4 gap-2 text-xs">
                                   {acc.opportunities.map(o => (
@@ -551,6 +580,8 @@ export default function AccountTable({
                               const formatted = formatCurrency(e.target.value);
                               setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], best: formatted } }));
                             }
+                            // Auto-save on blur
+                            saveRow(acc);
                           }}
                         />
                       </td>
@@ -567,6 +598,8 @@ export default function AccountTable({
                               const formatted = formatCurrency(e.target.value);
                               setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], worst: formatted } }));
                             }
+                            // Auto-save on blur
+                            saveRow(acc);
                           }}
                         />
                       </td>
@@ -591,6 +624,8 @@ export default function AccountTable({
                                   const formatted = formatCurrency(e.target.value);
                                   setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], grossCall: formatted } }));
                                 }
+                                // Auto-save on blur
+                                saveRow(acc);
                               }} 
                             />
                           </div>
@@ -608,6 +643,8 @@ export default function AccountTable({
                                   const formatted = formatCurrency(e.target.value);
                                   setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], priceIncrease: formatted } }));
                                 }
+                                // Auto-save on blur
+                                saveRow(acc);
                               }} 
                             />
                           </div>
@@ -625,6 +662,8 @@ export default function AccountTable({
                                   const formatted = formatCurrency(e.target.value);
                                   setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], expansion: formatted } }));
                                 }
+                                // Auto-save on blur
+                                saveRow(acc);
                               }} 
                             />
                           </div>
@@ -635,6 +674,7 @@ export default function AccountTable({
                           className="w-full rounded border p-1 h-8" 
                           value={d.confidence} 
                           onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], confidence: e.target.value } }))}
+                          onBlur={() => saveRow(acc)}
                         >
                           <option value="">Select confidence...</option>
                           <option value="Commit">Commit (&lt;90%)</option>
@@ -645,20 +685,26 @@ export default function AccountTable({
                         </select>
                       </td>
                       <td className="p-2 align-top">
-                        <input 
-                          className="w-full rounded border p-1 h-8" 
-                          placeholder="Notes" 
-                          value={d.notes} 
-                          onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], notes: e.target.value } }))} 
-                        />
-                      </td>
-                      <td className="p-2 align-top">
-                        <button className="rounded bg-blue-600 px-2 py-1 text-xs text-white hover:bg-blue-700 h-8" onClick={() => saveRow(acc)}>Save</button>
+                        <div className="flex items-center gap-1">
+                          <input 
+                            className="flex-1 rounded border p-1 h-8" 
+                            placeholder="Notes" 
+                            value={d.notes} 
+                            onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], notes: e.target.value } }))} 
+                            onBlur={() => saveRow(acc)}
+                          />
+                          {savingStatus[acc.id] === 'saving' && (
+                            <span className="text-xs text-gray-500">Saving...</span>
+                          )}
+                          {savingStatus[acc.id] === 'saved' && (
+                            <span className="text-xs text-green-600">✓</span>
+                          )}
+                        </div>
                       </td>
                     </tr>
                     {expanded[acc.id] && (
                       <tr key={`${acc.id}-expanded`}>
-                        <td colSpan={12} className="bg-gray-50 p-3">
+                        <td colSpan={11} className="bg-gray-50 p-3">
                           <div className="text-xs font-semibold text-gray-600">Opportunities</div>
                           <div className="mt-2 grid grid-cols-4 gap-2 text-xs">
                             {acc.opportunities.map(o => (
