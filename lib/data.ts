@@ -3,6 +3,7 @@
  */
 import { prisma } from '@/lib/db';
 import { getRollingQuarters } from '@/lib/quarters';
+import type { ForecastSnapshot } from '@prisma/client';
 
 export interface AccountSnapshotData {
   bestUsd: number;
@@ -34,9 +35,37 @@ const OWNER_SELECT = {
   isActive: true,
 } as const;
 
+/** Convert a raw ForecastSnapshot row to USD display values. */
+function snapToAccountData(snap: ForecastSnapshot): AccountSnapshotData {
+  return {
+    bestUsd: (snap.bestCents || 0) / 100,
+    worstUsd: (snap.worstCents || 0) / 100,
+    callUsd: (snap.callCents || 0) / 100,
+    grossCallUsd: (snap.grossCallCents || 0) / 100,
+    priceIncreaseUsd: (snap.priceIncreaseCents || 0) / 100,
+    expansionUsd: (snap.expansionCents || 0) / 100,
+    confidence: snap.confidence || '',
+    notes: snap.notes || '',
+  };
+}
+
+function snapToVpData(snap: ForecastSnapshot): VpForecastData {
+  return {
+    bestUsd: (snap.bestCents || 0) / 100,
+    worstUsd: (snap.worstCents || 0) / 100,
+    callUsd: (snap.callCents || 0) / 100,
+    grossCallUsd: (snap.grossCallCents || 0) / 100,
+    priceIncreaseUsd: (snap.priceIncreaseCents || 0) / 100,
+    expansionUsd: (snap.expansionCents || 0) / 100,
+    notes: snap.notes || '',
+  };
+}
+
 /**
  * Fetch all accounts with opportunities and owner, plus latest forecast
  * snapshots per account per quarter. Optionally fetches VP-level forecasts.
+ *
+ * Uses bulk queries instead of per-account loops to avoid N+1.
  */
 export async function getDashboardData(options?: { includeVpForecasts?: boolean }) {
   const accounts = await prisma.account.findMany({
@@ -58,57 +87,47 @@ export async function getDashboardData(options?: { includeVpForecasts?: boolean 
   const quarters = getRollingQuarters();
   const quarterValues = [quarters.cq, quarters.nq, quarters.fq];
 
-  // Build latest snapshot map per account per quarter
+  // Bulk fetch all Account snapshots for the 3 quarters, newest first
+  const allAccountSnaps = await prisma.forecastSnapshot.findMany({
+    where: {
+      scopeType: 'Account',
+      quarterKey: { in: quarterValues },
+    },
+    orderBy: { createdAt: 'desc' },
+  });
+
+  // Deduplicate: keep only the latest per (scopeName, quarterKey)
   const latestByAccount = new Map<string, Record<string, AccountSnapshotData>>();
+  const seen = new Set<string>();
 
-  for (const account of validAccounts) {
-    const accountSnapshots: Record<string, AccountSnapshotData> = {};
+  for (const snap of allAccountSnaps) {
+    const key = `${snap.scopeName}|${snap.quarterKey}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
 
-    for (const quarter of quarterValues) {
-      const snap = await prisma.forecastSnapshot.findFirst({
-        where: { scopeType: 'Account', scopeName: account.name, quarterKey: quarter },
-        orderBy: { createdAt: 'desc' },
-      });
-
-      if (snap) {
-        accountSnapshots[quarter] = {
-          bestUsd: (snap.bestCents || 0) / 100,
-          worstUsd: (snap.worstCents || 0) / 100,
-          callUsd: (snap.callCents || 0) / 100,
-          grossCallUsd: (snap.grossCallCents || 0) / 100,
-          priceIncreaseUsd: (snap.priceIncreaseCents || 0) / 100,
-          expansionUsd: (snap.expansionCents || 0) / 100,
-          confidence: snap.confidence || '',
-          notes: snap.notes || '',
-        };
-      }
+    if (!latestByAccount.has(snap.scopeName)) {
+      latestByAccount.set(snap.scopeName, {});
     }
-
-    if (Object.keys(accountSnapshots).length > 0) {
-      latestByAccount.set(account.name, accountSnapshots);
-    }
+    latestByAccount.get(snap.scopeName)![snap.quarterKey] = snapToAccountData(snap);
   }
 
-  // Optionally fetch VP forecasts
+  // Optionally bulk fetch VP forecasts
   let vpForecasts = new Map<string, VpForecastData>();
 
   if (options?.includeVpForecasts) {
-    for (const quarter of quarterValues) {
-      const vpSnap = await prisma.forecastSnapshot.findFirst({
-        where: { scopeType: 'VP', scopeName: 'VP Forecast', quarterKey: quarter },
-        orderBy: { createdAt: 'desc' },
-      });
+    const allVpSnaps = await prisma.forecastSnapshot.findMany({
+      where: {
+        scopeType: 'VP',
+        scopeName: 'VP Forecast',
+        quarterKey: { in: quarterValues },
+      },
+      orderBy: { createdAt: 'desc' },
+    });
 
-      if (vpSnap) {
-        vpForecasts.set(quarter, {
-          bestUsd: (vpSnap.bestCents || 0) / 100,
-          worstUsd: (vpSnap.worstCents || 0) / 100,
-          callUsd: (vpSnap.callCents || 0) / 100,
-          grossCallUsd: (vpSnap.grossCallCents || 0) / 100,
-          priceIncreaseUsd: (vpSnap.priceIncreaseCents || 0) / 100,
-          expansionUsd: (vpSnap.expansionCents || 0) / 100,
-          notes: vpSnap.notes || '',
-        });
+    // Deduplicate: keep only the latest per quarterKey
+    for (const snap of allVpSnaps) {
+      if (!vpForecasts.has(snap.quarterKey)) {
+        vpForecasts.set(snap.quarterKey, snapToVpData(snap));
       }
     }
   }
