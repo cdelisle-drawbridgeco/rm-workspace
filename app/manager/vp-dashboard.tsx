@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import ForecastTrendChart from './forecast-trend-chart';
+import { formatUsd, formatUsdFromDollars, formatCurrency, parseCurrency } from '@/lib/format';
 
 interface Account {
   id: string;
@@ -40,14 +41,6 @@ interface Quarters {
   cq: string;
   nq: string;
   fq: string;
-}
-
-function formatUsd(cents: number): string {
-  return `$${(cents / 100).toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
-}
-
-function formatUsdFromDollars(dollars: number): string {
-  return `$${dollars.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
 }
 
 export default function VpDashboard({
@@ -149,18 +142,6 @@ export default function VpDashboard({
 
   const renewalRate = totalArrUpCents > 0 ? (callUsdTotal * 100) / (totalArrUpCents / 100) : 0;
   const spreadUsd = Math.max(0, bestUsdTotal - worstUsdTotal);
-
-  const parseCurrency = (val: string) => {
-    const cleaned = val.replace(/[$,]/g, '');
-    return Number(cleaned) || 0;
-  };
-
-  const formatCurrency = (val: string) => {
-    const cleaned = val.replace(/[$,]/g, '');
-    const num = Number(cleaned);
-    if (isNaN(num) || num === 0) return '';
-    return num.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-  };
 
   async function saveVpForecast() {
     const currentForecast = vpForecasts[currentQuarterKey];

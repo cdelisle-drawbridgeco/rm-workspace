@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import ForecastTrendChart from '../manager/forecast-trend-chart';
+import { formatUsd, formatUsdFromDollars } from '@/lib/format';
 
 interface Account {
   id: string;
@@ -40,14 +41,6 @@ interface Quarters {
   cq: string;
   nq: string;
   fq: string;
-}
-
-function formatUsd(cents: number): string {
-  return `$${(cents / 100).toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
-}
-
-function formatUsdFromDollars(dollars: number): string {
-  return `$${dollars.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
 }
 
 export default function ExecDashboard({

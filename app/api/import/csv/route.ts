@@ -1,11 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
-
-function toQuarterKey(d: Date): string {
-  const year = d.getUTCFullYear();
-  const q = Math.floor(d.getUTCMonth() / 3) + 1;
-  return `FY${String(year).slice(-2)}-Q${q}`;
-}
+import { toQuarterKey } from '@/lib/quarters';
 
 export async function POST(req: NextRequest) {
   const text = await req.text();

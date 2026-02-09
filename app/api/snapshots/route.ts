@@ -1,50 +1,34 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
-
-function toQuarterKey(d: Date): string {
-  const year = d.getUTCFullYear();
-  const q = Math.floor(d.getUTCMonth() / 3) + 1;
-  return `FY${String(year).slice(-2)}-Q${q}`;
-}
-
-function periodKeyWeek(d: Date): string {
-  const date = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
-  const firstThursday = new Date(Date.UTC(date.getUTCFullYear(), 0, 4));
-  const dayOfWeek = (date.getUTCDay() + 6) % 7;
-  const week1 = new Date(firstThursday);
-  week1.setUTCDate(firstThursday.getUTCDate() - ((firstThursday.getUTCDay() + 6) % 7));
-  const diff = (date.getTime() - week1.getTime()) / (1000 * 60 * 60 * 24);
-  const week = Math.floor(diff / 7) + 1;
-  return `${date.getUTCFullYear()}-${String(week).padStart(2, '0')}`;
-}
+import { toQuarterKey, periodKeyWeek } from '@/lib/quarters';
 
 export async function POST(req: NextRequest) {
   try {
     const body = (await req.json().catch(() => null)) as any;
     if (!body) return new NextResponse('Bad JSON', { status: 400 });
-    const { 
-      scopeType = 'RM', 
-      scopeName, 
-      best, 
-      worst, 
+    const {
+      scopeType = 'RM',
+      scopeName,
+      best,
+      worst,
       call, // Legacy: if provided, will be ignored in favor of components
-      grossCall, 
-      priceIncrease, 
+      grossCall,
+      priceIncrease,
       expansion,
-      confidencePct, 
-      confidence, 
-      notes, 
-      quarterKey 
+      confidencePct,
+      confidence,
+      notes,
+      quarterKey
     } = body;
     if (!scopeName) return new NextResponse('Missing scopeName', { status: 400 });
     const b = Number(best);
     const w = Number(worst);
-    
+
     // Handle Call components: if provided, use them; otherwise fall back to legacy 'call' field
     let grossCallCents = 0;
     let priceIncreaseCents = 0;
     let expansionCents = 0;
-    
+
     if (grossCall !== undefined || priceIncrease !== undefined || expansion !== undefined) {
       // New format: use components
       grossCallCents = Math.round((Number(grossCall) || 0) * 100);
@@ -56,14 +40,14 @@ export async function POST(req: NextRequest) {
       priceIncreaseCents = 0;
       expansionCents = 0;
     }
-    
+
     // Compute callCents as sum of components
     const callCents = grossCallCents + priceIncreaseCents + expansionCents;
-    
+
     if (Number.isNaN(b) || Number.isNaN(w)) {
       return new NextResponse('Best/Worst must be numbers (USD)', { status: 400 });
     }
-    
+
     const now = new Date();
     const toCents = (v: number) => Math.round(v * 100);
     const snap = await prisma.forecastSnapshot.create({
@@ -102,4 +86,3 @@ export async function POST(req: NextRequest) {
     return new NextResponse(`Server error: ${err?.message || 'unknown'}`, { status: 500 });
   }
 }
-

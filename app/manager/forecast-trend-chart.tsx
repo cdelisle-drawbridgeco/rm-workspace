@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { formatUsdFromDollars } from '@/lib/format';
 
 interface Account {
   id: string;
@@ -48,10 +49,6 @@ interface ForecastTrendChartProps {
   quarters: Quarters;
   selectedQuarter: string;
   selectedRM?: string; // Optional for RM filtering
-}
-
-function formatUsdFromDollars(dollars: number): string {
-  return `$${dollars.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
 }
 
 export default function ForecastTrendChart({

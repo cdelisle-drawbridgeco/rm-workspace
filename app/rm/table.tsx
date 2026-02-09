@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import ForecastTrendChart from '../manager/forecast-trend-chart';
 import ColumnManager from './column-manager';
+import { formatUsd, formatUsdFromDollars, formatCurrency, parseCurrency } from '@/lib/format';
 import {
   type ColumnConfigItem,
   type GridColumnId,
@@ -43,26 +44,6 @@ type Account = {
     updatedAt: Date;
   }[];
 };
-
-function formatUsd(cents: number): string {
-  return `$${(cents / 100).toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
-}
-
-function formatUsdFromDollars(dollars: number): string {
-  return `$${dollars.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
-}
-
-function formatCurrency(val: string): string {
-  const cleaned = val.replace(/[$,]/g, '');
-  const num = Number(cleaned);
-  if (isNaN(num) || num === 0) return '';
-  return num.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-}
-
-function handleCurrencyInput(value: string, setValue: (val: string) => void) {
-  // Allow normal typing - only store the raw value
-  setValue(value);
-}
 
 export default function AccountTable({
   accounts,
@@ -163,19 +144,6 @@ export default function AccountTable({
     // Set saving status
     setSavingStatus(prev => ({ ...prev, [a.id]: 'saving' }));
     
-    // Parse currency values (remove $ and commas)
-    const parseCurrency = (val: string) => {
-      const cleaned = val.replace(/[$,]/g, '');
-      return Number(cleaned) || 0;
-    };
-
-    const formatCurrency = (val: string) => {
-      const cleaned = val.replace(/[$,]/g, '');
-      const num = Number(cleaned);
-      if (isNaN(num) || num === 0) return '';
-      return num.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-    };
-
     try {
       const res = await fetch('/api/snapshots', {
         method: 'POST',
@@ -370,10 +338,6 @@ export default function AccountTable({
                       const sumArr = acc.opportunities.reduce((s, o) => s + o.expiringArrCents, 0);
                       const d = drafts[acc.id] || { best: '', worst: '', grossCall: '', priceIncrease: '', expansion: '', confidence: '', notes: '' };
                       // Compute Call Total from components
-                      const parseCurrency = (val: string) => {
-                        const cleaned = val.replace(/[$,]/g, '');
-                        return Number(cleaned) || 0;
-                      };
                       const callTotal = parseCurrency(d.grossCall) + parseCurrency(d.priceIncrease) + parseCurrency(d.expansion);
                       const callTotalFormatted = callTotal > 0 ? formatCurrency(String(callTotal)) : '';
                       return (
@@ -489,10 +453,6 @@ export default function AccountTable({
                 const sumArr = acc.opportunities.reduce((s, o) => s + o.expiringArrCents, 0);
                 const d = drafts[acc.id] || { best: '', worst: '', grossCall: '', priceIncrease: '', expansion: '', confidence: '', notes: '' };
                 // Compute Call Total from components
-                const parseCurrency = (val: string) => {
-                  const cleaned = val.replace(/[$,]/g, '');
-                  return Number(cleaned) || 0;
-                };
                 const callTotal = parseCurrency(d.grossCall) + parseCurrency(d.priceIncrease) + parseCurrency(d.expansion);
                 const callTotalFormatted = callTotal > 0 ? formatCurrency(String(callTotal)) : '';
                 return (
