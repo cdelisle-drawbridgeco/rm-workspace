@@ -84,16 +84,5 @@ model DataVersion {
   recordsCount Int
 }
 
-model AuditLog {
-  id         String   @id @default(cuid())
-  actor      String   // user free text
-  action     String
-  entityType String
-  entityId   String
-  beforeJson String?
-  afterJson  String?
-  createdAt  DateTime @default(now())
-}
-
 
 

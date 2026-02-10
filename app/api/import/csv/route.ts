@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createHash } from 'crypto';
 import { prisma } from '@/lib/db';
 import { toQuarterKey } from '@/lib/quarters';
 
@@ -94,6 +95,12 @@ export async function POST(req: NextRequest) {
     });
     created++;
   }
+
+  // Record this import in DataVersion
+  const hash = createHash('sha256').update(text).digest('hex');
+  await prisma.dataVersion.create({
+    data: { source: 'CSV', hash, recordsCount: created },
+  });
 
   return new NextResponse(`Imported ${created} opportunities`, {
     status: 200,
