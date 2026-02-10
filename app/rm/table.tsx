@@ -22,8 +22,8 @@ type Account = {
     username: string | null;
     isActive: boolean;
   };
-  segment: string | null; // Company type: Hedge Fund or Private Equity
-  businessSegment: string | null; // Business segment: Growth or Enterprise
+  segment: string | null;
+  businessSegment: string | null;
   region: string | null;
   createdAt: Date;
   updatedAt: Date;
@@ -45,21 +45,176 @@ type Account = {
   }[];
 };
 
+type DraftRow = {
+  best: string;
+  worst: string;
+  grossCall: string;
+  priceIncrease: string;
+  expansion: string;
+  confidence: string;
+  notes: string;
+};
+
+const EMPTY_DRAFT: DraftRow = { best: '', worst: '', grossCall: '', priceIncrease: '', expansion: '', confidence: '', notes: '' };
+
+/** Renders a single account row + its expandable opportunities panel. */
+function AccountRow({
+  acc,
+  drafts,
+  setDrafts,
+  savingStatus,
+  expanded,
+  setExpanded,
+  visibleColumns,
+  saveRow,
+  nested,
+}: {
+  acc: Account;
+  drafts: Record<string, DraftRow>;
+  setDrafts: React.Dispatch<React.SetStateAction<Record<string, DraftRow>>>;
+  savingStatus: Record<string, 'saving' | 'saved' | null>;
+  expanded: Record<string, boolean>;
+  setExpanded: React.Dispatch<React.SetStateAction<Record<string, boolean>>>;
+  visibleColumns: ColumnConfigItem[];
+  saveRow: (a: Account) => void;
+  nested: boolean;
+}) {
+  const sumArr = acc.opportunities.reduce((s, o) => s + o.expiringArrCents, 0);
+  const d = drafts[acc.id] || EMPTY_DRAFT;
+  const callTotal = parseCurrency(d.grossCall) + parseCurrency(d.priceIncrease) + parseCurrency(d.expansion);
+  const callTotalFormatted = callTotal > 0 ? formatCurrency(String(callTotal)) : '';
+
+  const updateDraft = (field: keyof DraftRow, value: string) => {
+    setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], [field]: value } }));
+  };
+
+  const blurFormat = (field: keyof DraftRow, value: string) => {
+    if (value && !value.includes('$')) {
+      updateDraft(field, formatCurrency(value));
+    }
+    saveRow(acc);
+  };
+
+  return (
+    <React.Fragment>
+      <tr className={nested ? 'bg-gray-50 hover:bg-gray-100' : 'hover:bg-gray-50'}>
+        {visibleColumns.map(col => {
+          if (col.id === 'account') return (
+            <td key={col.id} className={nested ? 'p-2 pl-8 align-top' : 'p-2 align-top'}>
+              <button className="mr-2 text-blue-600" onClick={() => setExpanded(x => ({ ...x, [acc.id]: !x[acc.id] }))}>
+                {expanded[acc.id] ? '▾' : '▸'}
+              </button>
+              {acc.name}
+            </td>
+          );
+          if (col.id === 'rm') return <td key={col.id} className="p-2 align-top">{acc.owner ? `${acc.owner.firstName} ${acc.owner.lastName}` : 'N/A'}</td>;
+          if (col.id === 'clientType') return <td key={col.id} className="p-2 align-top">{acc.segment || '-'}</td>;
+          if (col.id === 'segment') return <td key={col.id} className="p-2 align-top">{acc.businessSegment || '-'}</td>;
+          if (col.id === 'opps') return <td key={col.id} className="p-2 align-top">{acc.opportunities.length}</td>;
+          if (col.id === 'arrUp') return <td key={col.id} className="p-2 align-top font-medium">{formatUsd(sumArr)}</td>;
+          if (col.id === 'best') return (
+            <td key={col.id} className="p-2 align-top">
+              <input className="w-full rounded border p-1 h-8" placeholder="$0" value={d.best}
+                onChange={e => updateDraft('best', e.target.value)}
+                onBlur={e => blurFormat('best', e.target.value)}
+              />
+            </td>
+          );
+          if (col.id === 'worst') return (
+            <td key={col.id} className="p-2 align-top">
+              <input className="w-full rounded border p-1 h-8" placeholder="$0" value={d.worst}
+                onChange={e => updateDraft('worst', e.target.value)}
+                onBlur={e => blurFormat('worst', e.target.value)}
+              />
+            </td>
+          );
+          if (col.id === 'callTotal') return (
+            <td key={col.id} className="p-2 align-top">
+              <div className="mb-2 rounded border bg-gray-100 p-1 text-center text-sm font-semibold text-blue-600 h-8 flex items-center justify-center">{callTotalFormatted || '$0'}</div>
+              <div className="space-y-1.5">
+                <div className="flex items-center gap-2">
+                  <label className="text-xs text-gray-600 w-20 flex-shrink-0">Gross Call:</label>
+                  <input className="flex-1 rounded border border-blue-200 p-1 text-xs" placeholder="$0" value={d.grossCall}
+                    onChange={e => updateDraft('grossCall', e.target.value)}
+                    onBlur={e => blurFormat('grossCall', e.target.value)}
+                  />
+                </div>
+                <div className="flex items-center gap-2">
+                  <label className="text-xs text-gray-600 w-20 flex-shrink-0">Price Inc:</label>
+                  <input className="flex-1 rounded border border-blue-200 p-1 text-xs" placeholder="$0" value={d.priceIncrease}
+                    onChange={e => updateDraft('priceIncrease', e.target.value)}
+                    onBlur={e => blurFormat('priceIncrease', e.target.value)}
+                  />
+                </div>
+                <div className="flex items-center gap-2">
+                  <label className="text-xs text-gray-600 w-20 flex-shrink-0">Expansion:</label>
+                  <input className="flex-1 rounded border border-blue-200 p-1 text-xs" placeholder="$0" value={d.expansion}
+                    onChange={e => updateDraft('expansion', e.target.value)}
+                    onBlur={e => blurFormat('expansion', e.target.value)}
+                  />
+                </div>
+              </div>
+            </td>
+          );
+          if (col.id === 'confidence') return (
+            <td key={col.id} className="p-2 align-top">
+              <select className="w-full rounded border p-1 h-8" value={d.confidence} onChange={e => updateDraft('confidence', e.target.value)} onBlur={() => saveRow(acc)}>
+                <option value="">Select confidence...</option>
+                <option value="Commit">Commit (&lt;90%)</option>
+                <option value="Likely">Likely (60-90%)</option>
+                <option value="Upside">Upside (&gt;60%)</option>
+                <option value="At Risk">At Risk</option>
+                <option value="Churn">Churn</option>
+              </select>
+            </td>
+          );
+          if (col.id === 'notes') return (
+            <td key={col.id} className="p-2 align-top">
+              <div className="flex items-center gap-1">
+                <input className="flex-1 rounded border p-1 h-8" placeholder="Notes" value={d.notes} onChange={e => updateDraft('notes', e.target.value)} onBlur={() => saveRow(acc)} />
+                {savingStatus[acc.id] === 'saving' && <span className="text-xs text-gray-500">Saving...</span>}
+                {savingStatus[acc.id] === 'saved' && <span className="text-xs text-green-600">✓</span>}
+              </div>
+            </td>
+          );
+          return <td key={col.id} className="p-2 align-top">-</td>;
+        })}
+      </tr>
+      {expanded[acc.id] && (
+        <tr>
+          <td colSpan={visibleColumns.length} className={nested ? 'bg-gray-100 p-3 pl-8' : 'bg-gray-50 p-3'}>
+            <div className="text-xs font-semibold text-gray-600">Opportunities</div>
+            <div className="mt-2 grid grid-cols-4 gap-2 text-xs">
+              {acc.opportunities.map(o => (
+                <div key={o.id} className="rounded border bg-white p-2">
+                  <div className="font-medium">{o.name}</div>
+                  <div>Renewal: {new Date(o.renewalDate).toLocaleDateString()}</div>
+                  <div>ARR: {formatUsd(o.expiringArrCents)}</div>
+                </div>
+              ))}
+            </div>
+          </td>
+        </tr>
+      )}
+    </React.Fragment>
+  );
+}
+
 export default function AccountTable({
   accounts,
   latestByAccount,
   quarters
 }: {
   accounts: Account[];
-  latestByAccount: Record<string, Record<string, { 
-    bestUsd: number; 
-    worstUsd: number; 
-    callUsd: number; 
+  latestByAccount: Record<string, Record<string, {
+    bestUsd: number;
+    worstUsd: number;
+    callUsd: number;
     grossCallUsd: number;
     priceIncreaseUsd: number;
     expansionUsd: number;
-    confidence: string; 
-    notes: string 
+    confidence: string;
+    notes: string
   }>>;
   quarters: { cq: string; nq: string; fq: string };
 }) {
@@ -75,24 +230,8 @@ export default function AccountTable({
     setColumnConfig(loadColumnConfig());
   }, []);
 
-  const [drafts, setDrafts] = useState<Record<string, { 
-    best: string; 
-    worst: string; 
-    grossCall: string; 
-    priceIncrease: string; 
-    expansion: string; 
-    confidence: string; 
-    notes: string 
-  }>>(() => {
-    const d: Record<string, { 
-      best: string; 
-      worst: string; 
-      grossCall: string; 
-      priceIncrease: string; 
-      expansion: string; 
-      confidence: string; 
-      notes: string 
-    }> = {};
+  const [drafts, setDrafts] = useState<Record<string, DraftRow>>(() => {
+    const d: Record<string, DraftRow> = {};
     for (const a of accounts) {
       const accountSnapshots = latestByAccount[a.name];
       const currentQuarterKey = selectedQuarter === 'CQ' ? quarters.cq : selectedQuarter === 'NQ' ? quarters.nq : quarters.fq;
@@ -112,10 +251,10 @@ export default function AccountTable({
 
   // Filter accounts by quarter
   const currentQuarterKey = selectedQuarter === 'CQ' ? quarters.cq : selectedQuarter === 'NQ' ? quarters.nq : quarters.fq;
-  const quarterAccounts = accounts.filter(acc => 
+  const quarterAccounts = accounts.filter(acc =>
     acc.opportunities.some(opp => opp.quarterKey === currentQuarterKey)
   );
-  
+
   // Filter opportunities to only show current quarter ones
   const quarterAccountsWithFilteredOpps = quarterAccounts.map(acc => ({
     ...acc,
@@ -140,10 +279,9 @@ export default function AccountTable({
   async function saveRow(a: Account, showAlert = false) {
     const row = drafts[a.id];
     if (!row) return;
-    
-    // Set saving status
+
     setSavingStatus(prev => ({ ...prev, [a.id]: 'saving' }));
-    
+
     try {
       const res = await fetch('/api/snapshots', {
         method: 'POST',
@@ -165,33 +303,25 @@ export default function AccountTable({
       if (!res.ok) {
         const errorText = await res.text();
         setSavingStatus(prev => ({ ...prev, [a.id]: null }));
-        if (showAlert) {
-          alert(`Save failed: ${errorText}`);
-        }
+        if (showAlert) alert(`Save failed: ${errorText}`);
       } else {
         setSavingStatus(prev => ({ ...prev, [a.id]: 'saved' }));
-        // Clear saved status after 2 seconds
         setTimeout(() => {
           setSavingStatus(prev => ({ ...prev, [a.id]: null }));
         }, 2000);
-        if (showAlert) {
-          alert('Saved successfully!');
-        }
+        if (showAlert) alert('Saved successfully!');
       }
     } catch (error) {
       console.error('Save error:', error);
       setSavingStatus(prev => ({ ...prev, [a.id]: null }));
-      if (showAlert) {
-        alert('Save failed. Please try again.');
-      }
+      if (showAlert) alert('Save failed. Please try again.');
     }
   }
 
   // Calculate summary totals based on selected RM and quarter
   const summaryAccounts = selectedRM === 'All' ? quarterAccountsWithFilteredOpps : accountsByRM[selectedRM] || [];
-  
-  // Now opportunities are already filtered, so no need to filter again
-  const totalArrUpCents = summaryAccounts.reduce((sum, a) => 
+
+  const totalArrUpCents = summaryAccounts.reduce((sum, a) =>
     sum + a.opportunities.reduce((s, o) => s + o.expiringArrCents, 0), 0);
   let bestUsdTotal = 0, worstUsdTotal = 0, callUsdTotal = 0;
   for (const a of summaryAccounts) {
@@ -244,9 +374,9 @@ export default function AccountTable({
       <div className="mb-4 flex flex-wrap items-center gap-4">
         <div>
           <label className="text-sm font-medium text-gray-700">Filter by RM:</label>
-          <select 
-            className="ml-2 rounded border p-2" 
-            value={selectedRM} 
+          <select
+            className="ml-2 rounded border p-2"
+            value={selectedRM}
             onChange={e => setSelectedRM(e.target.value)}
           >
             <option value="All">All RMs</option>
@@ -334,231 +464,39 @@ export default function AccountTable({
                       })}
                     </tr>
                     {/* Account Rows */}
-                    {expandedRMs[rm] && rmAccounts.map(acc => {
-                      const sumArr = acc.opportunities.reduce((s, o) => s + o.expiringArrCents, 0);
-                      const d = drafts[acc.id] || { best: '', worst: '', grossCall: '', priceIncrease: '', expansion: '', confidence: '', notes: '' };
-                      // Compute Call Total from components
-                      const callTotal = parseCurrency(d.grossCall) + parseCurrency(d.priceIncrease) + parseCurrency(d.expansion);
-                      const callTotalFormatted = callTotal > 0 ? formatCurrency(String(callTotal)) : '';
-                      return (
-                        <React.Fragment key={acc.id}>
-                          <tr className="bg-gray-50 hover:bg-gray-100">
-                            {visibleColumns.map(col => {
-                              if (col.id === 'account') return (
-                                <td key={col.id} className="p-2 pl-8 align-top">
-                                  <button className="mr-2 text-blue-600" onClick={() => setExpanded(x => ({ ...x, [acc.id]: !x[acc.id] }))}>
-                                    {expanded[acc.id] ? '▾' : '▸'}
-                                  </button>
-                                  {acc.name}
-                                </td>
-                              );
-                              if (col.id === 'rm') return <td key={col.id} className="p-2">{acc.owner ? `${acc.owner.firstName} ${acc.owner.lastName}` : 'N/A'}</td>;
-                              if (col.id === 'clientType') return <td key={col.id} className="p-2">{acc.segment || '-'}</td>;
-                              if (col.id === 'segment') return <td key={col.id} className="p-2">{acc.businessSegment || '-'}</td>;
-                              if (col.id === 'opps') return <td key={col.id} className="p-2">{acc.opportunities.length}</td>;
-                              if (col.id === 'arrUp') return <td key={col.id} className="p-2 font-medium">{formatUsd(sumArr)}</td>;
-                              if (col.id === 'best') return (
-                                <td key={col.id} className="p-2 align-top">
-                                  <input className="w-full rounded border p-1 h-8" placeholder="$0" value={d.best}
-                                    onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], best: e.target.value } }))}
-                                    onBlur={e => { if (e.target.value && !e.target.value.includes('$')) { const formatted = formatCurrency(e.target.value); setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], best: formatted } })); } saveRow(acc); }}
-                                  />
-                                </td>
-                              );
-                              if (col.id === 'worst') return (
-                                <td key={col.id} className="p-2 align-top">
-                                  <input className="w-full rounded border p-1 h-8" placeholder="$0" value={d.worst}
-                                    onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], worst: e.target.value } }))}
-                                    onBlur={e => { if (e.target.value && !e.target.value.includes('$')) { const formatted = formatCurrency(e.target.value); setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], worst: formatted } })); } saveRow(acc); }}
-                                  />
-                                </td>
-                              );
-                              if (col.id === 'callTotal') return (
-                                <td key={col.id} className="p-2 align-top">
-                                  <div className="mb-2 rounded border bg-gray-100 p-1 text-center text-sm font-semibold text-blue-600 h-8 flex items-center justify-center">{callTotalFormatted || '$0'}</div>
-                                  <div className="space-y-1.5">
-                                    <div className="flex items-center gap-2">
-                                      <label className="text-xs text-gray-600 w-20 flex-shrink-0">Gross Call:</label>
-                                      <input className="flex-1 rounded border border-blue-200 p-1 text-xs" placeholder="$0" value={d.grossCall}
-                                        onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], grossCall: e.target.value } }))}
-                                        onBlur={e => { if (e.target.value && !e.target.value.includes('$')) { const formatted = formatCurrency(e.target.value); setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], grossCall: formatted } })); } saveRow(acc); }}
-                                      />
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                      <label className="text-xs text-gray-600 w-20 flex-shrink-0">Price Inc:</label>
-                                      <input className="flex-1 rounded border border-blue-200 p-1 text-xs" placeholder="$0" value={d.priceIncrease}
-                                        onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], priceIncrease: e.target.value } }))}
-                                        onBlur={e => { if (e.target.value && !e.target.value.includes('$')) { const formatted = formatCurrency(e.target.value); setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], priceIncrease: formatted } })); } saveRow(acc); }}
-                                      />
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                      <label className="text-xs text-gray-600 w-20 flex-shrink-0">Expansion:</label>
-                                      <input className="flex-1 rounded border border-blue-200 p-1 text-xs" placeholder="$0" value={d.expansion}
-                                        onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], expansion: e.target.value } }))}
-                                        onBlur={e => { if (e.target.value && !e.target.value.includes('$')) { const formatted = formatCurrency(e.target.value); setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], expansion: formatted } })); } saveRow(acc); }}
-                                      />
-                                    </div>
-                                  </div>
-                                </td>
-                              );
-                              if (col.id === 'confidence') return (
-                                <td key={col.id} className="p-2 align-top">
-                                  <select className="w-full rounded border p-1 h-8" value={d.confidence} onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], confidence: e.target.value } }))} onBlur={() => saveRow(acc)}>
-                                    <option value="">Select confidence...</option>
-                                    <option value="Commit">Commit (&lt;90%)</option>
-                                    <option value="Likely">Likely (60-90%)</option>
-                                    <option value="Upside">Upside (&gt;60%)</option>
-                                    <option value="At Risk">At Risk</option>
-                                    <option value="Churn">Churn</option>
-                                  </select>
-                                </td>
-                              );
-                              if (col.id === 'notes') return (
-                                <td key={col.id} className="p-2 align-top">
-                                  <div className="flex items-center gap-1">
-                                    <input className="flex-1 rounded border p-1 h-8" placeholder="Notes" value={d.notes} onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], notes: e.target.value } }))} onBlur={() => saveRow(acc)} />
-                                    {savingStatus[acc.id] === 'saving' && <span className="text-xs text-gray-500">Saving...</span>}
-                                    {savingStatus[acc.id] === 'saved' && <span className="text-xs text-green-600">✓</span>}
-                                  </div>
-                                </td>
-                              );
-                              return <td key={col.id} className="p-2 align-top">-</td>;
-                            })}
-                          </tr>
-                          {expanded[acc.id] && (
-                            <tr key={`${acc.id}-expanded`}>
-                              <td colSpan={visibleColumns.length} className="bg-gray-100 p-3 pl-8">
-                                <div className="text-xs font-semibold text-gray-600">Opportunities</div>
-                                <div className="mt-2 grid grid-cols-4 gap-2 text-xs">
-                                  {acc.opportunities.map(o => (
-                                    <div key={o.id} className="rounded border bg-white p-2">
-                                      <div className="font-medium">{o.name}</div>
-                                      <div>Renewal: {new Date(o.renewalDate).toLocaleDateString()}</div>
-                                      <div>ARR: {formatUsd(o.expiringArrCents)}</div>
-                                    </div>
-                                  ))}
-                                </div>
-                              </td>
-                            </tr>
-                          )}
-                        </React.Fragment>
-                      );
-                    })}
+                    {expandedRMs[rm] && rmAccounts.map(acc => (
+                      <AccountRow
+                        key={acc.id}
+                        acc={acc}
+                        drafts={drafts}
+                        setDrafts={setDrafts}
+                        savingStatus={savingStatus}
+                        expanded={expanded}
+                        setExpanded={setExpanded}
+                        visibleColumns={visibleColumns}
+                        saveRow={saveRow}
+                        nested
+                      />
+                    ))}
                   </React.Fragment>
                 );
               })
             ) : (
               // Single RM view
-              filteredAccounts.map(acc => {
-                const sumArr = acc.opportunities.reduce((s, o) => s + o.expiringArrCents, 0);
-                const d = drafts[acc.id] || { best: '', worst: '', grossCall: '', priceIncrease: '', expansion: '', confidence: '', notes: '' };
-                // Compute Call Total from components
-                const callTotal = parseCurrency(d.grossCall) + parseCurrency(d.priceIncrease) + parseCurrency(d.expansion);
-                const callTotalFormatted = callTotal > 0 ? formatCurrency(String(callTotal)) : '';
-                return (
-                  <React.Fragment key={acc.id}>
-                    <tr className="hover:bg-gray-50">
-                      {visibleColumns.map(col => {
-                        if (col.id === 'account') return (
-                          <td key={col.id} className="p-2 align-top">
-                            <button className="mr-2 text-blue-600" onClick={() => setExpanded(x => ({ ...x, [acc.id]: !x[acc.id] }))}>
-                              {expanded[acc.id] ? '▾' : '▸'}
-                            </button>
-                            {acc.name}
-                          </td>
-                        );
-                        if (col.id === 'rm') return <td key={col.id} className="p-2 align-top">{acc.owner ? `${acc.owner.firstName} ${acc.owner.lastName}` : 'N/A'}</td>;
-                        if (col.id === 'clientType') return <td key={col.id} className="p-2 align-top">{acc.segment || '-'}</td>;
-                        if (col.id === 'segment') return <td key={col.id} className="p-2 align-top">{acc.businessSegment || '-'}</td>;
-                        if (col.id === 'opps') return <td key={col.id} className="p-2 align-top w-20">{acc.opportunities.length}</td>;
-                        if (col.id === 'arrUp') return <td key={col.id} className="p-2 align-top font-medium">{formatUsd(sumArr)}</td>;
-                        if (col.id === 'best') return (
-                          <td key={col.id} className="p-2 align-top">
-                            <input className="w-full rounded border p-1 h-8" placeholder="$0" value={d.best}
-                              onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], best: e.target.value } }))}
-                              onBlur={e => { if (e.target.value && !e.target.value.includes('$')) { const formatted = formatCurrency(e.target.value); setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], best: formatted } })); } saveRow(acc); }}
-                            />
-                          </td>
-                        );
-                        if (col.id === 'worst') return (
-                          <td key={col.id} className="p-2 align-top">
-                            <input className="w-full rounded border p-1 h-8" placeholder="$0" value={d.worst}
-                              onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], worst: e.target.value } }))}
-                              onBlur={e => { if (e.target.value && !e.target.value.includes('$')) { const formatted = formatCurrency(e.target.value); setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], worst: formatted } })); } saveRow(acc); }}
-                            />
-                          </td>
-                        );
-                        if (col.id === 'callTotal') return (
-                          <td key={col.id} className="p-2 align-top">
-                            <div className="mb-2 rounded border bg-gray-100 p-1 text-center text-sm font-semibold text-blue-600 h-8 flex items-center justify-center">{callTotalFormatted || '$0'}</div>
-                            <div className="space-y-1.5">
-                              <div className="flex items-center gap-2">
-                                <label className="text-xs text-gray-600 w-20 flex-shrink-0">Gross Call:</label>
-                                <input className="flex-1 rounded border border-blue-200 p-1 text-xs" placeholder="$0" value={d.grossCall}
-                                  onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], grossCall: e.target.value } }))}
-                                  onBlur={e => { if (e.target.value && !e.target.value.includes('$')) { const formatted = formatCurrency(e.target.value); setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], grossCall: formatted } })); } saveRow(acc); }}
-                                />
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <label className="text-xs text-gray-600 w-20 flex-shrink-0">Price Inc:</label>
-                                <input className="flex-1 rounded border border-blue-200 p-1 text-xs" placeholder="$0" value={d.priceIncrease}
-                                  onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], priceIncrease: e.target.value } }))}
-                                  onBlur={e => { if (e.target.value && !e.target.value.includes('$')) { const formatted = formatCurrency(e.target.value); setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], priceIncrease: formatted } })); } saveRow(acc); }}
-                                />
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <label className="text-xs text-gray-600 w-20 flex-shrink-0">Expansion:</label>
-                                <input className="flex-1 rounded border border-blue-200 p-1 text-xs" placeholder="$0" value={d.expansion}
-                                  onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], expansion: e.target.value } }))}
-                                  onBlur={e => { if (e.target.value && !e.target.value.includes('$')) { const formatted = formatCurrency(e.target.value); setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], expansion: formatted } })); } saveRow(acc); }}
-                                />
-                              </div>
-                            </div>
-                          </td>
-                        );
-                        if (col.id === 'confidence') return (
-                          <td key={col.id} className="p-2 align-top">
-                            <select className="w-full rounded border p-1 h-8" value={d.confidence} onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], confidence: e.target.value } }))} onBlur={() => saveRow(acc)}>
-                              <option value="">Select confidence...</option>
-                              <option value="Commit">Commit (&lt;90%)</option>
-                              <option value="Likely">Likely (60-90%)</option>
-                              <option value="Upside">Upside (&gt;60%)</option>
-                              <option value="At Risk">At Risk</option>
-                              <option value="Churn">Churn</option>
-                            </select>
-                          </td>
-                        );
-                        if (col.id === 'notes') return (
-                          <td key={col.id} className="p-2 align-top">
-                            <div className="flex items-center gap-1">
-                              <input className="flex-1 rounded border p-1 h-8" placeholder="Notes" value={d.notes} onChange={e => setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], notes: e.target.value } }))} onBlur={() => saveRow(acc)} />
-                              {savingStatus[acc.id] === 'saving' && <span className="text-xs text-gray-500">Saving...</span>}
-                              {savingStatus[acc.id] === 'saved' && <span className="text-xs text-green-600">✓</span>}
-                            </div>
-                          </td>
-                        );
-                        return <td key={col.id} className="p-2 align-top">-</td>;
-                      })}
-                    </tr>
-                    {expanded[acc.id] && (
-                      <tr key={`${acc.id}-expanded`}>
-                        <td colSpan={visibleColumns.length} className="bg-gray-50 p-3">
-                          <div className="text-xs font-semibold text-gray-600">Opportunities</div>
-                          <div className="mt-2 grid grid-cols-4 gap-2 text-xs">
-                            {acc.opportunities.map(o => (
-                              <div key={o.id} className="rounded border bg-white p-2">
-                                <div className="font-medium">{o.name}</div>
-                                <div>Renewal: {new Date(o.renewalDate).toLocaleDateString()}</div>
-                                <div>ARR: {formatUsd(o.expiringArrCents)}</div>
-                              </div>
-                            ))}
-                          </div>
-                        </td>
-                      </tr>
-                    )}
-                  </React.Fragment>
-                );
-              })
+              filteredAccounts.map(acc => (
+                <AccountRow
+                  key={acc.id}
+                  acc={acc}
+                  drafts={drafts}
+                  setDrafts={setDrafts}
+                  savingStatus={savingStatus}
+                  expanded={expanded}
+                  setExpanded={setExpanded}
+                  visibleColumns={visibleColumns}
+                  saveRow={saveRow}
+                  nested={false}
+                />
+              ))
             )}
           </tbody>
         </table>
@@ -568,7 +506,7 @@ export default function AccountTable({
       <div className="mt-8">
         <h3 className="mb-4 text-lg font-semibold">RM Forecast Trends - {selectedRM === 'All' ? 'All RMs' : selectedRM} - {selectedQuarter === 'CQ' ? 'Current Quarter' : selectedQuarter === 'NQ' ? 'Next Quarter' : 'Following Quarter'}</h3>
         <div className="rounded-lg border bg-white p-6">
-          <ForecastTrendChart 
+          <ForecastTrendChart
             accounts={accounts}
             latestByAccount={latestByAccount}
             vpForecasts={{}} // Empty for RM view
@@ -581,4 +519,3 @@ export default function AccountTable({
     </div>
   );
 }
-
