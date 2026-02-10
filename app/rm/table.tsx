@@ -88,9 +88,14 @@ function AccountRow({
     setDrafts(s => ({ ...s, [acc.id]: { ...s[acc.id], [field]: value } }));
   };
 
+  const arrUpUsd = sumArr / 100;
+
   const blurFormat = (field: keyof DraftRow, value: string) => {
-    if (value && !value.includes('$')) {
-      updateDraft(field, formatCurrency(value));
+    const trimmed = value.trim();
+    if (trimmed === '+' && (field === 'best' || field === 'worst' || field === 'grossCall')) {
+      updateDraft(field, formatCurrency(String(arrUpUsd)));
+    } else if (trimmed && !trimmed.includes('$')) {
+      updateDraft(field, formatCurrency(trimmed));
     }
     saveRow(acc);
   };
