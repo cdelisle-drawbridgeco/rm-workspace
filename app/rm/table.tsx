@@ -325,12 +325,18 @@ export default function AccountTable({
     sum + a.opportunities.reduce((s, o) => s + o.expiringArrCents, 0), 0);
   let bestUsdTotal = 0, worstUsdTotal = 0, callUsdTotal = 0;
   for (const a of summaryAccounts) {
-    const accountSnapshots = latestByAccount[a.name];
-    const latest = accountSnapshots?.[currentQuarterKey];
-    if (latest) {
-      bestUsdTotal += latest.bestUsd || 0;
-      worstUsdTotal += latest.worstUsd || 0;
-      callUsdTotal += latest.callUsd || 0;
+    const d = drafts[a.id];
+    if (d) {
+      bestUsdTotal += parseCurrency(d.best);
+      worstUsdTotal += parseCurrency(d.worst);
+      callUsdTotal += parseCurrency(d.grossCall) + parseCurrency(d.priceIncrease) + parseCurrency(d.expansion);
+    } else {
+      const latest = latestByAccount[a.name]?.[currentQuarterKey];
+      if (latest) {
+        bestUsdTotal += latest.bestUsd || 0;
+        worstUsdTotal += latest.worstUsd || 0;
+        callUsdTotal += latest.callUsd || 0;
+      }
     }
   }
 
