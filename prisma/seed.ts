@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Opportunity, ForecastSnapshot } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -153,7 +153,7 @@ async function main() {
 
   // Create opportunities for 2026 quarters
   const year2026 = 2026;
-  const opps: any[] = [];
+  const opps: Promise<Opportunity>[] = [];
   
   // Q1 2026 (FY26-Q1) - Current Quarter
   // Create mix: some accounts with smaller values to ensure some are under $20k total
@@ -324,7 +324,7 @@ async function main() {
   console.log('\n=== Account updates complete ===\n');
   
   // Create account-level snapshots for all quarters with Best/Worst/Call = ARR up for renewal
-  const snapshots: any[] = [];
+  const snapshots: Promise<ForecastSnapshot>[] = [];
   
   // Get all opportunities grouped by account and quarter
   const allOpps = await prisma.opportunity.findMany();

@@ -2,16 +2,31 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 import { toQuarterKey, periodKeyWeek } from '@/lib/quarters';
 
+interface SnapshotBody {
+  scopeType?: string;
+  scopeName?: string;
+  best?: number;
+  worst?: number;
+  call?: number;
+  grossCall?: number;
+  priceIncrease?: number;
+  expansion?: number;
+  confidencePct?: number;
+  confidence?: string;
+  notes?: string;
+  quarterKey?: string;
+}
+
 export async function POST(req: NextRequest) {
   try {
-    const body = (await req.json().catch(() => null)) as any;
+    const body: SnapshotBody | null = await req.json().catch(() => null);
     if (!body) return new NextResponse('Bad JSON', { status: 400 });
     const {
       scopeType = 'RM',
       scopeName,
       best,
       worst,
-      call, // Legacy: if provided, will be ignored in favor of components
+      call,
       grossCall,
       priceIncrease,
       expansion,
@@ -81,8 +96,9 @@ export async function POST(req: NextRequest) {
       notes: snap.notes
     });
     return NextResponse.json(snap);
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('Snapshot create failed', err);
-    return new NextResponse(`Server error: ${err?.message || 'unknown'}`, { status: 500 });
+    const message = err instanceof Error ? err.message : 'unknown';
+    return new NextResponse(`Server error: ${message}`, { status: 500 });
   }
 }
