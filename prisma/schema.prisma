@@ -34,6 +34,7 @@ model Account {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   opportunities   Opportunity[]
+  renewalPlans    RenewalPlan[]
 }
 
 model Opportunity {
@@ -82,6 +83,27 @@ model DataVersion {
   ingestedAt   DateTime @default(now())
   hash         String
   recordsCount Int
+}
+
+model RenewalPlan {
+  id                 String   @id @default(cuid())
+  accountId          String
+  account            Account  @relation(fields: [accountId], references: [id])
+  quarterKey         String   // e.g., FY26-Q1
+  currentStage       String   @default("prep")
+  riskRating         String?  // 'Green' | 'Yellow' | 'Red'
+  prepGates          Json?
+  callScheduledGates Json?
+  riskRatingGates    Json?
+  strategizeGates    Json?
+  planningGates      Json?
+  negotiateGates     Json?
+  executeGates       Json?
+  notes              String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@unique([accountId, quarterKey])
 }
 
 

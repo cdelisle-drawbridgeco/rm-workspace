@@ -466,9 +466,9 @@ export default function VpDashboard({
       </div>
 
         {/* Forecast Trend Chart */}
-        <div className="mt-8">
-          <h3 className="mb-4 text-lg font-semibold">Forecast Trends Over Time - {selectedQuarter === 'CQ' ? 'Current Quarter' : selectedQuarter === 'NQ' ? 'Next Quarter' : 'Following Quarter'}</h3>
-          <div className="rounded-lg border bg-white p-6">
+        <div className="mt-6">
+          <h3 className="mb-2 text-sm font-semibold">Forecast Trends Over Time - {selectedQuarter === 'CQ' ? 'Current Quarter' : selectedQuarter === 'NQ' ? 'Next Quarter' : 'Following Quarter'}</h3>
+          <div className="rounded-lg border bg-white p-3">
             <ForecastTrendChart 
               accounts={accounts}
               latestByAccount={latestByAccount}

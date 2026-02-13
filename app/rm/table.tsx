@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import ForecastTrendChart from '../manager/forecast-trend-chart';
 import ColumnManager from './column-manager';
 import { formatUsd, formatUsdFromDollars, formatCurrency, parseCurrency } from '@/lib/format';
@@ -7,9 +7,14 @@ import {
   type ColumnConfigItem,
   type GridColumnId,
   getDefaultColumnConfig,
+  getDefaultWidth,
   loadColumnConfig,
+  saveColumnConfig,
   getVisibleColumns,
 } from './column-config';
+import { STAGE_LABELS, RISK_RATING_COLORS } from '@/lib/renewal-stages';
+import type { RenewalStage } from '@/lib/renewal-stages';
+import type { RenewalPlanSummary } from '@/lib/data';
 
 type Account = {
   id: string;
@@ -68,6 +73,7 @@ function AccountRow({
   visibleColumns,
   saveRow,
   nested,
+  planSummary,
 }: {
   acc: Account;
   drafts: Record<string, DraftRow>;
@@ -78,6 +84,7 @@ function AccountRow({
   visibleColumns: ColumnConfigItem[];
   saveRow: (a: Account) => void;
   nested: boolean;
+  planSummary?: RenewalPlanSummary;
 }) {
   const sumArr = acc.opportunities.reduce((s, o) => s + o.expiringArrCents, 0);
   const d = drafts[acc.id] || EMPTY_DRAFT;
@@ -93,7 +100,21 @@ function AccountRow({
   const blurFormat = (field: keyof DraftRow, value: string) => {
     const trimmed = value.trim();
     if (trimmed === '+' && (field === 'best' || field === 'worst' || field === 'grossCall')) {
+      // + shortcut: auto-fill ARR Up value
       updateDraft(field, formatCurrency(String(arrUpUsd)));
+    } else if (/^\*\d*\.?\d+$/i.test(trimmed)) {
+      // Multiplier shortcut: *.8 = 80% of ARR Up, *.05 = 5% of ARR Up
+      const multiplier = parseFloat(trimmed.slice(1));
+      if (!isNaN(multiplier)) {
+        const result = Math.round(arrUpUsd * multiplier);
+        updateDraft(field, formatCurrency(String(result)));
+      }
+    } else if (/^[\d,.]+k$/i.test(trimmed)) {
+      // K shortcut: 10k = 10,000, 1.5k = 1,500
+      const num = parseFloat(trimmed.replace(/[k,]/gi, ''));
+      if (!isNaN(num)) {
+        updateDraft(field, formatCurrency(String(num * 1000)));
+      }
     } else if (trimmed && !trimmed.includes('$')) {
       updateDraft(field, formatCurrency(trimmed));
     }
@@ -117,43 +138,71 @@ function AccountRow({
           if (col.id === 'segment') return <td key={col.id} className="p-2 align-top">{acc.businessSegment || '-'}</td>;
           if (col.id === 'opps') return <td key={col.id} className="p-2 align-top">{acc.opportunities.length}</td>;
           if (col.id === 'arrUp') return <td key={col.id} className="p-2 align-top font-medium">{formatUsd(sumArr)}</td>;
+          if (col.id === 'renewalStage') {
+            const stage = planSummary?.currentStage as RenewalStage | undefined;
+            return (
+              <td key={col.id} className="p-2 align-top">
+                {stage ? (
+                  <span className="inline-block rounded bg-blue-100 px-2 py-0.5 text-xs text-blue-800">
+                    {STAGE_LABELS[stage] || stage}
+                  </span>
+                ) : (
+                  <span className="text-gray-400 text-xs">-</span>
+                )}
+              </td>
+            );
+          }
+          if (col.id === 'riskRating') {
+            const risk = planSummary?.riskRating;
+            return (
+              <td key={col.id} className="p-2 align-top">
+                {risk ? (
+                  <span className={`inline-block rounded px-2 py-0.5 text-xs ${RISK_RATING_COLORS[risk]?.bg || 'bg-gray-100'} ${RISK_RATING_COLORS[risk]?.text || 'text-gray-800'}`}>
+                    {risk}
+                  </span>
+                ) : (
+                  <span className="text-gray-400 text-xs">-</span>
+                )}
+              </td>
+            );
+          }
           if (col.id === 'best') return (
-            <td key={col.id} className="p-2 align-top">
-              <input className="w-full rounded border p-1 h-8" placeholder="$0" value={d.best}
+            <td key={col.id} className="p-1.5 align-top">
+              <input className="w-full rounded border px-1 py-0.5 text-xs" placeholder="$0" value={d.best}
                 onChange={e => updateDraft('best', e.target.value)}
                 onBlur={e => blurFormat('best', e.target.value)}
               />
             </td>
           );
           if (col.id === 'worst') return (
-            <td key={col.id} className="p-2 align-top">
-              <input className="w-full rounded border p-1 h-8" placeholder="$0" value={d.worst}
+            <td key={col.id} className="p-1.5 align-top">
+              <input className="w-full rounded border px-1 py-0.5 text-xs" placeholder="$0" value={d.worst}
                 onChange={e => updateDraft('worst', e.target.value)}
                 onBlur={e => blurFormat('worst', e.target.value)}
               />
             </td>
           );
           if (col.id === 'callTotal') return (
-            <td key={col.id} className="p-2 align-top">
-              <div className="mb-2 rounded border bg-gray-100 p-1 text-center text-sm font-semibold text-blue-600 h-8 flex items-center justify-center">{callTotalFormatted || '$0'}</div>
-              <div className="space-y-1.5">
-                <div className="flex items-center gap-2">
-                  <label className="text-xs text-gray-600 w-20 flex-shrink-0">Gross Call:</label>
-                  <input className="flex-1 rounded border border-blue-200 p-1 text-xs" placeholder="$0" value={d.grossCall}
+            <td key={col.id} className="p-1.5 align-top">
+              <div className="mb-1 rounded bg-gray-100 px-1 py-0.5 text-center text-xs font-semibold text-db-aqua-dark">{callTotalFormatted || '$0'}</div>
+              <div className="space-y-0.5">
+                <div className="flex items-center gap-1">
+                  <label className="text-[10px] text-gray-500 w-10 flex-shrink-0">Gross:</label>
+                  <input className="flex-1 min-w-0 rounded border border-gray-200 px-1 py-0.5 text-[11px]" placeholder="$0" value={d.grossCall}
                     onChange={e => updateDraft('grossCall', e.target.value)}
                     onBlur={e => blurFormat('grossCall', e.target.value)}
                   />
                 </div>
-                <div className="flex items-center gap-2">
-                  <label className="text-xs text-gray-600 w-20 flex-shrink-0">Price Inc:</label>
-                  <input className="flex-1 rounded border border-blue-200 p-1 text-xs" placeholder="$0" value={d.priceIncrease}
+                <div className="flex items-center gap-1">
+                  <label className="text-[10px] text-gray-500 w-10 flex-shrink-0">Price:</label>
+                  <input className="flex-1 min-w-0 rounded border border-gray-200 px-1 py-0.5 text-[11px]" placeholder="$0" value={d.priceIncrease}
                     onChange={e => updateDraft('priceIncrease', e.target.value)}
                     onBlur={e => blurFormat('priceIncrease', e.target.value)}
                   />
                 </div>
-                <div className="flex items-center gap-2">
-                  <label className="text-xs text-gray-600 w-20 flex-shrink-0">Expansion:</label>
-                  <input className="flex-1 rounded border border-blue-200 p-1 text-xs" placeholder="$0" value={d.expansion}
+                <div className="flex items-center gap-1">
+                  <label className="text-[10px] text-gray-500 w-10 flex-shrink-0">Exp:</label>
+                  <input className="flex-1 min-w-0 rounded border border-gray-200 px-1 py-0.5 text-[11px]" placeholder="$0" value={d.expansion}
                     onChange={e => updateDraft('expansion', e.target.value)}
                     onBlur={e => blurFormat('expansion', e.target.value)}
                   />
@@ -178,7 +227,7 @@ function AccountRow({
               <div className="flex items-center gap-1">
                 <input className="flex-1 rounded border p-1 h-8" placeholder="Notes" value={d.notes} onChange={e => updateDraft('notes', e.target.value)} onBlur={() => saveRow(acc)} />
                 {savingStatus[acc.id] === 'saving' && <span className="text-xs text-gray-500">Saving...</span>}
-                {savingStatus[acc.id] === 'saved' && <span className="text-xs text-green-600">✓</span>}
+                {savingStatus[acc.id] === 'saved' && <span className="text-xs text-db-orange">✓</span>}
               </div>
             </td>
           );
@@ -188,7 +237,14 @@ function AccountRow({
       {expanded[acc.id] && (
         <tr>
           <td colSpan={visibleColumns.length} className={nested ? 'bg-gray-100 p-3 pl-8' : 'bg-gray-50 p-3'}>
-            <div className="text-xs font-semibold text-gray-600">Opportunities</div>
+            <div className="flex items-center justify-between">
+              <div className="text-xs font-semibold text-gray-600">Opportunities</div>
+              {planSummary && (
+                <a href="/plans" className="text-xs text-blue-600 hover:underline">
+                  View Plan
+                </a>
+              )}
+            </div>
             <div className="mt-2 grid grid-cols-4 gap-2 text-xs">
               {acc.opportunities.map(o => (
                 <div key={o.id} className="rounded border bg-white p-2">
@@ -208,7 +264,8 @@ function AccountRow({
 export default function AccountTable({
   accounts,
   latestByAccount,
-  quarters
+  quarters,
+  renewalPlanSummaries = {},
 }: {
   accounts: Account[];
   latestByAccount: Record<string, Record<string, {
@@ -222,6 +279,7 @@ export default function AccountTable({
     notes: string
   }>>;
   quarters: { cq: string; nq: string; fq: string };
+  renewalPlanSummaries?: Record<string, RenewalPlanSummary>;
 }) {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const [expandedRMs, setExpandedRMs] = useState<Record<string, boolean>>({});
@@ -351,10 +409,48 @@ export default function AccountTable({
   const fmtUsdFromCents = (c: number) => `$${(c / 100).toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
   const fmtPct = (p: number) => `${p.toFixed(1)}%`;
 
-  const thWidth: Partial<Record<GridColumnId, string>> = {
-    account: 'w-56', rm: 'w-24', clientType: 'w-28', segment: 'w-28', opps: 'w-16',
-    arrUp: 'w-32', best: 'w-28', worst: 'w-28', callTotal: 'w-28', confidence: 'w-32', notes: 'w-48',
-  };
+  // --- Column resize logic ---
+  const resizingRef = useRef<{ colId: GridColumnId; startX: number; startW: number } | null>(null);
+
+  const getColWidth = (col: ColumnConfigItem) => col.width ?? getDefaultWidth(col.id);
+
+  const handleResizeStart = useCallback((e: React.MouseEvent, col: ColumnConfigItem) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const colId = col.id;
+    const startX = e.clientX;
+    const startW = getColWidth(col);
+    resizingRef.current = { colId, startX, startW };
+
+    const onMove = (ev: MouseEvent) => {
+      if (!resizingRef.current) return;
+      const delta = ev.clientX - startX;
+      const newWidth = Math.max(40, startW + delta);
+      setColumnConfig(prev =>
+        prev.map(c => c.id === colId ? { ...c, width: newWidth } : c)
+      );
+    };
+
+    const onUp = () => {
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onUp);
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+      // Persist widths
+      setColumnConfig(prev => {
+        saveColumnConfig(prev);
+        return prev;
+      });
+      resizingRef.current = null;
+    };
+
+    document.body.style.cursor = 'col-resize';
+    document.body.style.userSelect = 'none';
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
+  }, []);
+
+  const totalWidth = visibleColumns.reduce((sum, c) => sum + getColWidth(c), 0);
 
   return (
     <div className="mt-6">
@@ -424,17 +520,27 @@ export default function AccountTable({
       </section>
 
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
+        <table className="divide-y divide-gray-200" style={{ tableLayout: 'fixed', width: totalWidth }}>
+          <colgroup>
+            {visibleColumns.map(col => (
+              <col key={col.id} style={{ width: getColWidth(col) }} />
+            ))}
+          </colgroup>
           <thead>
             <tr className="bg-gray-100 text-left text-sm font-semibold">
               {visibleColumns.map(col => (
-                <th key={col.id} className={`p-2 align-top ${thWidth[col.id] ?? ''}`}>
-                  {col.label}
+                <th key={col.id} className="p-2 align-top relative select-none" style={{ width: getColWidth(col) }}>
+                  <span className="truncate block pr-2">{col.label}</span>
+                  <div
+                    onMouseDown={(e) => handleResizeStart(e, col)}
+                    className="absolute right-0 top-0 bottom-0 w-1.5 cursor-col-resize hover:bg-db-aqua/40 active:bg-db-aqua/60"
+                    title="Drag to resize"
+                  />
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100 text-sm [&>tr>td]:align-top">
+          <tbody className="divide-y divide-gray-100 text-sm [&>tr>td]:align-top [&>tr>td]:overflow-hidden">
             {selectedRM === 'All' ? (
               // Grouped view
               rms.map(rm => {
@@ -461,11 +567,11 @@ export default function AccountTable({
                             <button className="mr-2 text-blue-600" onClick={() => setExpandedRMs(x => ({ ...x, [rm]: !x[rm] }))}>
                               {expandedRMs[rm] ? '▾' : '▸'}
                             </button>
-                            {rm} (Total)
+                            {rm}
                           </td>
                         );
                         if (col.id === 'rm') return <td key={col.id} className="p-2 align-top">{rm}</td>;
-                        if (col.id === 'clientType' || col.id === 'segment' || col.id === 'confidence' || col.id === 'notes') return <td key={col.id} className="p-2 align-top">-</td>;
+                        if (col.id === 'clientType' || col.id === 'segment' || col.id === 'confidence' || col.id === 'notes' || col.id === 'renewalStage' || col.id === 'riskRating') return <td key={col.id} className="p-2 align-top">-</td>;
                         if (col.id === 'opps') return <td key={col.id} className="p-2 align-top">{rmAccounts.length}</td>;
                         if (col.id === 'arrUp') return <td key={col.id} className="p-2 align-top">{formatUsd(rmTotals.arrUp)}</td>;
                         if (col.id === 'best') return <td key={col.id} className="p-2 align-top text-green-600">{formatUsdFromDollars(rmTotals.best)}</td>;
@@ -487,6 +593,7 @@ export default function AccountTable({
                         visibleColumns={visibleColumns}
                         saveRow={saveRow}
                         nested
+                        planSummary={renewalPlanSummaries[`${acc.id}|${currentQuarterKey}`]}
                       />
                     ))}
                   </React.Fragment>
@@ -506,6 +613,7 @@ export default function AccountTable({
                   visibleColumns={visibleColumns}
                   saveRow={saveRow}
                   nested={false}
+                  planSummary={renewalPlanSummaries[`${acc.id}|${currentQuarterKey}`]}
                 />
               ))
             )}
@@ -514,9 +622,9 @@ export default function AccountTable({
       </div>
 
       {/* Forecast Trend Chart */}
-      <div className="mt-8">
-        <h3 className="mb-4 text-lg font-semibold">RM Forecast Trends - {selectedRM === 'All' ? 'All RMs' : selectedRM} - {selectedQuarter === 'CQ' ? 'Current Quarter' : selectedQuarter === 'NQ' ? 'Next Quarter' : 'Following Quarter'}</h3>
-        <div className="rounded-lg border bg-white p-6">
+      <div className="mt-6">
+        <h3 className="mb-2 text-sm font-semibold">RM Forecast Trends - {selectedRM === 'All' ? 'All RMs' : selectedRM} - {selectedQuarter === 'CQ' ? 'Current Quarter' : selectedQuarter === 'NQ' ? 'Next Quarter' : 'Following Quarter'}</h3>
+        <div className="rounded-lg border bg-white p-3">
           <ForecastTrendChart
             accounts={accounts}
             latestByAccount={latestByAccount}

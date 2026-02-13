@@ -44,6 +44,28 @@ export function toQuarterKey(d: Date): string {
   return `FY${String(year).slice(-2)}-Q${q}`;
 }
 
+/** Returns the fourth quarter from now. */
+export function getFourthQuarter(): string {
+  const now = new Date();
+  const year = now.getUTCFullYear();
+  const q = Math.floor(now.getUTCMonth() / 3) + 1;
+  const offset = 3; // 3 quarters ahead
+  const targetQ = ((q - 1 + offset) % 4) + 1;
+  const yearsAhead = Math.floor((q - 1 + offset) / 4);
+  const targetYear = year + yearsAhead;
+  return `FY${String(targetYear).slice(-2)}-Q${targetQ}`;
+}
+
+/** Returns 4-quarter rolling window: current, next, following, and fourth. */
+export function getRollingQuarters4() {
+  return {
+    cq: getCurrentQuarter(),
+    nq: getNextQuarter(),
+    fq: getFollowingQuarter(),
+    q4: getFourthQuarter(),
+  };
+}
+
 /** ISO-ish week key for a Date (e.g. 2026-05). */
 export function periodKeyWeek(d: Date): string {
   const date = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));

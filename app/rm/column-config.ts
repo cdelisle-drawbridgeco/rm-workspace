@@ -10,6 +10,8 @@ export type GridColumnId =
   | 'segment'
   | 'opps'
   | 'arrUp'
+  | 'renewalStage'
+  | 'riskRating'
   | 'best'
   | 'worst'
   | 'callTotal'
@@ -21,22 +23,25 @@ export interface ColumnConfigItem {
   label: string;
   visible: boolean;
   order: number;
+  width?: number; // pixel width, undefined = use default
 }
 
 const STORAGE_KEY = 'renewal-forecast-rm-columns';
 
 const DEFAULT_COLUMNS: ColumnConfigItem[] = [
-  { id: 'account', label: 'Account', visible: true, order: 0 },
-  { id: 'rm', label: 'RM', visible: true, order: 1 },
-  { id: 'clientType', label: 'Client Type', visible: true, order: 2 },
-  { id: 'segment', label: 'Segment', visible: true, order: 3 },
-  { id: 'opps', label: 'Opps', visible: true, order: 4 },
-  { id: 'arrUp', label: 'ARR Up (sum)', visible: true, order: 5 },
-  { id: 'best', label: 'Best (USD)', visible: true, order: 6 },
-  { id: 'worst', label: 'Worst (USD)', visible: true, order: 7 },
-  { id: 'callTotal', label: 'Call Total', visible: true, order: 8 },
-  { id: 'confidence', label: 'Confidence', visible: true, order: 9 },
-  { id: 'notes', label: 'Notes', visible: true, order: 10 },
+  { id: 'account', label: 'Account', visible: true, order: 0, width: 220 },
+  { id: 'rm', label: 'RM', visible: true, order: 1, width: 100 },
+  { id: 'clientType', label: 'Client Type', visible: true, order: 2, width: 110 },
+  { id: 'segment', label: 'Segment', visible: true, order: 3, width: 110 },
+  { id: 'opps', label: 'Opps', visible: true, order: 4, width: 60 },
+  { id: 'arrUp', label: 'ARR Up (sum)', visible: true, order: 5, width: 120 },
+  { id: 'renewalStage', label: 'Stage', visible: true, order: 6, width: 100 },
+  { id: 'riskRating', label: 'Risk', visible: true, order: 7, width: 80 },
+  { id: 'best', label: 'Best (USD)', visible: true, order: 8, width: 95 },
+  { id: 'worst', label: 'Worst (USD)', visible: true, order: 9, width: 95 },
+  { id: 'callTotal', label: 'Call Total', visible: true, order: 10, width: 95 },
+  { id: 'confidence', label: 'Confidence', visible: true, order: 11, width: 130 },
+  { id: 'notes', label: 'Notes', visible: true, order: 12, width: 190 },
 ];
 
 export function getDefaultColumnConfig(): ColumnConfigItem[] {
@@ -59,6 +64,7 @@ export function loadColumnConfig(): ColumnConfigItem[] {
           label: typeof item.label === 'string' ? item.label : (byId.get(item.id as GridColumnId)?.label ?? item.id),
           visible: typeof item.visible === 'boolean' ? item.visible : true,
           order: item.order,
+          width: typeof item.width === 'number' ? item.width : byId.get(item.id as GridColumnId)?.width,
         });
       }
     }
@@ -86,6 +92,11 @@ export function saveColumnConfig(config: ColumnConfigItem[]): void {
   } catch {
     // ignore
   }
+}
+
+/** Returns the default pixel width for a column. */
+export function getDefaultWidth(id: GridColumnId): number {
+  return GET_DEFAULT_MAP().get(id)?.width ?? 120;
 }
 
 /** Visible columns in display order. If none visible, returns all columns so the grid is never empty. */

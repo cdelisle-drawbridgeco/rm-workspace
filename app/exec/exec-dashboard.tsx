@@ -201,9 +201,9 @@ export default function ExecDashboard({
 
       {/* VP Forecast Display */}
       {vpForecast && (
-        <div className="mb-6 rounded-lg border bg-green-50 p-4">
-          <h3 className="mb-3 text-lg font-semibold text-green-900">VP Forecast</h3>
-          <p className="mb-4 text-sm text-green-700">
+        <div className="mb-6 rounded-lg border bg-orange-50 p-4">
+          <h3 className="mb-3 text-lg font-semibold text-orange-900">VP Forecast</h3>
+          <p className="mb-4 text-sm text-orange-700">
             VP-level forecast for {selectedQuarter === 'CQ' ? 'Current Quarter' : selectedQuarter === 'NQ' ? 'Next Quarter' : 'Following Quarter'}.
           </p>
           
@@ -382,9 +382,9 @@ export default function ExecDashboard({
       </div>
 
       {/* Forecast Trend Chart */}
-      <div className="mt-8">
-        <h3 className="mb-4 text-lg font-semibold">Forecast Trends Over Time - {selectedQuarter === 'CQ' ? 'Current Quarter' : selectedQuarter === 'NQ' ? 'Next Quarter' : 'Following Quarter'}</h3>
-        <div className="rounded-lg border bg-white p-6">
+      <div className="mt-6">
+        <h3 className="mb-2 text-sm font-semibold">Forecast Trends Over Time - {selectedQuarter === 'CQ' ? 'Current Quarter' : selectedQuarter === 'NQ' ? 'Next Quarter' : 'Following Quarter'}</h3>
+        <div className="rounded-lg border bg-white p-3">
           <ForecastTrendChart 
             accounts={accounts}
             latestByAccount={latestByAccount}

@@ -67,7 +67,38 @@ function snapToVpData(snap: ForecastSnapshot): VpForecastData {
  *
  * Uses bulk queries instead of per-account loops to avoid N+1.
  */
-export async function getDashboardData(options?: { includeVpForecasts?: boolean }) {
+export interface RenewalPlanSummary {
+  accountId: string;
+  quarterKey: string;
+  currentStage: string;
+  riskRating: string | null;
+}
+
+/** Bulk fetch renewal plan summaries (stage + risk) for syncing to the RM table. */
+export async function getRenewalPlanSummaries(
+  quarterKeys: string[]
+): Promise<Record<string, RenewalPlanSummary>> {
+  const plans = await prisma.renewalPlan.findMany({
+    where: { quarterKey: { in: quarterKeys } },
+    select: {
+      accountId: true,
+      quarterKey: true,
+      currentStage: true,
+      riskRating: true,
+    },
+  });
+
+  const map: Record<string, RenewalPlanSummary> = {};
+  for (const p of plans) {
+    map[`${p.accountId}|${p.quarterKey}`] = p;
+  }
+  return map;
+}
+
+export async function getDashboardData(options?: {
+  includeVpForecasts?: boolean;
+  includeRenewalPlanSummaries?: boolean;
+}) {
   const accounts = await prisma.account.findMany({
     include: {
       opportunities: true,
@@ -132,10 +163,17 @@ export async function getDashboardData(options?: { includeVpForecasts?: boolean 
     }
   }
 
+  // Optionally fetch renewal plan summaries
+  let renewalPlanSummaries: Record<string, RenewalPlanSummary> = {};
+  if (options?.includeRenewalPlanSummaries) {
+    renewalPlanSummaries = await getRenewalPlanSummaries(quarterValues);
+  }
+
   return {
     accounts: validAccounts,
     latestByAccount: Object.fromEntries(latestByAccount),
     vpForecasts: Object.fromEntries(vpForecasts),
     quarters,
+    renewalPlanSummaries,
   };
 }

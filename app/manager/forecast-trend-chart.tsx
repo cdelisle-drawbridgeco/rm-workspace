@@ -172,10 +172,10 @@ export default function ForecastTrendChart({
   // Combine historical and current data
   const allData = [...generateHistoricalData(), generateCurrentQuarterData()];
 
-  // Chart dimensions - optimized for available space
-  const width = 1000;
-  const height = 500;
-  const padding = 80;
+  // Chart dimensions - compact
+  const width = 700;
+  const height = 300;
+  const padding = 60;
   const chartWidth = width - (padding * 2);
   const chartHeight = height - (padding * 2);
 
