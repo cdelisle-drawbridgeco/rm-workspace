@@ -11,6 +11,8 @@ type SectionId =
   | 'hedge-funds'
   | 'private-equity'
   | 'family-offices'
+  | 'forecasting-best-practices'
+  | 'renewal-plan-best-practices'
   | 'marketing';
 
 interface NavItem {
@@ -23,6 +25,11 @@ const TRAINING_ITEMS: NavItem[] = [
   { id: 'hedge-funds', label: 'Hedge Funds' },
   { id: 'private-equity', label: 'Private Equity' },
   { id: 'family-offices', label: 'Family & Home Offices' },
+];
+
+const WORKFLOW_ITEMS: NavItem[] = [
+  { id: 'forecasting-best-practices', label: 'Forecasting Best Practices' },
+  { id: 'renewal-plan-best-practices', label: 'Renewal Plan Best Practices' },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -907,6 +914,585 @@ function MarketingMaterials() {
 }
 
 /* ------------------------------------------------------------------ */
+/*  FORECASTING BEST PRACTICES                                        */
+/* ------------------------------------------------------------------ */
+
+function ForecastingBestPractices() {
+  return (
+    <>
+      <HeroSection
+        icon="🎯"
+        title="Forecasting Best Practices"
+        subtitle="How to build a disciplined, data-driven renewal forecast — treating your renewal pipeline like a sales pipeline."
+      />
+
+      {/* Philosophy */}
+      <SectionHeading>The Forecasting Mindset</SectionHeading>
+      <p className="text-sm text-gray-700 leading-relaxed">
+        Renewal forecasting is both an <strong>art and a science</strong>. The science is the
+        data — contract values, renewal dates, historical retention rates, product usage.
+        The art is your judgment as an RM — reading the relationship, sensing risk signals,
+        and weighing factors the data can&apos;t capture. A great forecast combines both.
+      </p>
+      <p className="mt-3 text-sm text-gray-700 leading-relaxed">
+        Think of your renewal book like a <strong>sales pipeline</strong>. Every renewal is a
+        &ldquo;deal&rdquo; that needs to be qualified, worked, and closed. Just like a sales rep
+        doesn&apos;t wait until the last week to close a deal, you shouldn&apos;t wait until the
+        last month to engage on a renewal. The forecast is your tool for staying ahead.
+      </p>
+
+      {/* Best / Worst / Call */}
+      <SectionHeading>Understanding Best, Worst & Call</SectionHeading>
+      <div className="grid grid-cols-3 gap-4 mt-2">
+        <div className="rounded-lg border-2 border-green-200 bg-green-50 p-4">
+          <p className="font-semibold text-green-800 font-heading">Best Case</p>
+          <p className="mt-2 text-sm text-green-700">
+            The outcome if <strong>everything goes right</strong>. The client renews on time,
+            accepts a price increase, adds new services, and the champion stays in place.
+            This is your realistic upside — not a fantasy.
+          </p>
+          <p className="mt-3 text-xs text-green-600 italic">
+            Ask yourself: &ldquo;If the stars align and every conversation goes well, what&apos;s the
+            maximum realistic outcome?&rdquo;
+          </p>
+        </div>
+        <div className="rounded-lg border-2 border-red-200 bg-red-50 p-4">
+          <p className="font-semibold text-red-800 font-heading">Worst Case</p>
+          <p className="mt-2 text-sm text-red-700">
+            The outcome if <strong>things go sideways</strong>. The client downsizes, pushes
+            back on price, loses their champion, goes through M&A, or churns entirely.
+            This is your realistic downside — not doomsday.
+          </p>
+          <p className="mt-3 text-xs text-red-600 italic">
+            Ask yourself: &ldquo;If I lose the internal champion or the budget gets cut, what&apos;s
+            the floor?&rdquo;
+          </p>
+        </div>
+        <div className="rounded-lg border-2 border-blue-200 bg-blue-50 p-4">
+          <p className="font-semibold text-blue-800 font-heading">Call</p>
+          <p className="mt-2 text-sm text-blue-700">
+            Your <strong>honest, gut-informed prediction</strong> of what will actually happen.
+            This is not the midpoint of best and worst — it&apos;s your professional judgment
+            weighted by the signals you&apos;re seeing right now.
+          </p>
+          <p className="mt-3 text-xs text-blue-600 italic">
+            Ask yourself: &ldquo;If I had to bet my own money, what would I say this renewal
+            lands at?&rdquo;
+          </p>
+        </div>
+      </div>
+
+      <SubSection icon="📐" title="How to Set Your Best / Worst / Call">
+        <p><strong>Step 1: Start with the baseline.</strong> The expiring ARR is your anchor. Every
+          forecast starts from what the client is paying today.</p>
+        <p><strong>Step 2: Assess the upside (Best).</strong> Is there an expansion opportunity?
+          Price increase? New product adoption? Multi-year commitment? Factor in only
+          what you have evidence to support — a conversation, a proposal, expressed interest.</p>
+        <p><strong>Step 3: Assess the downside (Worst).</strong> What could go wrong? Budget
+          pressure? Champion departure? Competitive threat? Scope reduction? Be honest —
+          the worst case should feel uncomfortable but plausible.</p>
+        <p><strong>Step 4: Make your Call.</strong> This is where judgment matters. Weight the
+          probability of each scenario. If you&apos;re 80% confident in renewal at current
+          rates, your call should be close to the expiring value. If there&apos;s a real risk
+          of churn, the call should reflect that — don&apos;t hide bad news in the forecast.</p>
+        <p><strong>Step 5: Narrow the spread over time.</strong> Early in the quarter, your best
+          and worst may be far apart. That&apos;s fine — it reflects genuine uncertainty. As
+          you get closer to the renewal date and have more conversations, the spread should
+          tighten. If it&apos;s not tightening, you&apos;re not working the renewal hard enough.</p>
+      </SubSection>
+
+      {/* Probability Thinking */}
+      <SectionHeading>Thinking in Probabilities</SectionHeading>
+      <SubSection icon="🎲" title="Scenario Weighting">
+        <p>
+          Great forecasters don&apos;t think in single outcomes — they think in
+          <strong> weighted scenarios</strong>. For every renewal, mentally assign a probability
+          to each possible outcome:
+        </p>
+        <div className="mt-3 rounded-md border border-gray-200 overflow-hidden">
+          <table className="w-full text-sm">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-4 py-2 text-left font-medium text-gray-600">Scenario</th>
+                <th className="px-4 py-2 text-left font-medium text-gray-600">Example</th>
+                <th className="px-4 py-2 text-right font-medium text-gray-600">Probability</th>
+                <th className="px-4 py-2 text-right font-medium text-gray-600">Value</th>
+                <th className="px-4 py-2 text-right font-medium text-gray-600">Weighted</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-100">
+              <tr>
+                <td className="px-4 py-2 text-green-700">Upsell</td>
+                <td className="px-4 py-2 text-gray-600">Expand to portcos + price increase</td>
+                <td className="px-4 py-2 text-right">20%</td>
+                <td className="px-4 py-2 text-right">$180K</td>
+                <td className="px-4 py-2 text-right font-medium">$36K</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-2 text-blue-700">Flat Renewal</td>
+                <td className="px-4 py-2 text-gray-600">Same scope, same price</td>
+                <td className="px-4 py-2 text-right">50%</td>
+                <td className="px-4 py-2 text-right">$150K</td>
+                <td className="px-4 py-2 text-right font-medium">$75K</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-2 text-orange-700">Downsize</td>
+                <td className="px-4 py-2 text-gray-600">Drop one service line</td>
+                <td className="px-4 py-2 text-right">20%</td>
+                <td className="px-4 py-2 text-right">$110K</td>
+                <td className="px-4 py-2 text-right font-medium">$22K</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-2 text-red-700">Churn</td>
+                <td className="px-4 py-2 text-gray-600">Client leaves entirely</td>
+                <td className="px-4 py-2 text-right">10%</td>
+                <td className="px-4 py-2 text-right">$0</td>
+                <td className="px-4 py-2 text-right font-medium">$0</td>
+              </tr>
+              <tr className="bg-gray-50 font-semibold">
+                <td className="px-4 py-2" colSpan={2}>Expected Value (Your Call)</td>
+                <td className="px-4 py-2 text-right">100%</td>
+                <td className="px-4 py-2 text-right"></td>
+                <td className="px-4 py-2 text-right">$133K</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-3">
+          You don&apos;t need to calculate this formally every time, but you should be thinking
+          this way. When your manager asks &ldquo;why is your call at $133K?&rdquo; you should be
+          able to articulate the scenarios and your confidence level in each.
+        </p>
+      </SubSection>
+
+      <SubSection icon="⚠️" title="Common Forecasting Mistakes">
+        <ul className="list-disc ml-5 space-y-2">
+          <li><strong>Sandbagging</strong> — Setting your call artificially low so you can
+            &ldquo;beat&rdquo; the number. This destroys trust and makes it impossible for leadership
+            to plan. Your call should be your honest prediction, not a negotiating position.</li>
+          <li><strong>Happy Ears</strong> — Hearing what you want to hear. The client said
+            &ldquo;we love Drawbridge&rdquo; but hasn&apos;t signed the renewal with 30 days left. Actions
+            matter more than words.</li>
+          <li><strong>Stale Forecasts</strong> — Not updating your numbers after a significant
+            conversation or event. If you learned the client is being acquired, your forecast
+            should change <em>that day</em>, not next Monday.</li>
+          <li><strong>Binary Thinking</strong> — &ldquo;They&apos;ll either renew or they won&apos;t.&rdquo;
+            Reality has more nuance. Most renewals involve some negotiation on scope, price,
+            or timing.</li>
+          <li><strong>Ignoring Leading Indicators</strong> — Engagement metrics, response
+            times, champion changes, budget cycle timing — these signals tell you where a
+            renewal is heading before the client does.</li>
+        </ul>
+      </SubSection>
+
+      {/* Weekly Cadence */}
+      <SectionHeading>The Weekly Forecast Cadence</SectionHeading>
+      <p className="text-sm text-gray-700 leading-relaxed mb-4">
+        Forecasting is not a monthly exercise — it&apos;s a <strong>weekly discipline</strong>.
+        The following cadence ensures leadership always has a current, accurate picture
+        of where we stand.
+      </p>
+
+      <div className="rounded-lg border border-gray-200 bg-white overflow-hidden">
+        <div className="grid grid-cols-1 divide-y divide-gray-100">
+          <div className="flex items-start gap-4 p-4">
+            <div className="shrink-0 w-28 text-center">
+              <p className="text-xs font-semibold text-gray-400 uppercase">Monday</p>
+              <p className="text-lg font-bold font-heading text-db-dark">by EOD</p>
+            </div>
+            <div>
+              <p className="font-semibold text-db-dark">RM Forecast Submission</p>
+              <p className="mt-1 text-sm text-gray-600">
+                Every RM updates their Best / Worst / Call for all renewals in the active
+                forecast window. Review every account — even the ones you think are locked.
+                Update notes on any changes from the prior week. Flag accounts that need
+                escalation or support.
+              </p>
+            </div>
+          </div>
+          <div className="flex items-start gap-4 p-4">
+            <div className="shrink-0 w-28 text-center">
+              <p className="text-xs font-semibold text-gray-400 uppercase">Tuesday</p>
+              <p className="text-lg font-bold font-heading text-db-dark">Team Call</p>
+            </div>
+            <div>
+              <p className="font-semibold text-db-dark">Team Forecast Review</p>
+              <p className="mt-1 text-sm text-gray-600">
+                Team-wide meeting to review the aggregated call. Walk through at-risk renewals,
+                celebrate wins, discuss strategy on key accounts. Focus on: What changed this
+                week? Where do we need help? What&apos;s the gap to target? This is a
+                working session, not a status report.
+              </p>
+            </div>
+          </div>
+          <div className="flex items-start gap-4 p-4">
+            <div className="shrink-0 w-28 text-center">
+              <p className="text-xs font-semibold text-gray-400 uppercase">Wed–Thu</p>
+              <p className="text-lg font-bold font-heading text-db-dark">1:1s</p>
+            </div>
+            <div>
+              <p className="font-semibold text-db-dark">Manager 1:1 Deep Dives</p>
+              <p className="mt-1 text-sm text-gray-600">
+                Individual sessions to go deeper on specific accounts. Strategize on at-risk
+                renewals, coach on negotiation approach, align on escalation needs. This is
+                where the real deal coaching happens — come prepared with your top 3 accounts
+                that need attention.
+              </p>
+            </div>
+          </div>
+          <div className="flex items-start gap-4 p-4">
+            <div className="shrink-0 w-28 text-center">
+              <p className="text-xs font-semibold text-gray-400 uppercase">Thursday</p>
+              <p className="text-lg font-bold font-heading text-db-dark">PM</p>
+            </div>
+            <div>
+              <p className="font-semibold text-db-dark">Leadership Call Submitted</p>
+              <p className="mt-1 text-sm text-gray-600">
+                The leadership team finalizes the consolidated forecast and submits the call
+                to the exec team. This number is informed by every RM&apos;s input, the team
+                review, and 1:1 discussions. It&apos;s the official number the business plans on.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Forecast Horizons */}
+      <SectionHeading>Forecast Horizons</SectionHeading>
+      <p className="text-sm text-gray-700 leading-relaxed mb-4">
+        Not every quarter gets the same level of scrutiny. The cadence adjusts based on
+        how close we are to execution.
+      </p>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div className="rounded-lg border-2 border-db-aqua bg-db-aqua/5 p-5">
+          <p className="text-xs font-semibold text-db-aqua-dark uppercase tracking-wide">Weekly Forecast</p>
+          <p className="mt-2 font-semibold text-db-dark font-heading text-lg">Current Quarter + Next Quarter</p>
+          <p className="mt-2 text-sm text-gray-600">
+            These are your <strong>active execution quarters</strong>. Every renewal gets a
+            weekly Best / Worst / Call update. The current quarter is all about closing —
+            getting signatures and locking in ARR. Next quarter starts getting weekly
+            attention <strong>one month before it begins</strong>, so you&apos;re never caught
+            flat-footed on day one of a new quarter.
+          </p>
+          <div className="mt-3 flex gap-2">
+            <span className="rounded-full bg-db-aqua/20 px-3 py-1 text-xs font-medium text-db-dark">Weekly updates</span>
+            <span className="rounded-full bg-db-aqua/20 px-3 py-1 text-xs font-medium text-db-dark">Monday deadline</span>
+            <span className="rounded-full bg-db-aqua/20 px-3 py-1 text-xs font-medium text-db-dark">Account-level detail</span>
+          </div>
+        </div>
+        <div className="rounded-lg border border-gray-200 bg-white p-5">
+          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Monthly Forecast</p>
+          <p className="mt-2 font-semibold text-db-dark font-heading text-lg">Following 2 Quarters</p>
+          <p className="mt-2 text-sm text-gray-600">
+            These are your <strong>planning quarters</strong>. Review monthly to maintain
+            awareness and start early risk identification. The goal is to spot problems
+            early — a renewal 6 months out that&apos;s already showing churn signals needs
+            attention <em>now</em>, not when it hits the weekly window.
+          </p>
+          <div className="mt-3 flex gap-2">
+            <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600">Monthly updates</span>
+            <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600">Risk flagging</span>
+            <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600">Early engagement</span>
+          </div>
+        </div>
+      </div>
+
+      <SubSection icon="📅" title="Rolling 4-Quarter View">
+        <p>
+          At any given time, you should have visibility into the <strong>next 4 quarters
+          of renewals</strong>. This is your rolling forecast window:
+        </p>
+        <div className="mt-3 grid grid-cols-4 gap-2">
+          <div className="rounded-md bg-db-aqua/15 border border-db-aqua/30 p-3 text-center">
+            <p className="text-xs font-semibold text-db-aqua-dark">Q (Current)</p>
+            <p className="text-[11px] text-gray-500 mt-1">Weekly</p>
+            <p className="text-[11px] text-gray-500">Close &amp; collect</p>
+          </div>
+          <div className="rounded-md bg-db-aqua/10 border border-db-aqua/20 p-3 text-center">
+            <p className="text-xs font-semibold text-db-aqua-dark">Q+1</p>
+            <p className="text-[11px] text-gray-500 mt-1">Weekly (last month)</p>
+            <p className="text-[11px] text-gray-500">Engage &amp; negotiate</p>
+          </div>
+          <div className="rounded-md bg-gray-50 border border-gray-200 p-3 text-center">
+            <p className="text-xs font-semibold text-gray-600">Q+2</p>
+            <p className="text-[11px] text-gray-500 mt-1">Monthly</p>
+            <p className="text-[11px] text-gray-500">Plan &amp; prepare</p>
+          </div>
+          <div className="rounded-md bg-gray-50 border border-gray-200 p-3 text-center">
+            <p className="text-xs font-semibold text-gray-600">Q+3</p>
+            <p className="text-[11px] text-gray-500 mt-1">Monthly</p>
+            <p className="text-[11px] text-gray-500">Identify &amp; assess</p>
+          </div>
+        </div>
+      </SubSection>
+
+      {/* What Good Looks Like */}
+      <SectionHeading>What a Great Forecast Looks Like</SectionHeading>
+      <div className="grid grid-cols-2 gap-4">
+        <CharacteristicCard
+          title="Tight Spreads Late in Quarter"
+          description="Best and Worst should converge as you approach close. A $100K spread with 2 weeks left means you haven't done the work."
+        />
+        <CharacteristicCard
+          title="Call Moves for Reasons"
+          description="When your call changes, you should be able to explain exactly why. 'I had a conversation with the CFO and they're cutting 20% of vendor spend.'"
+        />
+        <CharacteristicCard
+          title="No Surprises"
+          description="The Tuesday team call should never be the first time leadership hears about a deal going sideways. Flag risks early and often."
+        />
+        <CharacteristicCard
+          title="Consistent Accuracy"
+          description="Over time, your call should land within 5-10% of actuals. Track your forecast accuracy — it's how you build credibility."
+        />
+      </div>
+
+      <DrawbridgeAngle>
+        <p>
+          Forecasting discipline directly impacts Drawbridge&apos;s ability to plan hiring, invest
+          in product, and hit company targets. When every RM commits to an honest, well-reasoned
+          weekly call, leadership can make better decisions for the entire business. Your
+          forecast isn&apos;t just a number — it&apos;s a commitment to transparency and to running
+          your book of business like a professional.
+        </p>
+      </DrawbridgeAngle>
+    </>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  RENEWAL PLAN BEST PRACTICES                                       */
+/* ------------------------------------------------------------------ */
+
+function RenewalPlanBestPractices() {
+  return (
+    <>
+      <HeroSection
+        icon="📋"
+        title="Renewal Plan Best Practices"
+        subtitle="How to run your renewal pipeline with the rigor of a sales pipeline — proactive, structured, and always moving forward."
+      />
+
+      {/* Pipeline Mindset */}
+      <SectionHeading>The Pipeline Mindset</SectionHeading>
+      <p className="text-sm text-gray-700 leading-relaxed">
+        A renewal is not an event — it&apos;s a <strong>process that starts months before the
+        contract expires</strong>. The best RMs treat every renewal like a deal in a sales
+        pipeline: it has stages, milestones, risk signals, and a close plan. The renewal
+        plan is your deal sheet — it keeps you organized, accountable, and ahead of the
+        timeline.
+      </p>
+      <p className="mt-3 text-sm text-gray-700 leading-relaxed">
+        The 7-stage renewal workflow in Drawbridge is designed to mirror this pipeline
+        approach. Each stage has specific gates (tasks) that must be completed before
+        moving forward. Skipping stages is like skipping discovery in a sales process —
+        you might get lucky, but you&apos;ll eventually lose a deal you shouldn&apos;t have.
+      </p>
+
+      {/* Timeline */}
+      <SectionHeading>Renewal Timeline — When to Start What</SectionHeading>
+      <div className="rounded-lg border border-gray-200 bg-white overflow-hidden">
+        <div className="grid grid-cols-1 divide-y divide-gray-100">
+          <div className="flex items-start gap-4 p-4">
+            <div className="shrink-0 w-24 text-center">
+              <p className="text-xs font-semibold text-gray-400">START</p>
+              <p className="text-lg font-bold font-heading text-db-dark">120+ days</p>
+            </div>
+            <div>
+              <p className="font-semibold text-db-dark">Discovery & Health Check</p>
+              <p className="mt-1 text-sm text-gray-600">
+                Begin the renewal plan. Pull usage data, review support tickets, check
+                stakeholder changes. Open the plan in Drawbridge, complete Stage 1 gates.
+                The goal: understand where you stand <em>before</em> you talk to the client.
+              </p>
+            </div>
+          </div>
+          <div className="flex items-start gap-4 p-4">
+            <div className="shrink-0 w-24 text-center">
+              <p className="text-xs font-semibold text-gray-400">ENGAGE</p>
+              <p className="text-lg font-bold font-heading text-db-dark">90 days</p>
+            </div>
+            <div>
+              <p className="font-semibold text-db-dark">Stakeholder Engagement</p>
+              <p className="mt-1 text-sm text-gray-600">
+                Schedule the renewal conversation with your champion and economic buyer.
+                Present the value delivered (DDQs completed, incidents handled, compliance
+                maintained). Surface any concerns early. Complete Stages 2–3.
+              </p>
+            </div>
+          </div>
+          <div className="flex items-start gap-4 p-4">
+            <div className="shrink-0 w-24 text-center">
+              <p className="text-xs font-semibold text-gray-400">PROPOSE</p>
+              <p className="text-lg font-bold font-heading text-db-dark">60 days</p>
+            </div>
+            <div>
+              <p className="font-semibold text-db-dark">Proposal & Negotiation</p>
+              <p className="mt-1 text-sm text-gray-600">
+                Deliver the renewal proposal. Include scope, pricing, any expansion
+                opportunities. Be prepared for negotiation — have your walk-away and your
+                stretch targets defined. Complete Stages 4–5.
+              </p>
+            </div>
+          </div>
+          <div className="flex items-start gap-4 p-4">
+            <div className="shrink-0 w-24 text-center">
+              <p className="text-xs font-semibold text-gray-400">CLOSE</p>
+              <p className="text-lg font-bold font-heading text-db-dark">30 days</p>
+            </div>
+            <div>
+              <p className="font-semibold text-db-dark">Contract & Signature</p>
+              <p className="mt-1 text-sm text-gray-600">
+                Finalize terms, route the contract through legal, get the signature.
+                If you&apos;re still in negotiation at 30 days, escalate — this is a red flag.
+                Complete Stages 6–7 and close the plan.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Working the Plan */}
+      <SectionHeading>Working the Plan — Stage by Stage</SectionHeading>
+      <SubSection icon="1️⃣" title="Pre-Renewal Assessment">
+        <p>
+          This is your <strong>discovery phase</strong>. Before you reach out to the client,
+          do your homework:
+        </p>
+        <ul className="list-disc ml-5 space-y-1">
+          <li>Review the current contract scope and pricing</li>
+          <li>Pull usage and engagement data — are they using everything they&apos;re paying for?</li>
+          <li>Check support ticket history — any unresolved issues?</li>
+          <li>Review DDQ completion rates, assessment scores, and deliverable status</li>
+          <li>Confirm your stakeholder map — who&apos;s the champion, the economic buyer, the blocker?</li>
+        </ul>
+        <p>
+          <strong>Red flags at this stage:</strong> Low engagement, unresolved support issues,
+          champion departure, M&A activity, budget freezes. If you find these, adjust your
+          forecast accordingly and start strategizing early.
+        </p>
+      </SubSection>
+
+      <SubSection icon="2️⃣" title="Stakeholder Mapping & Engagement">
+        <p>
+          Know your <strong>buying committee</strong>. In alternative asset management, the
+          decision-making structure typically looks like:
+        </p>
+        <ul className="list-disc ml-5 space-y-1">
+          <li><strong>Champion</strong> — The person who uses and values Drawbridge day-to-day (usually COO, CCO, or Head of IT)</li>
+          <li><strong>Economic Buyer</strong> — The person who signs the check (often CFO, Managing Partner, or CEO)</li>
+          <li><strong>Influencers</strong> — People whose opinions matter (compliance team, external counsel, allocator relations)</li>
+          <li><strong>Blockers</strong> — People who might resist renewal (new hires who preferred a different vendor, cost-cutters)</li>
+        </ul>
+        <p>
+          Schedule a <strong>formal renewal meeting</strong> — don&apos;t try to sneak the renewal
+          into a regular check-in. Frame it as a strategic conversation about the partnership,
+          not a transaction.
+        </p>
+      </SubSection>
+
+      <SubSection icon="3️⃣" title="Value Demonstration">
+        <p>
+          This is your <strong>ROI conversation</strong>. Come prepared with concrete data:
+        </p>
+        <ul className="list-disc ml-5 space-y-1">
+          <li>Number of DDQs completed and hours saved</li>
+          <li>Security incidents detected and resolved</li>
+          <li>Compliance requirements met (SEC exams, LP requests)</li>
+          <li>Risk score improvements over the contract period</li>
+          <li>Peer benchmarking data — how do they compare to similar firms?</li>
+        </ul>
+        <p>
+          The goal is to make the renewal feel like an <strong>obvious decision</strong>. If
+          you&apos;ve delivered clear value, the conversation shifts from &ldquo;should we renew?&rdquo;
+          to &ldquo;what else can Drawbridge help with?&rdquo;
+        </p>
+      </SubSection>
+
+      <SubSection icon="4️⃣" title="Proposal & Negotiation Strategy">
+        <p>
+          Go in with a plan. Before presenting the proposal, know:
+        </p>
+        <ul className="list-disc ml-5 space-y-1">
+          <li><strong>Your anchor</strong> — The price you lead with (ideally with a modest increase or expansion)</li>
+          <li><strong>Your target</strong> — The deal you&apos;d be happy with</li>
+          <li><strong>Your floor</strong> — The minimum you&apos;ll accept before escalating to leadership</li>
+          <li><strong>Your levers</strong> — Multi-year commitment, payment terms, scope adjustments, timing</li>
+        </ul>
+        <p>
+          <strong>Don&apos;t discount preemptively.</strong> Let the client ask for a concession
+          before you offer one. And when you do concede, always get something in return —
+          a longer term, a case study, a reference, or expanded scope.
+        </p>
+      </SubSection>
+
+      <SubSection icon="5️⃣" title="Managing At-Risk Renewals">
+        <p>
+          Not every renewal will be smooth. When you identify a renewal at risk:
+        </p>
+        <ul className="list-disc ml-5 space-y-2">
+          <li><strong>Escalate early</strong> — Don&apos;t wait. Bring your manager in as soon as you sense risk. A warm handoff to leadership can change the dynamic.</li>
+          <li><strong>Diagnose the root cause</strong> — Is it price? Value? Champion change? Competitive displacement? Each requires a different strategy.</li>
+          <li><strong>Build a save plan</strong> — Specific actions with owners and deadlines. &ldquo;Schedule exec-to-exec call by Friday&rdquo; not &ldquo;try to save the deal.&rdquo;</li>
+          <li><strong>Consider creative structures</strong> — Bridge contracts, reduced-scope renewals, pilot extensions. A partial save is better than a churn.</li>
+          <li><strong>Update your forecast honestly</strong> — If a deal is at risk, your call should reflect that. Don&apos;t hide problems in the forecast.</li>
+        </ul>
+      </SubSection>
+
+      {/* Running it like a pipeline */}
+      <SectionHeading>Pipeline Hygiene</SectionHeading>
+      <div className="grid grid-cols-2 gap-4">
+        <CharacteristicCard
+          title="No Stale Plans"
+          description="Every renewal plan should have activity in the last 7 days during the active forecast window. If a plan is untouched for 2+ weeks, it's not being worked."
+        />
+        <CharacteristicCard
+          title="Stage Progression"
+          description="Plans should move forward every 2–3 weeks. If a renewal has been in the same stage for a month, something is stuck — diagnose and unblock it."
+        />
+        <CharacteristicCard
+          title="Complete Gate Items"
+          description="Don't skip gate items to advance stages. Each gate exists for a reason — they ensure you've done the work needed before moving forward."
+        />
+        <CharacteristicCard
+          title="Notes Are Non-Negotiable"
+          description="Every account should have current notes explaining the situation. If you got hit by a bus, could someone pick up this renewal from your notes alone?"
+        />
+      </div>
+
+      <SubSection icon="📊" title="Weekly Self-Check">
+        <p>Before submitting your Monday forecast, ask yourself these questions for every renewal in your active window:</p>
+        <ul className="list-disc ml-5 space-y-1">
+          <li>Have I spoken with or emailed the client in the last 2 weeks?</li>
+          <li>Do I know who the decision-maker is and what their timeline looks like?</li>
+          <li>Can I articulate the top risk to this renewal?</li>
+          <li>Is my Best / Worst / Call still accurate, or does it need adjustment?</li>
+          <li>What is the <strong>one thing</strong> I need to do this week to move this renewal forward?</li>
+        </ul>
+        <p>
+          If you can&apos;t answer these for an account, that account needs immediate attention.
+        </p>
+      </SubSection>
+
+      <DrawbridgeAngle>
+        <p>
+          The renewal plan workflow in Drawbridge is built to support this pipeline discipline.
+          Use it as your single source of truth — not a spreadsheet, not a notepad, not your
+          memory. When every RM works their plans consistently, we get predictability as a
+          business. Predictability lets us invest, hire, and grow with confidence.
+        </p>
+        <p>
+          Remember: a well-worked renewal plan doesn&apos;t just protect revenue — it creates
+          expansion opportunities. The RMs who consistently work their plans early are the
+          ones who find upsell moments and drive net revenue growth, not just retention.
+        </p>
+      </DrawbridgeAngle>
+    </>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /*  MAIN COMPONENT                                                    */
 /* ------------------------------------------------------------------ */
 
@@ -915,6 +1501,8 @@ const CONTENT_MAP: Record<SectionId, React.FC> = {
   'hedge-funds': HedgeFunds,
   'private-equity': PrivateEquity,
   'family-offices': FamilyOffices,
+  'forecasting-best-practices': ForecastingBestPractices,
+  'renewal-plan-best-practices': RenewalPlanBestPractices,
   marketing: MarketingMaterials,
 };
 
@@ -933,6 +1521,29 @@ export default function EnablementContent() {
           </p>
           <ul className="space-y-1">
             {TRAINING_ITEMS.map((item) => (
+              <li key={item.id}>
+                <button
+                  onClick={() => setActive(item.id)}
+                  className={`w-full rounded-md px-3 py-2 text-left text-sm transition ${
+                    active === item.id
+                      ? 'border-l-3 border-db-aqua bg-db-aqua/10 font-medium text-db-dark'
+                      : 'text-gray-600 hover:bg-gray-50 hover:text-db-dark'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              </li>
+            ))}
+          </ul>
+
+          <div className="my-4 border-t border-gray-100" />
+
+          {/* RM Workflows Section */}
+          <p className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-gray-400">
+            RM Workflows
+          </p>
+          <ul className="space-y-1">
+            {WORKFLOW_ITEMS.map((item) => (
               <li key={item.id}>
                 <button
                   onClick={() => setActive(item.id)}
