@@ -11,6 +11,8 @@ type SectionId =
   | 'hedge-funds'
   | 'private-equity'
   | 'family-offices'
+  | 'reg-sp'
+  | 'dora'
   | 'forecasting-best-practices'
   | 'renewal-plan-best-practices'
   | 'marketing';
@@ -25,6 +27,8 @@ const TRAINING_ITEMS: NavItem[] = [
   { id: 'hedge-funds', label: 'Hedge Funds' },
   { id: 'private-equity', label: 'Private Equity' },
   { id: 'family-offices', label: 'Family & Home Offices' },
+  { id: 'reg-sp', label: 'Regulation S-P' },
+  { id: 'dora', label: 'DORA (EU)' },
 ];
 
 const WORKFLOW_ITEMS: NavItem[] = [
@@ -914,6 +918,464 @@ function MarketingMaterials() {
 }
 
 /* ------------------------------------------------------------------ */
+/*  REGULATION S-P                                                    */
+/* ------------------------------------------------------------------ */
+
+function RegSP() {
+  return (
+    <>
+      <HeroSection
+        icon="⚖️"
+        title="Regulation S-P — Deep Dive"
+        subtitle="The SEC's cornerstone regulation for safeguarding customer information at financial institutions, and why it matters for every Drawbridge client."
+      />
+
+      <div className="mt-6 grid grid-cols-4 gap-4">
+        <StatCard label="Originally Adopted" value="2000" />
+        <StatCard label="Major Amendment" value="2025" />
+        <StatCard label="Compliance Deadline" value="Dec 2025" />
+        <StatCard label="Applies To" value="All SEC-Registered" />
+      </div>
+
+      {/* What Is Reg S-P */}
+      <SectionHeading>What Is Regulation S-P?</SectionHeading>
+      <p className="text-sm text-gray-700 leading-relaxed">
+        Regulation S-P (formally &ldquo;Privacy of Consumer Financial Information&rdquo;) is the
+        SEC&apos;s primary regulation governing how broker-dealers, investment companies, and
+        <strong> registered investment advisers (RIAs)</strong> — including hedge fund and PE
+        fund managers — must protect the personal information of their customers and
+        investors. Originally adopted in 2000 under the Gramm-Leach-Bliley Act (GLBA),
+        Reg S-P was <strong>significantly amended in 2025</strong> to address modern
+        cybersecurity threats.
+      </p>
+      <p className="mt-3 text-sm text-gray-700 leading-relaxed">
+        The regulation has two core pillars: <strong>privacy notices</strong> (informing
+        customers about data collection and sharing practices) and the
+        <strong> Safeguards Rule</strong> (requiring firms to implement written policies and
+        procedures to protect customer information). The 2025 amendments dramatically
+        expanded the Safeguards Rule, adding explicit incident response and breach
+        notification requirements.
+      </p>
+
+      {/* Key Requirements */}
+      <SectionHeading>Key Requirements</SectionHeading>
+
+      <SubSection icon="📜" title="The Safeguards Rule (Rule 30(a))">
+        <p>
+          The Safeguards Rule is the heart of Reg S-P for Drawbridge&apos;s clients. It requires
+          every covered institution to adopt <strong>written policies and procedures</strong> that
+          are reasonably designed to:
+        </p>
+        <ul className="list-disc ml-5 space-y-1">
+          <li>Ensure the security and confidentiality of customer records and information</li>
+          <li>Protect against anticipated threats or hazards to the security of those records</li>
+          <li>Protect against unauthorized access or use that could result in substantial harm or inconvenience</li>
+        </ul>
+        <p>
+          This is not a checkbox exercise — the SEC expects firms to implement controls
+          that are <strong>appropriate to the size, complexity, and nature of their
+          activities</strong>. A $10B multi-strategy hedge fund is held to a higher standard
+          than a $200M single-strategy shop, but both must have documented programs.
+        </p>
+      </SubSection>
+
+      <SubSection icon="🆕" title="2025 Amendments — What Changed">
+        <p>
+          The SEC&apos;s 2025 amendments to Reg S-P represent the most significant update in
+          the regulation&apos;s history. Key changes include:
+        </p>
+        <ul className="list-disc ml-5 space-y-2">
+          <li>
+            <strong>Incident Response Program (Required)</strong> — Firms must establish
+            written policies and procedures for detecting, responding to, and recovering
+            from unauthorized access to or use of customer information. This must include
+            specific procedures for assessing the nature and scope of an incident, containing
+            and remediating it, and notifying affected individuals.
+          </li>
+          <li>
+            <strong>Breach Notification (New)</strong> — Firms must notify affected individuals
+            <strong> within 30 days</strong> of becoming aware that a breach has occurred or is
+            reasonably likely to have occurred. The notice must include specific details about
+            the incident and steps individuals can take to protect themselves.
+          </li>
+          <li>
+            <strong>Service Provider Oversight (Expanded)</strong> — Firms must ensure that
+            their service providers (including IT vendors, cloud providers, and — notably —
+            cybersecurity firms) implement appropriate safeguards. Contracts must require
+            service providers to maintain protections and notify the firm of breaches.
+          </li>
+          <li>
+            <strong>Record Keeping (Expanded)</strong> — Firms must maintain records of their
+            safeguards policies, incident response procedures, and breach notifications for
+            SEC examination.
+          </li>
+          <li>
+            <strong>Exemption Removed</strong> — The previous &ldquo;no harm, no foul&rdquo; exception
+            (where firms didn&apos;t need to notify if they determined no misuse occurred) has
+            been <strong>eliminated</strong>. If customer information was accessed, notification
+            is required regardless of whether harm occurred.
+          </li>
+        </ul>
+      </SubSection>
+
+      <SubSection icon="👥" title="Who Does Reg S-P Apply To?">
+        <p>Reg S-P applies to every entity registered with the SEC, including:</p>
+        <ul className="list-disc ml-5 space-y-1">
+          <li><strong>Registered Investment Advisers (RIAs)</strong> — This covers most hedge fund and PE fund managers, since the GP entity is typically registered as an investment adviser</li>
+          <li><strong>Broker-Dealers</strong> — Including prime brokers and any affiliated broker-dealer entities</li>
+          <li><strong>Investment Companies</strong> — Registered funds (mutual funds, ETFs, closed-end funds)</li>
+          <li><strong>Transfer Agents</strong> — Entities that maintain shareholder records</li>
+        </ul>
+        <p>
+          <strong>Important nuance:</strong> Family offices that rely on the &ldquo;family office
+          exclusion&rdquo; from RIA registration are technically <em>not</em> directly covered by
+          Reg S-P. However, many family offices voluntarily adopt Reg S-P standards because
+          (a) their LPs expect it, (b) they may have affiliated registered entities, and
+          (c) it represents a recognized best-practice framework.
+        </p>
+      </SubSection>
+
+      {/* What It Means for Clients */}
+      <SectionHeading>What This Means for Drawbridge Clients</SectionHeading>
+      <div className="grid grid-cols-2 gap-4">
+        <CharacteristicCard
+          title="Written Security Policies Required"
+          description="Every client must have documented cybersecurity policies tailored to their specific risks — not a template downloaded from the internet. Drawbridge helps build and maintain these."
+        />
+        <CharacteristicCard
+          title="Incident Response Plans Are Mandatory"
+          description="The 2025 amendments make IR plans a regulatory requirement, not a best practice. Clients without one are now in violation. Drawbridge provides IR planning and retainer services."
+        />
+        <CharacteristicCard
+          title="30-Day Breach Notification"
+          description="Clients must notify affected individuals within 30 days of discovering a breach — a tight timeline that requires preparation and practiced response procedures."
+        />
+        <CharacteristicCard
+          title="Vendor Oversight Obligations"
+          description="Clients must monitor their vendors' security practices, including requiring contractual security commitments. This creates demand for third-party risk management services."
+        />
+      </div>
+
+      {/* SEC Enforcement */}
+      <SectionHeading>SEC Enforcement — The Stakes Are Real</SectionHeading>
+      <SubSection icon="🔨" title="How the SEC Enforces Reg S-P">
+        <p>
+          The SEC enforces Reg S-P through two primary mechanisms:
+        </p>
+        <ul className="list-disc ml-5 space-y-2">
+          <li>
+            <strong>Examinations (OCIE/EXAMS)</strong> — The SEC&apos;s Division of Examinations
+            conducts routine and for-cause examinations of registered entities. Cybersecurity
+            has been a <strong>stated exam priority every year since 2020</strong>. Examiners
+            request and review written policies, incident logs, vendor contracts, training
+            records, and evidence of ongoing monitoring. Deficiencies result in deficiency
+            letters that require remediation.
+          </li>
+          <li>
+            <strong>Enforcement Actions</strong> — For serious violations, the SEC&apos;s Division
+            of Enforcement brings formal actions that can result in censures, fines,
+            disgorgement of profits, and bars from the industry. Recent enforcement actions
+            for cybersecurity failures have resulted in penalties ranging from
+            <strong> $500K to $35M+</strong>.
+          </li>
+        </ul>
+        <p>
+          Notable enforcement examples include actions against firms for: failing to adopt
+          written cybersecurity policies, failing to implement identity theft prevention
+          programs, inadequate email security leading to account takeovers, and failing
+          to notify customers after breaches.
+        </p>
+      </SubSection>
+
+      <DrawbridgeAngle>
+        <p>
+          Reg S-P is the <strong>single most important regulatory driver</strong> of Drawbridge&apos;s
+          business with US-based clients. Every service Drawbridge provides maps directly
+          to a Reg S-P requirement:
+        </p>
+        <ul className="list-disc ml-5 space-y-1">
+          <li>Written cybersecurity policies → Drawbridge Policy Program</li>
+          <li>Incident response procedures → Drawbridge IR Planning &amp; Retainer</li>
+          <li>Ongoing risk assessment → Drawbridge Security Assessments</li>
+          <li>Employee training → Drawbridge Security Awareness Program</li>
+          <li>Vendor oversight → Drawbridge Third-Party Risk Management</li>
+          <li>Evidence of compliance → Drawbridge Platform &amp; Reporting</li>
+        </ul>
+        <p className="mt-2">
+          The 2025 amendments are a major renewal tailwind. Clients who previously had
+          basic programs now need to upgrade to meet the new incident response and breach
+          notification requirements. Use this as a renewal conversation starter: &ldquo;The
+          new Reg S-P requirements took effect in December — let&apos;s review your program
+          to ensure you&apos;re compliant.&rdquo;
+        </p>
+      </DrawbridgeAngle>
+
+      <SectionHeading>Key Terms</SectionHeading>
+      <div className="grid grid-cols-3 gap-3">
+        <TermBadge term="GLBA" definition="Gramm-Leach-Bliley Act (1999) — the federal law that authorized the SEC to create Reg S-P and other financial privacy regulations." />
+        <TermBadge term="Safeguards Rule" definition="The core requirement of Reg S-P: written policies and procedures to protect customer information from unauthorized access." />
+        <TermBadge term="NPI" definition="Nonpublic Personal Information — the category of customer data protected under Reg S-P (SSNs, account numbers, financial records, etc.)." />
+        <TermBadge term="RIA" definition="Registered Investment Adviser — an entity registered with the SEC under the Investment Advisers Act, including most hedge fund and PE managers." />
+        <TermBadge term="OCIE / EXAMS" definition="Office of Compliance Inspections and Examinations (now Division of Examinations) — the SEC's exam arm that audits firms for compliance." />
+        <TermBadge term="Deficiency Letter" definition="A letter from SEC examiners identifying regulatory shortcomings — firms must respond with a remediation plan and evidence of corrective action." />
+        <TermBadge term="Reg S-ID" definition="Regulation S-ID (Identity Theft Red Flags) — companion regulation requiring firms to detect and prevent identity theft. Often reviewed alongside Reg S-P." />
+        <TermBadge term="Rule 30(a)" definition="The specific Reg S-P rule requiring written safeguards policies — the provision most commonly cited in SEC exams and enforcement actions." />
+        <TermBadge term="Breach Notification" definition="New under 2025 amendments: requirement to notify affected individuals within 30 days of discovering unauthorized access to their information." />
+      </div>
+    </>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  DORA (EU)                                                         */
+/* ------------------------------------------------------------------ */
+
+function DORA() {
+  return (
+    <>
+      <HeroSection
+        icon="🇪🇺"
+        title="DORA — Digital Operational Resilience Act"
+        subtitle="The EU's landmark regulation for ICT risk management in financial services, and what it means for Drawbridge's clients with European operations."
+      />
+
+      <div className="mt-6 grid grid-cols-4 gap-4">
+        <StatCard label="Enacted" value="Jan 2023" />
+        <StatCard label="In Force" value="Jan 2025" />
+        <StatCard label="Scope" value="EU Financial Entities" />
+        <StatCard label="ICT Providers Covered" value="Direct Oversight" />
+      </div>
+
+      {/* What Is DORA */}
+      <SectionHeading>What Is DORA?</SectionHeading>
+      <p className="text-sm text-gray-700 leading-relaxed">
+        The <strong>Digital Operational Resilience Act (DORA)</strong> is an EU regulation
+        (Regulation 2022/2554) that establishes a comprehensive framework for managing
+        ICT (Information and Communications Technology) risk across the European financial
+        sector. Unlike directives, DORA is a <strong>regulation</strong> — meaning it applies
+        directly and uniformly across all EU member states without needing national
+        transposition.
+      </p>
+      <p className="mt-3 text-sm text-gray-700 leading-relaxed">
+        DORA recognizes that digital operational resilience is not just an IT issue but a
+        <strong> financial stability concern</strong>. A major cyber incident at a systemically
+        important financial institution — or at a critical third-party ICT provider — could
+        cascade across the financial system. DORA aims to prevent this by harmonizing ICT
+        risk management rules across 21 types of financial entities.
+      </p>
+      <p className="mt-3 text-sm text-gray-700 leading-relaxed">
+        For Drawbridge&apos;s clients, DORA matters because many alternative asset managers have
+        <strong> European operations, European investors, or European portfolio companies</strong>.
+        Even US-headquartered firms may need to comply if they manage EU-domiciled funds
+        (common in Luxembourg and Ireland) or are classified as critical ICT providers
+        to EU financial entities.
+      </p>
+
+      {/* Five Pillars */}
+      <SectionHeading>The Five Pillars of DORA</SectionHeading>
+      <p className="text-sm text-gray-700 leading-relaxed mb-4">
+        DORA is organized around five core pillars, each with detailed requirements.
+      </p>
+
+      <SubSection icon="1️⃣" title="Pillar 1: ICT Risk Management">
+        <p>
+          Financial entities must establish a <strong>comprehensive ICT risk management
+          framework</strong> that is documented, reviewed annually, and approved by the
+          management body (board of directors or equivalent). Requirements include:
+        </p>
+        <ul className="list-disc ml-5 space-y-1">
+          <li><strong>Governance</strong> — The management body bears ultimate responsibility for ICT risk. They must define, approve, and oversee the implementation of the ICT risk management framework. This is a board-level obligation, not just a CISO responsibility.</li>
+          <li><strong>Identification</strong> — Map all ICT assets, systems, and dependencies. Maintain an up-to-date inventory of information assets and ICT systems, including those managed by third parties.</li>
+          <li><strong>Protection &amp; Prevention</strong> — Implement security controls including access management, encryption, network security, and vulnerability management. Policies must cover data classification, identity management, and physical security.</li>
+          <li><strong>Detection</strong> — Deploy mechanisms to promptly detect anomalous activity, including security monitoring, log analysis, and intrusion detection.</li>
+          <li><strong>Response &amp; Recovery</strong> — Maintain incident response and business continuity plans. Conduct regular testing of recovery procedures with specific recovery time and recovery point objectives (RTO/RPO).</li>
+          <li><strong>Learning &amp; Evolving</strong> — Conduct post-incident reviews, incorporate lessons learned, and continuously improve the ICT risk framework based on threat intelligence and incidents.</li>
+        </ul>
+      </SubSection>
+
+      <SubSection icon="2️⃣" title="Pillar 2: ICT Incident Reporting">
+        <p>
+          DORA establishes a <strong>harmonized incident reporting framework</strong> across
+          the EU, replacing the patchwork of national reporting requirements. Key requirements:
+        </p>
+        <ul className="list-disc ml-5 space-y-1">
+          <li><strong>Classification</strong> — Incidents must be classified using specific criteria: number of clients affected, duration, geographic spread, data losses, economic impact, and criticality of services affected.</li>
+          <li><strong>Reporting Timeline</strong> — Major ICT incidents must be reported to the relevant competent authority (national regulator) using a three-stage process: <strong>initial notification</strong> (within 4 hours of classification / 24 hours of detection), <strong>intermediate report</strong> (within 72 hours), and <strong>final report</strong> (within 1 month).</li>
+          <li><strong>Voluntary Reporting</strong> — Firms may voluntarily report significant cyber threats, even if no incident has occurred, to help build sector-wide threat intelligence.</li>
+        </ul>
+      </SubSection>
+
+      <SubSection icon="3️⃣" title="Pillar 3: Digital Operational Resilience Testing">
+        <p>
+          DORA requires regular testing of ICT systems and tools, going well beyond
+          traditional penetration testing:
+        </p>
+        <ul className="list-disc ml-5 space-y-1">
+          <li><strong>Basic Testing (All Entities)</strong> — Vulnerability assessments, network security scans, gap analysis, source code reviews, performance testing, and end-to-end testing at least annually.</li>
+          <li><strong>Threat-Led Penetration Testing (TLPT)</strong> — Systemically important firms must conduct advanced <strong>threat-led penetration tests</strong> (similar to TIBER-EU) at least every 3 years. These are red-team exercises that simulate real-world attack scenarios based on current threat intelligence.</li>
+          <li><strong>Third-Party Testing</strong> — Testing must cover critical ICT services provided by third parties, and third-party providers must participate in or support these exercises.</li>
+        </ul>
+      </SubSection>
+
+      <SubSection icon="4️⃣" title="Pillar 4: Third-Party ICT Risk Management">
+        <p>
+          This is arguably DORA&apos;s most groundbreaking pillar — and the most relevant
+          to Drawbridge. DORA creates a <strong>comprehensive framework for managing
+          third-party ICT risk</strong>:
+        </p>
+        <ul className="list-disc ml-5 space-y-2">
+          <li>
+            <strong>Contractual Requirements</strong> — All ICT outsourcing contracts must
+            include specific provisions: service level descriptions, data location and
+            processing requirements, audit rights, exit strategies, incident notification
+            obligations, and security requirements. Pre-DORA contracts must be updated.
+          </li>
+          <li>
+            <strong>Concentration Risk</strong> — Firms must identify and manage ICT
+            concentration risk — over-reliance on a single provider or a small number
+            of providers. Regulators can require firms to diversify if concentration
+            poses systemic risk.
+          </li>
+          <li>
+            <strong>Critical ICT Provider Oversight</strong> — For the first time, EU
+            regulators have <strong>direct oversight authority</strong> over critical
+            third-party ICT providers (designated by the European Supervisory Authorities).
+            Major cloud providers (AWS, Azure, Google Cloud) and other critical vendors
+            are subject to direct regulatory engagement, inspections, and recommendations.
+          </li>
+          <li>
+            <strong>Register of ICT Providers</strong> — Firms must maintain a detailed
+            register of all ICT third-party service providers, classifying which support
+            critical or important functions.
+          </li>
+        </ul>
+      </SubSection>
+
+      <SubSection icon="5️⃣" title="Pillar 5: Information Sharing">
+        <p>
+          DORA encourages (but does not mandate) financial entities to share cyber
+          threat intelligence with each other through trusted information-sharing
+          arrangements. The goal is to build collective defenses by enabling firms to
+          learn from each other&apos;s incidents and threat observations. Sharing arrangements
+          must comply with GDPR and competition law.
+        </p>
+      </SubSection>
+
+      {/* Who Does DORA Apply To */}
+      <SectionHeading>Who Does DORA Apply To?</SectionHeading>
+      <SubSection icon="🎯" title="Scope of Application">
+        <p>DORA applies to <strong>21 categories</strong> of financial entities, including:</p>
+        <ul className="list-disc ml-5 space-y-1">
+          <li>Credit institutions (banks)</li>
+          <li>Investment firms (including EU-based fund managers)</li>
+          <li><strong>Alternative Investment Fund Managers (AIFMs)</strong> — This is the EU equivalent of hedge fund and PE managers, and the category most relevant to Drawbridge clients</li>
+          <li>Management companies (UCITS managers)</li>
+          <li>Insurance and reinsurance undertakings</li>
+          <li>Central counterparties and trade repositories</li>
+          <li>Crypto-asset service providers</li>
+          <li><strong>ICT third-party service providers</strong> designated as critical</li>
+        </ul>
+        <p className="mt-2">
+          <strong>The extraterritorial angle:</strong> A US-headquartered hedge fund or PE
+          firm is not directly subject to DORA. However, if that firm:
+        </p>
+        <ul className="list-disc ml-5 space-y-1">
+          <li>Manages EU-domiciled funds (e.g., a Cayman master / Irish feeder structure) through an EU AIFM</li>
+          <li>Has a European subsidiary or office that is a regulated entity</li>
+          <li>Is designated as a critical ICT provider to EU financial entities</li>
+        </ul>
+        <p>
+          ...then DORA applies to those EU-regulated components. Many Drawbridge clients
+          with European fund structures need to ensure their EU operations are DORA-compliant.
+        </p>
+      </SubSection>
+
+      {/* DORA vs Other Regs */}
+      <SectionHeading>DORA vs. Other Regulations</SectionHeading>
+      <div className="mt-2 rounded-md border border-gray-200 overflow-hidden">
+        <table className="w-full text-sm">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-4 py-2 text-left font-medium text-gray-600">Aspect</th>
+              <th className="px-4 py-2 text-left font-medium text-gray-600">Reg S-P (US/SEC)</th>
+              <th className="px-4 py-2 text-left font-medium text-gray-600">DORA (EU)</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-100">
+            <tr>
+              <td className="px-4 py-2 font-medium">Scope</td>
+              <td className="px-4 py-2">SEC-registered entities</td>
+              <td className="px-4 py-2">21 categories of EU financial entities + critical ICT providers</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2 font-medium">Focus</td>
+              <td className="px-4 py-2">Customer information protection</td>
+              <td className="px-4 py-2">Comprehensive digital operational resilience</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2 font-medium">Third-Party Oversight</td>
+              <td className="px-4 py-2">Contractual requirements</td>
+              <td className="px-4 py-2">Direct regulatory oversight of critical ICT providers</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2 font-medium">Testing Requirements</td>
+              <td className="px-4 py-2">Not specified</td>
+              <td className="px-4 py-2">Annual basic testing + TLPT every 3 years for major entities</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2 font-medium">Incident Reporting</td>
+              <td className="px-4 py-2">30-day customer notification</td>
+              <td className="px-4 py-2">4-hour initial / 72-hour intermediate / 1-month final to regulators</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2 font-medium">Board Accountability</td>
+              <td className="px-4 py-2">Implied (policies must be approved)</td>
+              <td className="px-4 py-2">Explicit — management body bears ultimate responsibility</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      {/* Impact on Drawbridge */}
+      <DrawbridgeAngle>
+        <p>
+          DORA creates significant opportunities for Drawbridge, particularly with clients
+          who have European operations:
+        </p>
+        <ul className="list-disc ml-5 space-y-1">
+          <li><strong>ICT Risk Management Frameworks</strong> → Drawbridge builds and maintains the documented frameworks DORA requires</li>
+          <li><strong>Incident Response &amp; Reporting</strong> → Drawbridge&apos;s IR services help clients meet the aggressive 4-hour initial notification timeline</li>
+          <li><strong>Resilience Testing</strong> → Drawbridge coordinates vulnerability assessments and penetration testing programs</li>
+          <li><strong>Third-Party Risk Registers</strong> → Drawbridge helps clients build and maintain the required ICT provider registers</li>
+          <li><strong>Board Reporting</strong> → Drawbridge provides board-ready reporting on ICT risk posture, which DORA requires the management body to review</li>
+        </ul>
+        <p className="mt-2">
+          For renewals, DORA is a powerful conversation driver with any client that has
+          European fund structures. Many US-headquartered firms are still figuring out
+          their DORA obligations — positioning Drawbridge as a guide through DORA compliance
+          adds significant renewal and expansion value. Ask in discovery: &ldquo;Do you manage
+          any EU-domiciled funds or have European LPs? Let&apos;s talk about how DORA affects
+          your program.&rdquo;
+        </p>
+      </DrawbridgeAngle>
+
+      <SectionHeading>Key Terms</SectionHeading>
+      <div className="grid grid-cols-3 gap-3">
+        <TermBadge term="DORA" definition="Digital Operational Resilience Act (Regulation 2022/2554) — EU-wide regulation for ICT risk management in financial services, effective January 2025." />
+        <TermBadge term="AIFM" definition="Alternative Investment Fund Manager — the EU regulatory classification for hedge fund and PE managers, authorized under the AIFMD directive." />
+        <TermBadge term="ESA" definition="European Supervisory Authorities — the three EU financial regulators (EBA, ESMA, EIOPA) responsible for DORA oversight and designating critical ICT providers." />
+        <TermBadge term="TLPT" definition="Threat-Led Penetration Testing — advanced red-team exercises simulating real attack scenarios, required every 3 years for systemically important entities." />
+        <TermBadge term="TIBER-EU" definition="Threat Intelligence-Based Ethical Red Teaming — the ECB's framework for threat-led testing that DORA's TLPT requirements are modeled on." />
+        <TermBadge term="ICT Concentration Risk" definition="The risk arising from over-dependence on a single or small number of ICT providers — DORA requires firms to identify and manage this explicitly." />
+        <TermBadge term="RTO / RPO" definition="Recovery Time Objective / Recovery Point Objective — maximum acceptable downtime and data loss targets that DORA requires firms to define and test." />
+        <TermBadge term="Critical ICT Provider" definition="A third-party ICT provider designated by the ESAs as critical to EU financial stability — subject to direct regulatory oversight under DORA." />
+        <TermBadge term="Competent Authority" definition="The national financial regulator in each EU member state (e.g., BaFin in Germany, AMF in France) responsible for DORA enforcement." />
+      </div>
+    </>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /*  FORECASTING BEST PRACTICES                                        */
 /* ------------------------------------------------------------------ */
 
@@ -1501,6 +1963,8 @@ const CONTENT_MAP: Record<SectionId, React.FC> = {
   'hedge-funds': HedgeFunds,
   'private-equity': PrivateEquity,
   'family-offices': FamilyOffices,
+  'reg-sp': RegSP,
+  dora: DORA,
   'forecasting-best-practices': ForecastingBestPractices,
   'renewal-plan-best-practices': RenewalPlanBestPractices,
   marketing: MarketingMaterials,
