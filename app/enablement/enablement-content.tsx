@@ -3174,26 +3174,290 @@ function JourneyHedgeFund() {
       {/* How to use */}
       <div className="mt-6 rounded-lg bg-db-dark p-5">
         <p className="text-sm font-semibold text-db-aqua uppercase tracking-wide mb-2">
-          How to Use This Journey
+          Two Views of the Same Journey
         </p>
-        <div className="grid grid-cols-3 gap-4 text-sm text-gray-300">
+        <div className="grid grid-cols-2 gap-6 text-sm text-gray-300">
           <div>
-            <p className="font-medium text-white">In Sales</p>
-            <p className="mt-1">Show prospects the path forward — not just what we do on day one, but how the partnership grows over time.</p>
+            <p className="font-medium text-white">Client-Facing (Outcome Phases)</p>
+            <p className="mt-1">What the client sees: a progression of business outcomes — starting with their most urgent need and expanding as priorities evolve. Share this in sales, QBRs, and renewals.</p>
           </div>
           <div>
-            <p className="font-medium text-white">Post-Sale</p>
-            <p className="mt-1">Walk clients through where they are and what&apos;s next. Use it in QBRs to frame progress and expansion.</p>
-          </div>
-          <div>
-            <p className="font-medium text-white">At Renewal</p>
-            <p className="mt-1">Show what we&apos;ve accomplished together and the natural next phase. The renewal becomes a stepping stone, not a finish line.</p>
+            <p className="font-medium text-white">Internal (Drawbridge Lifecycle)</p>
+            <p className="mt-1">How we operate behind the scenes: the handoffs, roles, and motions that deliver each outcome. This is our playbook for who does what and when.</p>
           </div>
         </div>
       </div>
 
+      {/* ── INTERNAL LIFECYCLE ── */}
+      <SectionHeading>The Drawbridge Lifecycle</SectionHeading>
+      <p className="text-sm text-gray-700 leading-relaxed mb-4">
+        Every client relationship follows a continuous cycle. Each stage has a clear
+        owner, a defined purpose, and a handoff that keeps the relationship moving forward.
+      </p>
+
+      {/* Lifecycle visual */}
+      <div className="flex items-center gap-0 mb-2">
+        {[
+          { label: 'Discovery', color: 'bg-db-dark', text: 'text-white' },
+          { label: 'Implementation', color: 'bg-db-aqua-dark', text: 'text-white' },
+          { label: 'Value Realization', color: 'bg-db-aqua', text: 'text-db-dark' },
+          { label: 'Strategic Partnership', color: 'bg-db-orange/80', text: 'text-white' },
+          { label: 'Renewal', color: 'bg-db-orange', text: 'text-white' },
+        ].map((stage, i) => (
+          <div key={stage.label} className={`flex-1 ${stage.color} ${stage.text} py-2 px-1 text-center text-xs font-semibold ${i === 0 ? 'rounded-l-lg' : ''} ${i === 4 ? 'rounded-r-lg' : ''}`}>
+            {stage.label}
+          </div>
+        ))}
+      </div>
+      <div className="flex justify-end mb-6">
+        <span className="text-xs text-gray-400 italic">↩ cycles back to Strategic Partnership</span>
+      </div>
+
+      {/* Stage details */}
+      <div className="space-y-4">
+        {/* Discovery */}
+        <div className="rounded-lg border border-gray-200 bg-white overflow-hidden">
+          <div className="bg-db-dark px-5 py-3 flex items-center justify-between">
+            <p className="text-sm font-semibold text-white">Discovery &amp; Solution Design</p>
+            <span className="rounded-full bg-white/20 px-3 py-0.5 text-xs text-white">Sales Team</span>
+          </div>
+          <div className="px-5 py-4">
+            <div className="grid grid-cols-3 gap-4 text-sm">
+              <div>
+                <p className="text-xs font-semibold text-gray-400 uppercase">Purpose</p>
+                <p className="mt-1 text-gray-700">Understand the client&apos;s business problem. Not &ldquo;what services do they need?&rdquo; but &ldquo;what outcome are they trying to achieve?&rdquo;</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-400 uppercase">Key Activities</p>
+                <ul className="mt-1 text-gray-700 space-y-1">
+                  <li>&#8226; Identify the triggering event (fundraise, exam, incident, LP pressure)</li>
+                  <li>&#8226; Map the outcome to the framework (which of the 5?)</li>
+                  <li>&#8226; Design a solution scoped to the outcome, not a product list</li>
+                  <li>&#8226; Present the journey — show the client the path forward</li>
+                </ul>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-400 uppercase">Handoff</p>
+                <p className="mt-1 text-gray-700">
+                  Closed deal transitions to implementation with a clear brief: the outcome
+                  we promised, the scope, the timeline, and the client&apos;s expectations.
+                  The RM is introduced to the client before the sale closes — not after.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Implementation */}
+        <div className="rounded-lg border border-gray-200 bg-white overflow-hidden">
+          <div className="bg-db-aqua-dark px-5 py-3 flex items-center justify-between">
+            <p className="text-sm font-semibold text-white">Implementation &amp; Onboarding</p>
+            <span className="rounded-full bg-white/20 px-3 py-0.5 text-xs text-white">Cybersecurity Advisory Team + RM</span>
+          </div>
+          <div className="px-5 py-4">
+            <div className="grid grid-cols-3 gap-4 text-sm">
+              <div>
+                <p className="text-xs font-semibold text-gray-400 uppercase">Purpose</p>
+                <p className="mt-1 text-gray-700">Configure the platform, deliver the initial assessment, and begin working on the promised outcome. The cybersecurity advisory team owns the technical delivery.</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-400 uppercase">Key Activities</p>
+                <ul className="mt-1 text-gray-700 space-y-1">
+                  <li>&#8226; Kick-off call with client stakeholders</li>
+                  <li>&#8226; Platform configuration and data collection</li>
+                  <li>&#8226; Initial security assessment and gap analysis</li>
+                  <li>&#8226; Begin delivering against the scoped outcome (DDQs, policies, etc.)</li>
+                </ul>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-400 uppercase">Handoff</p>
+                <p className="mt-1 text-gray-700">
+                  Implementation is &ldquo;complete&rdquo; when the initial deliverables are in the
+                  client&apos;s hands and the program is running. The RM takes the lead on the
+                  relationship while the advisory team continues ongoing delivery.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Value Realization */}
+        <div className="rounded-lg border border-gray-200 bg-white overflow-hidden">
+          <div className="bg-db-aqua px-5 py-3 flex items-center justify-between">
+            <p className="text-sm font-semibold text-db-dark">Value Realization</p>
+            <span className="rounded-full bg-db-dark/20 px-3 py-0.5 text-xs text-db-dark">RM Team</span>
+          </div>
+          <div className="px-5 py-4">
+            <div className="grid grid-cols-3 gap-4 text-sm">
+              <div>
+                <p className="text-xs font-semibold text-gray-400 uppercase">Purpose</p>
+                <p className="mt-1 text-gray-700">Measure and communicate the value delivered — in the client&apos;s language, tied to the business outcome they bought. This is where we prove the investment is working.</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-400 uppercase">Key Activities</p>
+                <ul className="mt-1 text-gray-700 space-y-1">
+                  <li>&#8226; Gather evidence: DDQs completed, turnaround times, risk scores, training rates</li>
+                  <li>&#8226; Frame the story around the outcome, not the tasks</li>
+                  <li>&#8226; Deliver a QBR that shows impact: &ldquo;Here&apos;s what we achieved together&rdquo;</li>
+                  <li>&#8226; Confirm with the client that they see the value</li>
+                </ul>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-400 uppercase">Handoff</p>
+                <p className="mt-1 text-gray-700">
+                  Once the client confirms value, the RM shifts into strategic partnership
+                  mode. The client trusts us — now we&apos;ve earned the right to broaden
+                  the conversation.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Strategic Partnership */}
+        <div className="rounded-lg border border-gray-200 bg-white overflow-hidden">
+          <div className="bg-db-orange/80 px-5 py-3 flex items-center justify-between">
+            <p className="text-sm font-semibold text-white">Strategic Partnership</p>
+            <span className="rounded-full bg-white/20 px-3 py-0.5 text-xs text-white">RM Team</span>
+          </div>
+          <div className="px-5 py-4">
+            <div className="grid grid-cols-3 gap-4 text-sm">
+              <div>
+                <p className="text-xs font-semibold text-gray-400 uppercase">Purpose</p>
+                <p className="mt-1 text-gray-700">
+                  Be the client&apos;s trusted business advisor — someone who understands their
+                  firm, anticipates their needs, and connects business problems to solutions.
+                  <strong> This is an RM relationship role</strong>, distinct from the cybersecurity
+                  advisory services our delivery team provides.
+                </p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-400 uppercase">Key Activities</p>
+                <ul className="mt-1 text-gray-700 space-y-1">
+                  <li>&#8226; Stay close to the client&apos;s business: fundraising cycles, team changes, regulatory events</li>
+                  <li>&#8226; Proactively surface business problems they may not have connected to Drawbridge</li>
+                  <li>&#8226; Introduce the next outcome phase when the timing is right — not as a pitch, but as a natural next step</li>
+                  <li>&#8226; Keep the advisory team informed so delivery stays aligned</li>
+                </ul>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-400 uppercase">The Distinction</p>
+                <p className="mt-1 text-gray-700">
+                  <strong>RM as strategic advisor</strong> = understanding the client&apos;s business
+                  and guiding the relationship. <strong>Cybersecurity advisory services</strong> =
+                  the technical expertise our delivery team provides (assessments, policies, IR).
+                  The RM connects the two — identifying the problem, the advisory team solves it.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 rounded-md bg-orange-50 border border-orange-200 p-3">
+              <p className="text-xs font-semibold text-db-orange uppercase">Getting It Right</p>
+              <p className="text-sm text-gray-700 mt-1">
+                The line between &ldquo;helpful advisor&rdquo; and &ldquo;salesperson&rdquo; is intent. When
+                you surface a problem, lead with the client&apos;s risk or business impact —
+                not with a product. &ldquo;I noticed you&apos;re launching a new fund — that changes
+                your risk profile&rdquo; is advisory. &ldquo;We have a new product for fund launches&rdquo;
+                is sales. Same information, completely different conversation.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Renewal */}
+        <div className="rounded-lg border border-gray-200 bg-white overflow-hidden">
+          <div className="bg-db-orange px-5 py-3 flex items-center justify-between">
+            <p className="text-sm font-semibold text-white">Renewal</p>
+            <span className="rounded-full bg-white/20 px-3 py-0.5 text-xs text-white">RM Team</span>
+          </div>
+          <div className="px-5 py-4">
+            <div className="grid grid-cols-3 gap-4 text-sm">
+              <div>
+                <p className="text-xs font-semibold text-gray-400 uppercase">Purpose</p>
+                <p className="mt-1 text-gray-700">Prove the value delivered, demonstrate ROI, and confirm the renewal. This should feel like a natural checkpoint in the relationship — not a sales event.</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-400 uppercase">Key Activities</p>
+                <ul className="mt-1 text-gray-700 space-y-1">
+                  <li>&#8226; Present outcome-based value summary (not a task list)</li>
+                  <li>&#8226; Quantify ROI: cost of alternatives, risk reduction, time saved</li>
+                  <li>&#8226; Propose next year&apos;s scope — including the next outcome phase if appropriate</li>
+                  <li>&#8226; Negotiate and close using the playbook principles</li>
+                </ul>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-400 uppercase">What Happens Next</p>
+                <p className="mt-1 text-gray-700">
+                  After renewal, the cycle continues — back into <strong>Strategic Partnership</strong>.
+                  If the renewal includes new scope (next outcome phase), it flows through
+                  Implementation first. The relationship is continuous, not transactional.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Lifecycle + Outcome mapping */}
+      <SectionHeading>How the Lifecycle Maps to Outcome Phases</SectionHeading>
+      <p className="text-sm text-gray-700 leading-relaxed mb-4">
+        The internal lifecycle repeats within each outcome phase. As the client progresses
+        through outcomes, the lifecycle spins again — but faster and with deeper trust.
+      </p>
+      <div className="rounded-md border border-gray-200 overflow-hidden">
+        <table className="w-full text-sm">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-3 py-2 text-left font-medium text-gray-600">Outcome Phase</th>
+              <th className="px-3 py-2 text-left font-medium text-gray-600">Discovery</th>
+              <th className="px-3 py-2 text-left font-medium text-gray-600">Implementation</th>
+              <th className="px-3 py-2 text-left font-medium text-gray-600">Value Realization</th>
+              <th className="px-3 py-2 text-left font-medium text-gray-600">Strategic / Renewal</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-100">
+            <tr>
+              <td className="px-3 py-2 font-medium text-db-dark">1. Capital Confidence</td>
+              <td className="px-3 py-2 text-gray-600 text-xs">Sales identifies DDQ/ODD pain</td>
+              <td className="px-3 py-2 text-gray-600 text-xs">Advisory delivers assessment + DDQ foundation</td>
+              <td className="px-3 py-2 text-gray-600 text-xs">RM shows turnaround improvement, LP satisfaction</td>
+              <td className="px-3 py-2 text-gray-600 text-xs">RM bridges to regulatory readiness</td>
+            </tr>
+            <tr className="bg-gray-50/50">
+              <td className="px-3 py-2 font-medium text-db-dark">2. Regulatory Readiness</td>
+              <td className="px-3 py-2 text-gray-600 text-xs">RM identifies exam risk</td>
+              <td className="px-3 py-2 text-gray-600 text-xs">Advisory builds policies, IR plan, training</td>
+              <td className="px-3 py-2 text-gray-600 text-xs">RM shows exam-ready posture, policy currency</td>
+              <td className="px-3 py-2 text-gray-600 text-xs">RM bridges to active protection</td>
+            </tr>
+            <tr>
+              <td className="px-3 py-2 font-medium text-db-dark">3. Protection</td>
+              <td className="px-3 py-2 text-gray-600 text-xs">RM identifies testing gaps</td>
+              <td className="px-3 py-2 text-gray-600 text-xs">Advisory runs pen tests, tabletops, monitoring</td>
+              <td className="px-3 py-2 text-gray-600 text-xs">RM shows risk reduction, remediation progress</td>
+              <td className="px-3 py-2 text-gray-600 text-xs">RM bridges to competitive positioning</td>
+            </tr>
+            <tr className="bg-gray-50/50">
+              <td className="px-3 py-2 font-medium text-db-dark">4. Competitive Advantage</td>
+              <td className="px-3 py-2 text-gray-600 text-xs">RM identifies positioning opportunity</td>
+              <td className="px-3 py-2 text-gray-600 text-xs">Advisory delivers benchmarking, board reports</td>
+              <td className="px-3 py-2 text-gray-600 text-xs">RM shows peer positioning, LP feedback</td>
+              <td className="px-3 py-2 text-gray-600 text-xs">Renewal + continued partnership</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p className="mt-3 text-xs text-gray-500 italic">
+        Note: After Phase 1, the &ldquo;Discovery&rdquo; step is led by the RM (not Sales) — because the
+        RM is already in the relationship and identifies the next business problem naturally.
+      </p>
+
       {/* Visual journey bar */}
-      <div className="mt-8 flex items-center gap-0">
+      <SectionHeading>Client-Facing Outcome Phases</SectionHeading>
+      <p className="text-sm text-gray-700 leading-relaxed mb-4">
+        Below is the client-facing view — what you share with the client. The internal lifecycle
+        above is how we operate behind the scenes to deliver each phase.
+      </p>
+      <div className="flex items-center gap-0">
         {phases.map((phase, i) => (
           <div key={phase.num} className="flex-1 relative">
             <div className={`${phase.color} h-2 ${i === 0 ? 'rounded-l-full' : ''} ${i === phases.length - 1 ? 'rounded-r-full' : ''}`} />
@@ -3526,15 +3790,17 @@ function JourneyHedgeFund() {
 
       <DrawbridgeAngle>
         <p>
-          This journey is designed to be shared with the client — in a sales deck, a
-          QBR, or a renewal conversation. It shows them we&apos;re not trying to sell
-          everything at once. We&apos;re meeting them where they are and building from there.
+          This journey has two layers by design. The <strong>client-facing outcome phases</strong> are
+          what you share externally — they show the client a clear, non-salesy path
+          forward. The <strong>internal lifecycle</strong> is how we operate — it ensures
+          clean handoffs, clear ownership, and disciplined value communication.
         </p>
         <p>
-          The most important moment is the <strong>bridge between phases</strong>. That&apos;s
-          where expansion happens — and it should always be framed as the next logical
-          business problem to solve, not a product to buy. When a client says &ldquo;that
-          makes sense, let&apos;s do it&rdquo; — you&apos;ve nailed the bridge.
+          The RM is the connective tissue. You bridge Discovery to Implementation by
+          setting clear expectations. You bridge Implementation to Value Realization by
+          gathering evidence and telling the story. You bridge Value to Strategic
+          Partnership by earning trust. And you bridge Strategic Partnership to Renewal
+          by making the decision obvious. Every bridge is earned, never forced.
         </p>
       </DrawbridgeAngle>
     </>
