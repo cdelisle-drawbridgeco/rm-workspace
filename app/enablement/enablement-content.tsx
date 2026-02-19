@@ -18,6 +18,7 @@ type SectionId =
   | 'renewal-plan-best-practices'
   | 'negotiation-playbook'
   | 'outcome-framework'
+  | 'journey-hedge-fund'
   | 'marketing';
 
 interface NavItem {
@@ -43,6 +44,7 @@ const WORKFLOW_ITEMS: NavItem[] = [
 
 const VALUE_ITEMS: NavItem[] = [
   { id: 'outcome-framework', label: 'Outcome Framework' },
+  { id: 'journey-hedge-fund', label: 'Journey: Hedge Fund' },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -3150,6 +3152,396 @@ function OutcomeFramework() {
 }
 
 /* ------------------------------------------------------------------ */
+/*  CUSTOMER JOURNEY: HEDGE FUND                                      */
+/* ------------------------------------------------------------------ */
+
+function JourneyHedgeFund() {
+  const phases = [
+    { num: '1', label: 'Get Started', color: 'bg-db-aqua' },
+    { num: '2', label: 'Build Foundation', color: 'bg-db-aqua-dark' },
+    { num: '3', label: 'Strengthen', color: 'bg-db-orange/80' },
+    { num: '4', label: 'Differentiate', color: 'bg-db-orange' },
+  ];
+
+  return (
+    <>
+      <HeroSection
+        icon="📍"
+        title="Customer Journey — Hedge Fund"
+        subtitle="A practical roadmap for building a lasting client relationship. Start by solving their most urgent problem, then expand as their business evolves."
+      />
+
+      {/* How to use */}
+      <div className="mt-6 rounded-lg bg-db-dark p-5">
+        <p className="text-sm font-semibold text-db-aqua uppercase tracking-wide mb-2">
+          How to Use This Journey
+        </p>
+        <div className="grid grid-cols-3 gap-4 text-sm text-gray-300">
+          <div>
+            <p className="font-medium text-white">In Sales</p>
+            <p className="mt-1">Show prospects the path forward — not just what we do on day one, but how the partnership grows over time.</p>
+          </div>
+          <div>
+            <p className="font-medium text-white">Post-Sale</p>
+            <p className="mt-1">Walk clients through where they are and what&apos;s next. Use it in QBRs to frame progress and expansion.</p>
+          </div>
+          <div>
+            <p className="font-medium text-white">At Renewal</p>
+            <p className="mt-1">Show what we&apos;ve accomplished together and the natural next phase. The renewal becomes a stepping stone, not a finish line.</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Visual journey bar */}
+      <div className="mt-8 flex items-center gap-0">
+        {phases.map((phase, i) => (
+          <div key={phase.num} className="flex-1 relative">
+            <div className={`${phase.color} h-2 ${i === 0 ? 'rounded-l-full' : ''} ${i === phases.length - 1 ? 'rounded-r-full' : ''}`} />
+            <div className="mt-2 text-center">
+              <p className="text-xs font-semibold text-gray-400">PHASE {phase.num}</p>
+              <p className="text-sm font-semibold text-db-dark">{phase.label}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* ── Phase 1 ── */}
+      <div className="mt-10 rounded-xl border-2 border-db-aqua overflow-hidden">
+        <div className="bg-db-aqua/10 px-6 py-4 border-b border-db-aqua/20 flex items-center gap-4">
+          <span className="flex items-center justify-center w-10 h-10 rounded-full bg-db-aqua text-white text-lg font-bold">1</span>
+          <div>
+            <h3 className="text-lg font-bold font-heading text-db-dark">Get Started — Raise &amp; Retain Capital</h3>
+            <p className="text-sm text-gray-500">Solve their most urgent problem first. Everything else follows.</p>
+          </div>
+        </div>
+        <div className="px-6 py-5 space-y-5">
+          <div>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">The Trigger</p>
+            <p className="mt-1 text-sm text-gray-700">
+              A hedge fund raising capital or going through LP due diligence needs to
+              demonstrate a credible cybersecurity program — fast. DDQ season is approaching,
+              a consultant flagged gaps, or an allocator asked a question they couldn&apos;t answer.
+              This is the moment they reach out.
+            </p>
+          </div>
+
+          <div>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">What We Do</p>
+            <div className="mt-2 grid grid-cols-3 gap-3">
+              <div className="rounded-md bg-gray-50 border border-gray-200 p-3">
+                <p className="text-xs font-semibold text-db-aqua-dark">Week 1–2</p>
+                <p className="text-sm font-medium text-db-dark mt-1">Security Assessment</p>
+                <p className="text-xs text-gray-500 mt-1">Baseline their current posture. Identify gaps allocators will find.</p>
+              </div>
+              <div className="rounded-md bg-gray-50 border border-gray-200 p-3">
+                <p className="text-xs font-semibold text-db-aqua-dark">Week 2–4</p>
+                <p className="text-sm font-medium text-db-dark mt-1">Policy &amp; DDQ Foundation</p>
+                <p className="text-xs text-gray-500 mt-1">Build core policies and prepare DDQ responses they can send to LPs immediately.</p>
+              </div>
+              <div className="rounded-md bg-gray-50 border border-gray-200 p-3">
+                <p className="text-xs font-semibold text-db-aqua-dark">Ongoing</p>
+                <p className="text-sm font-medium text-db-dark mt-1">DDQ &amp; ODD Support</p>
+                <p className="text-xs text-gray-500 mt-1">Handle incoming DDQs and support allocator due diligence reviews as they come in.</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">How We Measure Value</p>
+            <div className="mt-1 flex flex-wrap gap-2">
+              <span className="rounded-full bg-db-aqua/10 border border-db-aqua/20 px-3 py-1 text-xs text-db-dark">DDQ turnaround: 3 weeks → 5 days</span>
+              <span className="rounded-full bg-db-aqua/10 border border-db-aqua/20 px-3 py-1 text-xs text-db-dark">ODD reviews passed without findings</span>
+              <span className="rounded-full bg-db-aqua/10 border border-db-aqua/20 px-3 py-1 text-xs text-db-dark">Zero follow-up requests from allocators</span>
+            </div>
+          </div>
+
+          <div className="rounded-md bg-green-50 border border-green-200 p-3">
+            <p className="text-xs font-semibold text-green-700">THE BRIDGE TO PHASE 2</p>
+            <p className="text-sm text-green-800 mt-1">
+              &ldquo;Your DDQ responses are strong and your allocators are satisfied. But the
+              responses are only as good as the program behind them. Let&apos;s make sure the
+              underlying policies and procedures are exam-ready — so if the SEC calls, you&apos;re
+              as prepared as you are for your LPs.&rdquo;
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Phase 2 ── */}
+      <div className="mt-6 rounded-xl border-2 border-db-aqua-dark overflow-hidden">
+        <div className="bg-db-aqua-dark/10 px-6 py-4 border-b border-db-aqua-dark/20 flex items-center gap-4">
+          <span className="flex items-center justify-center w-10 h-10 rounded-full bg-db-aqua-dark text-white text-lg font-bold">2</span>
+          <div>
+            <h3 className="text-lg font-bold font-heading text-db-dark">Build the Foundation — Regulatory Readiness</h3>
+            <p className="text-sm text-gray-500">Move from reactive DDQ support to a proactive compliance program.</p>
+          </div>
+        </div>
+        <div className="px-6 py-5 space-y-5">
+          <div>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">The Trigger</p>
+            <p className="mt-1 text-sm text-gray-700">
+              The initial engagement is working — DDQs are getting done, allocators are happy.
+              Now the conversation shifts naturally: what happens when the SEC shows up?
+              The Reg S-P amendments require a documented incident response program. The firm&apos;s
+              policies need to be current, specific, and board-approved.
+            </p>
+          </div>
+
+          <div>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">What We Add</p>
+            <div className="mt-2 grid grid-cols-3 gap-3">
+              <div className="rounded-md bg-gray-50 border border-gray-200 p-3">
+                <p className="text-xs font-semibold text-db-aqua-dark">Policies</p>
+                <p className="text-sm font-medium text-db-dark mt-1">Full Policy Program</p>
+                <p className="text-xs text-gray-500 mt-1">Written, board-approved cybersecurity policies tailored to the firm. Annual reviews.</p>
+              </div>
+              <div className="rounded-md bg-gray-50 border border-gray-200 p-3">
+                <p className="text-xs font-semibold text-db-aqua-dark">IR Planning</p>
+                <p className="text-sm font-medium text-db-dark mt-1">Incident Response Plan</p>
+                <p className="text-xs text-gray-500 mt-1">Documented IR procedures with roles, escalation, and notification workflows.</p>
+              </div>
+              <div className="rounded-md bg-gray-50 border border-gray-200 p-3">
+                <p className="text-xs font-semibold text-db-aqua-dark">Training</p>
+                <p className="text-sm font-medium text-db-dark mt-1">Security Awareness</p>
+                <p className="text-xs text-gray-500 mt-1">Employee training program with completion tracking and phishing simulations.</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">How We Measure Value</p>
+            <div className="mt-1 flex flex-wrap gap-2">
+              <span className="rounded-full bg-db-aqua/10 border border-db-aqua/20 px-3 py-1 text-xs text-db-dark">All policies current and board-approved</span>
+              <span className="rounded-full bg-db-aqua/10 border border-db-aqua/20 px-3 py-1 text-xs text-db-dark">IR plan documented and roles assigned</span>
+              <span className="rounded-full bg-db-aqua/10 border border-db-aqua/20 px-3 py-1 text-xs text-db-dark">90%+ training completion rate</span>
+              <span className="rounded-full bg-db-aqua/10 border border-db-aqua/20 px-3 py-1 text-xs text-db-dark">Exam-ready document package maintained</span>
+            </div>
+          </div>
+
+          <div className="rounded-md bg-green-50 border border-green-200 p-3">
+            <p className="text-xs font-semibold text-green-700">THE BRIDGE TO PHASE 3</p>
+            <p className="text-sm text-green-800 mt-1">
+              &ldquo;You have the policies and the plan on paper. Now let&apos;s test it. When&apos;s the
+              last time you ran a tabletop exercise or a penetration test? Let&apos;s find out
+              if the plan actually works before you need it to.&rdquo;
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Phase 3 ── */}
+      <div className="mt-6 rounded-xl border-2 border-db-orange/60 overflow-hidden">
+        <div className="bg-orange-50 px-6 py-4 border-b border-db-orange/20 flex items-center gap-4">
+          <span className="flex items-center justify-center w-10 h-10 rounded-full bg-db-orange/80 text-white text-lg font-bold">3</span>
+          <div>
+            <h3 className="text-lg font-bold font-heading text-db-dark">Strengthen — Protect from Disruption</h3>
+            <p className="text-sm text-gray-500">Move from documentation to active defense and tested resilience.</p>
+          </div>
+        </div>
+        <div className="px-6 py-5 space-y-5">
+          <div>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">The Trigger</p>
+            <p className="mt-1 text-sm text-gray-700">
+              The program is documented and the firm is exam-ready. But a policy on paper
+              doesn&apos;t stop ransomware. A peer firm gets breached. An employee clicks a
+              phishing link. The conversation naturally evolves from &ldquo;are we compliant?&rdquo; to
+              &ldquo;are we actually protected?&rdquo;
+            </p>
+          </div>
+
+          <div>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">What We Add</p>
+            <div className="mt-2 grid grid-cols-3 gap-3">
+              <div className="rounded-md bg-gray-50 border border-gray-200 p-3">
+                <p className="text-xs font-semibold text-db-orange">Testing</p>
+                <p className="text-sm font-medium text-db-dark mt-1">Pen Testing &amp; Vuln Scans</p>
+                <p className="text-xs text-gray-500 mt-1">Find weaknesses before attackers do. Annual pen test plus quarterly vulnerability scanning.</p>
+              </div>
+              <div className="rounded-md bg-gray-50 border border-gray-200 p-3">
+                <p className="text-xs font-semibold text-db-orange">Readiness</p>
+                <p className="text-sm font-medium text-db-dark mt-1">Tabletop Exercises</p>
+                <p className="text-xs text-gray-500 mt-1">Simulate a real incident with the leadership team. Stress-test the IR plan.</p>
+              </div>
+              <div className="rounded-md bg-gray-50 border border-gray-200 p-3">
+                <p className="text-xs font-semibold text-db-orange">Protection</p>
+                <p className="text-sm font-medium text-db-dark mt-1">IR Retainer &amp; Monitoring</p>
+                <p className="text-xs text-gray-500 mt-1">Someone to call at 2am. Ongoing monitoring and rapid response capability.</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">How We Measure Value</p>
+            <div className="mt-1 flex flex-wrap gap-2">
+              <span className="rounded-full bg-db-aqua/10 border border-db-aqua/20 px-3 py-1 text-xs text-db-dark">Vulnerabilities found and remediated</span>
+              <span className="rounded-full bg-db-aqua/10 border border-db-aqua/20 px-3 py-1 text-xs text-db-dark">Risk score improvement over time</span>
+              <span className="rounded-full bg-db-aqua/10 border border-db-aqua/20 px-3 py-1 text-xs text-db-dark">Tabletop exercise completed with leadership</span>
+              <span className="rounded-full bg-db-aqua/10 border border-db-aqua/20 px-3 py-1 text-xs text-db-dark">Phishing click rate decreasing quarter over quarter</span>
+            </div>
+          </div>
+
+          <div className="rounded-md bg-green-50 border border-green-200 p-3">
+            <p className="text-xs font-semibold text-green-700">THE BRIDGE TO PHASE 4</p>
+            <p className="text-sm text-green-800 mt-1">
+              &ldquo;You&apos;re now running a stronger security program than most of your peers.
+              That&apos;s not just protection — it&apos;s a differentiator. Let&apos;s make sure your LPs
+              and prospective allocators see it. How are you telling that story today?&rdquo;
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Phase 4 ── */}
+      <div className="mt-6 rounded-xl border-2 border-db-orange overflow-hidden">
+        <div className="bg-orange-50 px-6 py-4 border-b border-db-orange/20 flex items-center gap-4">
+          <span className="flex items-center justify-center w-10 h-10 rounded-full bg-db-orange text-white text-lg font-bold">4</span>
+          <div>
+            <h3 className="text-lg font-bold font-heading text-db-dark">Differentiate — Security as Competitive Advantage</h3>
+            <p className="text-sm text-gray-500">Turn the program into a story that wins capital and builds trust.</p>
+          </div>
+        </div>
+        <div className="px-6 py-5 space-y-5">
+          <div>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">The Trigger</p>
+            <p className="mt-1 text-sm text-gray-700">
+              The firm has a mature, tested program. Now the question shifts from &ldquo;are we
+              protected?&rdquo; to &ldquo;how do we use this to win?&rdquo; Allocators are comparing managers.
+              The firm with the best operational story wins the allocation. This is where
+              cybersecurity becomes a revenue driver, not a cost center.
+            </p>
+          </div>
+
+          <div>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">What We Add</p>
+            <div className="mt-2 grid grid-cols-3 gap-3">
+              <div className="rounded-md bg-gray-50 border border-gray-200 p-3">
+                <p className="text-xs font-semibold text-db-orange">Positioning</p>
+                <p className="text-sm font-medium text-db-dark mt-1">Peer Benchmarking</p>
+                <p className="text-xs text-gray-500 mt-1">Show the firm where they stand vs. peers — and help them tell that story to allocators.</p>
+              </div>
+              <div className="rounded-md bg-gray-50 border border-gray-200 p-3">
+                <p className="text-xs font-semibold text-db-orange">Governance</p>
+                <p className="text-sm font-medium text-db-dark mt-1">Board &amp; LP Reporting</p>
+                <p className="text-xs text-gray-500 mt-1">Executive-ready reports that demonstrate program maturity to leadership and investors.</p>
+              </div>
+              <div className="rounded-md bg-gray-50 border border-gray-200 p-3">
+                <p className="text-xs font-semibold text-db-orange">Growth</p>
+                <p className="text-sm font-medium text-db-dark mt-1">Vendor Risk Program</p>
+                <p className="text-xs text-gray-500 mt-1">Extend the program to cover third-party risk — a top allocator and regulatory priority.</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">How We Measure Value</p>
+            <div className="mt-1 flex flex-wrap gap-2">
+              <span className="rounded-full bg-db-aqua/10 border border-db-aqua/20 px-3 py-1 text-xs text-db-dark">Top-quartile peer benchmarking position</span>
+              <span className="rounded-full bg-db-aqua/10 border border-db-aqua/20 px-3 py-1 text-xs text-db-dark">Board receives quarterly security reports</span>
+              <span className="rounded-full bg-db-aqua/10 border border-db-aqua/20 px-3 py-1 text-xs text-db-dark">LP feedback cites security program as a strength</span>
+              <span className="rounded-full bg-db-aqua/10 border border-db-aqua/20 px-3 py-1 text-xs text-db-dark">Vendor risk program covering critical third parties</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Scale narrative */}
+      <SectionHeading>The Constant: Scale Without Headcount</SectionHeading>
+      <div className="rounded-lg border-l-4 border-db-dark bg-gray-50 p-5">
+        <p className="text-sm text-gray-700 leading-relaxed">
+          <strong>Outcome 5 — Scale Without Adding Headcount</strong> — isn&apos;t a phase. It&apos;s the
+          underlying value proposition that runs through the entire journey. At every phase, the
+          client is getting enterprise-grade security without hiring a CISO or building an internal
+          team. This should be reinforced at every touchpoint: &ldquo;We&apos;re delivering all of this
+          at a fraction of what it would cost to build in-house — and it scales automatically
+          as your firm grows.&rdquo;
+        </p>
+      </div>
+
+      {/* Journey at a glance */}
+      <SectionHeading>The Journey at a Glance</SectionHeading>
+      <div className="rounded-md border border-gray-200 overflow-hidden">
+        <table className="w-full text-sm">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-4 py-2 text-left font-medium text-gray-600">Phase</th>
+              <th className="px-4 py-2 text-left font-medium text-gray-600">Outcome</th>
+              <th className="px-4 py-2 text-left font-medium text-gray-600">Client Says</th>
+              <th className="px-4 py-2 text-left font-medium text-gray-600">We Deliver</th>
+              <th className="px-4 py-2 text-left font-medium text-gray-600">Bridge to Next</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-100">
+            <tr>
+              <td className="px-4 py-2 font-medium text-db-dark">1. Get Started</td>
+              <td className="px-4 py-2 text-gray-600">Capital Confidence</td>
+              <td className="px-4 py-2 text-gray-600 italic">&ldquo;DDQ season is killing us&rdquo;</td>
+              <td className="px-4 py-2 text-gray-600">Assessment, DDQ support, ODD readiness</td>
+              <td className="px-4 py-2 text-gray-600">&ldquo;Let&apos;s make the underlying program exam-ready&rdquo;</td>
+            </tr>
+            <tr className="bg-gray-50/50">
+              <td className="px-4 py-2 font-medium text-db-dark">2. Foundation</td>
+              <td className="px-4 py-2 text-gray-600">Regulatory Readiness</td>
+              <td className="px-4 py-2 text-gray-600 italic">&ldquo;What if the SEC shows up?&rdquo;</td>
+              <td className="px-4 py-2 text-gray-600">Policies, IR plan, training program</td>
+              <td className="px-4 py-2 text-gray-600">&ldquo;Let&apos;s test if the plan actually works&rdquo;</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2 font-medium text-db-dark">3. Strengthen</td>
+              <td className="px-4 py-2 text-gray-600">Protection</td>
+              <td className="px-4 py-2 text-gray-600 italic">&ldquo;Are we actually protected?&rdquo;</td>
+              <td className="px-4 py-2 text-gray-600">Pen testing, tabletops, IR retainer</td>
+              <td className="px-4 py-2 text-gray-600">&ldquo;You&apos;re ahead of peers — let&apos;s tell that story&rdquo;</td>
+            </tr>
+            <tr className="bg-gray-50/50">
+              <td className="px-4 py-2 font-medium text-db-dark">4. Differentiate</td>
+              <td className="px-4 py-2 text-gray-600">Competitive Advantage</td>
+              <td className="px-4 py-2 text-gray-600 italic">&ldquo;How do we stand out?&rdquo;</td>
+              <td className="px-4 py-2 text-gray-600">Benchmarking, board reporting, vendor risk</td>
+              <td className="px-4 py-2 text-gray-600">Continuous partnership &amp; expansion</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      {/* Key principles */}
+      <SectionHeading>Key Principles</SectionHeading>
+      <div className="grid grid-cols-2 gap-4">
+        <CharacteristicCard
+          title="Start Where They Hurt"
+          description="Don't try to sell the full program on day one. Solve their most urgent problem, prove value fast, and earn the right to expand."
+        />
+        <CharacteristicCard
+          title="Every Phase Earns the Next"
+          description="The bridge between phases should feel natural, not salesy. You're identifying the next business problem, not pitching the next SKU."
+        />
+        <CharacteristicCard
+          title="The Client Sets the Pace"
+          description="Some clients move through all four phases in year one. Others take three years. Match their priorities and budget cycle, not yours."
+        />
+        <CharacteristicCard
+          title="The Journey Never Ends"
+          description="Phase 4 isn't the finish line. Threats evolve, regulations change, firms grow. The partnership continues to create value as long as we stay relevant."
+        />
+      </div>
+
+      <DrawbridgeAngle>
+        <p>
+          This journey is designed to be shared with the client — in a sales deck, a
+          QBR, or a renewal conversation. It shows them we&apos;re not trying to sell
+          everything at once. We&apos;re meeting them where they are and building from there.
+        </p>
+        <p>
+          The most important moment is the <strong>bridge between phases</strong>. That&apos;s
+          where expansion happens — and it should always be framed as the next logical
+          business problem to solve, not a product to buy. When a client says &ldquo;that
+          makes sense, let&apos;s do it&rdquo; — you&apos;ve nailed the bridge.
+        </p>
+      </DrawbridgeAngle>
+    </>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /*  MAIN COMPONENT                                                    */
 /* ------------------------------------------------------------------ */
 
@@ -3165,6 +3557,7 @@ const CONTENT_MAP: Record<SectionId, React.FC> = {
   'renewal-plan-best-practices': RenewalPlanBestPractices,
   'negotiation-playbook': NegotiationPlaybook,
   'outcome-framework': OutcomeFramework,
+  'journey-hedge-fund': JourneyHedgeFund,
   marketing: MarketingMaterials,
 };
 
