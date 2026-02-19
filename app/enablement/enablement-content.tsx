@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 /* ------------------------------------------------------------------ */
 /*  Types & Navigation Data                                           */
@@ -3919,13 +3919,19 @@ const CONTENT_MAP: Record<SectionId, React.FC> = {
 
 export default function EnablementContent() {
   const [active, setActive] = useState<SectionId>('industry-overview');
+  const contentRef = useRef<HTMLElement>(null);
   const ContentComponent = CONTENT_MAP[active];
 
+  function navigate(id: SectionId) {
+    setActive(id);
+    contentRef.current?.scrollTo(0, 0);
+  }
+
   return (
-    <div className="flex gap-6">
+    <div className="flex h-full gap-0">
       {/* Sidebar */}
-      <aside className="w-56 shrink-0">
-        <nav className="sticky top-6 rounded-lg border border-gray-200 bg-white p-4">
+      <aside className="w-56 shrink-0 overflow-y-auto border-r border-gray-200 bg-white">
+        <nav className="p-4">
           {/* Training Section */}
           <p className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-gray-400">
             Training
@@ -3934,7 +3940,7 @@ export default function EnablementContent() {
             {TRAINING_ITEMS.map((item) => (
               <li key={item.id}>
                 <button
-                  onClick={() => setActive(item.id)}
+                  onClick={() => navigate(item.id)}
                   className={`w-full rounded-md px-3 py-2 text-left text-sm transition ${
                     active === item.id
                       ? 'border-l-3 border-db-aqua bg-db-aqua/10 font-medium text-db-dark'
@@ -3957,7 +3963,7 @@ export default function EnablementContent() {
             {WORKFLOW_ITEMS.map((item) => (
               <li key={item.id}>
                 <button
-                  onClick={() => setActive(item.id)}
+                  onClick={() => navigate(item.id)}
                   className={`w-full rounded-md px-3 py-2 text-left text-sm transition ${
                     active === item.id
                       ? 'border-l-3 border-db-aqua bg-db-aqua/10 font-medium text-db-dark'
@@ -3980,7 +3986,7 @@ export default function EnablementContent() {
             {VALUE_ITEMS.map((item) => (
               <li key={item.id}>
                 <button
-                  onClick={() => setActive(item.id)}
+                  onClick={() => navigate(item.id)}
                   className={`w-full rounded-md px-3 py-2 text-left text-sm transition ${
                     active === item.id
                       ? 'border-l-3 border-db-aqua bg-db-aqua/10 font-medium text-db-dark'
@@ -4000,7 +4006,7 @@ export default function EnablementContent() {
             Marketing Materials
           </p>
           <button
-            onClick={() => setActive('marketing')}
+            onClick={() => navigate('marketing')}
             className={`w-full rounded-md px-3 py-2 text-left text-sm transition ${
               active === 'marketing'
                 ? 'border-l-3 border-db-aqua bg-db-aqua/10 font-medium text-db-dark'
@@ -4013,7 +4019,7 @@ export default function EnablementContent() {
       </aside>
 
       {/* Content Area */}
-      <section className="flex-1 min-w-0">
+      <section ref={contentRef} className="flex-1 min-w-0 overflow-y-auto p-6">
         <ContentComponent />
       </section>
     </div>
