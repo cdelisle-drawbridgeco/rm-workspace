@@ -2708,7 +2708,7 @@ function OutcomeFramework() {
       <HeroSection
         icon="🎯"
         title="Business Outcome Framework"
-        subtitle="Stop selling features. Start solving business problems. Five outcomes that define the value we deliver — in our clients' language."
+        subtitle="Stop selling features. Start solving business problems. Six outcomes that define the value we deliver — in our clients' language."
       />
 
       {/* Philosophy */}
@@ -2725,7 +2725,7 @@ function OutcomeFramework() {
         The shift is subtle but powerful: it moves us from vendor to strategic partner.
       </p>
       <p className="mt-3 text-sm text-gray-700 leading-relaxed">
-        This framework defines <strong>five business outcomes</strong> that every Drawbridge
+        This framework defines <strong>six business outcomes</strong> that every Drawbridge
         engagement should map to. Use them in renewal conversations, QBRs, proposals, and
         internal planning. Over time, we&apos;ll layer in detailed value narratives and SKU
         mappings underneath each outcome — but the outcomes themselves are the foundation.
@@ -2756,7 +2756,7 @@ function OutcomeFramework() {
       </SubSection>
 
       {/* Outcome 1 */}
-      <SectionHeading>The Five Outcomes</SectionHeading>
+      <SectionHeading>The Six Outcomes</SectionHeading>
 
       <div className="mt-4 rounded-xl border-2 border-db-aqua bg-white overflow-hidden">
         <div className="bg-db-aqua/10 px-6 py-4 border-b border-db-aqua/20">
@@ -2999,6 +2999,83 @@ function OutcomeFramework() {
         </div>
       </div>
 
+      {/* Outcome 6 */}
+      <div className="mt-6 rounded-xl border-2 border-db-aqua bg-white overflow-hidden">
+        <div className="bg-db-aqua/10 px-6 py-4 border-b border-db-aqua/20">
+          <div className="flex items-center gap-3">
+            <span className="flex items-center justify-center w-10 h-10 rounded-full bg-db-aqua/20 text-lg font-bold text-db-aqua-dark">6</span>
+            <div>
+              <h3 className="text-lg font-bold font-heading text-db-dark">Be AI-Ready Without the Risk</h3>
+              <p className="text-sm text-gray-500 mt-0.5">Embrace AI confidently — with the training, governance, and guardrails to do it safely.</p>
+            </div>
+          </div>
+        </div>
+        <div className="px-6 py-5 space-y-4">
+          <div>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Why It Matters</p>
+            <p className="mt-1 text-sm text-gray-700 leading-relaxed">
+              Every firm is being asked about AI — by LPs, by regulators, and by their own teams.
+              Employees are already using AI tools, often without oversight. The SEC is paying
+              attention to AI governance, and allocators are starting to ask &ldquo;what&apos;s your AI
+              policy?&rdquo; in DDQs. Firms that wait to address AI readiness will find themselves
+              reacting to incidents, regulatory gaps, and reputational risk. The firms that get
+              ahead will have clear policies, trained teams, and a framework for evaluating and
+              governing AI tools — turning a source of anxiety into a managed capability.
+            </p>
+          </div>
+          <div>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">The Business Impact</p>
+            <ul className="mt-1 text-sm text-gray-700 space-y-1">
+              <li>&#8226; Employee AI training that reduces risk of data leakage and misuse</li>
+              <li>&#8226; LLM and AI tool assessments that identify exposure before it becomes a problem</li>
+              <li>&#8226; Clear, documented AI acceptable use policies that satisfy regulators and LPs</li>
+              <li>&#8226; Governance framework for evaluating, approving, and monitoring AI tools</li>
+              <li>&#8226; Confidence to adopt AI where it adds value — without creating new attack surfaces</li>
+            </ul>
+          </div>
+          <div>
+            <p className="text-xs font-semibold text-db-aqua-dark uppercase tracking-wide">How Your Client Says It</p>
+            <div className="mt-1 flex flex-wrap gap-2">
+              <span className="rounded-full bg-db-aqua/10 border border-db-aqua/20 px-3 py-1 text-xs text-db-dark">&ldquo;Our team is using ChatGPT — should we be worried?&rdquo;</span>
+              <span className="rounded-full bg-db-aqua/10 border border-db-aqua/20 px-3 py-1 text-xs text-db-dark">&ldquo;LPs are asking about our AI policy&rdquo;</span>
+              <span className="rounded-full bg-db-aqua/10 border border-db-aqua/20 px-3 py-1 text-xs text-db-dark">&ldquo;We don&apos;t know what tools people are using&rdquo;</span>
+              <span className="rounded-full bg-db-aqua/10 border border-db-aqua/20 px-3 py-1 text-xs text-db-dark">&ldquo;The SEC mentioned AI in their exam priorities&rdquo;</span>
+              <span className="rounded-full bg-db-aqua/10 border border-db-aqua/20 px-3 py-1 text-xs text-db-dark">&ldquo;We want to use AI but don&apos;t know where to start&rdquo;</span>
+            </div>
+          </div>
+          <div>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">What This Looks Like</p>
+            <div className="mt-2 grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="rounded-md border border-gray-200 bg-gray-50 p-3">
+                <p className="text-xs font-semibold text-db-aqua-dark">AI Training</p>
+                <p className="mt-1 text-xs text-gray-600">
+                  Role-based training for employees on safe AI usage, data handling with AI tools,
+                  and recognizing AI-related risks like prompt injection and data leakage.
+                </p>
+              </div>
+              <div className="rounded-md border border-gray-200 bg-gray-50 p-3">
+                <p className="text-xs font-semibold text-db-aqua-dark">LLM &amp; Tool Assessments</p>
+                <p className="mt-1 text-xs text-gray-600">
+                  Evaluate which AI tools are in use (sanctioned and shadow), assess data exposure
+                  risk, review vendor security posture, and map AI to existing risk frameworks.
+                </p>
+              </div>
+              <div className="rounded-md border border-gray-200 bg-gray-50 p-3">
+                <p className="text-xs font-semibold text-db-aqua-dark">Policy &amp; Governance</p>
+                <p className="mt-1 text-xs text-gray-600">
+                  Create and maintain AI acceptable use policies, establish approval workflows for
+                  new AI tools, and build ongoing monitoring and review cadences.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="rounded-md bg-gray-50 border border-gray-100 p-3">
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Value Narratives &amp; SKU Mapping</p>
+            <p className="mt-1 text-xs text-gray-400 italic">Coming soon — detailed narratives and service mapping will be added here.</p>
+          </div>
+        </div>
+      </div>
+
       {/* Using the Framework */}
       <SectionHeading>Putting It All Together</SectionHeading>
 
@@ -3017,8 +3094,9 @@ function OutcomeFramework() {
           <p className="text-sm text-green-700 italic">
             &ldquo;This year, we helped you raise your new fund with confidence — your ODD
             reviews went smoothly and your DDQ turnaround time dropped from 3 weeks to 5
-            days. We kept you exam-ready with current policies and a tested IR plan. And
-            we did it all without you having to hire a single security person. Looking
+            days. We kept you exam-ready with current policies and a tested IR plan. We
+            got ahead of AI risk with training and policies before the SEC asked about it.
+            And we did it all without you having to hire a single security person. Looking
             ahead, here&apos;s how we continue driving those outcomes as you grow.&rdquo;
           </p>
         </div>
@@ -3052,17 +3130,17 @@ function OutcomeFramework() {
               <tr>
                 <td className="px-4 py-2 font-medium text-db-dark">Hedge Fund (steady state)</td>
                 <td className="px-4 py-2 text-gray-600">2. Regulatory Complexity</td>
-                <td className="px-4 py-2 text-gray-600">3. Protection + 5. Scale</td>
+                <td className="px-4 py-2 text-gray-600">3. Protection + 6. AI Readiness</td>
               </tr>
               <tr>
                 <td className="px-4 py-2 font-medium text-db-dark">PE Firm (GP level)</td>
                 <td className="px-4 py-2 text-gray-600">1. Raise &amp; Retain Capital</td>
-                <td className="px-4 py-2 text-gray-600">5. Scale (portco expansion)</td>
+                <td className="px-4 py-2 text-gray-600">5. Scale + 6. AI Readiness (portco)</td>
               </tr>
               <tr>
                 <td className="px-4 py-2 font-medium text-db-dark">PE Portfolio Company</td>
                 <td className="px-4 py-2 text-gray-600">3. Protect from Disruption</td>
-                <td className="px-4 py-2 text-gray-600">2. Regulatory + 5. Scale</td>
+                <td className="px-4 py-2 text-gray-600">2. Regulatory + 6. AI Readiness</td>
               </tr>
               <tr>
                 <td className="px-4 py-2 font-medium text-db-dark">Family Office</td>
@@ -3078,6 +3156,11 @@ function OutcomeFramework() {
                 <td className="px-4 py-2 font-medium text-db-dark">Post-incident firm</td>
                 <td className="px-4 py-2 text-gray-600">3. Protect from Disruption</td>
                 <td className="px-4 py-2 text-gray-600">1. Capital Confidence (LP recovery)</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-2 font-medium text-db-dark">Firm adopting AI tools</td>
+                <td className="px-4 py-2 text-gray-600">6. AI Readiness</td>
+                <td className="px-4 py-2 text-gray-600">2. Regulatory + 3. Protection</td>
               </tr>
             </tbody>
           </table>
@@ -3125,6 +3208,13 @@ function OutcomeFramework() {
               <p className="text-xs text-gray-500">Cost vs. in-house equivalent, COO/CCO hours saved, new entities covered (funds, offices, portcos), services consumed per dollar</p>
             </div>
           </div>
+          <div className="flex items-start gap-3 rounded-md border border-gray-200 bg-white p-3">
+            <span className="shrink-0 font-bold text-db-aqua-dark">6</span>
+            <div>
+              <p className="text-sm font-medium text-db-dark">AI Readiness</p>
+              <p className="text-xs text-gray-500">AI policy in place &amp; current, employees trained (% completion), AI tools inventoried &amp; assessed, shadow AI tools identified, governance review cadence established</p>
+            </div>
+          </div>
         </div>
       </SubSection>
 
@@ -3132,7 +3222,7 @@ function OutcomeFramework() {
         <p>
           This framework is the foundation for how we talk about value — externally and
           internally. Every service we deliver, every assessment we run, every policy we
-          write should tie back to one or more of these five outcomes. If it doesn&apos;t,
+          write should tie back to one or more of these six outcomes. If it doesn&apos;t,
           we need to ask why we&apos;re doing it.
         </p>
         <p>
