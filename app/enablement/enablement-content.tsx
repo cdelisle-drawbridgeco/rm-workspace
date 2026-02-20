@@ -2766,7 +2766,7 @@ function OutcomeFramework() {
           { num: '3', title: 'Protect the Firm from Disruption', desc: 'Be ready for the incident that hasn\u2019t happened yet' },
           { num: '4', title: 'Make Security a Competitive Advantage', desc: 'Turn a cost center into a differentiator' },
           { num: '5', title: 'Scale Without Adding Headcount', desc: 'Enterprise security without the enterprise team' },
-          { num: '6', title: 'Be AI-Ready Without the Risk', desc: 'Embrace AI with training, governance & guardrails' },
+          { num: '6', title: 'Get AI-Ready, Stay AI-Safe', desc: 'Adopt AI with confidence — training, assessments & governance' },
         ].map((o) => (
           <div key={o.num} className="rounded-lg border border-db-aqua/30 bg-db-aqua/5 p-4 text-center">
             <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-db-aqua text-white text-sm font-bold">{o.num}</span>
@@ -3023,8 +3023,8 @@ function OutcomeFramework() {
           <div className="flex items-center gap-3">
             <span className="flex items-center justify-center w-10 h-10 rounded-full bg-db-aqua/20 text-lg font-bold text-db-aqua-dark">6</span>
             <div>
-              <h3 className="text-lg font-bold font-heading text-db-dark">Be AI-Ready Without the Risk</h3>
-              <p className="text-sm text-gray-500 mt-0.5">Embrace AI confidently — with the training, governance, and guardrails to do it safely.</p>
+              <h3 className="text-lg font-bold font-heading text-db-dark">Get AI-Ready, Stay AI-Safe</h3>
+              <p className="text-sm text-gray-500 mt-0.5">Adopt AI with confidence — with the training, assessments, and governance to minimize risk.</p>
             </div>
           </div>
         </div>
