@@ -2758,7 +2758,25 @@ function OutcomeFramework() {
       {/* Outcome 1 */}
       <SectionHeading>The Six Outcomes</SectionHeading>
 
-      <div className="mt-4 rounded-xl border-2 border-db-aqua bg-white overflow-hidden">
+      {/* At-a-glance overview cards */}
+      <div className="mt-4 grid grid-cols-3 gap-3">
+        {[
+          { num: '1', title: 'Raise & Retain Capital with Confidence', desc: 'Investor trust through operational excellence' },
+          { num: '2', title: 'Navigate Regulatory Complexity', desc: 'Stay ahead of evolving regulations' },
+          { num: '3', title: 'Protect the Firm from Disruption', desc: 'Be ready for the incident that hasn\u2019t happened yet' },
+          { num: '4', title: 'Make Security a Competitive Advantage', desc: 'Turn a cost center into a differentiator' },
+          { num: '5', title: 'Scale Without Adding Headcount', desc: 'Enterprise security without the enterprise team' },
+          { num: '6', title: 'Be AI-Ready Without the Risk', desc: 'Embrace AI with training, governance & guardrails' },
+        ].map((o) => (
+          <div key={o.num} className="rounded-lg border border-db-aqua/30 bg-db-aqua/5 p-4 text-center">
+            <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-db-aqua text-white text-sm font-bold">{o.num}</span>
+            <p className="mt-2 text-sm font-bold font-heading text-db-dark leading-snug">{o.title}</p>
+            <p className="mt-1 text-xs text-gray-500">{o.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-6 rounded-xl border-2 border-db-aqua bg-white overflow-hidden">
         <div className="bg-db-aqua/10 px-6 py-4 border-b border-db-aqua/20">
           <div className="flex items-center gap-3">
             <span className="flex items-center justify-center w-10 h-10 rounded-full bg-db-aqua/20 text-lg font-bold text-db-aqua-dark">1</span>
