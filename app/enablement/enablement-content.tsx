@@ -2468,6 +2468,294 @@ function NegotiationPlaybook() {
         </ul>
       </SubSection>
 
+      {/* Uplift Negotiation */}
+      <SectionHeading>Negotiating Uplift (Price Increases)</SectionHeading>
+
+      <SubSection icon="📊" title="Why Uplift Matters — The Strategic Picture">
+        <p>
+          Our standard annual uplift is 7%. In practice, most deals land somewhere between
+          3% and 7%. At our typical ACV of $30–50K, the dollar difference between those
+          numbers is a few hundred to maybe a thousand dollars. <strong>This is not about
+          fighting over a few hundred bucks.</strong>
+        </p>
+        <p>
+          So why does uplift matter? Because it&apos;s a <em>habit</em> and a <em>signal</em>.
+          If you consistently accept flat renewals or minimal increases, you&apos;re training
+          clients to expect it — and you&apos;re compressing your book over time. A 0% increase
+          this year is actually a real-dollar decrease when costs go up. Across 50 accounts,
+          the difference between averaging 3% uplift and 5% uplift is real money at the
+          portfolio level, even if any single deal feels small.
+        </p>
+        <p>
+          More importantly, <strong>how you handle the uplift conversation signals how you
+          show up as a partner</strong>. An RM who presents uplift confidently, ties it to
+          value, and uses it as a lever to deepen the relationship is operating strategically.
+          An RM who apologizes for it, pre-discounts before the client even pushes back, or
+          avoids the conversation entirely is leaving value on the table and undermining
+          their own positioning.
+        </p>
+      </SubSection>
+
+      <SubSection icon="🧭" title="The Uplift Framework">
+        <p>
+          This isn&apos;t a rigid script — it&apos;s a way of thinking about the conversation.
+          Every client is different, every situation has context, and you have judgment.
+          The framework is designed to help you <strong>think through your approach before
+          the conversation</strong>, not to box you in during it.
+        </p>
+
+        <div className="mt-4 space-y-4">
+          {/* Principle 1 */}
+          <div className="rounded-lg border border-gray-200 bg-white p-5">
+            <p className="text-sm font-bold text-db-dark">1. Always Start at Standard</p>
+            <p className="mt-2 text-sm text-gray-700">
+              Every proposal goes out at 7%. No pre-discounting. No &ldquo;I already brought it down
+              for you.&rdquo; The reason is simple: <strong>many clients will accept it without
+              pushback</strong> if it&apos;s presented as standard. You don&apos;t know which ones will push
+              back until they do — so don&apos;t negotiate against yourself.
+            </p>
+            <p className="mt-2 text-sm text-gray-700">
+              Present it as a line item, not a talking point. Call it an &ldquo;annual adjustment&rdquo;
+              or &ldquo;standard rate update&rdquo; — not a &ldquo;price increase.&rdquo; Language shapes perception.
+              If you treat it as routine, the client will too.
+            </p>
+          </div>
+
+          {/* Principle 2 */}
+          <div className="rounded-lg border border-gray-200 bg-white p-5">
+            <p className="text-sm font-bold text-db-dark">2. When They Push Back — Lead with Value, Not Apology</p>
+            <p className="mt-2 text-sm text-gray-700">
+              If a client questions the uplift, your first instinct should <em>not</em> be to
+              offer a lower number. Your first move is to tie the increase to something real:
+            </p>
+            <ul className="mt-2 text-sm text-gray-700 space-y-1 ml-4">
+              <li>&#8226; &ldquo;The regulatory landscape has expanded — new Reg S-P amendments, AI governance, expanded SEC priorities. The scope of what we cover for you has grown.&rdquo;</li>
+              <li>&#8226; &ldquo;We&apos;ve deepened our knowledge of your environment over the past year. That continuity has real value — a new provider would take 6 months to get up to speed.&rdquo;</li>
+              <li>&#8226; &ldquo;Platform improvements, expanded threat intelligence, faster DDQ turnaround — the service has gotten better, and the adjustment reflects that.&rdquo;</li>
+            </ul>
+            <p className="mt-2 text-sm text-gray-700">
+              Often, simply explaining the &ldquo;why&rdquo; is enough. Many clients push back reflexively —
+              they&apos;re not genuinely objecting, they&apos;re checking to see if the number moves.
+              If you hold with a clear rationale, a lot of them will accept it.
+            </p>
+          </div>
+
+          {/* Principle 3 */}
+          <div className="rounded-lg border border-gray-200 bg-white p-5">
+            <p className="text-sm font-bold text-db-dark">3. If You Come Down — Trade for Something</p>
+            <p className="mt-2 text-sm text-gray-700">
+              The exact percentage matters less than the principle: <strong>every concession
+              should come with a trade</strong>. This is where the real strategy lives.
+              Whether you end up at 5% or 3% is less important than what you get in return.
+            </p>
+            <div className="mt-3 rounded-md border border-gray-200 overflow-hidden">
+              <table className="w-full text-sm">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-4 py-2 text-left font-medium text-gray-600">You Give</th>
+                    <th className="px-4 py-2 text-left font-medium text-gray-600">You Get</th>
+                    <th className="px-4 py-2 text-left font-medium text-gray-600">Why It&apos;s Worth It</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  <tr>
+                    <td className="px-4 py-2 text-gray-700">Lower uplift</td>
+                    <td className="px-4 py-2 font-medium text-db-dark">2-year commitment</td>
+                    <td className="px-4 py-2 text-gray-600">Eliminates next year&apos;s renewal risk entirely. Revenue secured for 24 months.</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-2 text-gray-700">Lower uplift</td>
+                    <td className="px-4 py-2 font-medium text-db-dark">Auto-renewal clause</td>
+                    <td className="px-4 py-2 text-gray-600">Contract continues unless cancelled. Shifts the burden from &ldquo;renew&rdquo; to &ldquo;cancel.&rdquo;</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-2 text-gray-700">Lower uplift</td>
+                    <td className="px-4 py-2 font-medium text-db-dark">Expansion commitment</td>
+                    <td className="px-4 py-2 text-gray-600">&ldquo;I can work on the rate if we add the portco assessment we discussed for Q3.&rdquo;</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-2 text-gray-700">Lower uplift</td>
+                    <td className="px-4 py-2 font-medium text-db-dark">Case study / reference</td>
+                    <td className="px-4 py-2 text-gray-600">Marketing asset + social proof. Worth more than the uplift delta to the business.</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-2 text-gray-700">Lower uplift</td>
+                    <td className="px-4 py-2 font-medium text-db-dark">Upfront annual payment</td>
+                    <td className="px-4 py-2 text-gray-600">Cash flow improvement. A $40K check in January vs. quarterly invoices has real value.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-3 text-sm text-gray-700">
+              The <strong>2-year deal is your best lever</strong> and should be the first trade
+              you reach for. It&apos;s easy for the client to say yes to — they get rate certainty
+              and eliminate the hassle of renegotiating next year. You get guaranteed revenue
+              and remove renewal risk from your pipeline. Both sides win.
+            </p>
+          </div>
+
+          {/* Principle 4 */}
+          <div className="rounded-lg border border-gray-200 bg-white p-5">
+            <p className="text-sm font-bold text-db-dark">4. Know When It&apos;s Not Worth the Fight</p>
+            <p className="mt-2 text-sm text-gray-700">
+              Strategic judgment matters. On a $35K deal, the difference between 5% and 3% is
+              $700. If the client is a strong reference, has expansion potential, or just needs
+              an easy win to get the deal signed, it may not be worth spending two more calls
+              negotiating over that delta. <strong>Your time is an asset too.</strong>
+            </p>
+            <p className="mt-2 text-sm text-gray-700">
+              The question to ask yourself is: <em>&ldquo;What else could I accomplish with the time
+              I&apos;d spend fighting for this?&rdquo;</em> If the answer is &ldquo;close another deal&rdquo; or
+              &ldquo;expand a different account,&rdquo; take the reasonable offer and move on. The goal
+              is to maximize the value of your <em>book</em>, not to win every individual negotiation.
+            </p>
+          </div>
+
+          {/* Principle 5 */}
+          <div className="rounded-lg border border-gray-200 bg-white p-5">
+            <p className="text-sm font-bold text-db-dark">5. Flat Renewals Need a Story</p>
+            <p className="mt-2 text-sm text-gray-700">
+              Sometimes the right answer is 0%. A strategic account in a save situation, a
+              client going through a genuine hardship, a relationship you need to protect for
+              long-term expansion. That&apos;s fine — but it should be a <strong>deliberate
+              decision with a plan</strong>, not a default.
+            </p>
+            <p className="mt-2 text-sm text-gray-700">
+              If you&apos;re proposing a flat renewal, you should be able to articulate:
+              <em> why this client</em>, <em>what you&apos;re getting in return</em> (even if it&apos;s
+              just goodwill and retention), and <em>what the plan is to get uplift next year</em>.
+              It&apos;s not about asking permission — it&apos;s about operating with intention.
+            </p>
+          </div>
+        </div>
+      </SubSection>
+
+      {/* Strategic Thinking */}
+      <SubSection icon="🧠" title="The Real Skill: Reading the Situation">
+        <p>
+          The best uplift negotiators don&apos;t rely on a script. They read the client and
+          the situation and adjust. Here are the patterns to recognize:
+        </p>
+        <div className="mt-3 space-y-3">
+          <div className="rounded-md border border-gray-200 bg-white p-4">
+            <p className="text-sm font-bold text-db-dark">The Reflexive Pushback</p>
+            <p className="mt-1 text-sm text-gray-700">
+              <strong>What it sounds like:</strong> &ldquo;Can you do anything on the price?&rdquo; — asked
+              casually, almost out of habit. They haven&apos;t looked at the numbers. They&apos;re checking.
+            </p>
+            <p className="mt-1 text-sm text-gray-700">
+              <strong>What to do:</strong> Hold. Explain the value. Most of the time, this
+              resolves itself. They weren&apos;t objecting — they were testing. If you immediately
+              offer a discount, you&apos;ve rewarded the test and they&apos;ll do it harder next year.
+            </p>
+          </div>
+          <div className="rounded-md border border-gray-200 bg-white p-4">
+            <p className="text-sm font-bold text-db-dark">The Budget Reality</p>
+            <p className="mt-1 text-sm text-gray-700">
+              <strong>What it sounds like:</strong> &ldquo;Our COO said all vendor renewals need to
+              come in at X% or flat.&rdquo; There&apos;s a real number. Someone above them set it.
+            </p>
+            <p className="mt-1 text-sm text-gray-700">
+              <strong>What to do:</strong> Work with it. If the number is 3% or 5%, just take it
+              and trade for multi-year or another concession. If it&apos;s 0%, explore restructuring
+              or offer to help them build the internal case. &ldquo;Would it help if I put together a
+              brief for your COO on the regulatory risk of reducing coverage?&rdquo;
+            </p>
+          </div>
+          <div className="rounded-md border border-gray-200 bg-white p-4">
+            <p className="text-sm font-bold text-db-dark">The Competitive Lever</p>
+            <p className="mt-1 text-sm text-gray-700">
+              <strong>What it sounds like:</strong> &ldquo;We got a quote from another provider at
+              $X&rdquo; or &ldquo;We&apos;re evaluating options.&rdquo;
+            </p>
+            <p className="mt-1 text-sm text-gray-700">
+              <strong>What to do:</strong> Don&apos;t panic and don&apos;t match blindly. Shift the
+              conversation to switching costs and continuity: &ldquo;Switching providers means 3–6
+              months of onboarding, losing institutional knowledge of your environment, and
+              starting over on LP reporting. The uplift is a fraction of that disruption cost.&rdquo;
+              Then offer the multi-year trade to close the conversation.
+            </p>
+          </div>
+          <div className="rounded-md border border-gray-200 bg-white p-4">
+            <p className="text-sm font-bold text-db-dark">The Value Question</p>
+            <p className="mt-1 text-sm text-gray-700">
+              <strong>What it sounds like:</strong> &ldquo;Why should we pay more when we didn&apos;t
+              use everything?&rdquo; or &ldquo;We&apos;re not sure we&apos;re getting our money&apos;s worth.&rdquo;
+            </p>
+            <p className="mt-1 text-sm text-gray-700">
+              <strong>What to do:</strong> This is a delivery and engagement problem, not a pricing
+              problem. Don&apos;t argue about the uplift — schedule a business review and show the
+              value. If the client is under-utilizing, that&apos;s on us to fix. Address the root
+              cause, then the renewal conversation gets much easier.
+            </p>
+          </div>
+          <div className="rounded-md border border-gray-200 bg-white p-4">
+            <p className="text-sm font-bold text-db-dark">The Hard Line</p>
+            <p className="mt-1 text-sm text-gray-700">
+              <strong>What it sounds like:</strong> &ldquo;We&apos;re renewing at the old price or we&apos;re
+              not renewing.&rdquo; Firm. Not negotiating.
+            </p>
+            <p className="mt-1 text-sm text-gray-700">
+              <strong>What to do:</strong> Take it seriously but don&apos;t fold immediately. Use
+              the &ldquo;leadership approval&rdquo; frame to buy time and add weight: &ldquo;A flat renewal
+              isn&apos;t something I can approve on my own — let me take this back to my leadership
+              with a case for it. If we can get a 2-year commitment, that gives me something to
+              work with.&rdquo; This shows the client the concession is real and makes the trade feel
+              earned.
+            </p>
+          </div>
+        </div>
+      </SubSection>
+
+      <SubSection icon="🤝" title="The Multi-Year Play — Your Best Tool">
+        <p>
+          Across all of these scenarios, the <strong>2-year deal</strong> is your most versatile
+          lever. It works because both sides genuinely benefit:
+        </p>
+        <div className="mt-3 grid grid-cols-2 gap-4">
+          <div className="rounded-lg border border-green-200 bg-green-50 p-4">
+            <p className="text-sm font-bold text-green-700">Client Gets</p>
+            <ul className="mt-2 text-sm text-gray-700 space-y-1">
+              <li>&#8226; Rate certainty for 24 months</li>
+              <li>&#8226; No renewal negotiation next year</li>
+              <li>&#8226; Budget predictability — easier internal approval</li>
+              <li>&#8226; Commitment to continued service levels</li>
+            </ul>
+          </div>
+          <div className="rounded-lg border border-db-aqua bg-db-aqua/5 p-4">
+            <p className="text-sm font-bold text-db-aqua-dark">Drawbridge Gets</p>
+            <ul className="mt-2 text-sm text-gray-700 space-y-1">
+              <li>&#8226; Guaranteed revenue for 2 years</li>
+              <li>&#8226; One less renewal to manage next year</li>
+              <li>&#8226; Deeper relationship and switching cost</li>
+              <li>&#8226; Better forecasting accuracy</li>
+            </ul>
+          </div>
+        </div>
+        <p className="mt-3 text-sm text-gray-700">
+          Frame it as a partnership move, not a pricing trick: &ldquo;A 2-year agreement means
+          we can plan a longer-horizon program together — more proactive, less reactive.
+          It also takes this negotiation off both our plates next year so we can focus on
+          the work.&rdquo;
+        </p>
+      </SubSection>
+
+      <DrawbridgeAngle>
+        <p>
+          The uplift conversation is a skill, not a policy. The percentages are guidelines.
+          What matters is <strong>how you show up</strong>: confident, prepared, and focused on
+          the relationship. An RM who consistently lands 3–5% with multi-year terms and
+          strong client relationships is doing exactly the right thing. An RM who avoids
+          the conversation entirely or apologizes their way to 0% is leaving value on the
+          table — not just in dollars, but in how the client perceives us.
+        </p>
+        <p>
+          Think of uplift as a muscle. The more you practice it, the more natural it feels.
+          Start by presenting 7% confidently on your next renewal and see what happens.
+          You&apos;ll be surprised how often the answer is just &ldquo;okay.&rdquo;
+        </p>
+      </DrawbridgeAngle>
+
       {/* Expansion Playbook */}
       <SectionHeading>Driving Expansion</SectionHeading>
 
