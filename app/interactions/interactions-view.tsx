@@ -75,7 +75,7 @@ function AccountSearch({
   }
 
   return (
-    <div ref={wrapperRef} className="relative flex-1 min-w-[240px]">
+    <div ref={wrapperRef} className="relative">
       <input
         type="text"
         value={open ? query : selected ? selected.name : query}
@@ -88,7 +88,7 @@ function AccountSearch({
         className="w-full rounded border border-db-gray px-3 py-1.5 text-sm focus:border-db-aqua focus:outline-none focus:ring-1 focus:ring-db-aqua"
       />
       {open && (
-        <div className="absolute z-20 mt-1 max-h-64 w-full overflow-y-auto rounded-lg border border-gray-200 bg-white shadow-lg">
+        <div className="absolute z-20 mt-1 max-h-64 w-full min-w-[280px] overflow-y-auto rounded-lg border border-gray-200 bg-white shadow-lg">
           {suggestions.length === 0 ? (
             <p className="px-3 py-3 text-sm text-gray-400">No accounts found</p>
           ) : (
@@ -104,7 +104,7 @@ function AccountSearch({
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-db-dark">{account.name}</span>
+                    <span className="text-db-dark truncate">{account.name}</span>
                     <div className="flex items-center gap-1.5 ml-2 shrink-0">
                       {latest?.temperature && (
                         <span
@@ -220,16 +220,18 @@ export default function InteractionsView({ accounts, rms }: Props) {
   }
 
   return (
-    <div className="flex h-full flex-col">
-      {/* Top Filter Bar */}
-      <div className="shrink-0 border-b border-gray-200 bg-white px-6 py-3">
-        <div className="mx-auto flex max-w-4xl items-center gap-4">
-          <div className="shrink-0">
-            <label className="mr-2 text-sm font-medium text-db-dark">RM:</label>
+    <div className="flex h-full">
+      {/* Left Sidebar — Filters */}
+      <aside className="w-64 shrink-0 overflow-y-auto border-r border-gray-200 bg-white">
+        <div className="p-4 space-y-4">
+          <div>
+            <label className="mb-1 block text-xs font-medium uppercase tracking-wider text-gray-500">
+              Relationship Manager
+            </label>
             <select
               value={selectedRM}
               onChange={(e) => setSelectedRM(e.target.value)}
-              className="rounded border border-db-gray px-2 py-1.5 text-sm focus:border-db-aqua focus:outline-none focus:ring-1 focus:ring-db-aqua"
+              className="w-full rounded border border-db-gray px-2 py-1.5 text-sm focus:border-db-aqua focus:outline-none focus:ring-1 focus:ring-db-aqua"
             >
               <option value="All">All RMs</option>
               {rms.map((rm) => (
@@ -239,71 +241,119 @@ export default function InteractionsView({ accounts, rms }: Props) {
               ))}
             </select>
           </div>
-          <AccountSearch
-            accounts={filtered}
-            selectedId={selectedAccountId}
-            onSelect={setSelectedAccountId}
-          />
-        </div>
-      </div>
 
-      {/* Content Area */}
-      <div className="flex-1 min-h-0 overflow-y-auto">
-        <div className="mx-auto max-w-4xl p-6">
-          {!selectedAccount ? (
-            <div className="flex items-center justify-center py-24">
-              <div className="text-center">
-                <p className="text-lg font-heading font-semibold text-db-dark">
-                  Client Interactions
-                </p>
-                <p className="mt-1 text-sm text-gray-500">
-                  Select an account above to view and log interactions.
-                </p>
-              </div>
+          <div>
+            <label className="mb-1 block text-xs font-medium uppercase tracking-wider text-gray-500">
+              Account
+            </label>
+            <AccountSearch
+              accounts={filtered}
+              selectedId={selectedAccountId}
+              onSelect={setSelectedAccountId}
+            />
+          </div>
+
+          {/* Selected account info card */}
+          {selectedAccount && (
+            <div className="rounded-lg border border-db-aqua/30 bg-db-aqua/5 p-3">
+              <p className="text-sm font-medium text-db-dark">{selectedAccount.name}</p>
+              <p className="mt-0.5 text-xs text-gray-500">
+                {selectedAccount.owner.firstName} {selectedAccount.owner.lastName}
+              </p>
+              {selectedAccount.interactions[0] && (
+                <div className="mt-2 flex items-center gap-1.5 flex-wrap">
+                  {selectedAccount.interactions[0].temperature && (
+                    <span
+                      className={`rounded-full px-1.5 py-0.5 text-[10px] font-medium ${
+                        TEMPERATURE_COLORS[
+                          selectedAccount.interactions[0].temperature as Temperature
+                        ]?.active ?? ''
+                      }`}
+                    >
+                      {selectedAccount.interactions[0].temperature}
+                    </span>
+                  )}
+                  {selectedAccount.interactions[0].riskFlag && (
+                    <span className="rounded-full bg-red-100 px-1.5 py-0.5 text-[10px] font-medium text-red-700">
+                      Risk
+                    </span>
+                  )}
+                  <span className="text-[10px] text-gray-400">
+                    Last:{' '}
+                    {new Date(
+                      selectedAccount.interactions[0].date
+                    ).toLocaleDateString('en-US', {
+                      month: 'short',
+                      day: 'numeric',
+                    })}{' '}
+                    {selectedAccount.interactions[0].type}
+                  </span>
+                </div>
+              )}
+              <p className="mt-1 text-[10px] text-gray-400">
+                {selectedAccount._count.interactions} interaction
+                {selectedAccount._count.interactions !== 1 ? 's' : ''}
+              </p>
             </div>
-          ) : (
-            <>
-              {/* Account Header */}
-              <div className="mb-4">
-                <h2 className="text-lg font-heading font-semibold text-db-dark">
-                  {selectedAccount.name}
-                </h2>
-                <p className="text-sm text-gray-500">
-                  {selectedAccount.owner.firstName} {selectedAccount.owner.lastName}
-                </p>
-              </div>
-
-              {/* Quick Add */}
-              <QuickAddForm
-                accountId={selectedAccount.id}
-                authorId={selectedAccount.ownerId}
-                onSaved={handleSaved}
-              />
-
-              {/* Timeline */}
-              <div className="mt-6 space-y-3">
-                {loading && (
-                  <p className="py-4 text-center text-sm text-gray-400">Loading...</p>
-                )}
-                {!loading && interactions.length === 0 && (
-                  <p className="py-8 text-center text-sm text-gray-400">
-                    No interactions yet. Log the first one above.
-                  </p>
-                )}
-                {!loading &&
-                  interactions.map((ix) => (
-                    <InteractionCard
-                      key={ix.id}
-                      interaction={ix}
-                      onUpdate={handleUpdate}
-                      onDelete={handleDelete}
-                    />
-                  ))}
-              </div>
-            </>
           )}
         </div>
-      </div>
+      </aside>
+
+      {/* Content Area */}
+      <section className="flex-1 min-w-0 overflow-y-auto p-6">
+        {!selectedAccount ? (
+          <div className="flex h-full items-center justify-center">
+            <div className="text-center">
+              <p className="text-lg font-heading font-semibold text-db-dark">
+                Client Interactions
+              </p>
+              <p className="mt-1 text-sm text-gray-500">
+                Select an account to view and log interactions.
+              </p>
+            </div>
+          </div>
+        ) : (
+          <div className="mx-auto max-w-3xl">
+            {/* Account Header */}
+            <div className="mb-4">
+              <h2 className="text-lg font-heading font-semibold text-db-dark">
+                {selectedAccount.name}
+              </h2>
+              <p className="text-sm text-gray-500">
+                {selectedAccount.owner.firstName} {selectedAccount.owner.lastName}
+              </p>
+            </div>
+
+            {/* Quick Add */}
+            <QuickAddForm
+              accountId={selectedAccount.id}
+              authorId={selectedAccount.ownerId}
+              onSaved={handleSaved}
+            />
+
+            {/* Timeline */}
+            <div className="mt-6 space-y-3">
+              {loading && (
+                <p className="py-4 text-center text-sm text-gray-400">Loading...</p>
+              )}
+              {!loading && interactions.length === 0 && (
+                <p className="py-8 text-center text-sm text-gray-400">
+                  No interactions yet. Log the first one above.
+                </p>
+              )}
+              {!loading &&
+                interactions.map((ix) => (
+                  <InteractionCard
+                    key={ix.id}
+                    interaction={ix}
+                    onUpdate={handleUpdate}
+                    onDelete={handleDelete}
+                  />
+                ))}
+            </div>
+          </div>
+        )}
+      </section>
     </div>
   );
 }
