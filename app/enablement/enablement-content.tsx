@@ -1,12 +1,21 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import type { CategoryId, NavState, TopicId } from './types';
 import { CATEGORIES, TOPIC_COMPONENTS, getCategoryById } from './registry';
 import CategoryLanding from './components/category-landing';
 import BackButton from './components/back-button';
 
 const DEFAULT_NAV: NavState = { view: 'landing', category: 'training' };
+
+function isNavState(obj: unknown): obj is NavState {
+  if (typeof obj !== 'object' || obj === null) return false;
+  const o = obj as Record<string, unknown>;
+  return (
+    (o.view === 'landing' || o.view === 'topic') &&
+    typeof o.category === 'string'
+  );
+}
 
 function TopicContent({ id }: { id: TopicId }) {
   const Component = TOPIC_COMPONENTS[id];
@@ -16,29 +25,52 @@ function TopicContent({ id }: { id: TopicId }) {
 export default function EnablementContent() {
   const [nav, setNav] = useState<NavState>(DEFAULT_NAV);
   const contentRef = useRef<HTMLElement>(null);
+  const skipPushRef = useRef(false);
 
   function scrollTop() {
     contentRef.current?.scrollTo(0, 0);
   }
 
-  function goToCategory(id: CategoryId) {
-    // Marketing has a single topic — skip the landing page
-    if (id === 'marketing') {
-      setNav({ view: 'topic', category: 'marketing', topic: 'marketing-materials' });
-    } else {
-      setNav({ view: 'landing', category: id });
+  // Replace current history entry with initial state on mount
+  useEffect(() => {
+    window.history.replaceState(DEFAULT_NAV, '');
+  }, []);
+
+  // Listen for browser back/forward
+  useEffect(() => {
+    function handlePopState(event: PopStateEvent) {
+      if (isNavState(event.state)) {
+        skipPushRef.current = true;
+        setNav(event.state);
+        scrollTop();
+      }
     }
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const navigate = useCallback((next: NavState) => {
+    setNav(next);
+    window.history.pushState(next, '');
     scrollTop();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  function goToCategory(id: CategoryId) {
+    if (id === 'marketing') {
+      navigate({ view: 'topic', category: 'marketing', topic: 'marketing-materials' });
+    } else {
+      navigate({ view: 'landing', category: id });
+    }
   }
 
   function goToTopic(topicId: TopicId) {
-    setNav({ view: 'topic', category: nav.category, topic: topicId });
-    scrollTop();
+    navigate({ view: 'topic', category: nav.category, topic: topicId });
   }
 
   function goBackToLanding() {
-    setNav({ view: 'landing', category: nav.category });
-    scrollTop();
+    navigate({ view: 'landing', category: nav.category });
   }
 
   const category = getCategoryById(nav.category);

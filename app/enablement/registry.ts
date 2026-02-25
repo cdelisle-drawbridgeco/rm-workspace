@@ -19,6 +19,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'The alternative asset management landscape — AUM, capital flows, and why cybersecurity matters.',
         icon: '🌐',
+        group: 'Industry & Client Segments',
       },
       {
         id: 'hedge-funds',
@@ -26,6 +27,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Strategies, capital raising, and the unique cyber risk profile of actively managed funds.',
         icon: '📈',
+        group: 'Industry & Client Segments',
       },
       {
         id: 'private-equity',
@@ -33,6 +35,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'LBOs, portfolio company risk, and how PE fundraising cycles drive security investment.',
         icon: '🏢',
+        group: 'Industry & Client Segments',
       },
       {
         id: 'family-offices',
@@ -40,6 +43,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'UHNW wealth management entities with lean teams and outsized cyber exposure.',
         icon: '🏠',
+        group: 'Industry & Client Segments',
       },
       {
         id: 'reg-sp',
@@ -47,6 +51,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'The SEC\'s cornerstone privacy regulation — 2025 amendments, breach notification, and enforcement.',
         icon: '⚖️',
+        group: 'Regulatory Deep-Dives',
       },
       {
         id: 'dora',
@@ -54,6 +59,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'The EU\'s Digital Operational Resilience Act and its impact on financial entities.',
         icon: '🇪🇺',
+        group: 'Regulatory Deep-Dives',
       },
       {
         id: 'sec-exam-priorities',
@@ -61,6 +67,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'What SEC examiners are looking for in 2025 and how to prepare clients.',
         icon: '🔍',
+        group: 'Regulatory Deep-Dives',
       },
     ],
   },

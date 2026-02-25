@@ -29,6 +29,7 @@ export interface TopicConfig {
   title: string;
   description: string;
   icon: string;
+  group?: string;
 }
 
 export interface CategoryConfig {
