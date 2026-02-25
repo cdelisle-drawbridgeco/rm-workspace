@@ -219,10 +219,6 @@ export default function AiCyberRisk() {
             title="AI Vendor Due Diligence"
             description="We conduct vendor due diligence on AI providers — evaluating data retention policies, training data practices, SOC reports, contractual protections, and regulatory compliance posture."
           />
-          <CharacteristicCard
-            title="Shadow AI Discovery"
-            description="We identify unsanctioned AI tools employees are using without firm approval — a critical first step in understanding actual data exposure and building a governed AI program."
-          />
         </div>
       </SubSection>
 
