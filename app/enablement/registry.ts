@@ -122,6 +122,20 @@ export const CATEGORIES: CategoryConfig[] = [
           'End-to-end customer journey mapping for hedge fund clients across the lifecycle.',
         icon: '🗺️',
       },
+      {
+        id: 'journey-pe-management',
+        title: 'Journey: PE Management Co.',
+        description:
+          'Customer journey for PE firms (GPs) — from LP due diligence to portfolio-wide value creation.',
+        icon: '🏛️',
+      },
+      {
+        id: 'journey-pe-portco',
+        title: 'Journey: PE Portfolio Co.',
+        description:
+          'Customer journey for PE portfolio companies — from sponsor mandate to exit-ready security.',
+        icon: '🏭',
+      },
     ],
   },
   {
@@ -168,6 +182,10 @@ const TOPIC_COMPONENTS: Record<TopicId, ComponentType> = {
   'escalation-path': dynamic(() => import('./content/workflows/escalation-path')),
   'outcome-framework': dynamic(() => import('./content/outcomes/outcome-framework')),
   'journey-hedge-fund': dynamic(() => import('./content/outcomes/journey-hedge-fund')),
+  'journey-pe-management': dynamic(
+    () => import('./content/outcomes/journey-pe-management'),
+  ),
+  'journey-pe-portco': dynamic(() => import('./content/outcomes/journey-pe-portco')),
   'marketing-materials': dynamic(
     () => import('./content/marketing/marketing-materials'),
   ),

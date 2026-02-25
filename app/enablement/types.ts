@@ -14,6 +14,8 @@ export type TopicId =
   | 'escalation-path'
   | 'outcome-framework'
   | 'journey-hedge-fund'
+  | 'journey-pe-management'
+  | 'journey-pe-portco'
   | 'marketing-materials';
 
 export type NavState = {
