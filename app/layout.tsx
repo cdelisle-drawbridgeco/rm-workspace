@@ -22,6 +22,7 @@ export default function RootLayout({
               </a>
               <a href="/" className="text-db-orange hover:text-white transition">Forecast</a>
               <a href="/plans" className="text-db-orange hover:text-white transition">Plans</a>
+              <a href="/interactions" className="text-db-orange hover:text-white transition">Interactions</a>
               <a href="/enablement" className="text-db-orange hover:text-white transition">Enablement</a>
             </div>
             <a className="text-db-orange hover:text-white transition text-xs" href="/admin/import">Admin</a>
