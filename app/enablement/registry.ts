@@ -1,0 +1,184 @@
+import type { ComponentType } from 'react';
+import type { CategoryConfig, CategoryId, TopicId } from './types';
+
+/* ------------------------------------------------------------------ */
+/*  Category definitions (drives sidebar + landing pages)              */
+/* ------------------------------------------------------------------ */
+
+export const CATEGORIES: CategoryConfig[] = [
+  {
+    id: 'training',
+    label: 'Training',
+    icon: '📚',
+    subtitle:
+      'Industry knowledge, client segments, and regulatory deep-dives to sharpen your renewal conversations.',
+    topics: [
+      {
+        id: 'industry-overview',
+        title: 'Industry Overview',
+        description:
+          'The alternative asset management landscape — AUM, capital flows, and why cybersecurity matters.',
+        icon: '🌐',
+      },
+      {
+        id: 'hedge-funds',
+        title: 'Hedge Funds',
+        description:
+          'Strategies, capital raising, and the unique cyber risk profile of actively managed funds.',
+        icon: '📈',
+      },
+      {
+        id: 'private-equity',
+        title: 'Private Equity',
+        description:
+          'LBOs, portfolio company risk, and how PE fundraising cycles drive security investment.',
+        icon: '🏢',
+      },
+      {
+        id: 'family-offices',
+        title: 'Family & Home Offices',
+        description:
+          'UHNW wealth management entities with lean teams and outsized cyber exposure.',
+        icon: '🏠',
+      },
+      {
+        id: 'reg-sp',
+        title: 'Regulation S-P',
+        description:
+          'The SEC\'s cornerstone privacy regulation — 2025 amendments, breach notification, and enforcement.',
+        icon: '⚖️',
+      },
+      {
+        id: 'dora',
+        title: 'DORA (EU)',
+        description:
+          'The EU\'s Digital Operational Resilience Act and its impact on financial entities.',
+        icon: '🇪🇺',
+      },
+      {
+        id: 'sec-exam-priorities',
+        title: 'SEC Exam Priorities',
+        description:
+          'What SEC examiners are looking for in 2025 and how to prepare clients.',
+        icon: '🔍',
+      },
+    ],
+  },
+  {
+    id: 'workflows',
+    label: 'RM Workflows',
+    icon: '⚙️',
+    subtitle:
+      'Step-by-step guides for forecasting, renewal planning, negotiation, and cross-team coordination.',
+    topics: [
+      {
+        id: 'forecasting-best-practices',
+        title: 'Forecasting Best Practices',
+        description:
+          'Weekly cadence, Best/Worst/Call methodology, and common forecasting pitfalls.',
+        icon: '📊',
+      },
+      {
+        id: 'renewal-plan-best-practices',
+        title: 'Renewal Plan Best Practices',
+        description:
+          'Stage-gate workflow, timeline management, and stakeholder alignment.',
+        icon: '📋',
+      },
+      {
+        id: 'negotiation-playbook',
+        title: 'Negotiation Playbook',
+        description:
+          'Strategic framework for pricing conversations, concession management, and closing.',
+        icon: '🤝',
+      },
+      {
+        id: 'escalation-path',
+        title: 'RM ↔ CS Escalation Path',
+        description:
+          'When and how to escalate between Relationship Management and Client Success.',
+        icon: '🔄',
+      },
+    ],
+  },
+  {
+    id: 'outcomes',
+    label: 'Outcomes & Value',
+    icon: '🎯',
+    subtitle:
+      'Outcome frameworks and customer journey maps to anchor every renewal in measurable client value.',
+    topics: [
+      {
+        id: 'outcome-framework',
+        title: 'Outcome Framework',
+        description:
+          'Six business outcomes that define Drawbridge\'s value — from regulatory readiness to AI safety.',
+        icon: '🏆',
+      },
+      {
+        id: 'journey-hedge-fund',
+        title: 'Journey: Hedge Fund',
+        description:
+          'End-to-end customer journey mapping for hedge fund clients across the lifecycle.',
+        icon: '🗺️',
+      },
+    ],
+  },
+  {
+    id: 'marketing',
+    label: 'Marketing Materials',
+    icon: '📁',
+    subtitle:
+      'Sales collateral, competitive intelligence, and customer-facing resources.',
+    topics: [
+      {
+        id: 'marketing-materials',
+        title: 'Browse Materials',
+        description:
+          'Pitch decks, case studies, one-pagers, and battle cards for sales conversations.',
+        icon: '📁',
+      },
+    ],
+  },
+];
+
+/* ------------------------------------------------------------------ */
+/*  Lazy-loaded topic components                                       */
+/* ------------------------------------------------------------------ */
+
+import dynamic from 'next/dynamic';
+
+const TOPIC_COMPONENTS: Record<TopicId, ComponentType> = {
+  'industry-overview': dynamic(() => import('./content/training/industry-overview')),
+  'hedge-funds': dynamic(() => import('./content/training/hedge-funds')),
+  'private-equity': dynamic(() => import('./content/training/private-equity')),
+  'family-offices': dynamic(() => import('./content/training/family-offices')),
+  'reg-sp': dynamic(() => import('./content/training/reg-sp')),
+  dora: dynamic(() => import('./content/training/dora')),
+  'sec-exam-priorities': dynamic(() => import('./content/training/sec-exam-priorities')),
+  'forecasting-best-practices': dynamic(
+    () => import('./content/workflows/forecasting-best-practices'),
+  ),
+  'renewal-plan-best-practices': dynamic(
+    () => import('./content/workflows/renewal-plan-best-practices'),
+  ),
+  'negotiation-playbook': dynamic(
+    () => import('./content/workflows/negotiation-playbook'),
+  ),
+  'escalation-path': dynamic(() => import('./content/workflows/escalation-path')),
+  'outcome-framework': dynamic(() => import('./content/outcomes/outcome-framework')),
+  'journey-hedge-fund': dynamic(() => import('./content/outcomes/journey-hedge-fund')),
+  'marketing-materials': dynamic(
+    () => import('./content/marketing/marketing-materials'),
+  ),
+};
+
+export { TOPIC_COMPONENTS };
+
+/* ------------------------------------------------------------------ */
+/*  Helpers                                                            */
+/* ------------------------------------------------------------------ */
+
+export function getCategoryById(id: CategoryId): CategoryConfig {
+  return CATEGORIES.find((c) => c.id === id)!;
+}

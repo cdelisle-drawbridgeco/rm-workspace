@@ -1,0 +1,38 @@
+export type CategoryId = 'training' | 'workflows' | 'outcomes' | 'marketing';
+
+export type TopicId =
+  | 'industry-overview'
+  | 'hedge-funds'
+  | 'private-equity'
+  | 'family-offices'
+  | 'reg-sp'
+  | 'dora'
+  | 'sec-exam-priorities'
+  | 'forecasting-best-practices'
+  | 'renewal-plan-best-practices'
+  | 'negotiation-playbook'
+  | 'escalation-path'
+  | 'outcome-framework'
+  | 'journey-hedge-fund'
+  | 'marketing-materials';
+
+export type NavState = {
+  view: 'landing' | 'topic';
+  category: CategoryId;
+  topic?: TopicId;
+};
+
+export interface TopicConfig {
+  id: TopicId;
+  title: string;
+  description: string;
+  icon: string;
+}
+
+export interface CategoryConfig {
+  id: CategoryId;
+  label: string;
+  icon: string;
+  subtitle: string;
+  topics: TopicConfig[];
+}
