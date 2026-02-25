@@ -1,4 +1,4 @@
-export type CategoryId = 'training' | 'workflows' | 'outcomes' | 'marketing';
+export type CategoryId = 'training' | 'workflows' | 'outcomes' | 'marketing' | 'ai-training';
 
 export type TopicId =
   | 'industry-overview'
@@ -16,7 +16,8 @@ export type TopicId =
   | 'journey-hedge-fund'
   | 'journey-pe-management'
   | 'journey-pe-portco'
-  | 'marketing-materials';
+  | 'marketing-materials'
+  | 'ai-cyber-risk';
 
 export type NavState = {
   view: 'landing' | 'topic';

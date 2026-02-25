@@ -161,6 +161,22 @@ export const CATEGORIES: CategoryConfig[] = [
       },
     ],
   },
+  {
+    id: 'ai-training',
+    label: 'AI Training',
+    icon: '🤖',
+    subtitle:
+      'How AI is reshaping cyber threats and how Drawbridge helps clients stay protected.',
+    topics: [
+      {
+        id: 'ai-cyber-risk',
+        title: 'AI & Cyber Risk',
+        description:
+          'How artificial intelligence is amplifying the threat landscape — and what it means for your clients.',
+        icon: '🧠',
+      },
+    ],
+  },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -195,6 +211,9 @@ const TOPIC_COMPONENTS: Record<TopicId, ComponentType> = {
   'journey-pe-portco': dynamic(() => import('./content/outcomes/journey-pe-portco')),
   'marketing-materials': dynamic(
     () => import('./content/marketing/marketing-materials'),
+  ),
+  'ai-cyber-risk': dynamic(
+    () => import('./content/ai-training/ai-cyber-risk'),
   ),
 };
 
