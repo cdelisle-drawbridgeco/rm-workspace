@@ -190,41 +190,45 @@ export default function AiCyberRisk() {
       {/* ── Talking to Clients ──────────────────────────── */}
       <SectionHeading>Talking to Clients: Claude &amp; ChatGPT Assessments</SectionHeading>
       <p className="text-sm text-gray-700 leading-relaxed">
-        Drawbridge now offers dedicated <strong>AI usage assessments</strong> — evaluating how
-        clients&apos; organizations are adopting AI tools like Claude and ChatGPT, and whether
-        appropriate guardrails are in place. Here&apos;s how to position them.
+        Drawbridge offers a comprehensive <strong>AI assessment program</strong> that goes
+        beyond a simple checklist. We review how clients are actually using AI platforms
+        like ChatGPT and Claude, ensure their enterprise configurations follow cyber best
+        practices, and help them build the policies, training, and vendor oversight needed
+        to adopt AI safely.
       </p>
 
-      <SubSection icon="📋" title="What the Assessments Evaluate">
-        <ul className="list-disc pl-5 space-y-2">
-          <li>
-            <strong>AI tool inventory:</strong> Which AI tools are in use (sanctioned and
-            unsanctioned / &ldquo;shadow AI&rdquo;)?
-          </li>
-          <li>
-            <strong>Data exposure risk:</strong> What data is being fed into AI systems?
-            Are employees pasting client PII, trade strategies, or proprietary code into
-            public LLMs?
-          </li>
-          <li>
-            <strong>Policy &amp; governance:</strong> Does the firm have an acceptable use
-            policy for AI? Who approved the tools? Is there oversight?
-          </li>
-          <li>
-            <strong>Prompt injection &amp; output risks:</strong> Are AI-generated outputs
-            being reviewed before use in client communications or decision-making?
-          </li>
-          <li>
-            <strong>Vendor risk:</strong> What are the data retention and training policies
-            of the AI providers? Is the firm using enterprise tiers with appropriate
-            contractual protections?
-          </li>
-        </ul>
+      <SubSection icon="📋" title="What Drawbridge Delivers">
+        <div className="grid grid-cols-2 gap-3 mt-1">
+          <CharacteristicCard
+            title="Enterprise Account Configuration Review"
+            description="We review the setup of ChatGPT and Claude enterprise accounts to ensure they are configured around cybersecurity best practices — data sharing settings, access controls, retention policies, and admin guardrails."
+          />
+          <CharacteristicCard
+            title="AI Policy Development & Updates"
+            description="We update existing cybersecurity and acceptable use policies to account for AI — covering approved tools, prohibited uses, data handling rules, and employee responsibilities."
+          />
+          <CharacteristicCard
+            title="AI Cybersecurity Training"
+            description="We conduct training for employees on the cybersecurity risks of AI — from recognizing AI-generated phishing to understanding data leakage risks when using LLMs in daily workflows."
+          />
+          <CharacteristicCard
+            title="Penetration Testing of AI Vendors"
+            description="We pen test AI vendor integrations to identify vulnerabilities — prompt injection risks, data exfiltration paths, API misconfigurations, and output manipulation vectors."
+          />
+          <CharacteristicCard
+            title="AI Vendor Due Diligence"
+            description="We conduct vendor due diligence on AI providers — evaluating data retention policies, training data practices, SOC reports, contractual protections, and regulatory compliance posture."
+          />
+          <CharacteristicCard
+            title="Shadow AI Discovery"
+            description="We identify unsanctioned AI tools employees are using without firm approval — a critical first step in understanding actual data exposure and building a governed AI program."
+          />
+        </div>
       </SubSection>
 
       <SubSection icon="💬" title="How to Position in Renewal Conversations">
         <p>
-          AI assessments are a natural expansion of existing engagements. Frame them around
+          The AI assessment is a natural expansion of existing engagements. Frame it around
           the client&apos;s reality:
         </p>
         <div className="mt-3 space-y-3">
@@ -233,9 +237,10 @@ export default function AiCyberRisk() {
               Opening
             </p>
             <p className="text-sm italic text-gray-700">
-              &ldquo;Your team is almost certainly using AI tools already — even if there
-              isn&apos;t an official policy yet. We&apos;re helping firms get ahead of this
-              by understanding their exposure before it becomes a compliance issue.&rdquo;
+              &ldquo;Your team is almost certainly using ChatGPT or Claude already — the
+              question is whether those accounts are configured securely. We review the
+              enterprise setup, update your policies, train your staff, and even pen test
+              the AI vendors themselves.&rdquo;
             </p>
           </div>
           <div className="rounded-md bg-gray-50 p-3 border border-gray-200">
@@ -243,9 +248,11 @@ export default function AiCyberRisk() {
               Value Prop
             </p>
             <p className="text-sm italic text-gray-700">
-              &ldquo;Our AI assessment doesn&apos;t just check a box — it gives you a clear
-              picture of how AI is being used, where your data is going, and what policies
-              you need in place before your next LP due diligence review.&rdquo;
+              &ldquo;This isn&apos;t just a policy review — we get hands-on with your
+              ChatGPT and Claude configurations, make sure data sharing and retention
+              settings follow best practices, conduct vendor due diligence on the AI
+              providers, and train your team on the cyber risks specific to AI. It&apos;s
+              end-to-end.&rdquo;
             </p>
           </div>
           <div className="rounded-md bg-gray-50 p-3 border border-gray-200">
@@ -254,9 +261,9 @@ export default function AiCyberRisk() {
             </p>
             <p className="text-sm italic text-gray-700">
               &ldquo;That&apos;s actually one of the most common things we hear — and in
-              almost every case, the assessment reveals that employees are using AI tools
-              the firm doesn&apos;t know about. That&apos;s shadow AI, and it&apos;s a
-              data-leakage risk hiding in plain sight.&rdquo;
+              almost every case, employees are using AI tools the firm doesn&apos;t know
+              about. Our assessment finds that shadow AI usage, identifies the exposure,
+              and helps you get ahead of it before it becomes a compliance finding.&rdquo;
             </p>
           </div>
           <div className="rounded-md bg-gray-50 p-3 border border-gray-200">
@@ -264,9 +271,11 @@ export default function AiCyberRisk() {
               Objection: &ldquo;We already have an AI policy&rdquo;
             </p>
             <p className="text-sm italic text-gray-700">
-              &ldquo;That&apos;s great — you&apos;re ahead of most firms. Our assessment
-              validates that the policy is actually being followed and identifies gaps
-              between policy and practice. Think of it as a health check.&rdquo;
+              &ldquo;That&apos;s great — you&apos;re ahead of most firms. But is the
+              enterprise account actually configured to enforce it? Are your AI vendors
+              meeting the same due diligence bar as your other third parties? We validate
+              the full picture — policy, configuration, vendor risk, and employee
+              awareness.&rdquo;
             </p>
           </div>
         </div>
@@ -296,21 +305,26 @@ export default function AiCyberRisk() {
       {/* ── Drawbridge Angle ────────────────────────────── */}
       <DrawbridgeAngle>
         <p>
-          Drawbridge helps firms assess, monitor, and defend against AI-amplified risk.
-          Our <strong>Claude and ChatGPT assessments</strong> give clients a clear picture
-          of their AI exposure — sanctioned tools, shadow AI, data flows, and governance
-          gaps — before they become compliance findings or security incidents.
+          Drawbridge&apos;s AI assessment program is a hands-on, end-to-end service —
+          not a checkbox exercise. We <strong>review ChatGPT and Claude enterprise
+          configurations</strong> to ensure they follow cyber best practices,
+          <strong> update policies</strong> to account for AI adoption,
+          <strong> conduct cybersecurity training</strong> specific to AI risks,
+          <strong> pen test AI vendor integrations</strong> for vulnerabilities, and
+          perform <strong>vendor due diligence</strong> on AI providers.
         </p>
         <p>
-          As the threat landscape accelerates, Drawbridge&apos;s continuous monitoring
-          and proactive assessment model becomes even more critical. The firms that
-          understand their AI risk posture today are the ones that will be prepared for
-          the regulatory and threat environment of tomorrow.
+          This combination means clients get a governed AI posture from every angle:
+          secure configurations, enforceable policies, trained employees, tested
+          integrations, and vetted vendors. It&apos;s the same comprehensive approach
+          Drawbridge brings to every other area of cybersecurity — now applied to the
+          fastest-moving risk category in the market.
         </p>
         <p>
           <strong>Position the AI assessment as a natural add-on</strong> during renewals:
-          it&apos;s a small incremental investment that addresses a fast-moving risk area
-          and demonstrates proactive governance to allocators and regulators alike.
+          it&apos;s a focused engagement that addresses an urgent, fast-moving risk area
+          and gives allocators and regulators confidence that the firm is managing AI
+          adoption responsibly.
         </p>
       </DrawbridgeAngle>
 
