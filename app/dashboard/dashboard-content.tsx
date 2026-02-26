@@ -12,6 +12,8 @@ import AccountTable from './account-table';
 import RiskOverview from './risk-overview';
 import RenewalCenter from './renewal-center';
 import ExpansionIndicators from './expansion-indicators';
+import ColumnManager from './column-manager';
+import { type ColumnConfigItem, loadColumnConfig, saveColumnConfig } from './column-config';
 
 interface Props {
   accounts: DashboardAccount[];
@@ -66,6 +68,12 @@ export default function DashboardContent({ accounts, rms }: Props) {
   const [sortColumn, setSortColumn] = useState<SortColumn>('name');
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
   const [activeTab, setActiveTab] = useState<DashboardTab>('risk');
+  const [columnConfig, setColumnConfig] = useState<ColumnConfigItem[]>(() => loadColumnConfig());
+
+  const handleColumnConfigChange = (config: ColumnConfigItem[]) => {
+    setColumnConfig(config);
+    saveColumnConfig(config);
+  };
 
   const handleSort = (col: SortColumn) => {
     if (col === sortColumn) {
@@ -169,14 +177,20 @@ export default function DashboardContent({ accounts, rms }: Props) {
       {/* Main content */}
       <section className="flex-1 min-w-0 overflow-y-auto p-6 space-y-6">
         {/* Header */}
-        <div>
-          <h1 className="text-2xl font-heading font-semibold text-db-dark">
-            Customer Dashboard
-          </h1>
-          <p className="mt-1 text-sm text-gray-500">
-            Book of business overview — ARR, renewals, risk signals, and
-            expansion opportunities.
-          </p>
+        <div className="flex items-start justify-between">
+          <div>
+            <h1 className="text-2xl font-heading font-semibold text-db-dark">
+              Customer Dashboard
+            </h1>
+            <p className="mt-1 text-sm text-gray-500">
+              Book of business overview — ARR, renewals, risk signals, and
+              expansion opportunities.
+            </p>
+          </div>
+          <ColumnManager
+            columnConfig={columnConfig}
+            onConfigChange={handleColumnConfigChange}
+          />
         </div>
 
         {/* Stat cards */}
@@ -188,6 +202,8 @@ export default function DashboardContent({ accounts, rms }: Props) {
           sortColumn={sortColumn}
           sortDirection={sortDirection}
           onSort={handleSort}
+          columnConfig={columnConfig}
+          onConfigChange={handleColumnConfigChange}
         />
 
         {/* Tab switcher */}

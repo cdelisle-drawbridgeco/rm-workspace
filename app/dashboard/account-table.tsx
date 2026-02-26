@@ -1,17 +1,26 @@
 'use client';
 
+import React, { useCallback, useRef } from 'react';
 import { formatUsd } from '@/lib/format';
 import type { DashboardAccount, SortColumn, SortDirection } from './types';
+import {
+  type ColumnConfigItem,
+  getDefaultWidth,
+  getVisibleColumns,
+  saveColumnConfig,
+} from './column-config';
 
 interface Props {
   accounts: DashboardAccount[];
   sortColumn: SortColumn;
   sortDirection: SortDirection;
   onSort: (col: SortColumn) => void;
+  columnConfig: ColumnConfigItem[];
+  onConfigChange: (config: ColumnConfigItem[]) => void;
 }
 
 function formatDate(iso: string | null): string {
-  if (!iso) return '—';
+  if (!iso) return '\u2014';
   return new Date(iso).toLocaleDateString('en-US', {
     month: 'short',
     day: 'numeric',
@@ -20,7 +29,7 @@ function formatDate(iso: string | null): string {
 }
 
 function TempBadge({ temp }: { temp: string | null }) {
-  if (!temp) return <span className="text-gray-400">—</span>;
+  if (!temp) return <span className="text-gray-400">\u2014</span>;
   const colors: Record<string, string> = {
     Hot: 'bg-red-100 text-red-700',
     Warm: 'bg-orange-100 text-orange-700',
@@ -35,7 +44,7 @@ function TempBadge({ temp }: { temp: string | null }) {
 }
 
 function DaysBadge({ days }: { days: number | null }) {
-  if (days === null) return <span className="text-gray-400">—</span>;
+  if (days === null) return <span className="text-gray-400">\u2014</span>;
   let color = 'text-green-700';
   if (days > 90) color = 'text-red-600 font-semibold';
   else if (days > 60) color = 'text-orange-600';
@@ -60,143 +69,122 @@ function ScoreBar({ score }: { score: number }) {
   );
 }
 
-type ColumnDef = {
-  key: SortColumn;
-  label: string;
-  mock?: boolean;
-  render: (a: DashboardAccount) => React.ReactNode;
-  align?: 'right';
+const RENDERERS: Record<string, (a: DashboardAccount) => React.ReactNode> = {
+  name: (a) => <span className="font-medium text-db-dark">{a.name}</span>,
+  arrCents: (a) => formatUsd(a.arrCents),
+  nextRenewalDate: (a) => formatDate(a.nextRenewalDate),
+  renewalOppCount: (a) => a.renewalOppCount,
+  temperature: (a) => <TempBadge temp={a.temperature} />,
+  entitlements: (a) => a.entitlements,
+  loggedInUsers180d: (a) => a.loggedInUsers180d,
+  openCases: (a) => (
+    <span className={a.openCases > 0 ? 'text-orange-600 font-medium' : ''}>
+      {a.openCases}
+    </span>
+  ),
+  staleCases: (a) => (
+    <span className={a.staleCases > 0 ? 'text-red-600 font-medium' : ''}>
+      {a.staleCases}
+    </span>
+  ),
+  hasExecSponsor: (a) =>
+    a.hasExecSponsor ? (
+      <span className="text-green-600">&#10003;</span>
+    ) : (
+      <span className="text-red-400">&#10007;</span>
+    ),
+  daysSinceLastTouch: (a) => <DaysBadge days={a.daysSinceLastTouch} />,
+  lastQbrDate: (a) => formatDate(a.lastQbrDate),
+  nextScheduledQbr: (a) => formatDate(a.nextScheduledQbr),
+  platformScore: (a) => <ScoreBar score={a.platformScore} />,
 };
-
-const COLUMNS: ColumnDef[] = [
-  {
-    key: 'name',
-    label: 'Account Name',
-    render: (a) => <span className="font-medium text-db-dark">{a.name}</span>,
-  },
-  {
-    key: 'arrCents',
-    label: 'ARR',
-    align: 'right',
-    render: (a) => formatUsd(a.arrCents),
-  },
-  {
-    key: 'nextRenewalDate',
-    label: 'Next Renewal',
-    render: (a) => formatDate(a.nextRenewalDate),
-  },
-  {
-    key: 'renewalOppCount',
-    label: '# Opps',
-    align: 'right',
-    render: (a) => a.renewalOppCount,
-  },
-  {
-    key: 'temperature',
-    label: 'Temperature',
-    render: (a) => <TempBadge temp={a.temperature} />,
-  },
-  {
-    key: 'entitlements',
-    label: '# Entitlements',
-    mock: true,
-    align: 'right',
-    render: (a) => a.entitlements,
-  },
-  {
-    key: 'loggedInUsers180d',
-    label: 'Users (180d)',
-    mock: true,
-    align: 'right',
-    render: (a) => a.loggedInUsers180d,
-  },
-  {
-    key: 'openCases',
-    label: 'Open Cases',
-    mock: true,
-    align: 'right',
-    render: (a) => (
-      <span className={a.openCases > 0 ? 'text-orange-600 font-medium' : ''}>
-        {a.openCases}
-      </span>
-    ),
-  },
-  {
-    key: 'staleCases',
-    label: 'Stale Cases',
-    mock: true,
-    align: 'right',
-    render: (a) => (
-      <span className={a.staleCases > 0 ? 'text-red-600 font-medium' : ''}>
-        {a.staleCases}
-      </span>
-    ),
-  },
-  {
-    key: 'hasExecSponsor',
-    label: 'Exec Sponsor',
-    mock: true,
-    render: (a) =>
-      a.hasExecSponsor ? (
-        <span className="text-green-600">&#10003;</span>
-      ) : (
-        <span className="text-red-400">&#10007;</span>
-      ),
-  },
-  {
-    key: 'daysSinceLastTouch',
-    label: 'Days Since Touch',
-    render: (a) => <DaysBadge days={a.daysSinceLastTouch} />,
-  },
-  {
-    key: 'lastQbrDate',
-    label: 'Last QBR',
-    render: (a) => formatDate(a.lastQbrDate),
-  },
-  {
-    key: 'nextScheduledQbr',
-    label: 'Next QBR',
-    mock: true,
-    render: (a) => formatDate(a.nextScheduledQbr),
-  },
-  {
-    key: 'platformScore',
-    label: 'Platform Score',
-    mock: true,
-    render: (a) => <ScoreBar score={a.platformScore} />,
-  },
-];
 
 export default function AccountTable({
   accounts,
   sortColumn,
   sortDirection,
   onSort,
+  columnConfig,
+  onConfigChange,
 }: Props) {
   const arrow = sortDirection === 'asc' ? ' \u25B2' : ' \u25BC';
+  const visibleColumns = getVisibleColumns(columnConfig);
+
+  // --- Column resize logic ---
+  const resizingRef = useRef<{ colId: string; startX: number; startW: number } | null>(null);
+
+  const getColWidth = (col: ColumnConfigItem) => col.width ?? getDefaultWidth(col.id);
+
+  const handleResizeStart = useCallback((e: React.MouseEvent, col: ColumnConfigItem) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const colId = col.id;
+    const startX = e.clientX;
+    const startW = getColWidth(col);
+    resizingRef.current = { colId, startX, startW };
+
+    const onMove = (ev: MouseEvent) => {
+      if (!resizingRef.current) return;
+      const delta = ev.clientX - startX;
+      const newWidth = Math.max(40, startW + delta);
+      onConfigChange(
+        columnConfig.map((c) => (c.id === colId ? { ...c, width: newWidth } : c))
+      );
+    };
+
+    const onUp = () => {
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onUp);
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+      // Persist widths
+      saveColumnConfig(columnConfig);
+      resizingRef.current = null;
+    };
+
+    document.body.style.cursor = 'col-resize';
+    document.body.style.userSelect = 'none';
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
+  }, [columnConfig, onConfigChange]);
+
+  const totalWidth = visibleColumns.reduce((sum, c) => sum + getColWidth(c), 0);
 
   return (
     <div className="overflow-x-auto rounded-lg border border-db-gray bg-white">
-      <table className="w-full text-sm">
+      <table className="text-sm" style={{ tableLayout: 'fixed', width: totalWidth }}>
+        <colgroup>
+          {visibleColumns.map((col) => (
+            <col key={col.id} style={{ width: getColWidth(col) }} />
+          ))}
+        </colgroup>
         <thead>
           <tr className="border-b border-db-gray bg-db-gray-light">
-            {COLUMNS.map((col) => (
+            {visibleColumns.map((col) => (
               <th
-                key={col.key}
-                onClick={() => onSort(col.key)}
-                className={`cursor-pointer whitespace-nowrap px-3 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-db-dark select-none ${
+                key={col.id}
+                onClick={() => onSort(col.id as SortColumn)}
+                className={`relative cursor-pointer select-none whitespace-nowrap px-3 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-db-dark ${
                   col.align === 'right' ? 'text-right' : ''
                 }`}
+                style={{ width: getColWidth(col) }}
               >
-                {col.label}
-                {col.mock && (
-                  <span className="ml-1 text-[9px] font-normal normal-case text-gray-400">
-                    (mock)
-                  </span>
-                )}
-                {sortColumn === col.key && (
-                  <span className="ml-0.5 text-db-aqua-dark">{arrow}</span>
-                )}
+                <span className="block truncate pr-2">
+                  {col.label}
+                  {col.mock && (
+                    <span className="ml-1 text-[9px] font-normal normal-case text-gray-400">
+                      (mock)
+                    </span>
+                  )}
+                  {sortColumn === col.id && (
+                    <span className="ml-0.5 text-db-aqua-dark">{arrow}</span>
+                  )}
+                </span>
+                <div
+                  onMouseDown={(e) => handleResizeStart(e, col)}
+                  className="absolute right-0 top-0 bottom-0 w-1.5 cursor-col-resize hover:bg-db-aqua/40 active:bg-db-aqua/60"
+                  title="Drag to resize"
+                />
               </th>
             ))}
           </tr>
@@ -205,7 +193,7 @@ export default function AccountTable({
           {accounts.length === 0 && (
             <tr>
               <td
-                colSpan={COLUMNS.length}
+                colSpan={visibleColumns.length}
                 className="px-3 py-8 text-center text-gray-400"
               >
                 No accounts match your filters.
@@ -217,14 +205,14 @@ export default function AccountTable({
               key={acct.id}
               className="border-b border-gray-100 hover:bg-db-gray-light/50 transition"
             >
-              {COLUMNS.map((col) => (
+              {visibleColumns.map((col) => (
                 <td
-                  key={col.key}
-                  className={`whitespace-nowrap px-3 py-2 ${
+                  key={col.id}
+                  className={`whitespace-nowrap px-3 py-2 overflow-hidden ${
                     col.align === 'right' ? 'text-right' : ''
                   }`}
                 >
-                  {col.render(acct)}
+                  {RENDERERS[col.id]?.(acct) ?? '\u2014'}
                 </td>
               ))}
             </tr>
