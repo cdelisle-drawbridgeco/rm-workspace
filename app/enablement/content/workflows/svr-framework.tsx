@@ -118,13 +118,25 @@ export default function SvrFramework() {
         Until formal client tiering is implemented, use this simple depth dial to right-size your
         SVR effort.
       </p>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="mt-4 rounded-lg border-l-4 border-orange-400 bg-orange-50 p-4">
+        <p className="text-sm font-semibold text-orange-800">The Scale Reality</p>
+        <p className="mt-1 text-sm text-gray-700">
+          RMs carry ~100 accounts each. Quarterly SVR prep across a full book is a significant time
+          investment &mdash; at 30&ndash;60 minutes per account, that&apos;s <strong>50&ndash;100+
+          hours of prep per quarter</strong> before you&apos;ve had a single conversation. This is
+          why <strong>automating SVR prep is a near-term priority</strong>: auto-pulling score data,
+          generating pre-filled prep sheets, and flagging churn signals should happen before the RM
+          opens the account. Until that automation exists, use the two-track model below to right-size
+          your effort and focus your deepest prep on the accounts that need it most.
+        </p>
+      </div>
+      <div className="mt-4 grid grid-cols-2 gap-4">
         <div className="rounded-lg border-2 border-db-aqua bg-db-aqua/5 p-5">
           <p className="text-xs font-semibold text-db-aqua-dark uppercase tracking-wide">Enterprise</p>
           <p className="mt-1 font-semibold text-db-dark font-heading text-lg">&gt;$15k ARR &middot; ~800 clients</p>
           <div className="mt-3 text-sm text-gray-600 space-y-2">
             <p><strong>Format:</strong> Full 45&ndash;60 min live meeting (video or in-person)</p>
-            <p><strong>Prep time:</strong> 45&ndash;60 min</p>
+            <p><strong>Prep time:</strong> 45&ndash;60 min (target: 15 min once automated)</p>
             <p><strong>Leave-behind:</strong> Formatted one-page summary sent within 48 hrs</p>
             <p><strong>Cadence:</strong> Quarterly SVR + monthly light touchpoint</p>
             <p><strong>Talk track:</strong> Full framework</p>
@@ -136,7 +148,7 @@ export default function SvrFramework() {
           <p className="mt-1 font-semibold text-db-dark font-heading text-lg">&lt;$15k ARR &middot; ~400 clients</p>
           <div className="mt-3 text-sm text-gray-600 space-y-2">
             <p><strong>Format:</strong> 30 min video or structured email summary</p>
-            <p><strong>Prep time:</strong> 20&ndash;30 min</p>
+            <p><strong>Prep time:</strong> 20&ndash;30 min (target: 10 min once automated)</p>
             <p><strong>Leave-behind:</strong> Clean summary email within 48 hrs</p>
             <p><strong>Cadence:</strong> Quarterly SVR (may be async for lowest-engagement clients)</p>
             <p><strong>Talk track:</strong> Abbreviated: Score story + 2 recommendations + one strategic observation</p>
@@ -171,10 +183,12 @@ export default function SvrFramework() {
       </SubSection>
 
       <SubSection icon="2" title="Step 2 &mdash; Pull Your Data (Manual Checklist)">
-        <p className="font-medium text-db-dark">From the Drawbridge Platform:</p>
+        <p className="font-medium text-db-dark">From the Drawbridge Platform (Score &amp; CRA Data):</p>
         <ul className="list-disc ml-5 space-y-1 mt-1">
-          <li>Current Cyber Score + prior quarter score</li>
-          <li>Score trend: improving / flat / declining</li>
+          <li><strong>CRA baseline score</strong> &mdash; score at the start of the current assessment</li>
+          <li><strong>Current score</strong> &mdash; reflects all remediation work completed to date</li>
+          <li><strong>Planned items &amp; projected score impact</strong> &mdash; what&apos;s on the roadmap and how much each item moves the needle</li>
+          <li>For multi-year CRA clients: <strong>prior assessment score</strong> to show year-over-year progress</li>
           <li>Number of outstanding CRA items (open findings)</li>
           <li>Number of remediated items since last SVR</li>
           <li>Remediation velocity: are items getting closed, or is the backlog growing?</li>
@@ -204,9 +218,10 @@ export default function SvrFramework() {
         </p>
         <p className="mt-3 font-medium text-db-dark">On the score and remediation:</p>
         <ul className="list-disc ml-5 space-y-1 mt-1">
-          <li>Is the score moving? If yes, what drove it &mdash; and can you name it specifically?</li>
-          <li>If flat or declining, do you know why? Client-side inaction or a Drawbridge delivery gap?</li>
-          <li>What are the 2&ndash;3 remediations with the biggest score impact if completed this quarter?</li>
+          <li>How far has the score moved from the CRA baseline? What specific remediations drove that progress?</li>
+          <li>For multi-year clients: how does the current score compare to the prior assessment? Can you tell a year-over-year progress story?</li>
+          <li>What are the 2&ndash;3 planned items with the biggest projected score impact? These become your &ldquo;what to focus on next&rdquo; recommendations.</li>
+          <li>If the score hasn&apos;t moved from baseline, do you know why? Client-side inaction or a Drawbridge delivery gap?</li>
           <li>Are there items open because the client hasn&apos;t prioritized them? That&apos;s a conversation to have.</li>
         </ul>
         <p className="mt-3 font-medium text-db-dark">On service utilization:</p>
@@ -231,7 +246,8 @@ export default function SvrFramework() {
           <p><strong>CLIENT:</strong> _________________ &nbsp; <strong>DATE:</strong> _________________</p>
           <p><strong>RM:</strong> _________________ &nbsp; <strong>RENEWAL DATE:</strong> _____________ &nbsp; <strong>CURRENT ARR:</strong> _____________</p>
           <p><strong>TRACK:</strong> [ ] Enterprise &nbsp; [ ] Long Tail</p>
-          <p><strong>SCORE:</strong> Current [&nbsp;&nbsp;] | Prior Quarter [&nbsp;&nbsp;] | Trend: [ &#8593; Rising ] [ &#8594; Flat ] [ &#8595; Declining ]</p>
+          <p><strong>SCORE:</strong> CRA Baseline [&nbsp;&nbsp;] | Current [&nbsp;&nbsp;] | Projected (if planned items complete) [&nbsp;&nbsp;]</p>
+          <p><strong>PRIOR ASSESSMENT:</strong> [ ] N/A (first year) &nbsp; Score: [&nbsp;&nbsp;] (for multi-year clients)</p>
           <p className="mt-2"><strong>PRIMARY OUTCOME THIS CLIENT CARES ABOUT (pick one):</strong></p>
           <p className="ml-2">[ ] Raise &amp; Retain Capital &nbsp; [ ] Navigate Regulatory Complexity &nbsp; [ ] Protect from Disruption</p>
           <p className="ml-2">[ ] Competitive Advantage &nbsp; [ ] Scale Without Headcount &nbsp; [ ] AI Readiness</p>
@@ -254,7 +270,7 @@ export default function SvrFramework() {
         <p>Be honest with yourself. Check which signals are present:</p>
         <div className="mt-2 grid grid-cols-2 gap-2">
           {[
-            'Score flat/declining 2+ quarters',
+            'Score unchanged from CRA baseline',
             'Unused services',
             'No remediation activity in 60+ days',
             'Primary contact has changed',
@@ -298,8 +314,8 @@ export default function SvrFramework() {
                 outcome: 'Capital confidence / Regulatory readiness',
               },
               {
-                cs: 'Score improved X points',
-                rm: '"Your score moved from [X] to [Y] this quarter. That means you\'re in stronger shape for LP due diligence and a more defensible position if the SEC comes calling."',
+                cs: 'Score improved from CRA baseline',
+                rm: '"You started this assessment at [X] and you\'re at [Y] today. That progress means you\'re in stronger shape for LP due diligence and a more defensible position if the SEC comes calling."',
                 outcome: 'Capital confidence / Competitive advantage',
               },
               {
@@ -393,6 +409,12 @@ export default function SvrFramework() {
 
       <SubSection icon="&#128202;" title="Section 1: Where You Stand (10 min) &mdash; The Score Story">
         <p><strong>Tell a story. Do not read a dashboard.</strong></p>
+        <p className="mt-2 text-xs text-gray-500">
+          You have three score data points to work with: <strong>CRA baseline</strong> (where they started),{' '}
+          <strong>current score</strong> (reflecting remediations to date), and{' '}
+          <strong>planned items with projected impact</strong> (where they&apos;re headed). For multi-year clients,
+          you also have the prior assessment score to tell a year-over-year story.
+        </p>
         <div className="mt-3 grid grid-cols-2 gap-3">
           <div className="rounded-md border border-red-200 bg-red-50 p-3">
             <p className="text-xs font-semibold text-red-700 uppercase">Don&apos;t say</p>
@@ -403,20 +425,22 @@ export default function SvrFramework() {
           <div className="rounded-md border border-green-200 bg-green-50 p-3">
             <p className="text-xs font-semibold text-green-700 uppercase">Say instead</p>
             <p className="mt-1 text-xs text-green-600 italic">
-              &ldquo;Your score moved from 68 to 74 this quarter &mdash; that&apos;s real progress.
-              The biggest driver was [specific items]. You now have 12 things still open, and I want
-              to walk you through the 2 or 3 that will have the most impact...&rdquo;
+              &ldquo;When we started the assessment, your baseline was 58. You&apos;re at 74 today
+              &mdash; that&apos;s real progress driven by [specific remediations]. We have 12 items
+              still on the plan, and completing the top 3 would push you into the low 80s. Let me
+              walk you through which ones move the needle most...&rdquo;
             </p>
           </div>
         </div>
-        <p className="mt-3">Always connect the score to something tangible:</p>
+        <p className="mt-3">Frame the score story around the CRA journey:</p>
         <ul className="list-disc ml-5 space-y-1 mt-1">
-          <li><strong>Rising score:</strong> &ldquo;That&apos;s what your LPs and allocators are looking for in ODD. You&apos;re moving in the right direction.&rdquo;</li>
-          <li><strong>Flat score:</strong> &ldquo;Your score hasn&apos;t moved much, and I want to be straight with you about why &mdash; and what we do about it.&rdquo;</li>
-          <li><strong>Declining score:</strong> &ldquo;I want to address this directly. Here&apos;s what happened and here&apos;s the plan.&rdquo;</li>
+          <li><strong>Strong progress from baseline:</strong> &ldquo;You started at [X] and you&apos;re at [Y] today &mdash; that&apos;s the program maturing. It&apos;s what LPs and allocators want to see in ODD.&rdquo;</li>
+          <li><strong>Score hasn&apos;t moved from baseline:</strong> &ldquo;Your score is still near where we started the assessment, and I want to be straight with you about what&apos;s blocking progress &mdash; and what we do about it.&rdquo;</li>
+          <li><strong>Multi-year client with prior assessment:</strong> &ldquo;Last year you were at [X]. Today you&apos;re at [Y]. That year-over-year trajectory is exactly the kind of story that resonates with allocators and regulators.&rdquo;</li>
+          <li><strong>Planned items &amp; projected impact:</strong> &ldquo;If we complete the top 3 planned items, your score projects to [Z]. Here&apos;s what that takes and why each one matters.&rdquo;</li>
         </ul>
         <p className="mt-3 text-gray-600 italic text-xs">
-          Never hide a flat or declining score. Name it, own it, and come with a hypothesis and a
+          Never hide a stalled score. Name it, own it, and come with a hypothesis and a
           path forward. Clients respect directness far more than polished spin.
         </p>
       </SubSection>
@@ -507,7 +531,7 @@ export default function SvrFramework() {
         <ol className="list-decimal ml-5 space-y-2 mt-2">
           <li>
             <strong>Recap in their words, not yours:</strong>{' '}
-            <span className="italic text-gray-600">&ldquo;So to recap &mdash; your score is trending up, we got [X] done this quarter, and the two priorities for the next 90 days are [Y and Z]. Does that feel right to you?&rdquo;</span>
+            <span className="italic text-gray-600">&ldquo;So to recap &mdash; you&apos;ve moved from [baseline] to [current], we&apos;ve made real progress on [X], and the two priorities for the next 90 days are [Y and Z]. Does that feel right to you?&rdquo;</span>
           </li>
           <li>
             <strong>Assign clear owners and dates:</strong>{' '}
@@ -537,7 +561,7 @@ export default function SvrFramework() {
           </thead>
           <tbody className="divide-y divide-gray-100">
             {[
-              { signal: 'Score flat/declining 2+ quarters', means: 'Stuck, disengaged, or something blocking progress', action: 'Reach out with a specific hypothesis and a plan — not a generic check-in' },
+              { signal: 'Score unchanged from CRA baseline', means: 'Not executing on remediation — disengaged or blocked', action: 'Reach out with a specific hypothesis and a plan — not a generic check-in' },
               { signal: 'Services purchased but unused', means: 'Value not being realized — pre-churn signal', action: 'Proactive reactivation: "I noticed X hasn\'t been activated — let\'s fix that before renewal"' },
               { signal: 'No remediation activity 60+ days', means: 'Client not executing — capacity issue or disengagement', action: 'Offer to remove the blocker; find out who owns remediation on their side' },
               { signal: 'Primary contact changed', means: 'Relationship at risk; new contact doesn\'t know Drawbridge\'s value', action: 'Fast re-introduction meeting — start the value story over with the new stakeholder' },
@@ -572,7 +596,7 @@ export default function SvrFramework() {
         </div>
         <div>
           <p className="font-semibold text-gray-700 text-xs uppercase tracking-wide">Where you stand</p>
-          <p className="text-xs text-gray-600 mt-1">Your Cyber Score is [X], [up X points / flat / down X points] from last quarter. [One sentence on what&apos;s driving it.]</p>
+          <p className="text-xs text-gray-600 mt-1">Your Cyber Score is [current], up from a baseline of [baseline] at the start of the assessment. [One sentence on what drove the progress and what&apos;s next.]</p>
         </div>
         <div>
           <p className="font-semibold text-gray-700 text-xs uppercase tracking-wide">What we accomplished together this quarter</p>
@@ -622,14 +646,14 @@ export default function SvrFramework() {
           </thead>
           <tbody className="divide-y divide-gray-100">
             {[
-              { sit: 'Rising Cyber Score', outcome: 'Capital confidence / Competitive positioning', say: '"Your program is getting stronger — that\'s what LPs and allocators are looking for in ODD."' },
+              { sit: 'Score progressing from baseline', outcome: 'Capital confidence / Competitive positioning', say: '"You\'ve moved meaningfully from your CRA baseline — that\'s the kind of progress LPs and allocators want to see in ODD."' },
               { sit: 'Completed, current policies', outcome: 'Regulatory readiness', say: '"Board-approved policies on record — that\'s the first thing an SEC examiner asks for."' },
               { sit: 'High training completion', outcome: 'Protection from disruption', say: '"Your team is a harder target than they were six months ago. That\'s real, measurable risk reduction."' },
               { sit: 'Clean DDQ cycles', outcome: 'Capital confidence', say: '"No follow-up requests from allocators — that\'s the fundraising process working the way it should."' },
               { sit: 'Active vulnerability scanning', outcome: 'Protection / Scale without headcount', say: '"We find the gaps before attackers do — without you needing to hire anyone to manage it."' },
               { sit: 'Low remediation velocity', outcome: 'Risk exposure / Missed value', say: '"This is the gap between where your score is and where it could be. Let\'s talk about what\'s blocking it."' },
               { sit: 'Unused services', outcome: 'Retention risk / Opportunity', say: '"You\'re paying for something that should be working for you. Let\'s fix that this quarter."' },
-              { sit: 'Score improvement over time', outcome: 'All outcomes', say: '"You started at [X]. You\'re at [Y] today. That\'s the program maturing — and it shows."' },
+              { sit: 'Multi-year client with prior assessment', outcome: 'All outcomes', say: '"Last assessment you were at [X]. Today you\'re at [Y]. That trajectory tells a powerful story to anyone who asks about your program."' },
             ].map((row, i) => (
               <tr key={i}>
                 <td className="px-3 py-2 text-gray-700 font-medium text-xs">{row.sit}</td>
@@ -697,8 +721,15 @@ export default function SvrFramework() {
         <p>
           The SVR is where Drawbridge earns the right to be called a partner &mdash; not just a
           vendor. When done well, every SVR re-anchors the client&apos;s perception of value, plants
-          expansion seeds naturally, and makes the renewal conversation a formality. The RM who
-          masters the SVR masters their book of business.
+          expansion seeds naturally, and makes the renewal conversation a formality.
+        </p>
+        <p>
+          With ~100 accounts per RM, manual SVR prep doesn&apos;t scale. The near-term goal is to
+          automate the data pull &mdash; pre-filled prep sheets with CRA baseline, current score,
+          planned items, projected impact, service utilization, and churn signals &mdash; so RMs
+          spend their time on interpretation and conversation, not data gathering. Until then, use
+          the two-track model to focus deep prep where it matters most and keep long-tail SVRs
+          efficient.
         </p>
       </DrawbridgeAngle>
     </>

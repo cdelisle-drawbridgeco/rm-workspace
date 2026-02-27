@@ -96,7 +96,7 @@ export default function SvrConversationGuide() {
 
       <SubSection icon="&#128200;" title="Score Reaction">
         <div className="space-y-2">
-          <QuestionBlock question="&ldquo;Your score moved from [X] to [Y] this quarter. Does that track with how things have felt on your end — or does it surprise you?&rdquo;" />
+          <QuestionBlock question="&ldquo;Your score has moved from [baseline] to [current] since we started the assessment. Does that track with how things have felt on your end — or does it surprise you?&rdquo;" />
           <QuestionBlock question="&ldquo;When you think about your cyber program today, what feels solid to you? What keeps you up at night?&rdquo;" />
           <QuestionBlock question="&ldquo;If a new LP asked you tomorrow to describe your cybersecurity program in two sentences, what would you say?&rdquo;" />
         </div>
@@ -112,7 +112,7 @@ export default function SvrConversationGuide() {
 
       <SubSection icon="&#128201;" title="For a Flat or Declining Score">
         <div className="space-y-2">
-          <QuestionBlock question="&ldquo;Your score hasn't moved much this quarter. I have a hypothesis about why — but before I share it, what's your read on what's getting in the way?&rdquo;" />
+          <QuestionBlock question="&ldquo;Your score hasn't moved much from baseline. I have a hypothesis about why — but before I share it, what's your read on what's getting in the way?&rdquo;" />
           <QuestionBlock question="&ldquo;Is cyber getting enough internal priority right now to make progress? I want to be realistic about what's achievable given what's on your plate.&rdquo;" />
         </div>
       </SubSection>
