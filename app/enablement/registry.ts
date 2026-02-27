@@ -106,6 +106,22 @@ export const CATEGORIES: CategoryConfig[] = [
           'When and how to escalate between Relationship Management and Client Success.',
         icon: '🔄',
       },
+      {
+        id: 'svr-framework',
+        title: 'SVR Framework',
+        description:
+          'The Strategic Value Review playbook — preparation, conversation flow, value translation, and churn early warning.',
+        icon: '📋',
+        group: 'SVR Meetings',
+      },
+      {
+        id: 'svr-conversation-guide',
+        title: 'SVR Conversation Guide',
+        description:
+          'Question bank and active listening cues for turning SVRs into strategic partnership conversations.',
+        icon: '💬',
+        group: 'SVR Meetings',
+      },
     ],
   },
   {
@@ -203,6 +219,10 @@ const TOPIC_COMPONENTS: Record<TopicId, ComponentType> = {
     () => import('./content/workflows/negotiation-playbook'),
   ),
   'escalation-path': dynamic(() => import('./content/workflows/escalation-path')),
+  'svr-framework': dynamic(() => import('./content/workflows/svr-framework')),
+  'svr-conversation-guide': dynamic(
+    () => import('./content/workflows/svr-conversation-guide'),
+  ),
   'outcome-framework': dynamic(() => import('./content/outcomes/outcome-framework')),
   'journey-hedge-fund': dynamic(() => import('./content/outcomes/journey-hedge-fund')),
   'journey-pe-management': dynamic(

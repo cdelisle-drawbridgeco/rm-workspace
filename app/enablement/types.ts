@@ -12,6 +12,8 @@ export type TopicId =
   | 'renewal-plan-best-practices'
   | 'negotiation-playbook'
   | 'escalation-path'
+  | 'svr-framework'
+  | 'svr-conversation-guide'
   | 'outcome-framework'
   | 'journey-hedge-fund'
   | 'journey-pe-management'
