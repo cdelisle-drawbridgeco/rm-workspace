@@ -164,21 +164,125 @@ export default function SvrFramework() {
         work you did before walking in.
       </p>
 
-      <FlowDiagram steps={['Brief with CS', 'Pull Your Data', 'Interpret the Data', 'Complete Prep Sheet']} />
+      <FlowDiagram steps={['CS Brief (2 wks out)', 'Pull Your Data', 'Interpret the Data', 'Complete Prep Sheet']} />
 
-      <SubSection icon="1" title="Step 1 &mdash; Brief with CS (48&ndash;72 hours before)">
+      <SubSection icon="1" title="Step 1 &mdash; CS Brief (2 weeks before the SVR)">
         <p>
-          Before you pull any data, talk to the CS owner for this account. Ask them four questions:
+          The CS brief should go out <strong>2 weeks before</strong> the scheduled SVR &mdash; not
+          48 hours. Two weeks gives you time to act on what CS sends back, and more importantly, it
+          surfaces a critical signal: <strong>if CS has nothing to report, that itself is the
+          finding</strong>.
         </p>
+
+        <div className="mt-3 rounded-lg border-2 border-db-aqua bg-db-aqua/5 p-4">
+          <p className="text-xs font-semibold text-db-aqua-dark uppercase tracking-wide mb-2">
+            Automated CS Brief (target process)
+          </p>
+          <p className="text-sm text-gray-700">
+            An automated email goes to the CS owner 14 days before each scheduled SVR with four
+            standard questions. CS replies inline. The RM gets the response and has a full week to
+            prepare. If CS doesn&apos;t respond within 3 business days, the RM gets an escalation
+            nudge.
+          </p>
+        </div>
+
+        <p className="mt-3 font-medium text-db-dark">The four questions (sent to CS via email):</p>
         <ol className="list-decimal ml-5 space-y-2 mt-2">
-          <li>What did we actually deliver this quarter that the client may not have noticed or appreciated?</li>
+          <li>What did we actually deliver since the last SVR that the client may not have noticed or appreciated?</li>
           <li>Is there anything the client is struggling with or not using that we should address?</li>
-          <li>Any friction, complaints, or moments of delight in the last 90 days?</li>
+          <li>Any friction, complaints, or moments of delight since the last touchpoint?</li>
           <li>What&apos;s the one thing you&apos;d want me to make sure the client understands about the value we&apos;ve delivered?</li>
         </ol>
+
         <p className="mt-3">
-          Write down their answers. These become the raw material for your value story. Your job is
-          not to repeat what CS tells you &mdash; it&apos;s to <strong>translate it</strong>.
+          CS replies inline. Your job is not to repeat what CS tells you &mdash; it&apos;s to{' '}
+          <strong>translate it</strong> into business language. These answers become the raw material
+          for your value story.
+        </p>
+
+        <div className="mt-4 rounded-lg border border-orange-200 bg-orange-50 p-4">
+          <p className="text-sm font-semibold text-orange-800 mb-2">
+            When CS comes back with &ldquo;no updates&rdquo;
+          </p>
+          <p className="text-sm text-gray-700">
+            If CS has little or nothing to report, that&apos;s not a reason to skip the SVR &mdash;
+            it&apos;s a <strong>red flag that the SVR is even more important</strong>. No updates
+            means the client isn&apos;t engaging, isn&apos;t remediating, or isn&apos;t using what
+            they&apos;re paying for. The RM and CS should connect live to determine:
+          </p>
+          <ul className="list-disc ml-5 space-y-1 mt-2 text-sm text-gray-700">
+            <li>Why is there no activity? Is the client disengaged, blocked, or just busy?</li>
+            <li>Are there services on the contract that haven&apos;t been activated?</li>
+            <li>Has the primary contact changed or gone quiet?</li>
+            <li>Is this a churn risk that needs to be flagged before the SVR even happens?</li>
+          </ul>
+          <p className="mt-3 text-sm text-gray-700">
+            Then frame the SVR as a <strong>re-engagement conversation</strong>, not a status update.
+            See the talk tracks below.
+          </p>
+        </div>
+      </SubSection>
+
+      {/* "No Updates" Talk Tracks */}
+      <SubSection icon="&#128680;" title="Talk Tracks: When There Are No Updates">
+        <p>
+          If CS came back with nothing and the account is quiet, don&apos;t pretend everything is
+          fine. Use one of these approaches to have an honest, productive conversation:
+        </p>
+        <div className="mt-3 space-y-3">
+          <div className="rounded-md bg-db-aqua/10 border border-db-aqua/30 p-3">
+            <p className="text-xs font-semibold text-db-dark mb-1">Direct &amp; honest (recommended for strong relationships)</p>
+            <p className="text-xs italic text-gray-700">
+              &ldquo;I want to be straight with you &mdash; when I looked at your account ahead of
+              this meeting, there hasn&apos;t been much activity since we last spoke. No remediation
+              progress, no new service activation. I want to understand what&apos;s going on from
+              your end &mdash; is it bandwidth, priorities, or something about the program that
+              isn&apos;t working for you?&rdquo;
+            </p>
+          </div>
+          <div className="rounded-md bg-db-aqua/10 border border-db-aqua/30 p-3">
+            <p className="text-xs font-semibold text-db-dark mb-1">Value re-anchor (for disengaged or &ldquo;check the box&rdquo; clients)</p>
+            <p className="text-xs italic text-gray-700">
+              &ldquo;I know cyber isn&apos;t where you want to spend your time, and I respect that.
+              But I also want to make sure you&apos;re getting real value from what you&apos;re
+              paying for &mdash; not just a line item on a contract. Right now there are [X]
+              planned items that would meaningfully improve your posture and give you a stronger
+              story for LPs and regulators. Can we talk about what&apos;s realistic to get done
+              before your renewal?&rdquo;
+            </p>
+          </div>
+          <div className="rounded-md bg-db-aqua/10 border border-db-aqua/30 p-3">
+            <p className="text-xs font-semibold text-db-dark mb-1">Unused services (when they&apos;re paying for things not activated)</p>
+            <p className="text-xs italic text-gray-700">
+              &ldquo;I noticed you have [policy module / training / vulnerability scanning] on
+              your contract and it hasn&apos;t been put to work yet. I don&apos;t want you heading
+              into renewal feeling like you didn&apos;t get the full value of what you bought.
+              Let&apos;s get this activated &mdash; what&apos;s been the blocker?&rdquo;
+            </p>
+          </div>
+          <div className="rounded-md bg-db-aqua/10 border border-db-aqua/30 p-3">
+            <p className="text-xs font-semibold text-db-dark mb-1">New contact / lost champion</p>
+            <p className="text-xs italic text-gray-700">
+              &ldquo;I understand there&apos;s been a change on your side since we last connected.
+              I&apos;d like to start fresh &mdash; walk you through where things stand, what
+              we&apos;ve built together so far, and make sure the program is aligned to what
+              matters to you. What does success look like from your seat?&rdquo;
+            </p>
+          </div>
+          <div className="rounded-md bg-db-aqua/10 border border-db-aqua/30 p-3">
+            <p className="text-xs font-semibold text-db-dark mb-1">Reframe the score as a roadmap</p>
+            <p className="text-xs italic text-gray-700">
+              &ldquo;Your score is at [current] &mdash; it hasn&apos;t moved much from where we
+              started the assessment. But the good news is the roadmap is clear: we know exactly
+              which items would move the needle, and the top 3 alone would push you to [projected].
+              The question is whether we prioritize that now or let it sit. I&apos;d recommend now
+              &mdash; here&apos;s why.&rdquo;
+            </p>
+          </div>
+        </div>
+        <p className="mt-3 text-xs text-gray-500 italic">
+          The worst thing you can do with a quiet account is have a quiet SVR. No updates is the
+          starting point of the conversation, not the end of it.
         </p>
       </SubSection>
 
