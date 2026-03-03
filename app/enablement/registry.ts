@@ -191,6 +191,13 @@ export const CATEGORIES: CategoryConfig[] = [
           'How artificial intelligence is amplifying the threat landscape — and what it means for your clients.',
         icon: '🧠',
       },
+      {
+        id: 'ai-in-alts',
+        title: 'AI in Alternatives',
+        description:
+          'How hedge funds and PE firms are actually using AI — and the cyber risks each use case creates.',
+        icon: '🏦',
+      },
     ],
   },
 ];
@@ -234,6 +241,9 @@ const TOPIC_COMPONENTS: Record<TopicId, ComponentType> = {
   ),
   'ai-cyber-risk': dynamic(
     () => import('./content/ai-training/ai-cyber-risk'),
+  ),
+  'ai-in-alts': dynamic(
+    () => import('./content/ai-training/ai-in-alts'),
   ),
 };
 

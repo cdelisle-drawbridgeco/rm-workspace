@@ -19,7 +19,8 @@ export type TopicId =
   | 'journey-pe-management'
   | 'journey-pe-portco'
   | 'marketing-materials'
-  | 'ai-cyber-risk';
+  | 'ai-cyber-risk'
+  | 'ai-in-alts';
 
 export type NavState = {
   view: 'landing' | 'topic';
