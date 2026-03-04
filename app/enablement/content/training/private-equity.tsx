@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { StatCard, SectionHeading, CharacteristicCard, TermBadge, HeroSection, DrawbridgeAngle, SubSection, FlowDiagram } from '../../components/shared-ui';
+import { StatCard, SectionHeading, CharacteristicCard, TermBadge, HeroSection, DrawbridgeAngle, SubSection, FlowDiagram, LastUpdated } from '../../components/shared-ui';
 
 export default function PrivateEquity() {
   return (
@@ -191,6 +191,8 @@ export default function PrivateEquity() {
         <TermBadge term="Cyber DD" definition="Cybersecurity due diligence conducted before an acquisition to identify risks and estimate remediation costs." />
         <TermBadge term="Fund Life" definition="Typically 10 years — includes investment period (years 1–5) and harvest period (years 6–10) with possible extensions." />
       </div>
+
+      <LastUpdated date="2026-02-24" />
     </>
   );
 }

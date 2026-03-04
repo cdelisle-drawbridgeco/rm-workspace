@@ -1,6 +1,6 @@
 'use client';
 
-import { HeroSection, SectionHeading, SubSection, DrawbridgeAngle } from '../../components/shared-ui';
+import { HeroSection, SectionHeading, SubSection, DrawbridgeAngle, LastUpdated } from '../../components/shared-ui';
 
 export default function OutcomeFramework() {
   return (
@@ -555,6 +555,8 @@ export default function OutcomeFramework() {
           next conversation around outcomes instead of deliverables. See what happens.
         </p>
       </DrawbridgeAngle>
+
+      <LastUpdated date="2026-02-24" />
     </>
   );
 }

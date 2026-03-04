@@ -6,6 +6,7 @@ import {
   SectionHeading,
   SubSection,
   DrawbridgeAngle,
+  LastUpdated,
 } from '../../components/shared-ui';
 
 function QuestionBlock({ question }: { question: string }) {
@@ -365,6 +366,8 @@ export default function SvrConversationGuide() {
           Update this question bank quarterly as regulatory and market topics evolve.
         </p>
       </DrawbridgeAngle>
+
+      <LastUpdated date="2026-02-27" />
     </>
   );
 }

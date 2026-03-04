@@ -7,6 +7,7 @@ import {
   SubSection,
   CharacteristicCard,
   DrawbridgeAngle,
+  LastUpdated,
 } from '../../components/shared-ui';
 
 export default function NegotiationPlaybook() {
@@ -699,6 +700,8 @@ export default function NegotiationPlaybook() {
           — it&apos;s infrastructure. That&apos;s the goal of every renewal conversation.
         </p>
       </DrawbridgeAngle>
+
+      <LastUpdated date="2026-02-24" />
     </>
   );
 }

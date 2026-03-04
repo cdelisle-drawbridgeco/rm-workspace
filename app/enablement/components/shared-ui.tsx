@@ -92,6 +92,14 @@ export function SubSection({
   );
 }
 
+export function LastUpdated({ date }: { date: string }) {
+  return (
+    <p className="mt-8 text-xs text-gray-400 text-right">
+      Last updated: {date}
+    </p>
+  );
+}
+
 export function FlowDiagram({ steps }: { steps: string[] }) {
   return (
     <div className="flex items-center gap-1 overflow-x-auto py-3">

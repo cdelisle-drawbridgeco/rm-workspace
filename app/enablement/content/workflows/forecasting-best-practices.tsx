@@ -7,6 +7,7 @@ import {
   SubSection,
   CharacteristicCard,
   DrawbridgeAngle,
+  LastUpdated,
 } from '../../components/shared-ui';
 
 export default function ForecastingBestPractices() {
@@ -349,6 +350,8 @@ export default function ForecastingBestPractices() {
           your book of business like a professional.
         </p>
       </DrawbridgeAngle>
+
+      <LastUpdated date="2026-02-24" />
     </>
   );
 }

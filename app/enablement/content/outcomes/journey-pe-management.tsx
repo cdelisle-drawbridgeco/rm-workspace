@@ -1,6 +1,6 @@
 'use client';
 
-import { HeroSection, SectionHeading, CharacteristicCard, DrawbridgeAngle } from '../../components/shared-ui';
+import { HeroSection, SectionHeading, CharacteristicCard, DrawbridgeAngle, LastUpdated } from '../../components/shared-ui';
 
 export default function JourneyPEManagement() {
   const phases = [
@@ -661,6 +661,8 @@ export default function JourneyPEManagement() {
           and portfolio strategy becomes indispensable.
         </p>
       </DrawbridgeAngle>
+
+      <LastUpdated date="2026-02-24" />
     </>
   );
 }

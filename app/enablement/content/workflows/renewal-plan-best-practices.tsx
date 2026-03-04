@@ -7,6 +7,7 @@ import {
   SubSection,
   CharacteristicCard,
   DrawbridgeAngle,
+  LastUpdated,
 } from '../../components/shared-ui';
 
 export default function RenewalPlanBestPractices() {
@@ -232,6 +233,8 @@ export default function RenewalPlanBestPractices() {
           ones who find upsell moments and drive net revenue growth, not just retention.
         </p>
       </DrawbridgeAngle>
+
+      <LastUpdated date="2026-02-24" />
     </>
   );
 }

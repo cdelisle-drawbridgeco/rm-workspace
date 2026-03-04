@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { StatCard, SectionHeading, CharacteristicCard, TermBadge, HeroSection, DrawbridgeAngle, SubSection, FlowDiagram } from '../../components/shared-ui';
+import { StatCard, SectionHeading, CharacteristicCard, TermBadge, HeroSection, DrawbridgeAngle, SubSection, FlowDiagram, LastUpdated } from '../../components/shared-ui';
 
 export default function HedgeFunds() {
   return (
@@ -177,6 +177,8 @@ export default function HedgeFunds() {
         <TermBadge term="BEC" definition="Business Email Compromise — social engineering attack targeting wire transfers by impersonating executives or counterparties." />
         <TermBadge term="Reg S-P" definition="SEC regulation requiring financial institutions to protect customer information and notify of breaches." />
       </div>
+
+      <LastUpdated date="2026-02-24" />
     </>
   );
 }

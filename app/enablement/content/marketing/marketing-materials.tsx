@@ -1,6 +1,6 @@
 'use client';
 
-import { HeroSection } from '../../components/shared-ui';
+import { HeroSection, LastUpdated } from '../../components/shared-ui';
 
 export default function MarketingMaterials() {
   const categories = [
@@ -78,6 +78,8 @@ export default function MarketingMaterials() {
           Coming Soon
         </button>
       </div>
+
+      <LastUpdated date="2026-02-24" />
     </>
   );
 }

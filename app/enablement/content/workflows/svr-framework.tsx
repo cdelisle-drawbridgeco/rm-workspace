@@ -8,6 +8,7 @@ import {
   CharacteristicCard,
   DrawbridgeAngle,
   FlowDiagram,
+  LastUpdated,
 } from '../../components/shared-ui';
 
 export default function SvrFramework() {
@@ -836,6 +837,8 @@ export default function SvrFramework() {
           efficient.
         </p>
       </DrawbridgeAngle>
+
+      <LastUpdated date="2026-02-27" />
     </>
   );
 }

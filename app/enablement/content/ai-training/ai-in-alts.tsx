@@ -8,6 +8,7 @@ import {
   HeroSection,
   DrawbridgeAngle,
   SubSection,
+  LastUpdated,
 } from '../../components/shared-ui';
 
 /* ── Risk badge component ─────────────────────────────────── */
@@ -462,6 +463,8 @@ export default function AiInAlts() {
           every COO, CCO, and CTO wants to have.
         </p>
       </DrawbridgeAngle>
+
+      <LastUpdated date="2026-03-03" />
     </>
   );
 }

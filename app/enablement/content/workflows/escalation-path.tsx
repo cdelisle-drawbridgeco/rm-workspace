@@ -6,6 +6,7 @@ import {
   SectionHeading,
   SubSection,
   DrawbridgeAngle,
+  LastUpdated,
 } from '../../components/shared-ui';
 
 export default function EscalationPath() {
@@ -19,9 +20,9 @@ export default function EscalationPath() {
 
       <div className="rounded-lg border border-db-aqua/30 bg-db-aqua/5 p-4 mt-2">
         <p className="text-sm text-db-dark">
-          <strong>Proposed Operating Model.</strong> This document is a starting point for aligning
-          RM and CS leadership on how our teams work together. It&apos;s meant to be reviewed and
-          refined jointly by the Head of CS and VP of RM before being shared broadly.
+          <strong>Proposed Operating Model.</strong> This document captures how RM and CS work together
+          day-to-day and how issues escalate when they arise. It&apos;s a shared framework meant
+          to be refined over time based on what works in practice.
         </p>
       </div>
 
@@ -86,55 +87,43 @@ export default function EscalationPath() {
         </div>
       </div>
 
-      {/* When Issues Surface in IC Conversations */}
-      <SubSection icon="💬" title="When Delivery Issues Come Up in IC Conversations">
+      {/* When Issues Surface Between ICs */}
+      <SubSection icon="💬" title="When Issues Come Up Between ICs">
         <p>
-          Because RMs and CS Advisors talk regularly, delivery issues will naturally surface in
-          those conversations — an advisor mentions they&apos;re running behind, a client shared
-          frustration during a call, a scope question comes up. This is normal and it&apos;s
-          actually valuable — it means information is flowing.
+          Because RMs and CS Advisors work so closely together, issues from both domains naturally
+          come up in IC conversations. An advisor mentions a delivery delay. An RM shares that a
+          client raised concerns during a renewal call. A scope question surfaces on a joint call.
+          This cross-pollination is healthy — it means both teams are informed.
         </p>
         <p>
-          <strong>The question isn&apos;t whether RMs hear about delivery issues — they will. The
-          question is what happens next.</strong> The recommended pattern:
+          <strong>The key is making sure issues get routed to the right owner</strong> rather than
+          getting stuck with whoever heard about it first. The pattern is the same in both directions:
         </p>
-        <div className="mt-3 space-y-2">
-          <div className="flex items-start gap-3 rounded-md border border-gray-200 bg-gray-50 p-3">
-            <span className="shrink-0 mt-0.5 inline-flex items-center justify-center w-6 h-6 rounded-full bg-db-aqua/20 text-xs font-bold text-db-aqua-dark">1</span>
-            <div>
-              <p className="text-sm font-medium text-db-dark">Acknowledge it</p>
-              <p className="text-sm text-gray-600">The CS Advisor feels heard. You&apos;re not dismissing the issue or pretending you didn&apos;t notice.</p>
+        <div className="mt-3 grid grid-cols-2 gap-3">
+          <div className="rounded-md border border-gray-200 bg-gray-50 p-4">
+            <p className="text-sm font-semibold text-db-dark mb-2">When a delivery issue surfaces with the RM</p>
+            <div className="space-y-2 text-sm text-gray-600">
+              <p>&#8226; Acknowledge it — the advisor feels heard</p>
+              <p>&#8226; Encourage the advisor to bring in their CS Manager if they haven&apos;t already</p>
+              <p>&#8226; Note it for account awareness</p>
+              <p>&#8226; If it could affect the relationship or renewal, engage at L3</p>
             </div>
           </div>
-          <div className="flex items-start gap-3 rounded-md border border-gray-200 bg-gray-50 p-3">
-            <span className="shrink-0 mt-0.5 inline-flex items-center justify-center w-6 h-6 rounded-full bg-db-aqua/20 text-xs font-bold text-db-aqua-dark">2</span>
-            <div>
-              <p className="text-sm font-medium text-db-dark">Encourage them to bring in their manager</p>
-              <p className="text-sm text-gray-600">&ldquo;That sounds like something [CS Manager] should know about — have you looped them in?&rdquo; This empowers the advisor to use their own chain rather than leaning on the RM as a shortcut.</p>
-            </div>
-          </div>
-          <div className="flex items-start gap-3 rounded-md border border-gray-200 bg-gray-50 p-3">
-            <span className="shrink-0 mt-0.5 inline-flex items-center justify-center w-6 h-6 rounded-full bg-db-aqua/20 text-xs font-bold text-db-aqua-dark">3</span>
-            <div>
-              <p className="text-sm font-medium text-db-dark">Note it for your own awareness</p>
-              <p className="text-sm text-gray-600">You now know there&apos;s a delivery issue on this account. You don&apos;t need to own it, but you&apos;re not in the dark either.</p>
-            </div>
-          </div>
-          <div className="flex items-start gap-3 rounded-md border border-gray-200 bg-gray-50 p-3">
-            <span className="shrink-0 mt-0.5 inline-flex items-center justify-center w-6 h-6 rounded-full bg-db-aqua/20 text-xs font-bold text-db-aqua-dark">4</span>
-            <div>
-              <p className="text-sm font-medium text-db-dark">Escalate yourself if it touches the relationship</p>
-              <p className="text-sm text-gray-600">If the issue feels like it could affect renewal, client satisfaction, or the executive relationship, connect with the CS Manager directly (L3).</p>
+          <div className="rounded-md border border-gray-200 bg-gray-50 p-4">
+            <p className="text-sm font-semibold text-db-dark mb-2">When a commercial issue surfaces with the advisor</p>
+            <div className="space-y-2 text-sm text-gray-600">
+              <p>&#8226; Acknowledge it — the client&apos;s concern is valid</p>
+              <p>&#8226; Let the client know the RM is the right person for that conversation</p>
+              <p>&#8226; Loop the RM in directly — it&apos;s a natural handoff</p>
+              <p>&#8226; If it could affect delivery scope, flag it to CS Manager as well</p>
             </div>
           </div>
         </div>
-        <div className="mt-4 rounded-md bg-db-aqua/5 border border-db-aqua/20 p-3">
+        <div className="mt-3 rounded-md bg-db-aqua/5 border border-db-aqua/20 p-3">
           <p className="text-sm text-db-dark">
-            <strong>Why this works:</strong> The RM isn&apos;t absorbing the problem or becoming the
-            default escalation path for delivery issues. But they&apos;re also not ignoring it or
-            creating a wall between teams. They&apos;re an empowered partner — staying informed,
-            encouraging the right process, and stepping in when the issue crosses into
-            relationship territory.
+            <strong>The principle:</strong> Neither team absorbs issues that belong to the other.
+            Both teams stay informed through the IC relationship, and both teams route to the
+            right owner when something crosses domains. No walls, no silos — just clear ownership.
           </p>
         </div>
       </SubSection>
@@ -299,16 +288,17 @@ export default function EscalationPath() {
           that makes accounts work.
         </p>
         <p>
-          When delivery issues arise that an advisor can&apos;t resolve on their own, <strong>CS
-          management is the escalation path for delivery</strong> — CS Managers know their team&apos;s
-          capacity, can reassign resources, and have the authority to adjust delivery plans. The RM
-          doesn&apos;t need to be the one solving delivery problems, but they&apos;re often the first
-          to hear about them because of how closely they work with advisors.
+          When issues arise, each team has a clear escalation path. <strong>Delivery issues escalate
+          through CS management</strong> — CS Managers know their team&apos;s capacity, can reassign
+          resources, and have the authority to adjust delivery plans. <strong>Commercial and relationship
+          issues escalate through RM leadership.</strong> Both ICs are empowered to route issues to
+          the right owner — and because they work so closely together, neither team is in the dark
+          when something escalates.
         </p>
         <p>
-          When a delivery issue starts to affect the client relationship or has commercial implications,
-          that&apos;s when the RM actively engages — not because someone finally &ldquo;brought them
-          in,&rdquo; but because the issue has crossed into their domain.
+          When an issue spans both domains — delivery problems that affect the relationship, or
+          commercial changes that affect delivery — that&apos;s when the teams formally coordinate
+          at L3 to co-own the resolution.
         </p>
       </SubSection>
 
@@ -387,10 +377,11 @@ export default function EscalationPath() {
             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">How Issues Get Here</p>
             <p className="mt-1 text-sm text-gray-700">
               This can come from multiple directions. The advisor recognizes they need help and
-              escalates to their manager. Or the RM hears about a delivery issue through their
-              normal working relationship with the advisor and encourages them to bring their
-              manager in. Either way, CS management gets involved because the issue needs
-              resources, authority, or oversight that goes beyond what the IC pair can handle.
+              escalates to their manager. The RM hears about a delivery issue through their
+              IC relationship and encourages the advisor to bring their manager in. Or the CS
+              Manager proactively identifies a pattern across their team. However it arrives,
+              CS management gets involved because the issue needs resources, authority, or
+              oversight that goes beyond what the IC pair can handle.
             </p>
           </div>
           <div>
@@ -398,13 +389,13 @@ export default function EscalationPath() {
             <p className="mt-1 text-sm text-gray-700">
               CS Managers can do things ICs can&apos;t — reassign resources, adjust delivery plans
               across accounts, coach advisors, or have management-level conversations with clients.
-              This is where most delivery issues get resolved. The RM stays informed through their
-              existing relationship with the advisor, and the CS Manager keeps RM in the loop on
-              anything that could affect the client relationship.
+              This is where most delivery issues get resolved. Because the RM and advisor work
+              closely together, the RM typically has awareness of the issue already. The CS Manager
+              keeps the RM in the loop on anything that could affect the client relationship.
             </p>
           </div>
           <div className="rounded-md bg-blue-50 border border-blue-200 p-3">
-            <p className="text-xs text-blue-700"><strong>RM Role:</strong> The RM is already aware of the issue through their IC relationship. At this level, the CS Manager may reach out to the RM for additional context or to coordinate on client messaging. The RM doesn&apos;t need to own the delivery fix, but they&apos;re a partner in the process.</p>
+            <p className="text-xs text-blue-700"><strong>Cross-team visibility:</strong> At this level, the CS Manager may reach out to the RM for additional client context or to coordinate on messaging. The RM doesn&apos;t own the delivery resolution, but both teams benefit from staying aligned.</p>
           </div>
         </div>
       </div>
@@ -423,12 +414,10 @@ export default function EscalationPath() {
         <div className="px-6 py-5 space-y-4">
           <div className="rounded-md bg-db-aqua/5 border border-db-aqua/20 p-3">
             <p className="text-sm text-db-dark">
-              At L1 and L2, the RM is typically already aware of the issue through their working
-              relationship with the advisor. L3 is when the issue formally needs both teams&apos;
-              involvement to resolve — because it&apos;s affecting the client relationship, has
-              commercial implications, or needs coordinated action between delivery and RM.
-              The RM isn&apos;t being &ldquo;brought in&rdquo; — they&apos;re stepping up from
-              informed partner to active co-owner.
+              L3 is when an issue formally spans both domains — delivery and commercial/relationship —
+              and needs coordinated action from both teams to resolve. Because RMs and advisors
+              work so closely together, both sides typically have context already. This level is
+              about aligning on a joint plan of action rather than one team handing off to the other.
             </p>
           </div>
           <div>
@@ -582,8 +571,8 @@ export default function EscalationPath() {
           <p className="text-sm font-bold text-green-700 mb-2">What Works Well</p>
           <ul className="text-sm text-gray-700 space-y-2">
             <li>&#8226; RMs and CS Advisors as the primary account partnership — talking daily, sharing context</li>
-            <li>&#8226; RMs encouraging advisors to bring their managers in when delivery issues need escalation</li>
-            <li>&#8226; CS Managers keeping RMs informed on delivery issues that could affect the relationship</li>
+            <li>&#8226; ICs routing issues to the right owner instead of absorbing them</li>
+            <li>&#8226; CS Managers and RMs keeping each other informed when issues cross domains</li>
             <li>&#8226; Both sides documenting issues and resolutions for account continuity</li>
             <li>&#8226; When in doubt, over-communicating — a quick Teams message goes a long way</li>
           </ul>
@@ -591,9 +580,9 @@ export default function EscalationPath() {
         <div className="rounded-lg border border-amber-200 bg-amber-50 p-4">
           <p className="text-sm font-bold text-amber-700 mb-2">What We Want to Avoid</p>
           <ul className="text-sm text-gray-700 space-y-2">
-            <li>&#8226; Delivery issues bypassing CS management and landing on RMs by default</li>
+            <li>&#8226; Issues getting stuck with whoever heard about them first instead of routing to the right owner</li>
             <li>&#8226; Either side surprising the other in front of a client</li>
-            <li>&#8226; Delivery complaints bouncing back to the client without internal coordination</li>
+            <li>&#8226; Client concerns bouncing back without internal coordination</li>
             <li>&#8226; Issues sitting unresolved because &ldquo;it&apos;s the other team&apos;s problem&rdquo;</li>
             <li>&#8226; Skipping levels — issues arriving at leadership without context from the teams closest to the work</li>
           </ul>
@@ -713,9 +702,9 @@ export default function EscalationPath() {
 
       <DrawbridgeAngle>
         <p>
-          This is a starting point for alignment between RM and CS leadership — not a finished
-          product. The goal is to capture how we think these teams can best work together, then
-          refine it based on real-world experience and input from CS leadership.
+          This is a shared framework — not a finished product. The goal is to capture how both
+          teams can work together most effectively, then refine it as we learn what works in
+          practice.
         </p>
         <p>
           When we get this right, clients see one coordinated team. Issues get resolved by the
@@ -723,6 +712,8 @@ export default function EscalationPath() {
           delivering great work, RM on building lasting client relationships.
         </p>
       </DrawbridgeAngle>
+
+      <LastUpdated date="2026-03-04" />
     </>
   );
 }

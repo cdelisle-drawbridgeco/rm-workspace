@@ -10,6 +10,7 @@ import {
   DrawbridgeAngle,
   SubSection,
   FlowDiagram,
+  LastUpdated,
 } from '../../components/shared-ui';
 
 export default function AiCyberRisk() {
@@ -352,6 +353,8 @@ export default function AiCyberRisk() {
           definition="Unsanctioned use of AI tools by employees without organizational approval or oversight — a growing data-leakage and compliance risk."
         />
       </div>
+
+      <LastUpdated date="2026-02-25" />
     </>
   );
 }

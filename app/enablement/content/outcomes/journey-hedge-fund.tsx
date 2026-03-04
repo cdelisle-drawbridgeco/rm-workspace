@@ -1,6 +1,6 @@
 'use client';
 
-import { HeroSection, SectionHeading, CharacteristicCard, SubSection, DrawbridgeAngle } from '../../components/shared-ui';
+import { HeroSection, SectionHeading, CharacteristicCard, SubSection, DrawbridgeAngle, LastUpdated } from '../../components/shared-ui';
 
 export default function JourneyHedgeFund() {
   const phases = [
@@ -650,6 +650,8 @@ export default function JourneyHedgeFund() {
           by making the decision obvious. Every bridge is earned, never forced.
         </p>
       </DrawbridgeAngle>
+
+      <LastUpdated date="2026-02-24" />
     </>
   );
 }

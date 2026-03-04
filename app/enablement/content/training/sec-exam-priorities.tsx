@@ -9,6 +9,7 @@ import {
   DrawbridgeAngle,
   SubSection,
   FlowDiagram,
+  LastUpdated,
 } from '../../components/shared-ui';
 
 export default function SECExamPriorities() {
@@ -326,6 +327,8 @@ export default function SECExamPriorities() {
         <TermBadge term="Shadow IT" definition="Technology tools and services used by employees without organizational approval — creates unmonitored security risks that examiners increasingly scrutinize." />
         <TermBadge term="Document Request List" definition="The initial list of documents and records the SEC requests at the start of an examination — typically 30\u201350 specific items for cybersecurity-focused exams." />
       </div>
+
+      <LastUpdated date="2026-02-24" />
     </>
   );
 }

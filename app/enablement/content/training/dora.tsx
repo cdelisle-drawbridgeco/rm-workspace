@@ -8,6 +8,7 @@ import {
   HeroSection,
   DrawbridgeAngle,
   SubSection,
+  LastUpdated,
 } from '../../components/shared-ui';
 
 export default function DORA() {
@@ -251,6 +252,8 @@ export default function DORA() {
         <TermBadge term="Critical ICT Provider" definition="A third-party ICT provider designated by the ESAs as critical to EU financial stability — subject to direct regulatory oversight under DORA." />
         <TermBadge term="Competent Authority" definition="The national financial regulator in each EU member state (e.g., BaFin in Germany, AMF in France) responsible for DORA enforcement." />
       </div>
+
+      <LastUpdated date="2026-02-24" />
     </>
   );
 }

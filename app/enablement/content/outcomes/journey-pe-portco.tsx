@@ -1,6 +1,6 @@
 'use client';
 
-import { HeroSection, SectionHeading, CharacteristicCard, DrawbridgeAngle } from '../../components/shared-ui';
+import { HeroSection, SectionHeading, CharacteristicCard, DrawbridgeAngle, LastUpdated } from '../../components/shared-ui';
 
 export default function JourneyPEPortco() {
   const phases = [
@@ -658,6 +658,8 @@ export default function JourneyPEPortco() {
           sponsor&apos;s investment thesis becomes indispensable.
         </p>
       </DrawbridgeAngle>
+
+      <LastUpdated date="2026-02-24" />
     </>
   );
 }

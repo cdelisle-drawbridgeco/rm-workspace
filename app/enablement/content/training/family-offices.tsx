@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { StatCard, SectionHeading, CharacteristicCard, TermBadge, HeroSection, DrawbridgeAngle, SubSection } from '../../components/shared-ui';
+import { StatCard, SectionHeading, CharacteristicCard, TermBadge, HeroSection, DrawbridgeAngle, SubSection, LastUpdated } from '../../components/shared-ui';
 
 export default function FamilyOffices() {
   return (
@@ -164,6 +164,8 @@ export default function FamilyOffices() {
         <TermBadge term="Concierge Security" definition="White-glove cybersecurity services covering personal devices, travel, home networks, and family members." />
         <TermBadge term="Digital Footprint" definition="The trail of personal information available online — social media, property records, court filings — that attackers use for targeting." />
       </div>
+
+      <LastUpdated date="2026-02-24" />
     </>
   );
 }

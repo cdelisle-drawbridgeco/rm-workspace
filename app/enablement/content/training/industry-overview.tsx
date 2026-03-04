@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { StatCard, SectionHeading, CharacteristicCard, TermBadge, HeroSection, DrawbridgeAngle, SubSection, FlowDiagram } from '../../components/shared-ui';
+import { StatCard, SectionHeading, CharacteristicCard, TermBadge, HeroSection, DrawbridgeAngle, SubSection, FlowDiagram, LastUpdated } from '../../components/shared-ui';
 
 export default function IndustryOverview() {
   return (
@@ -132,6 +132,8 @@ export default function IndustryOverview() {
         <TermBadge term="Carried Interest" definition="The GP's share of fund profits (typically 20%), earned above a preferred return hurdle — the primary wealth driver for fund managers." />
         <TermBadge term="ODD" definition="Operational Due Diligence — LP review of a manager's non-investment operations including cybersecurity, compliance, and business continuity." />
       </div>
+
+      <LastUpdated date="2026-02-24" />
     </>
   );
 }

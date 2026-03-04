@@ -9,6 +9,7 @@ import {
   HeroSection,
   DrawbridgeAngle,
   SubSection,
+  LastUpdated,
 } from '../../components/shared-ui';
 
 export default function RegSP() {
@@ -212,6 +213,8 @@ export default function RegSP() {
         <TermBadge term="Rule 30(a)" definition="The specific Reg S-P rule requiring written safeguards policies — the provision most commonly cited in SEC exams and enforcement actions." />
         <TermBadge term="Breach Notification" definition="New under 2025 amendments: requirement to notify affected individuals within 30 days of discovering unauthorized access to their information." />
       </div>
+
+      <LastUpdated date="2026-02-24" />
     </>
   );
 }
