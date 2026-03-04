@@ -53,15 +53,21 @@ export default function EscalationPath() {
         <p className="text-sm text-gray-700 leading-relaxed">
           Before talking about escalation, it&apos;s worth stating the obvious: <strong>IC-to-IC
           collaboration between RMs and CS Advisors is normal, expected, and encouraged.</strong> Our
-          teams work together every day — shared Slack channels, joint client calls, informal
-          coordination on account priorities. That&apos;s how it should be.
+          teams work together every day — and that daily interaction is what makes the client
+          experience feel seamless.
         </p>
         <p className="mt-3 text-sm text-gray-700 leading-relaxed">
-          This document is <em>not</em> about restricting who can talk to whom. It&apos;s about what
-          happens when an <strong>issue needs to be escalated</strong> — who owns the resolution,
-          and how it moves between teams. Day-to-day collaboration continues as it always has.
+          RMs and Advisors talk about their shared clients constantly. They coordinate in account
+          channels, join calls together, share context informally, and flag things for each other.
+          This is the foundation of how we serve clients well — and nothing in this document is
+          meant to change that.
         </p>
-        <div className="mt-4 grid grid-cols-3 gap-3">
+        <p className="mt-3 text-sm text-gray-700 leading-relaxed">
+          The escalation framework below is specifically about <strong>issue resolution
+          ownership</strong> — when something goes wrong, who drives the fix? Day-to-day
+          collaboration continues exactly as it always has.
+        </p>
+        <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
           <div className="rounded-lg bg-white border border-green-200 p-3 text-center">
             <p className="text-xs font-semibold text-green-700">Shared Account Channels</p>
             <p className="text-xs text-gray-500 mt-1">RMs and Advisors coordinate in real time</p>
@@ -74,8 +80,65 @@ export default function EscalationPath() {
             <p className="text-xs font-semibold text-green-700">Informal Check-ins</p>
             <p className="text-xs text-gray-500 mt-1">Quick syncs on account status and priorities</p>
           </div>
+          <div className="rounded-lg bg-white border border-green-200 p-3 text-center">
+            <p className="text-xs font-semibold text-green-700">Cross-Team Context</p>
+            <p className="text-xs text-gray-500 mt-1">Sharing what each side hears from the client</p>
+          </div>
         </div>
       </div>
+
+      {/* When Issues Surface in IC Conversations */}
+      <SubSection icon="💬" title="When Delivery Issues Come Up in IC Conversations">
+        <p>
+          Because RMs and CS Advisors talk regularly, delivery issues will naturally surface in
+          those conversations — an advisor mentions they&apos;re running behind, a client shared
+          frustration during a call, a scope question comes up. This is normal and it&apos;s
+          actually valuable — it means information is flowing.
+        </p>
+        <p>
+          <strong>The question isn&apos;t whether RMs hear about delivery issues — they will. The
+          question is what happens next.</strong> The recommended pattern:
+        </p>
+        <div className="mt-3 space-y-2">
+          <div className="flex items-start gap-3 rounded-md border border-gray-200 bg-gray-50 p-3">
+            <span className="shrink-0 mt-0.5 inline-flex items-center justify-center w-6 h-6 rounded-full bg-db-aqua/20 text-xs font-bold text-db-aqua-dark">1</span>
+            <div>
+              <p className="text-sm font-medium text-db-dark">Acknowledge it</p>
+              <p className="text-sm text-gray-600">The CS Advisor feels heard. You&apos;re not dismissing the issue or pretending you didn&apos;t notice.</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-3 rounded-md border border-gray-200 bg-gray-50 p-3">
+            <span className="shrink-0 mt-0.5 inline-flex items-center justify-center w-6 h-6 rounded-full bg-db-aqua/20 text-xs font-bold text-db-aqua-dark">2</span>
+            <div>
+              <p className="text-sm font-medium text-db-dark">Encourage them to bring in their manager</p>
+              <p className="text-sm text-gray-600">&ldquo;That sounds like something [CS Manager] should know about — have you looped them in?&rdquo; This empowers the advisor to use their own chain rather than leaning on the RM as a shortcut.</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-3 rounded-md border border-gray-200 bg-gray-50 p-3">
+            <span className="shrink-0 mt-0.5 inline-flex items-center justify-center w-6 h-6 rounded-full bg-db-aqua/20 text-xs font-bold text-db-aqua-dark">3</span>
+            <div>
+              <p className="text-sm font-medium text-db-dark">Note it for your own awareness</p>
+              <p className="text-sm text-gray-600">You now know there&apos;s a delivery issue on this account. You don&apos;t need to own it, but you&apos;re not in the dark either.</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-3 rounded-md border border-gray-200 bg-gray-50 p-3">
+            <span className="shrink-0 mt-0.5 inline-flex items-center justify-center w-6 h-6 rounded-full bg-db-aqua/20 text-xs font-bold text-db-aqua-dark">4</span>
+            <div>
+              <p className="text-sm font-medium text-db-dark">Escalate yourself if it touches the relationship</p>
+              <p className="text-sm text-gray-600">If the issue feels like it could affect renewal, client satisfaction, or the executive relationship, connect with the CS Manager directly (L3).</p>
+            </div>
+          </div>
+        </div>
+        <div className="mt-4 rounded-md bg-db-aqua/5 border border-db-aqua/20 p-3">
+          <p className="text-sm text-db-dark">
+            <strong>Why this works:</strong> The RM isn&apos;t absorbing the problem or becoming the
+            default escalation path for delivery issues. But they&apos;re also not ignoring it or
+            creating a wall between teams. They&apos;re an empowered partner — staying informed,
+            encouraging the right process, and stepping in when the issue crosses into
+            relationship territory.
+          </p>
+        </div>
+      </SubSection>
 
       {/* Org Context */}
       <SectionHeading>Organizational Context</SectionHeading>
@@ -209,6 +272,15 @@ export default function EscalationPath() {
             </ul>
           </div>
           <div>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">How Issues Get Here</p>
+            <p className="mt-1 text-sm text-gray-700">
+              Sometimes the advisor recognizes they need help and escalates on their own. Other times,
+              the prompt comes from an RM who heard about the issue in an IC conversation and encouraged
+              the advisor to loop in their manager. Either path is fine — what matters is that CS
+              management is aware and owns the resolution.
+            </p>
+          </div>
+          <div>
             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Why This Level Matters</p>
             <p className="mt-1 text-sm text-gray-700">
               This is where most delivery issues get resolved. CS Managers are closest to the work,
@@ -269,7 +341,7 @@ export default function EscalationPath() {
           <div>
             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">How It Works</p>
             <p className="mt-1 text-sm text-gray-700">
-              CS Manager and RM connect directly (Slack, call, or quick huddle) to align on the
+              CS Manager and RM connect directly (Teams, call, or quick huddle) to align on the
               issue and agree on who takes the next action with the client. Both parties leave
               with a clear owner and timeline.
             </p>
@@ -383,7 +455,7 @@ export default function EscalationPath() {
             <li>&#8226; CS Managers looping in RMs when client-visible issues are in play, even when CS is handling it</li>
             <li>&#8226; RMs routing delivery-related requests through CS Managers for proper prioritization</li>
             <li>&#8226; Both sides documenting issues and resolutions for account continuity</li>
-            <li>&#8226; When in doubt, over-communicating — a quick Slack message goes a long way</li>
+            <li>&#8226; When in doubt, over-communicating — a quick Teams message goes a long way</li>
           </ul>
         </div>
         <div className="rounded-lg border border-amber-200 bg-amber-50 p-4">
@@ -445,6 +517,16 @@ export default function EscalationPath() {
           </div>
         </div>
         <div className="rounded-lg border border-gray-200 bg-white p-4">
+          <p className="text-sm font-bold text-db-dark">Advisor mentions a delivery delay to the RM in Teams</p>
+          <div className="mt-2 flex items-center gap-2 text-xs text-gray-500">
+            <span className="rounded-full bg-green-100 text-green-700 px-2 py-0.5 font-medium">IC</span>
+            <span>RM acknowledges, asks &ldquo;Have you looped in [CS Manager]?&rdquo;</span>
+            <span className="text-gray-300">→</span>
+            <span className="rounded-full bg-blue-100 text-blue-700 px-2 py-0.5 font-medium">L2</span>
+            <span>Advisor brings CS Manager in — CS owns resolution</span>
+          </div>
+        </div>
+        <div className="rounded-lg border border-gray-200 bg-white p-4">
           <p className="text-sm font-bold text-db-dark">RM hears delivery praise during a renewal call</p>
           <div className="mt-2 flex items-center gap-2 text-xs text-gray-500">
             <span className="rounded-full bg-green-100 text-green-700 px-2 py-0.5 font-medium">L1</span>
@@ -466,12 +548,12 @@ export default function EscalationPath() {
           </thead>
           <tbody className="divide-y divide-gray-100">
             <tr>
-              <td className="px-4 py-2 font-medium text-db-dark">Slack (account channel)</td>
+              <td className="px-4 py-2 font-medium text-db-dark">Teams (account channel)</td>
               <td className="px-4 py-2 text-gray-600">Quick heads-ups, status updates, non-urgent coordination</td>
               <td className="px-4 py-2 text-gray-600">Same business day</td>
             </tr>
             <tr>
-              <td className="px-4 py-2 font-medium text-db-dark">Slack (DM to CS Manager or RM)</td>
+              <td className="px-4 py-2 font-medium text-db-dark">Teams (chat with CS Manager or RM)</td>
               <td className="px-4 py-2 text-gray-600">Time-sensitive L2/L3 issues that need quick alignment</td>
               <td className="px-4 py-2 text-gray-600">Within 2 hours</td>
             </tr>
