@@ -147,13 +147,13 @@ export default function EscalationPath() {
           <p className="text-xs font-semibold uppercase tracking-wide text-db-aqua-dark">Relationship Management</p>
           <div className="mt-3 space-y-2 text-sm text-gray-700">
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-db-aqua/20 text-xs font-bold text-db-aqua-dark">L4</span>
+              <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-db-aqua/20 text-xs font-bold text-db-aqua-dark">VP</span>
               <span>VP, Relationship Management</span>
             </div>
             <div className="ml-4 border-l-2 border-gray-200 pl-3">
               <div className="flex items-center gap-2">
-                <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-db-aqua/20 text-xs font-bold text-db-aqua-dark">L1</span>
-                <span>Relationship Managers <span className="text-gray-400">(ICs)</span></span>
+                <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-db-aqua/20 text-xs font-bold text-db-aqua-dark">IC</span>
+                <span>Relationship Managers</span>
               </div>
             </div>
           </div>
@@ -163,22 +163,22 @@ export default function EscalationPath() {
           <p className="text-xs font-semibold uppercase tracking-wide text-db-aqua-dark">Client Success</p>
           <div className="mt-3 space-y-2 text-sm text-gray-700">
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-orange-100 text-xs font-bold text-orange-600">L4</span>
+              <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-orange-100 text-xs font-bold text-orange-600">VP</span>
               <span>Head of Client Success</span>
             </div>
             <div className="ml-4 border-l-2 border-gray-200 pl-3 space-y-2">
               <div className="flex items-center gap-2">
-                <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-orange-100 text-xs font-bold text-orange-600">L3</span>
-                <span>CS Managers <span className="text-gray-400">(middle management)</span></span>
+                <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-orange-100 text-xs font-bold text-orange-600">Mgr</span>
+                <span>CS Managers</span>
               </div>
               <div className="ml-4 border-l-2 border-gray-200 pl-3 space-y-1">
                 <div className="flex items-center gap-2">
-                  <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-orange-100 text-xs font-bold text-orange-600">L1</span>
-                  <span>Cyber Security Advisors <span className="text-gray-400">(ICs)</span></span>
+                  <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-orange-100 text-xs font-bold text-orange-600">IC</span>
+                  <span>Cyber Security Advisors</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-orange-100 text-xs font-bold text-orange-600">L1</span>
-                  <span>Tech Advisors <span className="text-gray-400">(ICs)</span></span>
+                  <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-orange-100 text-xs font-bold text-orange-600">IC</span>
+                  <span>Tech Advisors</span>
                 </div>
               </div>
             </div>
@@ -186,19 +186,34 @@ export default function EscalationPath() {
           <p className="mt-3 text-xs text-gray-400">Layered structure — ICs → Managers → Head of CS</p>
         </div>
       </div>
+      <div className="mt-3 rounded-md bg-gray-50 border border-gray-200 p-3">
+        <p className="text-sm text-gray-600">
+          <strong>A note on structure:</strong> These two teams are organized differently — RM is
+          flat, CS has a management layer. That means an RM (IC) and a CS Advisor (IC) are peers
+          in terms of client work, even though the org charts look different. The escalation framework
+          accounts for this asymmetry: CS Advisors have a manager to escalate delivery issues to;
+          RMs escalate directly to the VP of RM.
+        </p>
+      </div>
 
       {/* The Core Idea */}
       <SubSection icon="🎯" title="The Core Idea">
         <p>
-          When delivery issues come up, <strong>CS owns the resolution through their management
-          chain</strong> — they&apos;re closest to the work and best positioned to fix it. When an
-          issue has commercial or relationship implications, it crosses to RM. This keeps each
-          team focused on what they do best: CS on delivery execution, RM on the strategic relationship.
+          <strong>RMs and CS Advisors are the primary working relationship on each account.</strong> They
+          collaborate daily, share context, and coordinate on client needs. That&apos;s the engine
+          that makes accounts work.
         </p>
         <p>
-          The same principle works in both directions: when RMs need delivery changes to support
-          a commercial conversation, that request is best routed through CS management so it
-          gets properly prioritized alongside other delivery commitments.
+          When delivery issues arise that an advisor can&apos;t resolve on their own, <strong>CS
+          management is the escalation path for delivery</strong> — CS Managers know their team&apos;s
+          capacity, can reassign resources, and have the authority to adjust delivery plans. The RM
+          doesn&apos;t need to be the one solving delivery problems, but they&apos;re often the first
+          to hear about them because of how closely they work with advisors.
+        </p>
+        <p>
+          When a delivery issue starts to affect the client relationship or has commercial implications,
+          that&apos;s when the RM actively engages — not because someone finally &ldquo;brought them
+          in,&rdquo; but because the issue has crossed into their domain.
         </p>
       </SubSection>
 
@@ -214,15 +229,15 @@ export default function EscalationPath() {
           <div className="flex items-center gap-3">
             <span className="flex items-center justify-center w-10 h-10 rounded-full bg-green-100 text-lg font-bold text-green-700">L1</span>
             <div>
-              <h3 className="text-lg font-bold font-heading text-db-dark">Advisor-Level Resolution</h3>
-              <p className="text-sm text-gray-500 mt-0.5">CS Advisor owns it — handles directly with the client</p>
+              <h3 className="text-lg font-bold font-heading text-db-dark">IC-Level Resolution</h3>
+              <p className="text-sm text-gray-500 mt-0.5">CS Advisor handles it — often in coordination with the RM</p>
             </div>
           </div>
         </div>
         <div className="px-6 py-5 space-y-4">
           <div>
             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Resolution Owner</p>
-            <p className="mt-1 text-sm text-gray-700">Cyber Security Advisor or Tech Advisor working directly with the client</p>
+            <p className="mt-1 text-sm text-gray-700">CS Advisor (Cyber Security Advisor or Tech Advisor), with the RM as a natural collaborator on the account</p>
           </div>
           <div>
             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Types of Issues</p>
@@ -235,11 +250,13 @@ export default function EscalationPath() {
             </ul>
           </div>
           <div>
-            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Expected Resolution</p>
-            <p className="mt-1 text-sm text-gray-700">Advisor resolves directly with the client. Logs resolution if relevant to account health.</p>
-          </div>
-          <div className="rounded-md bg-green-50 border border-green-200 p-3">
-            <p className="text-xs text-green-700"><strong>RM Visibility:</strong> None required. RMs may hear about it in regular account syncs but don&apos;t need to be looped in real-time.</p>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">How This Works in Practice</p>
+            <p className="mt-1 text-sm text-gray-700">
+              The advisor resolves it directly with the client. Because RMs and advisors work closely
+              together, the RM often knows about these issues already — they may come up in account
+              channel conversations or on joint calls. That&apos;s normal. The advisor owns the fix,
+              and the RM has natural visibility through the working relationship.
+            </p>
           </div>
         </div>
       </div>
@@ -250,15 +267,15 @@ export default function EscalationPath() {
           <div className="flex items-center gap-3">
             <span className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-100 text-lg font-bold text-blue-700">L2</span>
             <div>
-              <h3 className="text-lg font-bold font-heading text-db-dark">CS Manager Resolution</h3>
-              <p className="text-sm text-gray-500 mt-0.5">CS Manager owns it — delivery escalation stays within CS</p>
+              <h3 className="text-lg font-bold font-heading text-db-dark">CS Manager Escalation</h3>
+              <p className="text-sm text-gray-500 mt-0.5">Delivery issue needs management support — CS Manager steps in</p>
             </div>
           </div>
         </div>
         <div className="px-6 py-5 space-y-4">
           <div>
             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Resolution Owner</p>
-            <p className="mt-1 text-sm text-gray-700">CS Manager (the advisor&apos;s direct manager)</p>
+            <p className="mt-1 text-sm text-gray-700">CS Manager (the advisor&apos;s direct manager) — with input from the RM and advisor as needed</p>
           </div>
           <div>
             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Types of Issues</p>
@@ -274,23 +291,25 @@ export default function EscalationPath() {
           <div>
             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">How Issues Get Here</p>
             <p className="mt-1 text-sm text-gray-700">
-              Sometimes the advisor recognizes they need help and escalates on their own. Other times,
-              the prompt comes from an RM who heard about the issue in an IC conversation and encouraged
-              the advisor to loop in their manager. Either path is fine — what matters is that CS
-              management is aware and owns the resolution.
+              This can come from multiple directions. The advisor recognizes they need help and
+              escalates to their manager. Or the RM hears about a delivery issue through their
+              normal working relationship with the advisor and encourages them to bring their
+              manager in. Either way, CS management gets involved because the issue needs
+              resources, authority, or oversight that goes beyond what the IC pair can handle.
             </p>
           </div>
           <div>
             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Why This Level Matters</p>
             <p className="mt-1 text-sm text-gray-700">
-              This is where most delivery issues get resolved. CS Managers are closest to the work,
-              know their team&apos;s capacity, and can adjust delivery plans, reassign resources, or
-              coach advisors. <strong>When CS owns resolution at this level, it keeps RM focused on
-              the strategic relationship</strong> rather than getting pulled into delivery execution.
+              CS Managers can do things ICs can&apos;t — reassign resources, adjust delivery plans
+              across accounts, coach advisors, or have management-level conversations with clients.
+              This is where most delivery issues get resolved. The RM stays informed through their
+              existing relationship with the advisor, and the CS Manager keeps RM in the loop on
+              anything that could affect the client relationship.
             </p>
           </div>
           <div className="rounded-md bg-blue-50 border border-blue-200 p-3">
-            <p className="text-xs text-blue-700"><strong>RM Visibility:</strong> CS Manager sends a brief heads-up to the assigned RM if the issue is visible to the client or may affect the relationship. Informational — not asking RM to act.</p>
+            <p className="text-xs text-blue-700"><strong>RM Role:</strong> The RM is already aware of the issue through their IC relationship. At this level, the CS Manager may reach out to the RM for additional context or to coordinate on client messaging. The RM doesn&apos;t need to own the delivery fix, but they&apos;re a partner in the process.</p>
           </div>
         </div>
       </div>
@@ -301,26 +320,28 @@ export default function EscalationPath() {
           <div className="flex items-center gap-3">
             <span className="flex items-center justify-center w-10 h-10 rounded-full bg-db-aqua/20 text-lg font-bold text-db-aqua-dark">L3</span>
             <div>
-              <h3 className="text-lg font-bold font-heading text-db-dark">Cross-Team Coordination</h3>
-              <p className="text-sm text-gray-500 mt-0.5">CS Manager ↔ RM — when delivery meets the commercial relationship</p>
+              <h3 className="text-lg font-bold font-heading text-db-dark">Joint Resolution</h3>
+              <p className="text-sm text-gray-500 mt-0.5">Delivery issue has relationship or commercial impact — both teams actively own it</p>
             </div>
           </div>
         </div>
         <div className="px-6 py-5 space-y-4">
           <div className="rounded-md bg-db-aqua/5 border border-db-aqua/20 p-3">
             <p className="text-sm text-db-dark">
-              This is where delivery issues cross into relationship territory (or vice versa). The
-              recommended pattern is <strong>CS Manager ↔ RM</strong> as the coordination point,
-              since CS Managers have full context on the delivery situation and RMs have context on
-              the commercial relationship. This pairing ensures both sides of the picture are represented.
+              At L1 and L2, the RM is typically already aware of the issue through their working
+              relationship with the advisor. L3 is when the issue formally needs both teams&apos;
+              involvement to resolve — because it&apos;s affecting the client relationship, has
+              commercial implications, or needs coordinated action between delivery and RM.
+              The RM isn&apos;t being &ldquo;brought in&rdquo; — they&apos;re stepping up from
+              informed partner to active co-owner.
             </p>
           </div>
           <div>
             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Resolution Owners</p>
-            <p className="mt-1 text-sm text-gray-700">CS Manager + Relationship Manager for the account — jointly</p>
+            <p className="mt-1 text-sm text-gray-700">RM + CS Manager (and often the CS Advisor) — jointly, with each contributing their domain expertise</p>
           </div>
           <div>
-            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">When Delivery Issues Reach RM</p>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">When Delivery Issues Need RM Ownership</p>
             <ul className="mt-1 text-sm text-gray-700 space-y-1">
               <li>&#8226; Client is expressing significant dissatisfaction or raising renewal concerns</li>
               <li>&#8226; Delivery issue has commercial implications (scope change, pricing conversation needed)</li>
@@ -330,7 +351,7 @@ export default function EscalationPath() {
             </ul>
           </div>
           <div>
-            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">When Commercial Context Reaches CS</p>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">When Commercial Context Needs CS Action</p>
             <ul className="mt-1 text-sm text-gray-700 space-y-1">
               <li>&#8226; Client raised a delivery concern directly with the RM</li>
               <li>&#8226; RM identified a delivery gap during a QBR or renewal conversation</li>
@@ -341,13 +362,11 @@ export default function EscalationPath() {
           <div>
             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">How It Works</p>
             <p className="mt-1 text-sm text-gray-700">
-              CS Manager and RM connect directly (Teams, call, or quick huddle) to align on the
-              issue and agree on who takes the next action with the client. Both parties leave
-              with a clear owner and timeline.
+              The RM, CS Manager, and often the CS Advisor connect (Teams, call, or quick huddle) to
+              align on the issue and agree on who takes the next action with the client. Everyone
+              leaves with a clear owner and timeline. The advisor often stays involved since they
+              have the deepest client context.
             </p>
-          </div>
-          <div className="rounded-md bg-db-aqua/5 border border-db-aqua/20 p-3">
-            <p className="text-xs text-db-aqua-dark"><strong>RM Visibility:</strong> Full. RM is an active participant in resolution at this level.</p>
           </div>
         </div>
       </div>
@@ -402,44 +421,60 @@ export default function EscalationPath() {
       </div>
 
       {/* Visual Flow */}
-      <SectionHeading>Escalation Flow — At a Glance</SectionHeading>
+      <SectionHeading>How It Fits Together</SectionHeading>
       <div className="mt-4 rounded-lg border border-gray-200 bg-white p-6">
-        <div className="flex items-center justify-center gap-0 text-sm">
-          {/* CS Side */}
-          <div className="text-center">
-            <div className="rounded-lg bg-orange-50 border border-orange-200 px-4 py-3 w-36">
-              <p className="font-bold text-orange-700 text-xs">CS Advisor</p>
-              <p className="text-[10px] text-gray-400 mt-0.5">Owns resolution at L1</p>
+        {/* Two-track layout */}
+        <div className="space-y-6">
+          {/* Day-to-day track */}
+          <div>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3 text-center">Day-to-Day Working Relationship</p>
+            <div className="flex items-center justify-center gap-4">
+              <div className="rounded-lg bg-orange-50 border border-orange-200 px-4 py-3 w-36 text-center">
+                <p className="font-bold text-orange-700 text-xs">CS Advisor</p>
+                <p className="text-[10px] text-gray-400 mt-0.5">Delivery IC</p>
+              </div>
+              <div className="text-db-aqua-dark font-bold text-sm">↔</div>
+              <div className="rounded-lg bg-db-aqua/10 border border-db-aqua px-4 py-3 w-36 text-center">
+                <p className="font-bold text-db-aqua-dark text-xs">RM</p>
+                <p className="text-[10px] text-gray-400 mt-0.5">Relationship IC</p>
+              </div>
             </div>
+            <p className="text-[10px] text-gray-400 text-center mt-2">Primary account partnership — collaborate daily on client needs</p>
           </div>
-          <div className="text-gray-300 px-2">→</div>
-          <div className="text-center">
-            <div className="rounded-lg bg-orange-50 border border-orange-200 px-4 py-3 w-36">
-              <p className="font-bold text-orange-700 text-xs">CS Manager</p>
-              <p className="text-[10px] text-gray-400 mt-0.5">Owns resolution at L2</p>
-            </div>
-          </div>
-          <div className="text-gray-300 px-2">→</div>
-          {/* Crossing Point */}
-          <div className="text-center">
-            <div className="rounded-lg bg-db-aqua/10 border-2 border-db-aqua px-4 py-3 w-44">
-              <p className="font-bold text-db-aqua-dark text-xs">CS Manager ↔ RM</p>
-              <p className="text-[10px] text-gray-400 mt-0.5">Joint ownership at L3</p>
-            </div>
-          </div>
-          <div className="text-gray-300 px-2">→</div>
-          {/* Leadership */}
-          <div className="text-center">
-            <div className="rounded-lg bg-orange-50 border border-orange-200 px-4 py-3 w-36">
-              <p className="font-bold text-orange-700 text-xs">Head of CS</p>
-              <p className="text-[10px] text-gray-400 mt-0.5">L4 — CS leadership</p>
-            </div>
-          </div>
-          <div className="text-gray-300 px-2">↔</div>
-          <div className="text-center">
-            <div className="rounded-lg bg-db-aqua/10 border border-db-aqua px-4 py-3 w-36">
-              <p className="font-bold text-db-aqua-dark text-xs">VP of RM</p>
-              <p className="text-[10px] text-gray-400 mt-0.5">L4 — RM leadership</p>
+
+          <div className="border-t border-dashed border-gray-200" />
+
+          {/* Escalation track */}
+          <div>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3 text-center">When Issues Need Escalation</p>
+            <div className="flex items-center justify-center gap-0 text-sm">
+              <div className="text-center">
+                <div className="rounded-lg bg-green-50 border border-green-200 px-3 py-3 w-40">
+                  <p className="font-bold text-green-700 text-xs">L1 — IC Resolution</p>
+                  <p className="text-[10px] text-gray-400 mt-0.5">Advisor handles, RM aware</p>
+                </div>
+              </div>
+              <div className="text-gray-300 px-2">→</div>
+              <div className="text-center">
+                <div className="rounded-lg bg-blue-50 border border-blue-200 px-3 py-3 w-40">
+                  <p className="font-bold text-blue-700 text-xs">L2 — CS Manager</p>
+                  <p className="text-[10px] text-gray-400 mt-0.5">Delivery escalation within CS</p>
+                </div>
+              </div>
+              <div className="text-gray-300 px-2">→</div>
+              <div className="text-center">
+                <div className="rounded-lg bg-db-aqua/10 border-2 border-db-aqua px-3 py-3 w-40">
+                  <p className="font-bold text-db-aqua-dark text-xs">L3 — Joint Resolution</p>
+                  <p className="text-[10px] text-gray-400 mt-0.5">RM + CS co-own outcome</p>
+                </div>
+              </div>
+              <div className="text-gray-300 px-2">→</div>
+              <div className="text-center">
+                <div className="rounded-lg bg-orange-50 border border-orange-200 px-3 py-3 w-40">
+                  <p className="font-bold text-orange-700 text-xs">L4 — Leadership</p>
+                  <p className="text-[10px] text-gray-400 mt-0.5">Head of CS ↔ VP of RM</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -451,9 +486,9 @@ export default function EscalationPath() {
         <div className="rounded-lg border border-green-200 bg-green-50 p-4">
           <p className="text-sm font-bold text-green-700 mb-2">What Works Well</p>
           <ul className="text-sm text-gray-700 space-y-2">
-            <li>&#8226; RMs and CS Advisors collaborating directly in shared account channels</li>
-            <li>&#8226; CS Managers looping in RMs when client-visible issues are in play, even when CS is handling it</li>
-            <li>&#8226; RMs routing delivery-related requests through CS Managers for proper prioritization</li>
+            <li>&#8226; RMs and CS Advisors as the primary account partnership — talking daily, sharing context</li>
+            <li>&#8226; RMs encouraging advisors to bring their managers in when delivery issues need escalation</li>
+            <li>&#8226; CS Managers keeping RMs informed on delivery issues that could affect the relationship</li>
             <li>&#8226; Both sides documenting issues and resolutions for account continuity</li>
             <li>&#8226; When in doubt, over-communicating — a quick Teams message goes a long way</li>
           </ul>
