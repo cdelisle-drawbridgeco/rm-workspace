@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/db';
+import { renewalPlanService } from '@/lib/services';
 import { STAGE_GATES_FIELD, RENEWAL_STAGES } from '@/lib/renewal-stages';
 import type { RenewalStage } from '@/lib/renewal-stages';
 
@@ -12,19 +12,7 @@ export async function GET(
   { params }: { params: { planId: string } }
 ) {
   try {
-    const plan = await prisma.renewalPlan.findUnique({
-      where: { id: params.planId },
-      include: {
-        account: {
-          include: {
-            owner: {
-              select: { id: true, firstName: true, lastName: true },
-            },
-            opportunities: true,
-          },
-        },
-      },
-    });
+    const plan = await renewalPlanService.findById(params.planId);
 
     if (!plan) {
       return new NextResponse('Plan not found', { status: 404 });
@@ -73,19 +61,13 @@ export async function PATCH(
       if (!RENEWAL_STAGES.includes(value as RenewalStage)) {
         return new NextResponse('Invalid stage', { status: 400 });
       }
-      const updated = await prisma.renewalPlan.update({
-        where: { id: params.planId },
-        data: { currentStage: value },
-      });
+      const updated = await renewalPlanService.updateStage(params.planId, value);
       return NextResponse.json(updated);
     }
 
     // Handle notes
     if (field === 'notes') {
-      const updated = await prisma.renewalPlan.update({
-        where: { id: params.planId },
-        data: { notes: value },
-      });
+      const updated = await renewalPlanService.updateNotes(params.planId, value);
       return NextResponse.json(updated);
     }
 
@@ -93,9 +75,7 @@ export async function PATCH(
     const gateFields = Object.values(STAGE_GATES_FIELD);
     if (gateFields.includes(field)) {
       // Get current plan to merge gates
-      const current = await prisma.renewalPlan.findUnique({
-        where: { id: params.planId },
-      });
+      const current = await renewalPlanService.findByIdSimple(params.planId);
       if (!current) {
         return new NextResponse('Plan not found', { status: 404 });
       }
@@ -113,10 +93,7 @@ export async function PATCH(
         updateData.riskRating = value.rating || null;
       }
 
-      const updated = await prisma.renewalPlan.update({
-        where: { id: params.planId },
-        data: updateData,
-      });
+      const updated = await renewalPlanService.updateGates(params.planId, updateData);
       return NextResponse.json(updated);
     }
 

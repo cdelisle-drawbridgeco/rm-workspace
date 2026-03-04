@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/db';
+import { interactionService } from '@/lib/services';
 
 /**
  * GET /api/interactions?accountId=xxx
@@ -12,14 +12,7 @@ export async function GET(req: NextRequest) {
       return new NextResponse('Missing accountId', { status: 400 });
     }
 
-    const interactions = await prisma.clientInteraction.findMany({
-      where: { accountId },
-      orderBy: { date: 'desc' },
-      include: {
-        author: { select: { id: true, firstName: true, lastName: true } },
-      },
-    });
-
+    const interactions = await interactionService.findByAccount(accountId);
     return NextResponse.json(interactions);
   } catch (err: unknown) {
     console.error('Interactions GET failed', err);
@@ -41,21 +34,16 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const interaction = await prisma.clientInteraction.create({
-      data: {
-        accountId: body.accountId,
-        authorId: body.authorId,
-        date: body.date ? new Date(body.date) : new Date(),
-        type: body.type,
-        notes: body.notes,
-        temperature: body.temperature || null,
-        riskFlag: body.riskFlag || false,
-        followUp: body.followUp || null,
-        participants: body.participants || null,
-      },
-      include: {
-        author: { select: { id: true, firstName: true, lastName: true } },
-      },
+    const interaction = await interactionService.create({
+      accountId: body.accountId,
+      authorId: body.authorId,
+      date: body.date ? new Date(body.date) : undefined,
+      type: body.type,
+      notes: body.notes,
+      temperature: body.temperature || null,
+      riskFlag: body.riskFlag || false,
+      followUp: body.followUp || null,
+      participants: body.participants || null,
     });
 
     return NextResponse.json(interaction);

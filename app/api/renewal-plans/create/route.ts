@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/db';
+import { renewalPlanService } from '@/lib/services';
 
 /**
  * POST /api/renewal-plans/create
@@ -14,21 +14,7 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const plan = await prisma.renewalPlan.upsert({
-      where: {
-        accountId_quarterKey: {
-          accountId: body.accountId,
-          quarterKey: body.quarterKey,
-        },
-      },
-      create: {
-        accountId: body.accountId,
-        quarterKey: body.quarterKey,
-        currentStage: 'prep',
-      },
-      update: {}, // No-op if already exists
-    });
-
+    const plan = await renewalPlanService.upsert(body.accountId, body.quarterKey);
     return NextResponse.json(plan);
   } catch (err: unknown) {
     console.error('Renewal plan create failed', err);

@@ -1,7 +1,7 @@
 /**
  * Shared data-fetching logic for all dashboard pages.
  */
-import { prisma } from '@/lib/db';
+import { accountService, snapshotService, renewalPlanService } from '@/lib/services';
 import { getRollingQuarters } from '@/lib/quarters';
 import type { ForecastSnapshot } from '@prisma/client';
 
@@ -25,15 +25,6 @@ export interface VpForecastData {
   expansionUsd: number;
   notes: string;
 }
-
-const OWNER_SELECT = {
-  id: true,
-  firstName: true,
-  lastName: true,
-  email: true,
-  username: true,
-  isActive: true,
-} as const;
 
 /** Convert a raw ForecastSnapshot row to USD display values. */
 function snapToAccountData(snap: ForecastSnapshot): AccountSnapshotData {
@@ -78,15 +69,7 @@ export interface RenewalPlanSummary {
 export async function getRenewalPlanSummaries(
   quarterKeys: string[]
 ): Promise<Record<string, RenewalPlanSummary>> {
-  const plans = await prisma.renewalPlan.findMany({
-    where: { quarterKey: { in: quarterKeys } },
-    select: {
-      accountId: true,
-      quarterKey: true,
-      currentStage: true,
-      riskRating: true,
-    },
-  });
+  const plans = await renewalPlanService.findSummaries(quarterKeys);
 
   const map: Record<string, RenewalPlanSummary> = {};
   for (const p of plans) {
@@ -99,12 +82,7 @@ export async function getDashboardData(options?: {
   includeVpForecasts?: boolean;
   includeRenewalPlanSummaries?: boolean;
 }) {
-  const accounts = await prisma.account.findMany({
-    include: {
-      opportunities: true,
-      owner: { select: OWNER_SELECT },
-    },
-  });
+  const accounts = await accountService.findAllWithOwnerAndOpportunities();
 
   // Filter out any accounts without owners (defensive check)
   const validAccounts = accounts.filter(acc => acc.owner !== null);
@@ -119,13 +97,7 @@ export async function getDashboardData(options?: {
   const quarterValues = [quarters.cq, quarters.nq, quarters.fq];
 
   // Bulk fetch all Account snapshots for the 3 quarters, newest first
-  const allAccountSnaps = await prisma.forecastSnapshot.findMany({
-    where: {
-      scopeType: 'Account',
-      quarterKey: { in: quarterValues },
-    },
-    orderBy: { createdAt: 'desc' },
-  });
+  const allAccountSnaps = await snapshotService.findByScope('Account', quarterValues);
 
   // Deduplicate: keep only the latest per (scopeName, quarterKey)
   const latestByAccount = new Map<string, Record<string, AccountSnapshotData>>();
@@ -146,14 +118,7 @@ export async function getDashboardData(options?: {
   let vpForecasts = new Map<string, VpForecastData>();
 
   if (options?.includeVpForecasts) {
-    const allVpSnaps = await prisma.forecastSnapshot.findMany({
-      where: {
-        scopeType: 'VP',
-        scopeName: 'VP Forecast',
-        quarterKey: { in: quarterValues },
-      },
-      orderBy: { createdAt: 'desc' },
-    });
+    const allVpSnaps = await snapshotService.findVpSnapshots(quarterValues);
 
     // Deduplicate: keep only the latest per quarterKey
     for (const snap of allVpSnaps) {

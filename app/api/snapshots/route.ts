@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/db';
+import { snapshotService } from '@/lib/services';
 import { toQuarterKey, periodKeyWeek } from '@/lib/quarters';
 
 interface SnapshotBody {
@@ -65,24 +65,22 @@ export async function POST(req: NextRequest) {
 
     const now = new Date();
     const toCents = (v: number) => Math.round(v * 100);
-    const snap = await prisma.forecastSnapshot.create({
-      data: {
-        scopeType,
-        scopeName,
-        quarterKey: quarterKey || toQuarterKey(now),
-        periodKey: periodKeyWeek(now),
-        forQuarter: quarterKey ? (quarterKey.includes('Q1') || quarterKey.includes('Q2') ? 'CQ' : 'NQ') : 'CQ',
-        bestCents: toCents(b),
-        worstCents: toCents(w),
-        callCents: callCents,
-        grossCallCents: grossCallCents,
-        priceIncreaseCents: priceIncreaseCents,
-        expansionCents: expansionCents,
-        confidencePct: confidencePct != null ? Number(confidencePct) : null,
-        confidence: confidence || null,
-        notes: notes || null,
-        createdBy: scopeName
-      }
+    const snap = await snapshotService.create({
+      scopeType,
+      scopeName,
+      quarterKey: quarterKey || toQuarterKey(now),
+      periodKey: periodKeyWeek(now),
+      forQuarter: quarterKey ? (quarterKey.includes('Q1') || quarterKey.includes('Q2') ? 'CQ' : 'NQ') : 'CQ',
+      bestCents: toCents(b),
+      worstCents: toCents(w),
+      callCents: callCents,
+      grossCallCents: grossCallCents,
+      priceIncreaseCents: priceIncreaseCents,
+      expansionCents: expansionCents,
+      confidencePct: confidencePct != null ? Number(confidencePct) : null,
+      confidence: confidence || null,
+      notes: notes || null,
+      createdBy: scopeName
     });
     console.log('Created snapshot:', {
       scopeType,

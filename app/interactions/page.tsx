@@ -1,21 +1,10 @@
-import { prisma } from '@/lib/db';
+import { accountService } from '@/lib/services';
 import InteractionsView from './interactions-view';
 
 export const dynamic = 'force-dynamic';
 
 export default async function InteractionsPage() {
-  const accounts = await prisma.account.findMany({
-    include: {
-      owner: { select: { id: true, firstName: true, lastName: true } },
-      interactions: {
-        orderBy: { date: 'desc' },
-        take: 1,
-        select: { date: true, type: true, temperature: true, riskFlag: true },
-      },
-      _count: { select: { interactions: true } },
-    },
-    orderBy: { name: 'asc' },
-  });
+  const accounts = await accountService.findAllForInteractions();
 
   // Serialize Date objects to strings for the client component
   const serialized = accounts.map((a) => ({

@@ -288,10 +288,25 @@ export default function AccountTable({
   const [savingStatus, setSavingStatus] = useState<Record<string, 'saving' | 'saved' | null>>({});
   const [columnConfig, setColumnConfig] = useState<ColumnConfigItem[]>(() => getDefaultColumnConfig());
   const visibleColumns = getVisibleColumns(columnConfig);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'submitting' | 'submitted' | 'error'>('idle');
+  const [lockStatus, setLockStatus] = useState<{ status: string; submittedAt?: string } | null>(null);
 
   useEffect(() => {
     setColumnConfig(loadColumnConfig());
   }, []);
+
+  // Fetch current week's lock status when RM or quarter changes
+  useEffect(() => {
+    if (selectedRM === 'All') {
+      setLockStatus(null);
+      return;
+    }
+    const currentQuarter = selectedQuarter === 'CQ' ? quarters.cq : selectedQuarter === 'NQ' ? quarters.nq : quarters.fq;
+    fetch(`/api/forecast/status?rmName=${encodeURIComponent(selectedRM)}&quarterKey=${encodeURIComponent(currentQuarter)}`)
+      .then(r => r.json())
+      .then(data => setLockStatus(data))
+      .catch(() => setLockStatus(null));
+  }, [selectedRM, selectedQuarter, quarters]);
 
   const [drafts, setDrafts] = useState<Record<string, DraftRow>>(() => {
     const d: Record<string, DraftRow> = {};
@@ -378,6 +393,58 @@ export default function AccountTable({
       console.error('Save error:', error);
       setSavingStatus(prev => ({ ...prev, [a.id]: null }));
       if (showAlert) alert('Save failed. Please try again.');
+    }
+  }
+
+  async function submitForecast() {
+    if (selectedRM === 'All') return;
+    const rmAccounts = accountsByRM[selectedRM] || [];
+    if (rmAccounts.length === 0) return;
+
+    setSubmitStatus('submitting');
+    try {
+      const accountSnapshots = rmAccounts.map(a => {
+        const d = drafts[a.id] || EMPTY_DRAFT;
+        return {
+          accountId: a.id,
+          accountName: a.name,
+          best: parseCurrency(d.best),
+          worst: parseCurrency(d.worst),
+          grossCall: parseCurrency(d.grossCall),
+          priceIncrease: parseCurrency(d.priceIncrease),
+          expansion: parseCurrency(d.expansion),
+          call: parseCurrency(d.grossCall) + parseCurrency(d.priceIncrease) + parseCurrency(d.expansion),
+          confidence: d.confidence || '',
+          notes: d.notes || '',
+        };
+      });
+
+      const res = await fetch('/api/forecast/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          rmName: selectedRM,
+          quarterKey: currentQuarterKey,
+          accounts: accountSnapshots,
+        }),
+      });
+
+      if (!res.ok) {
+        const errorText = await res.text();
+        console.error('Submit failed:', errorText);
+        setSubmitStatus('error');
+        setTimeout(() => setSubmitStatus('idle'), 3000);
+        return;
+      }
+
+      const lock = await res.json();
+      setLockStatus(lock);
+      setSubmitStatus('submitted');
+      setTimeout(() => setSubmitStatus('idle'), 3000);
+    } catch (error) {
+      console.error('Submit error:', error);
+      setSubmitStatus('error');
+      setTimeout(() => setSubmitStatus('idle'), 3000);
     }
   }
 
@@ -493,6 +560,52 @@ export default function AccountTable({
           </select>
         </div>
         <ColumnManager columnConfig={columnConfig} onConfigChange={setColumnConfig} />
+
+        {/* Submit Forecast button — visible when a specific RM is selected */}
+        {selectedRM !== 'All' && (
+          <div className="ml-auto flex items-center gap-2">
+            {lockStatus && lockStatus.status !== 'draft' && (
+              <span className={`text-xs px-2 py-1 rounded ${
+                lockStatus.status === 'submitted' ? 'bg-blue-100 text-blue-700' :
+                lockStatus.status === 'reviewed' ? 'bg-green-100 text-green-700' :
+                lockStatus.status === 'locked' ? 'bg-gray-200 text-gray-600' :
+                'bg-gray-100 text-gray-500'
+              }`}>
+                {lockStatus.status === 'submitted' ? 'Submitted' :
+                 lockStatus.status === 'reviewed' ? 'Reviewed' :
+                 lockStatus.status === 'locked' ? 'Locked' :
+                 lockStatus.status}
+                {lockStatus.submittedAt && (
+                  <span className="ml-1 text-[10px] opacity-70">
+                    {new Date(lockStatus.submittedAt).toLocaleDateString()}
+                  </span>
+                )}
+              </span>
+            )}
+            <button
+              onClick={submitForecast}
+              disabled={submitStatus === 'submitting' || lockStatus?.status === 'locked'}
+              className={`px-4 py-2 text-sm font-medium rounded transition-colors ${
+                lockStatus?.status === 'locked'
+                  ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                  : submitStatus === 'submitting'
+                  ? 'bg-blue-300 text-white cursor-wait'
+                  : submitStatus === 'submitted'
+                  ? 'bg-green-600 text-white'
+                  : submitStatus === 'error'
+                  ? 'bg-red-500 text-white'
+                  : 'bg-db-orange text-white hover:bg-orange-600'
+              }`}
+            >
+              {submitStatus === 'submitting' ? 'Submitting...' :
+               submitStatus === 'submitted' ? 'Submitted!' :
+               submitStatus === 'error' ? 'Failed' :
+               lockStatus?.status === 'locked' ? 'Locked' :
+               lockStatus?.status === 'submitted' ? 'Re-submit Forecast' :
+               'Submit Forecast'}
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Summary header - filtered by selected RM */}

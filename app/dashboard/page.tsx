@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/db';
+import { accountService, interactionService, snapshotService } from '@/lib/services';
 import { generateMockData } from '@/lib/mock-data';
 import type { DashboardAccount } from './types';
 import DashboardContent from './dashboard-content';
@@ -7,47 +7,13 @@ export const dynamic = 'force-dynamic';
 
 export default async function DashboardPage() {
   // Fetch all accounts with related data
-  const accounts = await prisma.account.findMany({
-    include: {
-      owner: { select: { id: true, firstName: true, lastName: true } },
-      opportunities: {
-        select: {
-          id: true,
-          renewalDate: true,
-          expiringArrCents: true,
-          quarterKey: true,
-        },
-      },
-      renewalPlans: {
-        orderBy: { updatedAt: 'desc' },
-        take: 1,
-        select: { riskRating: true },
-      },
-    },
-    orderBy: { name: 'asc' },
-  });
+  const accounts = await accountService.findAllForDashboard();
 
   // Fetch interactions for days-since-last-touch and last QBR
-  const interactions = await prisma.clientInteraction.findMany({
-    select: {
-      accountId: true,
-      date: true,
-      type: true,
-      temperature: true,
-    },
-    orderBy: { date: 'desc' },
-  });
+  const interactions = await interactionService.findAllForDashboard();
 
   // Fetch expansion data from latest forecast snapshots
-  const snapshots = await prisma.forecastSnapshot.findMany({
-    where: { scopeType: 'RM' },
-    orderBy: { createdAt: 'desc' },
-    select: {
-      scopeName: true,
-      expansionCents: true,
-      quarterKey: true,
-    },
-  });
+  const snapshots = await snapshotService.findRmSnapshots();
 
   // Build interaction maps per account
   const now = new Date();

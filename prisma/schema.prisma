@@ -127,3 +127,22 @@ model ClientInteraction {
   @@index([accountId, date(sort: Desc)])
   @@map("client_interactions")
 }
+
+model WeeklyForecastLock {
+  id           String    @id @default(cuid())
+  rmName       String    // RM who submitted
+  quarterKey   String    // FY26-Q1
+  periodKey    String    // 2026-W10 (ISO week)
+  status       String    @default("draft") // draft | submitted | reviewed | locked
+  submittedAt  DateTime?
+  reviewedBy   String?
+  reviewedAt   DateTime?
+  lockedAt     DateTime?
+  snapshotData String?   // JSON blob of all account forecasts at submission time
+
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@unique([rmName, quarterKey, periodKey])
+  @@map("weekly_forecast_locks")
+}

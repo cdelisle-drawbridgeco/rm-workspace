@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/db';
+import { accountService } from '@/lib/services';
 
 /**
  * GET /api/renewal-plans?quarterKey=FY26-Q1
@@ -12,30 +12,7 @@ export async function GET(req: NextRequest) {
       return new NextResponse('Missing quarterKey', { status: 400 });
     }
 
-    // Find all accounts that have opportunities in this quarter
-    const accounts = await prisma.account.findMany({
-      where: {
-        opportunities: {
-          some: { quarterKey },
-        },
-      },
-      include: {
-        owner: {
-          select: {
-            id: true,
-            firstName: true,
-            lastName: true,
-          },
-        },
-        opportunities: {
-          where: { quarterKey },
-        },
-        renewalPlans: {
-          where: { quarterKey },
-        },
-      },
-      orderBy: { name: 'asc' },
-    });
+    const accounts = await accountService.findByQuarter(quarterKey);
 
     // Flatten: each account gets its plan (or null) + aggregated ARR
     const results = accounts.map((acc) => {
