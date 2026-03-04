@@ -11,6 +11,7 @@ export default function PrivateEquity() {
         title="Private Equity"
         subtitle="Firms that acquire, operate, and grow private companies to generate returns for institutional investors."
       />
+      <LastUpdated date="February 24, 2026 at 9:04 PM" />
 
       <div className="mt-6 grid grid-cols-4 gap-4">
         <StatCard label="Global PE AUM" value="$8.2T" />
@@ -192,7 +193,6 @@ export default function PrivateEquity() {
         <TermBadge term="Fund Life" definition="Typically 10 years — includes investment period (years 1–5) and harvest period (years 6–10) with possible extensions." />
       </div>
 
-      <LastUpdated date="2026-02-24" />
     </>
   );
 }

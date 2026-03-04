@@ -20,6 +20,7 @@ export default function RegSP() {
         title="Regulation S-P \u2014 Deep Dive"
         subtitle="The SEC's cornerstone regulation for safeguarding customer information at financial institutions, and why it matters for every Drawbridge client."
       />
+      <LastUpdated date="February 24, 2026 at 9:04 PM" />
 
       <div className="mt-6 grid grid-cols-4 gap-4">
         <StatCard label="Originally Adopted" value="2000" />
@@ -214,7 +215,6 @@ export default function RegSP() {
         <TermBadge term="Breach Notification" definition="New under 2025 amendments: requirement to notify affected individuals within 30 days of discovering unauthorized access to their information." />
       </div>
 
-      <LastUpdated date="2026-02-24" />
     </>
   );
 }

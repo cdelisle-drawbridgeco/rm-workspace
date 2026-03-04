@@ -25,6 +25,7 @@ export default function SvrConversationGuide() {
         title="SVR Conversation Guide & Question Bank"
         subtitle="Turning the SVR from a presentation into a partnership &mdash; structured questions that surface intelligence and let clients articulate the value themselves."
       />
+      <LastUpdated date="February 27, 2026 at 6:36 PM" />
 
       {/* The Mindset Shift */}
       <SectionHeading>The Mindset Shift</SectionHeading>
@@ -367,7 +368,6 @@ export default function SvrConversationGuide() {
         </p>
       </DrawbridgeAngle>
 
-      <LastUpdated date="2026-02-27" />
     </>
   );
 }

@@ -17,6 +17,7 @@ export default function JourneyPEPortco() {
         title="Customer Journey — PE Portfolio Company"
         subtitle="A roadmap for portfolio companies mandated by their PE sponsor to build a security program. Start with rapid uplift, then mature toward exit readiness."
       />
+      <LastUpdated date="February 24, 2026 at 10:39 PM" />
 
       {/* How to use */}
       <div className="mt-6 rounded-lg bg-db-dark p-5">
@@ -659,7 +660,6 @@ export default function JourneyPEPortco() {
         </p>
       </DrawbridgeAngle>
 
-      <LastUpdated date="2026-02-24" />
     </>
   );
 }

@@ -10,6 +10,7 @@ export default function OutcomeFramework() {
         title="Business Outcome Framework"
         subtitle="Stop selling features. Start solving business problems. Six outcomes that define the value we deliver — in our clients' language."
       />
+      <LastUpdated date="February 24, 2026 at 9:04 PM" />
 
       {/* Philosophy */}
       <SectionHeading>Why Outcomes, Not Features</SectionHeading>
@@ -556,7 +557,6 @@ export default function OutcomeFramework() {
         </p>
       </DrawbridgeAngle>
 
-      <LastUpdated date="2026-02-24" />
     </>
   );
 }

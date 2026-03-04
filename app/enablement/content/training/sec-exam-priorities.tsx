@@ -20,6 +20,7 @@ export default function SECExamPriorities() {
         title="SEC Cybersecurity Exam Priorities"
         subtitle="What the SEC's Division of Examinations is actively looking for — and how it directly shapes what Drawbridge clients need."
       />
+      <LastUpdated date="February 24, 2026 at 9:04 PM" />
 
       <div className="mt-6 grid grid-cols-4 gap-4">
         <StatCard label="Cyber as Exam Priority Since" value="2014" />
@@ -328,7 +329,6 @@ export default function SECExamPriorities() {
         <TermBadge term="Document Request List" definition="The initial list of documents and records the SEC requests at the start of an examination — typically 30\u201350 specific items for cybersecurity-focused exams." />
       </div>
 
-      <LastUpdated date="2026-02-24" />
     </>
   );
 }

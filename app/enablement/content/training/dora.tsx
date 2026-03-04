@@ -19,6 +19,7 @@ export default function DORA() {
         title="DORA \u2014 Digital Operational Resilience Act"
         subtitle="The EU's landmark regulation for ICT risk management in financial services, and what it means for Drawbridge's clients with European operations."
       />
+      <LastUpdated date="February 24, 2026 at 9:04 PM" />
 
       <div className="mt-6 grid grid-cols-4 gap-4">
         <StatCard label="Enacted" value="Jan 2023" />
@@ -253,7 +254,6 @@ export default function DORA() {
         <TermBadge term="Competent Authority" definition="The national financial regulator in each EU member state (e.g., BaFin in Germany, AMF in France) responsible for DORA enforcement." />
       </div>
 
-      <LastUpdated date="2026-02-24" />
     </>
   );
 }

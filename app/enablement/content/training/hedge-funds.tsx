@@ -11,6 +11,7 @@ export default function HedgeFunds() {
         title="Hedge Funds"
         subtitle="Actively managed investment vehicles using diverse strategies across public and private markets."
       />
+      <LastUpdated date="February 24, 2026 at 9:04 PM" />
 
       <div className="mt-6 grid grid-cols-4 gap-4">
         <StatCard label="Global Hedge Fund AUM" value="$4.3T" />
@@ -178,7 +179,6 @@ export default function HedgeFunds() {
         <TermBadge term="Reg S-P" definition="SEC regulation requiring financial institutions to protect customer information and notify of breaches." />
       </div>
 
-      <LastUpdated date="2026-02-24" />
     </>
   );
 }

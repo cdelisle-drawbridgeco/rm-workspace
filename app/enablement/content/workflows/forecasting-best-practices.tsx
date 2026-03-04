@@ -18,6 +18,7 @@ export default function ForecastingBestPractices() {
         title="Forecasting Best Practices"
         subtitle="How to build a disciplined, data-driven renewal forecast — treating your renewal pipeline like a sales pipeline."
       />
+      <LastUpdated date="February 24, 2026 at 9:04 PM" />
 
       {/* Philosophy */}
       <SectionHeading>The Forecasting Mindset</SectionHeading>
@@ -351,7 +352,6 @@ export default function ForecastingBestPractices() {
         </p>
       </DrawbridgeAngle>
 
-      <LastUpdated date="2026-02-24" />
     </>
   );
 }

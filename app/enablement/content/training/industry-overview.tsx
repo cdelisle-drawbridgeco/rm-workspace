@@ -11,6 +11,7 @@ export default function IndustryOverview() {
         title="Alternative Asset Management — Industry Overview"
         subtitle="Understanding the landscape Drawbridge serves across hedge funds, private equity, and family offices."
       />
+      <LastUpdated date="February 24, 2026 at 9:04 PM" />
 
       <div className="mt-6 grid grid-cols-4 gap-4">
         <StatCard label="Global AUM (Alternatives)" value="$23.2T" />
@@ -133,7 +134,6 @@ export default function IndustryOverview() {
         <TermBadge term="ODD" definition="Operational Due Diligence — LP review of a manager's non-investment operations including cybersecurity, compliance, and business continuity." />
       </div>
 
-      <LastUpdated date="2026-02-24" />
     </>
   );
 }

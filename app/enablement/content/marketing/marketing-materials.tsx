@@ -41,6 +41,7 @@ export default function MarketingMaterials() {
         title="Marketing Materials"
         subtitle="Sales collateral, competitive intelligence, and customer-facing resources."
       />
+      <LastUpdated date="February 24, 2026 at 9:04 PM" />
 
       <div className="mt-6 grid grid-cols-2 gap-4">
         {categories.map((cat) => (
@@ -79,7 +80,6 @@ export default function MarketingMaterials() {
         </button>
       </div>
 
-      <LastUpdated date="2026-02-24" />
     </>
   );
 }

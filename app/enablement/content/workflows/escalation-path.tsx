@@ -17,6 +17,7 @@ export default function EscalationPath() {
         title="RM ↔ Client Success Operating Model"
         subtitle="A proposed framework for how RM and CS collaborate day-to-day and route issues when they arise — designed to be refined together."
       />
+      <LastUpdated date="March 4, 2026 at 11:26 AM" />
 
       <div className="rounded-lg border border-db-aqua/30 bg-db-aqua/5 p-4 mt-2">
         <p className="text-sm text-db-dark">
@@ -713,7 +714,6 @@ export default function EscalationPath() {
         </p>
       </DrawbridgeAngle>
 
-      <LastUpdated date="2026-03-04" />
     </>
   );
 }

@@ -225,6 +225,7 @@ export default function AiInAlts() {
         title="AI in Alternatives: How Your Clients Are Using It"
         subtitle="Real-world AI adoption across hedge funds and PE firms — and the cyber risks each use case creates."
       />
+      <LastUpdated date="March 3, 2026 at 7:52 AM" />
 
       {/* Stats */}
       <div className="mt-6 grid grid-cols-4 gap-4">
@@ -464,7 +465,6 @@ export default function AiInAlts() {
         </p>
       </DrawbridgeAngle>
 
-      <LastUpdated date="2026-03-03" />
     </>
   );
 }

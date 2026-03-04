@@ -19,6 +19,7 @@ export default function SvrFramework() {
         title="Strategic Value Review (SVR) Framework"
         subtitle="Relationship Manager Playbook — how to run SVRs that re-anchor value, protect GRR, and plant expansion seeds."
       />
+      <LastUpdated date="February 27, 2026 at 6:49 PM" />
 
       {/* Philosophy */}
       <SectionHeading>The Philosophy: Why SVRs Exist</SectionHeading>
@@ -838,7 +839,6 @@ export default function SvrFramework() {
         </p>
       </DrawbridgeAngle>
 
-      <LastUpdated date="2026-02-27" />
     </>
   );
 }

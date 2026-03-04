@@ -17,6 +17,7 @@ export default function JourneyHedgeFund() {
         title="Customer Journey — Hedge Fund"
         subtitle="A practical roadmap for building a lasting client relationship. Start by solving their most urgent problem, then expand as their business evolves."
       />
+      <LastUpdated date="February 24, 2026 at 9:04 PM" />
 
       {/* How to use */}
       <div className="mt-6 rounded-lg bg-db-dark p-5">
@@ -651,7 +652,6 @@ export default function JourneyHedgeFund() {
         </p>
       </DrawbridgeAngle>
 
-      <LastUpdated date="2026-02-24" />
     </>
   );
 }

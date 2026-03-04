@@ -21,6 +21,7 @@ export default function AiCyberRisk() {
         title="AI & Cyber Risk"
         subtitle="How artificial intelligence is amplifying the threat landscape — and what it means for your clients."
       />
+      <LastUpdated date="February 25, 2026 at 5:14 PM" />
 
       {/* ── Stats Row ────────────────────────────────────── */}
       <div className="mt-6 grid grid-cols-4 gap-4">
@@ -354,7 +355,6 @@ export default function AiCyberRisk() {
         />
       </div>
 
-      <LastUpdated date="2026-02-25" />
     </>
   );
 }

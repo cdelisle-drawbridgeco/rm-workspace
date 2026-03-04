@@ -11,6 +11,7 @@ export default function FamilyOffices() {
         title="Family & Home Offices"
         subtitle="Private wealth management entities serving ultra-high-net-worth families and individuals."
       />
+      <LastUpdated date="February 24, 2026 at 9:04 PM" />
 
       <div className="mt-6 grid grid-cols-4 gap-4">
         <StatCard label="Global Family Office AUM" value="$6.0T" />
@@ -165,7 +166,6 @@ export default function FamilyOffices() {
         <TermBadge term="Digital Footprint" definition="The trail of personal information available online — social media, property records, court filings — that attackers use for targeting." />
       </div>
 
-      <LastUpdated date="2026-02-24" />
     </>
   );
 }

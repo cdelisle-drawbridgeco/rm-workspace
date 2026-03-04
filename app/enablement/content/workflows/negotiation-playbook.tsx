@@ -18,6 +18,7 @@ export default function NegotiationPlaybook() {
         title="Renewal Negotiation Playbook"
         subtitle="You're not an order-taker. You're a strategic advisor who protects and grows revenue through disciplined, proactive negotiation."
       />
+      <LastUpdated date="February 24, 2026 at 9:04 PM" />
 
       {/* Mindset */}
       <SectionHeading>The RM Mindset Shift</SectionHeading>
@@ -701,7 +702,6 @@ export default function NegotiationPlaybook() {
         </p>
       </DrawbridgeAngle>
 
-      <LastUpdated date="2026-02-24" />
     </>
   );
 }

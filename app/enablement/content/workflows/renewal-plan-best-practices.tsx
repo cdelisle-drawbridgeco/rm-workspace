@@ -18,6 +18,7 @@ export default function RenewalPlanBestPractices() {
         title="Renewal Plan Best Practices"
         subtitle="How to run your renewal pipeline with the rigor of a sales pipeline — proactive, structured, and always moving forward."
       />
+      <LastUpdated date="February 24, 2026 at 9:04 PM" />
 
       {/* Pipeline Mindset */}
       <SectionHeading>The Pipeline Mindset</SectionHeading>
@@ -234,7 +235,6 @@ export default function RenewalPlanBestPractices() {
         </p>
       </DrawbridgeAngle>
 
-      <LastUpdated date="2026-02-24" />
     </>
   );
 }

@@ -17,6 +17,7 @@ export default function JourneyPEManagement() {
         title="Customer Journey — PE Management Company"
         subtitle="A roadmap for building a lasting relationship with PE firms (GPs). Start with the fundraising moment, then expand into portfolio oversight and value creation."
       />
+      <LastUpdated date="February 24, 2026 at 10:39 PM" />
 
       {/* How to use */}
       <div className="mt-6 rounded-lg bg-db-dark p-5">
@@ -662,7 +663,6 @@ export default function JourneyPEManagement() {
         </p>
       </DrawbridgeAngle>
 
-      <LastUpdated date="2026-02-24" />
     </>
   );
 }

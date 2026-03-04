@@ -94,7 +94,7 @@ export function SubSection({
 
 export function LastUpdated({ date }: { date: string }) {
   return (
-    <p className="mt-8 text-xs text-gray-400 text-right">
+    <p className="mt-2 text-xs text-gray-400 text-right">
       Last updated: {date}
     </p>
   );
