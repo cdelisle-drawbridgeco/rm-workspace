@@ -29,10 +29,9 @@ export default function EscalationPath() {
       <SectionHeading>Purpose</SectionHeading>
       <p className="text-sm text-gray-700 leading-relaxed">
         RM and CS are both client-facing, and our teams interact constantly — that&apos;s by design.
-        <strong> Relationship Managers</strong> own the commercial relationship: renewals, expansion,
-        executive engagement, and strategic account planning. <strong>Client Success</strong> (Cyber Security
-        Advisors and Tech Advisors) owns delivery: assessments, advisory engagements, policy work,
-        and technical implementation.
+        Both teams have been presented on their roles and responsibilities (detailed below), and the
+        day-to-day working relationship between RMs and CS Advisors is the engine that drives our
+        client experience.
       </p>
       <p className="mt-3 text-sm text-gray-700 leading-relaxed">
         Most of the time, this works naturally. But when issues arise — a delivery gap, a client
@@ -195,6 +194,102 @@ export default function EscalationPath() {
           RMs escalate directly to the VP of RM.
         </p>
       </div>
+
+      {/* Roles & Responsibilities */}
+      <SectionHeading>Roles & Responsibilities</SectionHeading>
+      <p className="text-sm text-gray-500 mt-1">
+        Both teams have been aligned on these responsibilities. Understanding what each team owns — and
+        what they don&apos;t — is what makes the escalation framework work in practice.
+      </p>
+      <div className="mt-3 grid grid-cols-2 gap-4">
+        {/* RM */}
+        <div className="rounded-lg border border-gray-200 bg-white p-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-db-aqua-dark mb-3">Relationship Management</p>
+          <div>
+            <p className="text-xs font-semibold text-green-600 mb-1">We Own</p>
+            <ul className="text-sm text-gray-700 space-y-1">
+              <li>&#8226; Strategic, lasting client relationships</li>
+              <li>&#8226; Trusted advisor role — linking client outcomes to Drawbridge value</li>
+              <li>&#8226; Post-sales commercial responsibilities (renewals, expansion)</li>
+              <li>&#8226; Achieving outcomes and demonstrating value to protect Gross Retention</li>
+              <li>&#8226; Identifying opportunities to drive Net Retention</li>
+              <li>&#8226; Strategic account planning and executive engagement</li>
+              <li>&#8226; Evangelizing Drawbridge service value</li>
+            </ul>
+          </div>
+          <div className="mt-3">
+            <p className="text-xs font-semibold text-amber-600 mb-1">We Don&apos;t Own</p>
+            <ul className="text-sm text-gray-700 space-y-1">
+              <li>&#8226; Tactical delivery conversations</li>
+              <li>&#8226; Project delivery execution</li>
+              <li>&#8226; Reactive problem-solving on delivery issues</li>
+            </ul>
+          </div>
+        </div>
+        {/* CS */}
+        <div className="rounded-lg border border-gray-200 bg-white p-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-db-aqua-dark mb-3">Client Success</p>
+          <div>
+            <p className="text-xs font-semibold text-green-600 mb-1">We Own</p>
+            <ul className="text-sm text-gray-700 space-y-1">
+              <li>&#8226; Delivering contracted products and services</li>
+              <li>&#8226; Cyber advisory — interpreting data, clarifying threats, driving remediation</li>
+              <li>&#8226; Insight-led narrative and clear value story for clients</li>
+              <li>&#8226; Product quality standards and content ownership</li>
+              <li>&#8226; Engagement expectations, timelines, and effort estimates</li>
+              <li>&#8226; Improving client posture and Drawbridge score</li>
+              <li>&#8226; Creating and monitoring remediation plans</li>
+            </ul>
+          </div>
+          <div className="mt-3">
+            <p className="text-xs font-semibold text-amber-600 mb-1">We Don&apos;t Own</p>
+            <ul className="text-sm text-gray-700 space-y-1">
+              <li>&#8226; Setting or providing pricing</li>
+              <li>&#8226; Commenting on invoices or payment timing</li>
+              <li>&#8226; Managing third-party or white-labeled vendors</li>
+              <li>&#8226; Selling products (especially without a SKU)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Handoff Boundaries */}
+      <SubSection icon="🔄" title="Natural Handoff Points">
+        <p>
+          The &ldquo;We Don&apos;t Own&rdquo; lists above are where handoffs naturally occur. When a
+          client asks a CS Advisor about pricing, that&apos;s an RM conversation. When a client
+          raises a delivery concern with their RM, that&apos;s a CS conversation. These aren&apos;t
+          walls — they&apos;re the moments where the IC pair (RM + Advisor) recognizes
+          &ldquo;this one belongs to you&rdquo; and routes accordingly.
+        </p>
+        <div className="mt-3 grid grid-cols-2 gap-3">
+          <div className="rounded-md bg-db-aqua/5 border border-db-aqua/20 p-3">
+            <p className="text-xs font-semibold text-db-aqua-dark mb-1">Route to RM When...</p>
+            <ul className="text-xs text-gray-600 space-y-1">
+              <li>&#8226; Client asks about pricing, invoicing, or contract terms</li>
+              <li>&#8226; Client wants to discuss renewal or expansion</li>
+              <li>&#8226; Client raises strategic or executive-level concerns</li>
+              <li>&#8226; Third-party vendor management questions come up</li>
+            </ul>
+          </div>
+          <div className="rounded-md bg-orange-50 border border-orange-200 p-3">
+            <p className="text-xs font-semibold text-orange-600 mb-1">Route to CS When...</p>
+            <ul className="text-xs text-gray-600 space-y-1">
+              <li>&#8226; Client has delivery quality or timeline concerns</li>
+              <li>&#8226; Client needs scope clarification or effort estimates</li>
+              <li>&#8226; Client asks about product capabilities or feasibility</li>
+              <li>&#8226; Technical or advisory questions surface in RM conversations</li>
+            </ul>
+          </div>
+        </div>
+        <div className="mt-3 rounded-md bg-gray-50 border border-gray-200 p-3">
+          <p className="text-xs text-gray-600">
+            <strong>Sign-off note:</strong> Effort, capacity, and capability decisions are signed off by CS
+            leadership. Pricing and market fit decisions are signed off by commercial leadership. When
+            conversations cross these lines, that&apos;s a natural trigger for cross-team coordination.
+          </p>
+        </div>
+      </SubSection>
 
       {/* The Core Idea */}
       <SubSection icon="🎯" title="The Core Idea">
@@ -559,6 +654,16 @@ export default function EscalationPath() {
             <span className="text-gray-300">→</span>
             <span className="rounded-full bg-blue-100 text-blue-700 px-2 py-0.5 font-medium">L2</span>
             <span>Advisor brings CS Manager in — CS owns resolution</span>
+          </div>
+        </div>
+        <div className="rounded-lg border border-gray-200 bg-white p-4">
+          <p className="text-sm font-bold text-db-dark">Client asks advisor about pricing or contract terms</p>
+          <div className="mt-2 flex items-center gap-2 text-xs text-gray-500">
+            <span className="rounded-full bg-green-100 text-green-700 px-2 py-0.5 font-medium">IC</span>
+            <span>Advisor acknowledges, explains RM handles commercial conversations</span>
+            <span className="text-gray-300">→</span>
+            <span className="rounded-full bg-green-100 text-green-700 px-2 py-0.5 font-medium">IC</span>
+            <span>RM picks it up — natural handoff, no escalation needed</span>
           </div>
         </div>
         <div className="rounded-lg border border-gray-200 bg-white p-4">
