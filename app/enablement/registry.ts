@@ -167,6 +167,13 @@ export const CATEGORIES: CategoryConfig[] = [
         icon: '🏭',
       },
       {
+        id: 'journey-pe-revised',
+        title: 'Journey: PE Firm (Revised)',
+        description:
+          'Value-first PE journey — GP and portfolio outcomes mapped to fund lifecycle, not internal milestones.',
+        icon: '🧭',
+      },
+      {
         id: 'roi-value-measurement',
         title: 'ROI & Value Measurement',
         description:
@@ -251,6 +258,7 @@ const TOPIC_COMPONENTS: Record<TopicId, ComponentType> = {
     () => import('./content/outcomes/journey-pe-management'),
   ),
   'journey-pe-portco': dynamic(() => import('./content/outcomes/journey-pe-portco')),
+  'journey-pe-revised': dynamic(() => import('./content/outcomes/journey-pe-revised')),
   'roi-value-measurement': dynamic(() => import('./content/outcomes/roi-value-measurement')),
   'marketing-materials': dynamic(
     () => import('./content/marketing/marketing-materials'),

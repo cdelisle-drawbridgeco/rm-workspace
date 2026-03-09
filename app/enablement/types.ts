@@ -19,6 +19,7 @@ export type TopicId =
   | 'journey-hedge-fund-revised'
   | 'journey-pe-management'
   | 'journey-pe-portco'
+  | 'journey-pe-revised'
   | 'roi-value-measurement'
   | 'marketing-materials'
   | 'ai-cyber-risk'
