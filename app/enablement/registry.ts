@@ -146,6 +146,13 @@ export const CATEGORIES: CategoryConfig[] = [
         icon: '🗺️',
       },
       {
+        id: 'journey-hedge-fund-revised',
+        title: 'Journey: Hedge Fund (Revised)',
+        description:
+          'Value-first customer journey — mapped to the client\'s business evolution, not our internal milestones.',
+        icon: '🧭',
+      },
+      {
         id: 'journey-pe-management',
         title: 'Journey: PE Management Co.',
         description:
@@ -232,6 +239,7 @@ const TOPIC_COMPONENTS: Record<TopicId, ComponentType> = {
   ),
   'outcome-framework': dynamic(() => import('./content/outcomes/outcome-framework')),
   'journey-hedge-fund': dynamic(() => import('./content/outcomes/journey-hedge-fund')),
+  'journey-hedge-fund-revised': dynamic(() => import('./content/outcomes/journey-hedge-fund-revised')),
   'journey-pe-management': dynamic(
     () => import('./content/outcomes/journey-pe-management'),
   ),

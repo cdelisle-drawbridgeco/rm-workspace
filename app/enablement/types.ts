@@ -16,6 +16,7 @@ export type TopicId =
   | 'svr-conversation-guide'
   | 'outcome-framework'
   | 'journey-hedge-fund'
+  | 'journey-hedge-fund-revised'
   | 'journey-pe-management'
   | 'journey-pe-portco'
   | 'marketing-materials'
