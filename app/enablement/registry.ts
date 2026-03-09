@@ -107,6 +107,13 @@ export const CATEGORIES: CategoryConfig[] = [
         icon: '🔄',
       },
       {
+        id: 'msp-objection-handling',
+        title: 'MSP Objection Handling',
+        description:
+          'When a client says they\'re moving cyber to their MSP — regulatory case for independence and talk tracks.',
+        icon: '🛡️',
+      },
+      {
         id: 'svr-framework',
         title: 'SVR Framework',
         description:
@@ -247,6 +254,9 @@ const TOPIC_COMPONENTS: Record<TopicId, ComponentType> = {
     () => import('./content/workflows/negotiation-playbook'),
   ),
   'escalation-path': dynamic(() => import('./content/workflows/escalation-path')),
+  'msp-objection-handling': dynamic(
+    () => import('./content/workflows/msp-objection-handling'),
+  ),
   'svr-framework': dynamic(() => import('./content/workflows/svr-framework')),
   'svr-conversation-guide': dynamic(
     () => import('./content/workflows/svr-conversation-guide'),

@@ -14,6 +14,7 @@ export type TopicId =
   | 'escalation-path'
   | 'svr-framework'
   | 'svr-conversation-guide'
+  | 'msp-objection-handling'
   | 'outcome-framework'
   | 'journey-hedge-fund'
   | 'journey-hedge-fund-revised'
