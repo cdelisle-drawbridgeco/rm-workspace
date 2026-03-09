@@ -166,6 +166,13 @@ export const CATEGORIES: CategoryConfig[] = [
           'Customer journey for PE portfolio companies — from sponsor mandate to exit-ready security.',
         icon: '🏭',
       },
+      {
+        id: 'roi-value-measurement',
+        title: 'ROI & Value Measurement',
+        description:
+          'Five frameworks for quantifying Drawbridge\'s business impact — capital protected, costs avoided, and build vs. buy.',
+        icon: '📐',
+      },
     ],
   },
   {
@@ -244,6 +251,7 @@ const TOPIC_COMPONENTS: Record<TopicId, ComponentType> = {
     () => import('./content/outcomes/journey-pe-management'),
   ),
   'journey-pe-portco': dynamic(() => import('./content/outcomes/journey-pe-portco')),
+  'roi-value-measurement': dynamic(() => import('./content/outcomes/roi-value-measurement')),
   'marketing-materials': dynamic(
     () => import('./content/marketing/marketing-materials'),
   ),
