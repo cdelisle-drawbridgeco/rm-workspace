@@ -18,7 +18,7 @@ export default function NegotiationPlaybook() {
         title="Renewal Negotiation Playbook"
         subtitle="You're not an order-taker. You're a strategic advisor who protects and grows revenue through disciplined, proactive negotiation."
       />
-      <LastUpdated date="February 24, 2026 at 9:04 PM" />
+      <LastUpdated date="March 10, 2026" />
 
       {/* Mindset */}
       <SectionHeading>The RM Mindset Shift</SectionHeading>
@@ -59,6 +59,326 @@ export default function NegotiationPlaybook() {
           clients <em>trust</em> to guide them, not the ones who simply do what they&apos;re told.
         </p>
       </SubSection>
+
+      {/* Pre-Renewal Preparation */}
+      <SectionHeading>Pre-Renewal Preparation: Your SVR Data Is Your Playbook</SectionHeading>
+      <p className="text-sm text-gray-700 leading-relaxed">
+        If you&apos;ve been running SVRs properly, you already have everything you need to walk into
+        a renewal conversation with confidence. The SVR isn&apos;t just a client touchpoint — it&apos;s
+        your <strong>negotiation prep</strong>. Every data point you gathered, every conversation you
+        had, every piece of value you articulated feeds directly into how you position the renewal.
+      </p>
+
+      <SubSection icon="📋" title="The Data You Already Have">
+        <p>
+          Before you start a renewal conversation, pull these from your most recent SVR and CS
+          briefing. If you don&apos;t have them, that&apos;s a sign your SVR prep needs work.
+        </p>
+        <div className="mt-3 grid grid-cols-2 gap-3">
+          <div className="rounded-lg border border-gray-200 bg-white p-4">
+            <p className="text-xs font-semibold text-db-aqua-dark uppercase tracking-wide mb-2">Score &amp; Posture</p>
+            <ul className="text-sm text-gray-700 space-y-1">
+              <li>&#8226; CRA baseline score vs. current score</li>
+              <li>&#8226; Year-over-year score trajectory (multi-year clients)</li>
+              <li>&#8226; Items remediated since last SVR</li>
+              <li>&#8226; Outstanding items and projected score impact</li>
+              <li>&#8226; Remediation velocity — are items closing or stacking up?</li>
+            </ul>
+          </div>
+          <div className="rounded-lg border border-gray-200 bg-white p-4">
+            <p className="text-xs font-semibold text-db-aqua-dark uppercase tracking-wide mb-2">Value Delivered</p>
+            <ul className="text-sm text-gray-700 space-y-1">
+              <li>&#8226; DDQs turned around (count, turnaround time)</li>
+              <li>&#8226; Policies updated and board-approved</li>
+              <li>&#8226; Training completion rates</li>
+              <li>&#8226; Phishing simulation improvements</li>
+              <li>&#8226; Tabletop exercises run, IR plan documented</li>
+              <li>&#8226; Vendor risk assessments completed</li>
+            </ul>
+          </div>
+          <div className="rounded-lg border border-gray-200 bg-white p-4">
+            <p className="text-xs font-semibold text-db-aqua-dark uppercase tracking-wide mb-2">Client Context</p>
+            <ul className="text-sm text-gray-700 space-y-1">
+              <li>&#8226; Primary outcome the client cares about</li>
+              <li>&#8226; Client persona (COO, CCO, Founder)</li>
+              <li>&#8226; Business changes (fundraise, growth, new fund)</li>
+              <li>&#8226; Upcoming regulatory events (exam, DORA deadline)</li>
+              <li>&#8226; Competitive dynamics (evaluating alternatives?)</li>
+            </ul>
+          </div>
+          <div className="rounded-lg border border-gray-200 bg-white p-4">
+            <p className="text-xs font-semibold text-db-aqua-dark uppercase tracking-wide mb-2">Health Signals</p>
+            <ul className="text-sm text-gray-700 space-y-1">
+              <li>&#8226; Engagement level (active, passive, disengaged)</li>
+              <li>&#8226; Services purchased vs. utilized</li>
+              <li>&#8226; Champion stability (same contact? new?)</li>
+              <li>&#8226; Any friction, complaints, or escalations</li>
+              <li>&#8226; Churn signals present (0, 1, 2+)</li>
+            </ul>
+          </div>
+        </div>
+        <div className="mt-3 rounded-md bg-db-aqua/5 border border-db-aqua/20 p-3">
+          <p className="text-sm text-db-dark">
+            <strong>The principle:</strong> If you walk into a renewal conversation without this data,
+            you&apos;re winging it. And when you wing it, you react to what the client says instead of
+            driving the conversation to where you want it to go.
+          </p>
+        </div>
+      </SubSection>
+
+      <SubSection icon="🎯" title="The Score Is Your Negotiation Anchor">
+        <p>
+          Your client&apos;s Drawbridge score is the most powerful asset in a renewal conversation.
+          It&apos;s concrete, measurable, and directly tied to business outcomes. Use it differently
+          depending on the trajectory:
+        </p>
+        <div className="mt-3 space-y-3">
+          <div className="rounded-md border border-green-200 bg-green-50 p-4">
+            <p className="text-sm font-bold text-green-700">Score improved significantly (10+ points from baseline)</p>
+            <p className="mt-1 text-sm text-gray-700">
+              <strong>Your position is strong.</strong> Lead with the progress: &ldquo;When we started,
+              your score was 58. Today it&apos;s 76. That improvement didn&apos;t happen by accident — it&apos;s
+              the result of 14 remediated items, a documented IR plan, and quarterly training. That
+              trajectory is exactly what your LPs want to see.&rdquo;
+            </p>
+            <p className="mt-1 text-sm text-gray-700">
+              <strong>Negotiation lever:</strong> Use the score to justify the uplift. &ldquo;The program
+              is delivering measurable results. The standard adjustment reflects the expanded scope
+              and deeper coverage we&apos;ve built together.&rdquo;
+            </p>
+          </div>
+          <div className="rounded-md border border-amber-200 bg-amber-50 p-4">
+            <p className="text-sm font-bold text-amber-700">Score flat or modest improvement (3-9 points)</p>
+            <p className="mt-1 text-sm text-gray-700">
+              <strong>Acknowledge honestly, then pivot to what&apos;s next.</strong> &ldquo;We&apos;ve made
+              progress, but there&apos;s more to do. The top 3 planned items would push you into the 80s.
+              Renewing gives us the continuity to finish what we started — and switching providers
+              would reset you to zero on institutional knowledge.&rdquo;
+            </p>
+            <p className="mt-1 text-sm text-gray-700">
+              <strong>Negotiation lever:</strong> Frame the renewal as completing the journey. Offer to
+              front-load the high-impact items in the next quarter as part of the renewal commitment.
+            </p>
+          </div>
+          <div className="rounded-md border border-red-200 bg-red-50 p-4">
+            <p className="text-sm font-bold text-red-700">Score stalled or flat from baseline</p>
+            <p className="mt-1 text-sm text-gray-700">
+              <strong>This is a value delivery problem first, negotiation problem second.</strong> Don&apos;t
+              try to negotiate a renewal on a stalled score — the client knows the program hasn&apos;t
+              moved the needle. Instead, lead with honesty and a plan: &ldquo;Your score hasn&apos;t moved the
+              way either of us wanted. Here&apos;s my hypothesis on what&apos;s blocking progress, and here&apos;s
+              what I&apos;d change in the next 90 days. I want to earn the renewal by showing you results,
+              not just asking you to sign.&rdquo;
+            </p>
+            <p className="mt-1 text-sm text-gray-700">
+              <strong>Negotiation lever:</strong> Consider a restructured scope, a shorter renewal term
+              with a check-in, or a performance milestone. Show you&apos;re willing to be accountable.
+            </p>
+          </div>
+        </div>
+      </SubSection>
+
+      {/* The 120-Day Renewal Timeline */}
+      <SectionHeading>The 120-Day Renewal Timeline</SectionHeading>
+      <p className="text-sm text-gray-700 leading-relaxed">
+        Renewals don&apos;t start when the contract expires — they start <strong>4 months
+        before</strong>. This timeline integrates your SVR cadence, CS coordination, and
+        negotiation strategy into a single workflow.
+      </p>
+
+      <div className="mt-4 space-y-3">
+        <div className="rounded-lg border-2 border-gray-200 bg-white overflow-hidden">
+          <div className="bg-gray-50 px-5 py-3 border-b border-gray-200 flex items-center gap-3">
+            <span className="flex items-center justify-center w-10 h-10 rounded-full bg-db-aqua/20 text-sm font-bold text-db-aqua-dark">120d</span>
+            <div>
+              <p className="text-sm font-bold text-db-dark">Day 120: Data Gathering &amp; SVR Prep</p>
+              <p className="text-xs text-gray-500">4 months before renewal</p>
+            </div>
+          </div>
+          <div className="px-5 py-4 text-sm text-gray-700 space-y-2">
+            <ul className="space-y-1">
+              <li>&#8226; Request CS Brief — get the full picture on delivery, engagement, and value story</li>
+              <li>&#8226; Pull score data: baseline, current, trajectory, planned items</li>
+              <li>&#8226; Review Salesforce: prior call notes, expansion history, support tickets</li>
+              <li>&#8226; Identify churn signals (use the SVR churn signal checklist)</li>
+              <li>&#8226; Research: firm news, fundraising activity, regulatory calendar</li>
+            </ul>
+            <div className="rounded-md bg-db-aqua/5 border border-db-aqua/20 p-3">
+              <p className="text-xs text-db-aqua-dark"><strong>Goal:</strong> Know the full account picture before any renewal conversation happens.</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-lg border-2 border-gray-200 bg-white overflow-hidden">
+          <div className="bg-gray-50 px-5 py-3 border-b border-gray-200 flex items-center gap-3">
+            <span className="flex items-center justify-center w-10 h-10 rounded-full bg-green-100 text-sm font-bold text-green-700">90d</span>
+            <div>
+              <p className="text-sm font-bold text-db-dark">Day 90: The Pre-Renewal SVR</p>
+              <p className="text-xs text-gray-500">3 months before renewal</p>
+            </div>
+          </div>
+          <div className="px-5 py-4 text-sm text-gray-700 space-y-2">
+            <ul className="space-y-1">
+              <li>&#8226; Run a full SVR using the SVR Framework — this is the most important SVR of the year</li>
+              <li>&#8226; Present the score story, value delivered, and forward recommendations</li>
+              <li>&#8226; Use strategic bridge questions to understand what&apos;s ahead for the firm</li>
+              <li>&#8226; Listen carefully for budget signals, competitive pressure, or scope questions</li>
+              <li>&#8226; <strong>Do NOT discuss pricing yet</strong> — this meeting is about value, not cost</li>
+            </ul>
+            <div className="rounded-md bg-green-50 border border-green-200 p-3">
+              <p className="text-xs text-green-700"><strong>Goal:</strong> Anchor the renewal in value delivered and value ahead. The client should leave this meeting feeling like Drawbridge is essential — before they ever see a price.</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-lg border-2 border-gray-200 bg-white overflow-hidden">
+          <div className="bg-gray-50 px-5 py-3 border-b border-gray-200 flex items-center gap-3">
+            <span className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-100 text-sm font-bold text-blue-700">60d</span>
+            <div>
+              <p className="text-sm font-bold text-db-dark">Day 60: Proposal &amp; Opening Position</p>
+              <p className="text-xs text-gray-500">2 months before renewal</p>
+            </div>
+          </div>
+          <div className="px-5 py-4 text-sm text-gray-700 space-y-2">
+            <ul className="space-y-1">
+              <li>&#8226; Send the renewal proposal — anchored at standard 7% uplift with expansion if applicable</li>
+              <li>&#8226; Reference the SVR: &ldquo;Based on our conversation last month, here&apos;s the program for the coming year&rdquo;</li>
+              <li>&#8226; Include a one-page value summary (score progress, key deliverables, forward plan)</li>
+              <li>&#8226; If expansion is on the table, bundle it into the renewal proposal — not a separate conversation</li>
+              <li>&#8226; Schedule a follow-up within 1 week to discuss</li>
+            </ul>
+            <div className="rounded-md bg-blue-50 border border-blue-200 p-3">
+              <p className="text-xs text-blue-700"><strong>Goal:</strong> Get the proposal in front of the right people with enough time for internal review. Never send a proposal without a follow-up date locked in.</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-lg border-2 border-gray-200 bg-white overflow-hidden">
+          <div className="bg-gray-50 px-5 py-3 border-b border-gray-200 flex items-center gap-3">
+            <span className="flex items-center justify-center w-10 h-10 rounded-full bg-amber-100 text-sm font-bold text-amber-700">30d</span>
+            <div>
+              <p className="text-sm font-bold text-db-dark">Day 30: Negotiation &amp; Close</p>
+              <p className="text-xs text-gray-500">1 month before renewal</p>
+            </div>
+          </div>
+          <div className="px-5 py-4 text-sm text-gray-700 space-y-2">
+            <ul className="space-y-1">
+              <li>&#8226; Handle objections, negotiate terms, trade concessions (see frameworks below)</li>
+              <li>&#8226; If stalling, diagnose the reason and apply the appropriate response</li>
+              <li>&#8226; Multi-thread if needed — reach out to additional stakeholders</li>
+              <li>&#8226; Push for signature with constructive urgency (gap in coverage, rate certainty)</li>
+              <li>&#8226; If at-risk, escalate now — don&apos;t wait until the last week</li>
+            </ul>
+            <div className="rounded-md bg-amber-50 border border-amber-200 p-3">
+              <p className="text-xs text-amber-700"><strong>Goal:</strong> Signed contract before expiration. If it&apos;s not going to happen, you should know why by now — not be surprised on the last day.</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-lg border-2 border-gray-200 bg-white overflow-hidden">
+          <div className="bg-gray-50 px-5 py-3 border-b border-gray-200 flex items-center gap-3">
+            <span className="flex items-center justify-center w-10 h-10 rounded-full bg-red-100 text-sm font-bold text-red-700">0d</span>
+            <div>
+              <p className="text-sm font-bold text-db-dark">Renewal Date: Confirm &amp; Kick Off</p>
+              <p className="text-xs text-gray-500">Contract renewal</p>
+            </div>
+          </div>
+          <div className="px-5 py-4 text-sm text-gray-700 space-y-2">
+            <ul className="space-y-1">
+              <li>&#8226; Confirm signed contract and internal processing</li>
+              <li>&#8226; Send a &ldquo;thank you + here&apos;s what&apos;s ahead&rdquo; note to the client</li>
+              <li>&#8226; Brief CS on any scope changes, expansion items, or commitments made</li>
+              <li>&#8226; Update Salesforce with final terms, uplift %, and next renewal date</li>
+              <li>&#8226; If multi-year, note the review cadence (e.g., annual check-in even without renewal)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Negotiating by Persona */}
+      <SectionHeading>Negotiating by Persona</SectionHeading>
+      <p className="text-sm text-gray-700 leading-relaxed">
+        Who you&apos;re negotiating with changes everything — the same program, the same value, the
+        same price lands completely differently depending on who&apos;s across the table. Your SVR
+        should have identified the primary persona. Use that to tailor your negotiation approach.
+      </p>
+
+      <div className="mt-4 space-y-4">
+        <div className="rounded-lg border border-gray-200 bg-white p-5">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="text-lg">🏢</span>
+            <p className="text-sm font-bold text-db-dark">COO — Peace of Mind &amp; Efficiency</p>
+          </div>
+          <div className="grid grid-cols-2 gap-3 text-sm">
+            <div>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">What They Care About</p>
+              <p className="text-gray-700">Operational risk is covered. Nothing falls through the cracks. Their time is freed up for higher-value work. The board is satisfied.</p>
+            </div>
+            <div>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">How to Frame the Renewal</p>
+              <p className="text-gray-700">&ldquo;We&apos;re handling your entire cyber program so you don&apos;t have to. The alternative is hiring a CISO and a security analyst — that&apos;s $450K+ before you add tools and overhead. We&apos;re a fraction of that cost with deeper expertise.&rdquo;</p>
+            </div>
+            <div>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">What Triggers Pushback</p>
+              <p className="text-gray-700">Feels like they&apos;re managing the vendor too much. Deliverables are late or require chasing. They don&apos;t see the program running itself.</p>
+            </div>
+            <div>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Concession They&apos;ll Trade For</p>
+              <p className="text-gray-700">More hands-off experience. Fewer meetings, faster turnaround, proactive updates instead of reactive. &ldquo;If we commit to a 2-year term, I&apos;ll ensure quarterly proactive briefings so you never have to chase us.&rdquo;</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-lg border border-gray-200 bg-white p-5">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="text-lg">⚖️</span>
+            <p className="text-sm font-bold text-db-dark">CCO — Regulatory Readiness &amp; Exam Risk</p>
+          </div>
+          <div className="grid grid-cols-2 gap-3 text-sm">
+            <div>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">What They Care About</p>
+              <p className="text-gray-700">SEC exam readiness. Current policies on file. Documented evidence they can point to. No surprises from regulators. DORA compliance if applicable.</p>
+            </div>
+            <div>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">How to Frame the Renewal</p>
+              <p className="text-gray-700">&ldquo;Reg S-P just got harder. SEC exam priorities added AI governance and vendor oversight. Your policies are current, your IR plan is documented, and your training records are clean — because of this program. Dropping it means rebuilding that evidence from scratch.&rdquo;</p>
+            </div>
+            <div>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">What Triggers Pushback</p>
+              <p className="text-gray-700">Doesn&apos;t see Drawbridge as connected to their compliance obligations. Thinks their outside counsel handles it. Doesn&apos;t feel like the program maps to what examiners actually ask for.</p>
+            </div>
+            <div>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Concession They&apos;ll Trade For</p>
+              <p className="text-gray-700">Regulatory-specific deliverables. &ldquo;I&apos;ll include a Reg S-P readiness assessment in the renewal scope — that&apos;s something you can hand directly to your examiner.&rdquo;</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-lg border border-gray-200 bg-white p-5">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="text-lg">👤</span>
+            <p className="text-sm font-bold text-db-dark">Founder / CEO — Reputation &amp; Capital</p>
+          </div>
+          <div className="grid grid-cols-2 gap-3 text-sm">
+            <div>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">What They Care About</p>
+              <p className="text-gray-700">Firm reputation. LP confidence. Not being the fund that gets breached. Looking sophisticated and institutional to allocators. Time — they don&apos;t want to think about this.</p>
+            </div>
+            <div>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">How to Frame the Renewal</p>
+              <p className="text-gray-700">&ldquo;Your LPs see a firm with a mature cyber program that benchmarks in the top quartile. That&apos;s a competitive advantage when you&apos;re raising capital — one your peers don&apos;t have. Our program is what makes that story credible.&rdquo;</p>
+            </div>
+            <div>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">What Triggers Pushback</p>
+              <p className="text-gray-700">Feels like cybersecurity is a &ldquo;check the box&rdquo; exercise that doesn&apos;t connect to their real priorities (fundraising, performance, growth). Doesn&apos;t see it as strategic.</p>
+            </div>
+            <div>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Concession They&apos;ll Trade For</p>
+              <p className="text-gray-700">Status and positioning. &ldquo;I&apos;d like to feature your firm as a case study — anonymized or named, your choice. It positions you as a leader in cyber governance.&rdquo; Also: executive briefings, board-ready reporting.</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Pushing Conversations Forward */}
       <SectionHeading>Pushing Conversations Forward</SectionHeading>
@@ -473,6 +793,135 @@ export default function NegotiationPlaybook() {
         </p>
       </DrawbridgeAngle>
 
+      {/* ROI Ammunition */}
+      <SectionHeading>ROI Ammunition for Negotiation</SectionHeading>
+      <p className="text-sm text-gray-700 leading-relaxed">
+        When a client pushes on price, abstract arguments don&apos;t work. Concrete numbers do.
+        Use these ROI frameworks to shift the conversation from &ldquo;what does it cost?&rdquo; to
+        &ldquo;what does it cost <em>not</em> to have it?&rdquo;
+      </p>
+
+      <div className="mt-4 overflow-x-auto">
+        <table className="min-w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
+          <thead>
+            <tr className="bg-db-dark text-white text-left">
+              <th className="px-4 py-3 font-semibold">Framework</th>
+              <th className="px-4 py-3 font-semibold">When to Use</th>
+              <th className="px-4 py-3 font-semibold">The Line</th>
+              <th className="px-4 py-3 font-semibold">Typical ROI</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200">
+            <tr className="bg-white">
+              <td className="px-4 py-3 font-medium text-db-dark">Capital Protected</td>
+              <td className="px-4 py-3 text-gray-700">Client is fundraising, has LP concentration risk, or LPs are asking about cyber in ODD</td>
+              <td className="px-4 py-3 text-gray-700">&ldquo;A failed ODD due to cyber gaps costs you the allocation — that&apos;s $X in management fees at risk. Our annual fee is a rounding error compared to one lost LP.&rdquo;</td>
+              <td className="px-4 py-3 font-medium text-green-700">25-50x</td>
+            </tr>
+            <tr className="bg-gray-50">
+              <td className="px-4 py-3 font-medium text-db-dark">Enforcement Avoided</td>
+              <td className="px-4 py-3 text-gray-700">Client is compliance-focused, has an exam coming, or their CCO is the decision-maker</td>
+              <td className="px-4 py-3 text-gray-700">&ldquo;Average SEC cyber enforcement is $1.5M+ before legal fees. Our program costs less than what their lawyers charge for a single deficiency response.&rdquo;</td>
+              <td className="px-4 py-3 font-medium text-green-700">15-70x</td>
+            </tr>
+            <tr className="bg-white">
+              <td className="px-4 py-3 font-medium text-db-dark">Breach Cost</td>
+              <td className="px-4 py-3 text-gray-700">Peer firm was breached, client had a near-miss, or their team is lean and exposed</td>
+              <td className="px-4 py-3 text-gray-700">&ldquo;Average breach in financial services: $5.9M. Even at a 5% annual probability, the expected cost is $295K/year. Our program is a fraction of that.&rdquo;</td>
+              <td className="px-4 py-3 font-medium text-green-700">3-9x</td>
+            </tr>
+            <tr className="bg-gray-50">
+              <td className="px-4 py-3 font-medium text-db-dark">Build vs. Buy</td>
+              <td className="px-4 py-3 text-gray-700">Client says they&apos;ll handle it in-house, is hiring a CISO, or COO is evaluating vendor consolidation</td>
+              <td className="px-4 py-3 text-gray-700">&ldquo;A CISO + analyst + tools is $455K-$810K/year. We deliver broader coverage for $40K-$100K. Even if you hire internally, you still need us for the independent assessment.&rdquo;</td>
+              <td className="px-4 py-3 font-medium text-green-700">5-8x savings</td>
+            </tr>
+            <tr className="bg-white">
+              <td className="px-4 py-3 font-medium text-db-dark">Allocation Impact</td>
+              <td className="px-4 py-3 text-gray-700">Large fund, institutional LPs, competitive fundraise, or CEO/Founder is the persona</td>
+              <td className="px-4 py-3 text-gray-700">&ldquo;A single institutional allocation won or retained because of your cyber posture is $9-15M in lifetime fees. Our program costs less than a single month of that impact.&rdquo;</td>
+              <td className="px-4 py-3 font-medium text-green-700">100x+</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div className="mt-3 rounded-md bg-db-aqua/5 border border-db-aqua/20 p-3">
+        <p className="text-sm text-db-dark">
+          <strong>Which framework to lead with:</strong> Match to the persona. COO → Build vs. Buy.
+          CCO → Enforcement Avoided. Founder/CEO → Capital Protected or Allocation Impact.
+          If a peer was recently breached, lead with Breach Cost regardless of persona.
+        </p>
+      </div>
+
+      {/* Churn Signals → Negotiation Strategy */}
+      <SectionHeading>Reading the Account: Churn Signals Shape Your Approach</SectionHeading>
+      <p className="text-sm text-gray-700 leading-relaxed">
+        Not every renewal is the same negotiation. Your SVR should have surfaced churn signals —
+        use them to adjust your approach <strong>before</strong> you send the proposal.
+      </p>
+
+      <div className="mt-4 overflow-x-auto">
+        <table className="min-w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
+          <thead>
+            <tr className="bg-db-dark text-white text-left">
+              <th className="px-4 py-3 font-semibold">Churn Signals</th>
+              <th className="px-4 py-3 font-semibold">Account Health</th>
+              <th className="px-4 py-3 font-semibold">Negotiation Approach</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200">
+            <tr className="bg-white">
+              <td className="px-4 py-3 font-medium text-green-700">0 signals</td>
+              <td className="px-4 py-3">
+                <span className="rounded-full bg-green-100 text-green-700 px-2 py-0.5 text-xs font-medium">Healthy</span>
+              </td>
+              <td className="px-4 py-3 text-gray-700">
+                Full standard approach. Lead with value, anchor at 7%, push for multi-year and expansion.
+                This is your opportunity to grow the account, not just retain it.
+              </td>
+            </tr>
+            <tr className="bg-gray-50">
+              <td className="px-4 py-3 font-medium text-amber-700">1 signal</td>
+              <td className="px-4 py-3">
+                <span className="rounded-full bg-amber-100 text-amber-700 px-2 py-0.5 text-xs font-medium">Watch</span>
+              </td>
+              <td className="px-4 py-3 text-gray-700">
+                Standard approach but address the signal directly before proposing. If it&apos;s unused
+                services, fix that first. If it&apos;s a new contact, rebuild the relationship before
+                negotiating. Don&apos;t ignore the signal and hope the renewal covers it.
+              </td>
+            </tr>
+            <tr className="bg-white">
+              <td className="px-4 py-3 font-medium text-red-700">2+ signals</td>
+              <td className="px-4 py-3">
+                <span className="rounded-full bg-red-100 text-red-700 px-2 py-0.5 text-xs font-medium">At Risk</span>
+              </td>
+              <td className="px-4 py-3 text-gray-700">
+                Shift from negotiation mode to <strong>save mode</strong>. The goal is retention, not
+                uplift. Lead with value recovery — re-engage the client, demonstrate concrete impact,
+                and be willing to restructure scope. A flat renewal you retain is infinitely better
+                than a churned account with 7% uplift on the proposal.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <SubSection icon="🔍" title="The Churn Signal Checklist">
+        <p>Review these before every renewal — and flag any account with 2+ signals immediately:</p>
+        <div className="mt-2 grid grid-cols-2 gap-2">
+          <div className="rounded-md bg-gray-50 border border-gray-200 p-3 text-sm text-gray-700">&#9744; Score unchanged from CRA baseline</div>
+          <div className="rounded-md bg-gray-50 border border-gray-200 p-3 text-sm text-gray-700">&#9744; Services purchased but not utilized</div>
+          <div className="rounded-md bg-gray-50 border border-gray-200 p-3 text-sm text-gray-700">&#9744; No remediation activity in 60+ days</div>
+          <div className="rounded-md bg-gray-50 border border-gray-200 p-3 text-sm text-gray-700">&#9744; Primary contact changed</div>
+          <div className="rounded-md bg-gray-50 border border-gray-200 p-3 text-sm text-gray-700">&#9744; Low or declining platform engagement</div>
+          <div className="rounded-md bg-gray-50 border border-gray-200 p-3 text-sm text-gray-700">&#9744; Friction, complaints, or escalations</div>
+          <div className="rounded-md bg-gray-50 border border-gray-200 p-3 text-sm text-gray-700">&#9744; No response to outreach</div>
+          <div className="rounded-md bg-gray-50 border border-gray-200 p-3 text-sm text-gray-700">&#9744; Renewal approaching with no expansion discussion</div>
+        </div>
+      </SubSection>
+
       {/* Expansion Playbook */}
       <SectionHeading>Driving Expansion</SectionHeading>
 
@@ -683,6 +1132,106 @@ export default function NegotiationPlaybook() {
           <strong>Rule of thumb:</strong> escalate when the risk of <em>not</em> escalating
           is higher than the cost of asking for help. When in doubt, escalate early.
         </p>
+      </SubSection>
+
+      {/* Save Playbook */}
+      <SectionHeading>The Save Playbook: At-Risk Accounts</SectionHeading>
+      <p className="text-sm text-gray-700 leading-relaxed">
+        When an account is genuinely at risk — 2+ churn signals, client expressing dissatisfaction,
+        or competitive evaluation underway — the standard negotiation playbook doesn&apos;t apply.
+        You need a structured save approach. A saved account is worth more than two new logos.
+      </p>
+
+      <SubSection icon="🚨" title="The Save Framework: RESET">
+        <div className="mt-3 space-y-3">
+          <div className="rounded-md border border-gray-200 bg-white p-4">
+            <p className="text-sm font-bold text-db-dark">R — Recognize the Risk Honestly</p>
+            <p className="mt-1 text-sm text-gray-700">
+              Don&apos;t sugarcoat it internally or externally. Name what&apos;s happening: &ldquo;I think this
+              account is at risk. Here&apos;s what I&apos;m seeing.&rdquo; Flag it in your forecast, tell your
+              VP, and brief CS. Pretending the renewal is fine when it isn&apos;t is how accounts churn
+              &ldquo;unexpectedly.&rdquo;
+            </p>
+          </div>
+          <div className="rounded-md border border-gray-200 bg-white p-4">
+            <p className="text-sm font-bold text-db-dark">E — Engage Immediately and Directly</p>
+            <p className="mt-1 text-sm text-gray-700">
+              Don&apos;t wait for the client to formally cancel. Call them. Be direct: &ldquo;I want to check
+              in on how you&apos;re feeling about the program. I&apos;ve noticed [specific signal] and I want
+              to make sure we&apos;re addressing anything that&apos;s not working.&rdquo; Directness builds trust.
+              Avoidance erodes it.
+            </p>
+          </div>
+          <div className="rounded-md border border-gray-200 bg-white p-4">
+            <p className="text-sm font-bold text-db-dark">S — Surface the Real Issue</p>
+            <p className="mt-1 text-sm text-gray-700">
+              The stated reason is rarely the real reason. &ldquo;Budget&rdquo; usually means &ldquo;we don&apos;t see
+              enough value to justify the spend.&rdquo; &ldquo;We&apos;re going in-house&rdquo; usually means &ldquo;we feel
+              like we could do this ourselves because we don&apos;t see what you&apos;re doing.&rdquo; Ask open
+              questions and listen for what&apos;s underneath: &ldquo;If budget weren&apos;t a factor, would you
+              still want to change? What would make this a no-brainer to keep?&rdquo;
+            </p>
+          </div>
+          <div className="rounded-md border border-gray-200 bg-white p-4">
+            <p className="text-sm font-bold text-db-dark">E — Execute a Value Recovery</p>
+            <p className="mt-1 text-sm text-gray-700">
+              Once you understand the real issue, act fast. If it&apos;s low engagement — reactivate unused
+              services within days, not weeks. If it&apos;s value perception — run an emergency SVR showing
+              concrete impact. If it&apos;s the relationship — bring in a senior leader or change the team
+              dynamic. The client needs to <em>feel</em> the value changing before they&apos;ll reconsider.
+            </p>
+          </div>
+          <div className="rounded-md border border-gray-200 bg-white p-4">
+            <p className="text-sm font-bold text-db-dark">T — Trade for Time, Then Earn It</p>
+            <p className="mt-1 text-sm text-gray-700">
+              If the client is leaning toward churning, your last play is a structured &ldquo;prove it&rdquo;
+              period. Offer a short-term renewal (6 months, bridge quarter) with specific milestones:
+              &ldquo;Give us 90 days. Here&apos;s exactly what we&apos;ll deliver and what the measurable outcome
+              will be. If we don&apos;t hit these targets, you walk with no obligation.&rdquo; This works
+              because it removes the client&apos;s risk and puts the burden on you to perform.
+            </p>
+          </div>
+        </div>
+      </SubSection>
+
+      <SubSection icon="💡" title="Save Tactics That Work">
+        <div className="mt-2 space-y-3">
+          <div className="rounded-md border border-gray-200 bg-gray-50 p-4">
+            <p className="text-sm font-bold text-db-dark">The Executive Touch</p>
+            <p className="mt-1 text-sm text-gray-700">
+              Have your VP or a senior leader reach out directly. This signals that the client
+              matters to the organization, not just one RM. Keep it genuine — not a hostage
+              negotiation. &ldquo;Chris mentioned you might have some concerns about the program.
+              I wanted to hear directly from you.&rdquo;
+            </p>
+          </div>
+          <div className="rounded-md border border-gray-200 bg-gray-50 p-4">
+            <p className="text-sm font-bold text-db-dark">The Switching Cost Conversation</p>
+            <p className="mt-1 text-sm text-gray-700">
+              Most clients underestimate what switching actually costs. Walk them through it: 3-6
+              months of onboarding, lost institutional knowledge, new provider learning their environment,
+              gaps in compliance evidence, disrupted DDQ responses. &ldquo;You&apos;d be starting from scratch
+              on things that took us 18 months to build.&rdquo;
+            </p>
+          </div>
+          <div className="rounded-md border border-gray-200 bg-gray-50 p-4">
+            <p className="text-sm font-bold text-db-dark">The Scope Restructure</p>
+            <p className="mt-1 text-sm text-gray-700">
+              If budget is genuinely the issue, restructure rather than discount. Move to a core
+              package, defer expansion services, adjust payment terms. A smaller renewal you retain is
+              always better than a full-price proposal the client declines. Protect the relationship —
+              the scope can grow back.
+            </p>
+          </div>
+          <div className="rounded-md border border-gray-200 bg-gray-50 p-4">
+            <p className="text-sm font-bold text-db-dark">The Peer Comparison</p>
+            <p className="mt-1 text-sm text-gray-700">
+              Use benchmarking data: &ldquo;You&apos;re benchmarked against 1,200+ alternative investment firms.
+              Walking away from that data point means your next ODD questionnaire comes without peer
+              context — and that&apos;s increasingly what allocators are asking for.&rdquo;
+            </p>
+          </div>
+        </div>
       </SubSection>
 
       <DrawbridgeAngle>
