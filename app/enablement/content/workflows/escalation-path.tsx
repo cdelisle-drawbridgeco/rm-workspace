@@ -753,6 +753,186 @@ export default function EscalationPath() {
         </div>
       </SubSection>
 
+      {/* Client Feedback About RMs */}
+      <SectionHeading>Client Feedback About an RM</SectionHeading>
+      <div className="rounded-lg border border-purple-300 bg-purple-50 p-4">
+        <p className="text-sm text-gray-700 leading-relaxed">
+          CS Advisors spend more time with clients than anyone. That means they sometimes hear things
+          about the broader client experience — including feedback about the RM relationship. When a
+          client shares concerns about their RM, the advisor needs a clear, safe path to surface that
+          feedback so it can be addressed constructively.
+        </p>
+      </div>
+
+      <SubSection icon="💬" title="What This Looks Like">
+        <p>
+          This isn&apos;t always a direct complaint. Often it surfaces indirectly — a comment during a
+          working session, frustration about a follow-up that didn&apos;t happen, or a question about
+          why something was communicated a certain way. Examples:
+        </p>
+        <div className="mt-3 space-y-2">
+          <div className="rounded-md bg-gray-50 border border-gray-200 p-3 flex items-start gap-3">
+            <span className="text-sm mt-0.5">💬</span>
+            <p className="text-sm text-gray-700 italic">
+              &quot;I emailed [RM] about our renewal two weeks ago and haven&apos;t heard back.&quot;
+            </p>
+          </div>
+          <div className="rounded-md bg-gray-50 border border-gray-200 p-3 flex items-start gap-3">
+            <span className="text-sm mt-0.5">💬</span>
+            <p className="text-sm text-gray-700 italic">
+              &quot;[RM] told us we&apos;d have that pricing by last Friday — we still don&apos;t have it.&quot;
+            </p>
+          </div>
+          <div className="rounded-md bg-gray-50 border border-gray-200 p-3 flex items-start gap-3">
+            <span className="text-sm mt-0.5">💬</span>
+            <p className="text-sm text-gray-700 italic">
+              &quot;We don&apos;t feel like anyone on the commercial side really understands our business.&quot;
+            </p>
+          </div>
+          <div className="rounded-md bg-gray-50 border border-gray-200 p-3 flex items-start gap-3">
+            <span className="text-sm mt-0.5">💬</span>
+            <p className="text-sm text-gray-700 italic">
+              &quot;Can you just handle the renewal conversation? You actually know what we need.&quot;
+            </p>
+          </div>
+          <div className="rounded-md bg-gray-50 border border-gray-200 p-3 flex items-start gap-3">
+            <span className="text-sm mt-0.5">💬</span>
+            <p className="text-sm text-gray-700 italic">
+              &quot;Our last RM was much more proactive about checking in. We feel a bit forgotten.&quot;
+            </p>
+          </div>
+        </div>
+      </SubSection>
+
+      <SubSection icon="🔀" title="How to Escalate: Advisor → CS Manager → VP of RM">
+        <p>
+          The advisor should <strong>never</strong> try to address RM performance directly with the RM
+          or with the client. That crosses organizational lines and puts the advisor in an uncomfortable
+          position. Instead, the path is clear and confidential:
+        </p>
+
+        <div className="mt-4 space-y-3">
+          {/* Step 1 */}
+          <div className="rounded-lg border-2 border-green-200 bg-white overflow-hidden">
+            <div className="bg-green-50 px-4 py-3 border-b border-green-200 flex items-center gap-3">
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-green-100 text-sm font-bold text-green-700">1</span>
+              <p className="text-sm font-bold text-db-dark">Advisor: Acknowledge and Document</p>
+            </div>
+            <div className="px-4 py-3 text-sm text-gray-700 space-y-2">
+              <p>
+                When the client shares feedback, the advisor should listen and acknowledge without
+                agreeing, disagreeing, or making excuses on anyone&apos;s behalf.
+              </p>
+              <div className="rounded-md bg-green-50 border border-green-200 p-3">
+                <p className="text-xs text-green-700">
+                  <strong>What to say:</strong> &quot;I appreciate you sharing that with me. I want to
+                  make sure the right people hear this so we can address it. Let me bring this back to
+                  my team.&quot;
+                </p>
+              </div>
+              <p>
+                Document what was said — the specifics matter. &quot;Client is unhappy with RM&quot; is
+                not useful. &quot;Client said they emailed about renewal pricing on March 1st and haven&apos;t
+                received a response&quot; is actionable.
+              </p>
+            </div>
+          </div>
+
+          {/* Step 2 */}
+          <div className="flex justify-center">
+            <span className="text-gray-300 text-lg">↓</span>
+          </div>
+          <div className="rounded-lg border-2 border-blue-200 bg-white overflow-hidden">
+            <div className="bg-blue-50 px-4 py-3 border-b border-blue-200 flex items-center gap-3">
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-sm font-bold text-blue-700">2</span>
+              <p className="text-sm font-bold text-db-dark">CS Manager: Assess and Route</p>
+            </div>
+            <div className="px-4 py-3 text-sm text-gray-700 space-y-2">
+              <p>
+                The advisor brings the feedback to their CS Manager — this is a private, internal
+                conversation. The CS Manager&apos;s role is to:
+              </p>
+              <ul className="space-y-1">
+                <li>&#8226; Understand the full context — is this a one-time miss or a pattern?</li>
+                <li>&#8226; Determine if the feedback is something the client has raised before</li>
+                <li>&#8226; Assess whether the issue is impacting delivery or client engagement</li>
+                <li>&#8226; Pass the feedback to the VP of RM with specifics and context</li>
+              </ul>
+              <div className="rounded-md bg-blue-50 border border-blue-200 p-3">
+                <p className="text-xs text-blue-700">
+                  <strong>Key:</strong> The CS Manager should not attempt to resolve the RM issue
+                  themselves or coach the RM directly. That&apos;s the VP of RM&apos;s responsibility.
+                  The CS Manager&apos;s job is to make sure the feedback gets to the right person
+                  with enough detail to act on it.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Step 3 */}
+          <div className="flex justify-center">
+            <span className="text-gray-300 text-lg">↓</span>
+          </div>
+          <div className="rounded-lg border-2 border-orange-200 bg-white overflow-hidden">
+            <div className="bg-orange-50 px-4 py-3 border-b border-orange-200 flex items-center gap-3">
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-orange-100 text-sm font-bold text-orange-600">3</span>
+              <p className="text-sm font-bold text-db-dark">VP of RM: Address and Close the Loop</p>
+            </div>
+            <div className="px-4 py-3 text-sm text-gray-700 space-y-2">
+              <p>
+                The VP of RM receives the feedback from the CS Manager and owns the resolution:
+              </p>
+              <ul className="space-y-1">
+                <li>&#8226; Speaks with the RM to understand their side — there may be context CS doesn&apos;t have</li>
+                <li>&#8226; Coaches the RM on the specific issue (responsiveness, follow-through, engagement style)</li>
+                <li>&#8226; If it&apos;s a pattern, addresses it as part of broader performance management</li>
+                <li>&#8226; Closes the loop with the CS Manager to confirm the feedback was received and addressed</li>
+                <li>&#8226; If the client relationship needs a direct repair, the RM or VP of RM takes action with the client</li>
+              </ul>
+              <div className="rounded-md bg-orange-50 border border-orange-200 p-3">
+                <p className="text-xs text-orange-700">
+                  <strong>Important:</strong> The advisor and CS Manager should never be put in the middle
+                  of an RM coaching conversation or asked to deliver feedback to the RM. That erodes
+                  trust and makes advisors less likely to surface feedback in the future. The VP of RM
+                  handles it directly within their team.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </SubSection>
+
+      <SubSection icon="🛡️" title="Why This Path Matters">
+        <p>
+          CS Advisors are our closest ear to the client. If they don&apos;t feel safe surfacing
+          feedback — including feedback about RMs — we lose visibility into problems that directly
+          affect retention. This path protects everyone:
+        </p>
+        <div className="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="rounded-lg border border-purple-200 bg-purple-50 p-3 text-center">
+            <p className="text-sm font-bold text-purple-700">Protects the Advisor</p>
+            <p className="text-xs text-gray-500 mt-1">
+              They don&apos;t have to confront an RM peer or manage someone else&apos;s team. They
+              just route it to their manager — same as any other escalation.
+            </p>
+          </div>
+          <div className="rounded-lg border border-purple-200 bg-purple-50 p-3 text-center">
+            <p className="text-sm font-bold text-purple-700">Protects the RM</p>
+            <p className="text-xs text-gray-500 mt-1">
+              Feedback comes through their own leadership chain, with context and fairness. They
+              hear it from their VP, not secondhand from another team.
+            </p>
+          </div>
+          <div className="rounded-lg border border-purple-200 bg-purple-50 p-3 text-center">
+            <p className="text-sm font-bold text-purple-700">Protects the Client</p>
+            <p className="text-xs text-gray-500 mt-1">
+              Their concern actually gets addressed — it doesn&apos;t get stuck, ignored, or lost
+              because no one wanted to have an awkward conversation.
+            </p>
+          </div>
+        </div>
+      </SubSection>
+
       {/* Proposed Operating Norms */}
       <SectionHeading>Proposed Operating Norms</SectionHeading>
       <div className="mt-3 grid grid-cols-2 gap-4">
@@ -858,6 +1038,32 @@ export default function EscalationPath() {
             <span className="text-gray-300">→</span>
             <span className="rounded-full bg-orange-100 text-orange-700 px-2 py-0.5 font-medium">VP RM</span>
             <span>Leadership intervention if still unresolved</span>
+          </div>
+        </div>
+        <div className="rounded-lg border border-gray-200 bg-white p-4">
+          <p className="text-sm font-bold text-db-dark">Client tells advisor the RM hasn&apos;t followed up on a commitment</p>
+          <div className="mt-2 flex items-center gap-2 text-xs text-gray-500 flex-wrap">
+            <span className="rounded-full bg-green-100 text-green-700 px-2 py-0.5 font-medium">Advisor</span>
+            <span>Acknowledges, documents specifics</span>
+            <span className="text-gray-300">→</span>
+            <span className="rounded-full bg-blue-100 text-blue-700 px-2 py-0.5 font-medium">CS Mgr</span>
+            <span>Reviews context, passes to VP of RM</span>
+            <span className="text-gray-300">→</span>
+            <span className="rounded-full bg-orange-100 text-orange-700 px-2 py-0.5 font-medium">VP RM</span>
+            <span>Coaches RM, ensures client gets a response</span>
+          </div>
+        </div>
+        <div className="rounded-lg border border-gray-200 bg-white p-4">
+          <p className="text-sm font-bold text-db-dark">Client asks advisor to handle commercial conversations instead of RM</p>
+          <div className="mt-2 flex items-center gap-2 text-xs text-gray-500 flex-wrap">
+            <span className="rounded-full bg-green-100 text-green-700 px-2 py-0.5 font-medium">Advisor</span>
+            <span>Declines politely, notes it as a signal</span>
+            <span className="text-gray-300">→</span>
+            <span className="rounded-full bg-blue-100 text-blue-700 px-2 py-0.5 font-medium">CS Mgr</span>
+            <span>Flags to VP of RM — relationship may need a reset</span>
+            <span className="text-gray-300">→</span>
+            <span className="rounded-full bg-orange-100 text-orange-700 px-2 py-0.5 font-medium">VP RM</span>
+            <span>Works with RM to re-engage client directly</span>
           </div>
         </div>
         <div className="rounded-lg border border-gray-200 bg-white p-4">
