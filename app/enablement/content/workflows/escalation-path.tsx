@@ -17,7 +17,7 @@ export default function EscalationPath() {
         title="RM ↔ Client Success Operating Model"
         subtitle="A proposed framework for how RM and CS collaborate day-to-day and route issues when they arise — designed to be refined together."
       />
-      <LastUpdated date="March 4, 2026 at 11:26 AM" />
+      <LastUpdated date="March 9, 2026" />
 
       <div className="rounded-lg border border-db-aqua/30 bg-db-aqua/5 p-4 mt-2">
         <p className="text-sm text-db-dark">
@@ -565,6 +565,194 @@ export default function EscalationPath() {
         </div>
       </div>
 
+      {/* Client Non-Responsiveness */}
+      <SectionHeading>Client Non-Responsiveness Escalation</SectionHeading>
+      <div className="rounded-lg border border-amber-300 bg-amber-50 p-4">
+        <p className="text-sm text-gray-700 leading-relaxed">
+          One of the most common — and most dangerous — situations CS faces is a client who stops
+          responding. Missed meetings, unanswered emails, silence on remediation items. This isn&apos;t
+          just a delivery blocker — <strong>it&apos;s an early renewal risk signal.</strong> Disengaged
+          clients don&apos;t renew. The earlier we catch it, the easier it is to recover.
+        </p>
+      </div>
+
+      <SubSection icon="📵" title="When a Client Goes Silent">
+        <p>
+          CS Advisors are often the first to notice disengagement because they have the most frequent
+          touchpoints — assessment scheduling, remediation follow-ups, training coordination. When a
+          client stops responding to CS outreach, the path is clear:
+        </p>
+
+        {/* Escalation flow */}
+        <div className="mt-4 space-y-3">
+          {/* Step 1 */}
+          <div className="rounded-lg border-2 border-green-200 bg-white overflow-hidden">
+            <div className="bg-green-50 px-4 py-3 border-b border-green-200 flex items-center gap-3">
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-green-100 text-sm font-bold text-green-700">1</span>
+              <div>
+                <p className="text-sm font-bold text-db-dark">CS Advisor: Direct Outreach (1-2 weeks)</p>
+              </div>
+            </div>
+            <div className="px-4 py-3 text-sm text-gray-700 space-y-2">
+              <p>
+                The advisor tries to re-engage through normal channels — follow-up emails, rescheduling
+                attempts, direct messages. Document each attempt with dates.
+              </p>
+              <div className="rounded-md bg-green-50 border border-green-200 p-3">
+                <p className="text-xs text-green-700">
+                  <strong>Trigger to escalate:</strong> Two or more unanswered outreach attempts across
+                  different channels (email + call/Teams), or a scheduled meeting no-showed with no
+                  follow-up from the client.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Step 2 */}
+          <div className="flex justify-center">
+            <span className="text-gray-300 text-lg">↓</span>
+          </div>
+          <div className="rounded-lg border-2 border-db-aqua bg-white overflow-hidden">
+            <div className="bg-db-aqua/10 px-4 py-3 border-b border-db-aqua/20 flex items-center gap-3">
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-db-aqua/20 text-sm font-bold text-db-aqua-dark">2</span>
+              <div>
+                <p className="text-sm font-bold text-db-dark">Escalate to RM: Relationship Lever</p>
+              </div>
+            </div>
+            <div className="px-4 py-3 text-sm text-gray-700 space-y-2">
+              <p>
+                CS Advisor (or CS Manager) reaches out to the RM with context: who they&apos;ve been
+                trying to reach, how many attempts, what&apos;s outstanding, and how long the silence
+                has lasted.
+              </p>
+              <p>
+                <strong>Why the RM:</strong> RMs have the strategic relationship with the client. They
+                speak to different stakeholders, have different touchpoints, and carry different weight
+                in the relationship. A message from the RM often gets a response when CS outreach
+                hasn&apos;t.
+              </p>
+              <div className="rounded-md bg-db-aqua/5 border border-db-aqua/20 p-3">
+                <p className="text-xs text-db-aqua-dark">
+                  <strong>RM action:</strong> Treat this as an <strong>early renewal risk.</strong> Reach
+                  out to the client directly — not about the missed deliverable, but about the
+                  relationship. A check-in call, a &ldquo;wanted to make sure everything&apos;s okay on
+                  your end&rdquo; message. Use your relationship to understand what&apos;s behind the
+                  silence and get the client re-engaged with the CS team.
+                </p>
+              </div>
+              <div className="rounded-md bg-gray-50 border border-gray-200 p-3">
+                <p className="text-xs text-gray-600">
+                  <strong>What to listen for:</strong> Is the client overwhelmed internally? Did they
+                  lose their champion? Are they deprioritizing cyber? Each answer points to a different
+                  recovery path. Share what you learn back with CS so the team can adjust their approach.
+                </p>
+              </div>
+              <div className="rounded-md bg-amber-50 border border-amber-200 p-3">
+                <p className="text-xs text-amber-700">
+                  <strong>Trigger to escalate:</strong> RM outreach also goes unanswered for 1+ week,
+                  or client responds but still won&apos;t engage with CS on outstanding work.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Step 3 */}
+          <div className="flex justify-center">
+            <span className="text-gray-300 text-lg">↓</span>
+          </div>
+          <div className="rounded-lg border-2 border-blue-200 bg-white overflow-hidden">
+            <div className="bg-blue-50 px-4 py-3 border-b border-blue-200 flex items-center gap-3">
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-sm font-bold text-blue-700">3</span>
+              <div>
+                <p className="text-sm font-bold text-db-dark">CS Manager: Coordinated Recovery</p>
+              </div>
+            </div>
+            <div className="px-4 py-3 text-sm text-gray-700 space-y-2">
+              <p>
+                If neither the CS Advisor nor the RM can break through, the CS Manager gets involved.
+                At this point the account is at meaningful risk and needs a coordinated recovery plan.
+              </p>
+              <ul className="space-y-1">
+                <li>&#8226; Review the full outreach history (CS + RM attempts)</li>
+                <li>&#8226; Assess whether the advisor-client pairing needs to change</li>
+                <li>&#8226; Coordinate with the RM on a joint approach — who reaches out next, through what channel, with what message</li>
+                <li>&#8226; Consider whether a different stakeholder at the client should be contacted</li>
+                <li>&#8226; Flag the account as at-risk in any internal tracking</li>
+              </ul>
+              <div className="rounded-md bg-blue-50 border border-blue-200 p-3">
+                <p className="text-xs text-blue-700">
+                  <strong>Trigger to escalate:</strong> Recovery plan isn&apos;t working after 1-2 weeks,
+                  or the account is approaching renewal with an unengaged client.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Step 4 */}
+          <div className="flex justify-center">
+            <span className="text-gray-300 text-lg">↓</span>
+          </div>
+          <div className="rounded-lg border-2 border-orange-200 bg-white overflow-hidden">
+            <div className="bg-orange-50 px-4 py-3 border-b border-orange-200 flex items-center gap-3">
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-orange-100 text-sm font-bold text-orange-600">4</span>
+              <div>
+                <p className="text-sm font-bold text-db-dark">VP of RM: Leadership Intervention</p>
+              </div>
+            </div>
+            <div className="px-4 py-3 text-sm text-gray-700 space-y-2">
+              <p>
+                If the CS Manager&apos;s coordinated approach hasn&apos;t worked, escalate to the VP of RM.
+                At this point the client is materially disengaged and the renewal is at risk.
+              </p>
+              <ul className="space-y-1">
+                <li>&#8226; VP reviews the full timeline and all outreach attempts</li>
+                <li>&#8226; May reach out to the client at the executive level — a different voice and seniority can reset the conversation</li>
+                <li>&#8226; Decides whether to flag the account in leadership reviews and adjust the renewal forecast</li>
+                <li>&#8226; Aligns with Head of CS on whether to adjust the delivery plan (pause, restructure, or reallocate resources)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </SubSection>
+
+      {/* Why this matters for RMs */}
+      <SubSection icon="⚠️" title="Why RMs Should Care About Client Silence">
+        <p>
+          When CS tells you a client isn&apos;t responding, it&apos;s tempting to see it as a delivery
+          problem. But client disengagement is one of the strongest predictors of churn:
+        </p>
+        <div className="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-center">
+            <p className="text-sm font-bold text-red-700">Disengaged clients don&apos;t renew</p>
+            <p className="text-xs text-gray-500 mt-1">
+              If they&apos;re not participating in the program, they&apos;re not seeing the value.
+              Renewal becomes a cost conversation, not a value conversation.
+            </p>
+          </div>
+          <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-center">
+            <p className="text-sm font-bold text-red-700">Silence hides bigger problems</p>
+            <p className="text-xs text-gray-500 mt-1">
+              A client going silent may be evaluating alternatives, losing their internal champion,
+              or deprioritizing cyber entirely. The RM relationship is the best way to find out which.
+            </p>
+          </div>
+          <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-center">
+            <p className="text-sm font-bold text-red-700">Early action = easier recovery</p>
+            <p className="text-xs text-gray-500 mt-1">
+              A client who&apos;s been disengaged for 2 weeks is recoverable. A client who&apos;s been
+              disengaged for 3 months is a churn risk. Speed matters.
+            </p>
+          </div>
+        </div>
+        <div className="mt-3 rounded-md bg-db-aqua/5 border border-db-aqua/20 p-3">
+          <p className="text-sm text-db-dark">
+            <strong>The ask:</strong> When CS escalates a non-responsive client to you, treat it with the
+            same urgency as a renewal risk — because that&apos;s what it is. Use your relationship to
+            re-open the door, then work with CS to get the client back on track.
+          </p>
+        </div>
+      </SubSection>
+
       {/* Proposed Operating Norms */}
       <SectionHeading>Proposed Operating Norms</SectionHeading>
       <div className="mt-3 grid grid-cols-2 gap-4">
@@ -654,6 +842,22 @@ export default function EscalationPath() {
             <span className="text-gray-300">→</span>
             <span className="rounded-full bg-green-100 text-green-700 px-2 py-0.5 font-medium">IC</span>
             <span>RM picks it up — natural handoff, no escalation needed</span>
+          </div>
+        </div>
+        <div className="rounded-lg border border-gray-200 bg-white p-4">
+          <p className="text-sm font-bold text-db-dark">Client stops responding to CS outreach</p>
+          <div className="mt-2 flex items-center gap-2 text-xs text-gray-500 flex-wrap">
+            <span className="rounded-full bg-green-100 text-green-700 px-2 py-0.5 font-medium">CS</span>
+            <span>Advisor tries 2+ times, no response</span>
+            <span className="text-gray-300">→</span>
+            <span className="rounded-full bg-db-aqua/20 text-db-aqua-dark px-2 py-0.5 font-medium">RM</span>
+            <span>Reaches out using relationship — treats as early renewal risk</span>
+            <span className="text-gray-300">→</span>
+            <span className="rounded-full bg-blue-100 text-blue-700 px-2 py-0.5 font-medium">CS Mgr</span>
+            <span>Coordinated recovery if RM also can&apos;t break through</span>
+            <span className="text-gray-300">→</span>
+            <span className="rounded-full bg-orange-100 text-orange-700 px-2 py-0.5 font-medium">VP RM</span>
+            <span>Leadership intervention if still unresolved</span>
           </div>
         </div>
         <div className="rounded-lg border border-gray-200 bg-white p-4">
