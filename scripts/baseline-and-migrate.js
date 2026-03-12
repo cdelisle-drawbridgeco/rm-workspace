@@ -72,7 +72,36 @@ function main() {
       process.exit(1);
     }
     
-    if (errorOutput.includes('P3005') || errorOutput.includes('database schema is not empty') || errorOutput.includes('The database schema is not empty')) {
+    if (errorOutput.includes('P3009') || errorOutput.includes('migrate found failed migrations')) {
+      console.log('Found failed migrations. Resolving as rolled back...');
+
+      // Extract failed migration name from error output
+      const migrationsDir = path.join(__dirname, '..', 'prisma', 'migrations');
+      const migrations = fs.readdirSync(migrationsDir)
+        .filter(item => {
+          const itemPath = path.join(migrationsDir, item);
+          return fs.statSync(itemPath).isDirectory() && item !== 'migration_lock.toml';
+        })
+        .sort();
+
+      for (const migration of migrations) {
+        if (errorOutput.includes(migration)) {
+          try {
+            console.log(`Marking ${migration} as rolled back...`);
+            execSync(`npx prisma migrate resolve --rolled-back ${migration}`, {
+              encoding: 'utf-8',
+              stdio: 'inherit',
+              env
+            });
+          } catch (resolveError) {
+            console.log(`Note: Could not resolve ${migration}`);
+          }
+        }
+      }
+
+      console.log('Retrying migration deploy...');
+      execSync('npx prisma migrate deploy', { encoding: 'utf-8', stdio: 'inherit', env });
+    } else if (errorOutput.includes('P3005') || errorOutput.includes('database schema is not empty') || errorOutput.includes('The database schema is not empty')) {
       console.log('Database needs baselining. Marking existing migrations as applied...');
       
       // Get list of migration directories (exclude the new user model migration)
