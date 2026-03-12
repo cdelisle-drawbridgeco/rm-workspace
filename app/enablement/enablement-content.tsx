@@ -1,12 +1,11 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import type { CategoryId, NavState, TopicId } from './types';
 import { CATEGORIES, TOPIC_COMPONENTS, getCategoryById } from './registry';
 import CategoryLanding from './components/category-landing';
 import BackButton from './components/back-button';
-
-const DEFAULT_NAV: NavState = { view: 'landing', category: 'training' };
 
 function TopicContent({ id }: { id: TopicId }) {
   const Component = TOPIC_COMPONENTS[id];
@@ -14,43 +13,43 @@ function TopicContent({ id }: { id: TopicId }) {
 }
 
 export default function EnablementContent() {
-  const [nav, setNav] = useState<NavState>(DEFAULT_NAV);
-  const [prevNav, setPrevNav] = useState<NavState | null>(null);
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const contentRef = useRef<HTMLElement>(null);
+
+  const category = (searchParams.get('cat') || 'training') as CategoryId;
+  const topic = searchParams.get('topic') as TopicId | null;
+  const nav: NavState = topic
+    ? { view: 'topic', category, topic }
+    : { view: 'landing', category };
 
   function scrollTop() {
     contentRef.current?.scrollTo(0, 0);
   }
 
   function goToCategory(id: CategoryId) {
-    setPrevNav(null);
     if (id === 'marketing') {
-      setNav({ view: 'topic', category: 'marketing', topic: 'marketing-materials' });
+      router.push(`/enablement?cat=marketing&topic=marketing-materials`);
     } else {
-      setNav({ view: 'landing', category: id });
+      router.push(`/enablement?cat=${id}`);
     }
     scrollTop();
   }
 
   function goToTopic(topicId: TopicId) {
-    setPrevNav(nav);
-    setNav({ view: 'topic', category: nav.category, topic: topicId });
+    router.push(`/enablement?cat=${category}&topic=${topicId}`);
     scrollTop();
   }
 
-  function goBackToLanding() {
-    if (prevNav) {
-      setNav(prevNav);
-      setPrevNav(null);
-      scrollTop();
-    }
+  function goBack() {
+    router.back();
   }
 
-  const category = getCategoryById(nav.category);
+  const categoryConfig = getCategoryById(nav.category);
 
   return (
     <div className="flex h-full gap-0">
-      {/* Sidebar — 4 category buttons */}
+      {/* Sidebar */}
       <aside className="w-56 shrink-0 overflow-y-auto border-r border-gray-200 bg-white">
         <nav className="p-4 space-y-1">
           {CATEGORIES.map((cat) => (
@@ -73,12 +72,11 @@ export default function EnablementContent() {
       {/* Content Area */}
       <section ref={contentRef} className="flex-1 min-w-0 overflow-y-auto p-6">
         {nav.view === 'landing' ? (
-          <CategoryLanding category={category} onSelectTopic={goToTopic} />
+          <CategoryLanding category={categoryConfig} onSelectTopic={goToTopic} />
         ) : (
           <>
-            {/* Back button (except for marketing which has no intermediate landing) */}
             {nav.category !== 'marketing' && (
-              <BackButton label={category.label} onClick={goBackToLanding} />
+              <BackButton label={categoryConfig.label} onClick={goBack} />
             )}
             {nav.topic && <TopicContent id={nav.topic} />}
           </>
