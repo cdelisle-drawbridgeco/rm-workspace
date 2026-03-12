@@ -70,7 +70,7 @@ export default function EnablementContent() {
   }
 
   function goBackToLanding() {
-    navigate({ view: 'landing', category: nav.category });
+    window.history.back();
   }
 
   const category = getCategoryById(nav.category);
