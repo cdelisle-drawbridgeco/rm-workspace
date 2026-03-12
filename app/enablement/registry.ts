@@ -226,6 +226,13 @@ export const CATEGORIES: CategoryConfig[] = [
           'How hedge funds and PE firms are actually using AI — and the cyber risks each use case creates.',
         icon: '🏦',
       },
+      {
+        id: 'genai-assessments',
+        title: 'GenAI Security Assessments',
+        description:
+          'New ChatGPT and Claude security assessments — what they cover, who to target, and how to sell them.',
+        icon: '🔐',
+      },
     ],
   },
 ];
@@ -278,6 +285,9 @@ const TOPIC_COMPONENTS: Record<TopicId, ComponentType> = {
   ),
   'ai-in-alts': dynamic(
     () => import('./content/ai-training/ai-in-alts'),
+  ),
+  'genai-assessments': dynamic(
+    () => import('./content/ai-training/genai-assessments'),
   ),
 };
 

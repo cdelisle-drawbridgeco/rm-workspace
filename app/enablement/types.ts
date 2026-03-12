@@ -24,7 +24,8 @@ export type TopicId =
   | 'roi-value-measurement'
   | 'marketing-materials'
   | 'ai-cyber-risk'
-  | 'ai-in-alts';
+  | 'ai-in-alts'
+  | 'genai-assessments';
 
 export type NavState = {
   view: 'landing' | 'topic';
