@@ -233,6 +233,13 @@ export const CATEGORIES: CategoryConfig[] = [
           'New ChatGPT and Claude security assessments — what they cover, who to target, and how to sell them.',
         icon: '🔐',
       },
+      {
+        id: 'ai-security-bundle',
+        title: 'AI Security & Governance Bundle',
+        description:
+          'Assessment, Policy, and Training — the full three-service AI bundle, who to target, and how to sell it.',
+        icon: '🛡️',
+      },
     ],
   },
 ];
@@ -288,6 +295,9 @@ const TOPIC_COMPONENTS: Record<TopicId, ComponentType> = {
   ),
   'genai-assessments': dynamic(
     () => import('./content/ai-training/genai-assessments'),
+  ),
+  'ai-security-bundle': dynamic(
+    () => import('./content/ai-training/ai-security-bundle'),
   ),
 };
 
