@@ -86,6 +86,75 @@ export default function ForecastingBestPractices() {
         </div>
       </div>
 
+      <SubSection icon="🔍" title="Signals That Inform Your Forecast">
+        <p>
+          Your Best / Worst / Call isn&apos;t just a math exercise — it&apos;s a judgment call informed by
+          everything you know about the account. Before setting your numbers, run through these
+          seven signal areas. They&apos;re the difference between a forecast and a guess.
+        </p>
+        <div className="mt-4 grid grid-cols-2 gap-3">
+          {/* Overall Sentiment */}
+          <div className="rounded-md border border-gray-200 bg-gray-50 p-3">
+            <p className="text-xs font-semibold text-db-dark uppercase tracking-wide">Overall Sentiment</p>
+            <ul className="mt-2 space-y-1 text-xs text-gray-600 list-none">
+              <li>• Have we had value-focused conversations? Are they aligned on ROI?</li>
+              <li>• Are they happy — and do they advocate for us internally or externally?</li>
+              <li>• Invested in improving cyber posture, or check-the-box?</li>
+              <li>• Have they already indicated intent to renew?</li>
+            </ul>
+          </div>
+          {/* Business Health */}
+          <div className="rounded-md border border-gray-200 bg-gray-50 p-3">
+            <p className="text-xs font-semibold text-db-dark uppercase tracking-wide">Business Health</p>
+            <ul className="mt-2 space-y-1 text-xs text-gray-600 list-none">
+              <li>• Are they fundraising, or is performance declining?</li>
+              <li>• Any signs of budget cuts, layoffs, or hiring freezes?</li>
+              <li>• Is macro stress hitting them harder than their peers?</li>
+            </ul>
+          </div>
+          {/* Executive Sponsorship */}
+          <div className="rounded-md border border-gray-200 bg-gray-50 p-3">
+            <p className="text-xs font-semibold text-db-dark uppercase tracking-wide">Executive Sponsorship</p>
+            <ul className="mt-2 space-y-1 text-xs text-gray-600 list-none">
+              <li>• Do we have a senior leader who will advocate for Drawbridge in budget conversations?</li>
+              <li>• Or are we relying on a day-to-day user to make the case internally?</li>
+            </ul>
+          </div>
+          {/* Product Usage & Stickiness */}
+          <div className="rounded-md border border-gray-200 bg-gray-50 p-3">
+            <p className="text-xs font-semibold text-db-dark uppercase tracking-wide">Product Usage &amp; Stickiness</p>
+            <ul className="mt-2 space-y-1 text-xs text-gray-600 list-none">
+              <li>• How many products are they using, and how embedded are they in workflow?</li>
+              <li>• Has the account expanded recently?</li>
+            </ul>
+          </div>
+          {/* SKU-Level Risk */}
+          <div className="rounded-md border border-gray-200 bg-gray-50 p-3">
+            <p className="text-xs font-semibold text-db-dark uppercase tracking-wide">SKU-Level Churn Risk</p>
+            <ul className="mt-2 space-y-1 text-xs text-gray-600 list-none">
+              <li>• Are specific products at higher risk — rotating pen-test, something they&apos;re unhappy with, something not delivering value today?</li>
+            </ul>
+          </div>
+          {/* Tenure */}
+          <div className="rounded-md border border-gray-200 bg-gray-50 p-3">
+            <p className="text-xs font-semibold text-db-dark uppercase tracking-wide">Tenure</p>
+            <ul className="mt-2 space-y-1 text-xs text-gray-600 list-none">
+              <li>• ~1 year accounts carry more churn risk than 5+ year clients.</li>
+              <li>• For newer accounts: was onboarding successful? Are they fully activated?</li>
+            </ul>
+          </div>
+          {/* Adoption Quality */}
+          <div className="rounded-md border border-gray-200 bg-gray-50 col-span-2 p-3">
+            <p className="text-xs font-semibold text-db-dark uppercase tracking-wide">Adoption Quality</p>
+            <ul className="mt-2 grid grid-cols-3 gap-x-6 gap-y-1 text-xs text-gray-600 list-none">
+              <li>• Using value-add capabilities, or just logging in?</li>
+              <li>• Using the platform for remediation planning and forecasting?</li>
+              <li>• Or are most interactions still via spreadsheets and email?</li>
+            </ul>
+          </div>
+        </div>
+      </SubSection>
+
       <SubSection icon="📐" title="How to Set Your Best / Worst / Call">
         <p><strong>Step 1: Start with the baseline.</strong> The expiring ARR is your anchor. Every
           forecast starts from what the client is paying today.</p>
