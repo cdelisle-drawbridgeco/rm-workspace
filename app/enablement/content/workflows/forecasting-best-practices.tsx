@@ -35,19 +35,29 @@ export default function ForecastingBestPractices() {
         last month to engage on a renewal. The forecast is your tool for staying ahead.
       </p>
 
+      {/* Gross Retention framing callout */}
+      <div className="rounded-lg border border-db-aqua/30 bg-db-aqua/5 p-4 mt-2">
+        <p className="text-sm text-db-dark font-medium">
+          <strong>Forecasting focus: Gross Retention Rate (GRR).</strong> We are currently forecasting
+          against gross retention — meaning our goal is to retain 100% of expiring ARR at current contract
+          value. Best Case is capped at the expiring ARR. Expansion, upsells, and price increases will be
+          tracked separately once we move into net retention reporting.
+        </p>
+      </div>
+
       {/* Best / Worst / Call */}
       <SectionHeading>Understanding Best, Worst & Call</SectionHeading>
       <div className="grid grid-cols-3 gap-4 mt-2">
         <div className="rounded-lg border-2 border-green-200 bg-green-50 p-4">
           <p className="font-semibold text-green-800 font-heading">Best Case</p>
           <p className="mt-2 text-sm text-green-700">
-            The outcome if <strong>everything goes right</strong>. The client renews on time,
-            accepts a price increase, adds new services, and the champion stays in place.
-            This is your realistic upside — not a fantasy.
+            The client renews at <strong>100% of expiring ARR</strong> — full retention at current
+            contract value, on time, with no scope reduction. This is the ceiling for gross
+            retention forecasting. Do not include expansion or price increases in your Best Case.
           </p>
           <p className="mt-3 text-xs text-green-600 italic">
-            Ask yourself: &ldquo;If the stars align and every conversation goes well, what&apos;s the
-            maximum realistic outcome?&rdquo;
+            Ask yourself: &ldquo;Is there anything that could prevent a full, clean renewal at the
+            current contract value?&rdquo; If not, Best Case = expiring ARR.
           </p>
         </div>
         <div className="rounded-lg border-2 border-red-200 bg-red-50 p-4">
@@ -79,9 +89,10 @@ export default function ForecastingBestPractices() {
       <SubSection icon="📐" title="How to Set Your Best / Worst / Call">
         <p><strong>Step 1: Start with the baseline.</strong> The expiring ARR is your anchor. Every
           forecast starts from what the client is paying today.</p>
-        <p><strong>Step 2: Assess the upside (Best).</strong> Is there an expansion opportunity?
-          Price increase? New product adoption? Multi-year commitment? Factor in only
-          what you have evidence to support — a conversation, a proposal, expressed interest.</p>
+        <p><strong>Step 2: Set your Best Case at 100% of expiring ARR.</strong> In the gross
+          retention model, the best outcome is a full, clean renewal at current contract value.
+          If the account is locked and risk-free, Best = expiring ARR. Do not factor in
+          expansion, price increases, or upsells — those are tracked separately.</p>
         <p><strong>Step 3: Assess the downside (Worst).</strong> What could go wrong? Budget
           pressure? Champion departure? Competitive threat? Scope reduction? Be honest —
           the worst case should feel uncomfortable but plausible.</p>
@@ -116,29 +127,22 @@ export default function ForecastingBestPractices() {
             </thead>
             <tbody className="divide-y divide-gray-100">
               <tr>
-                <td className="px-4 py-2 text-green-700">Upsell</td>
-                <td className="px-4 py-2 text-gray-600">Expand to portcos + price increase</td>
-                <td className="px-4 py-2 text-right">20%</td>
-                <td className="px-4 py-2 text-right">$180K</td>
-                <td className="px-4 py-2 text-right font-medium">$36K</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-2 text-blue-700">Flat Renewal</td>
-                <td className="px-4 py-2 text-gray-600">Same scope, same price</td>
-                <td className="px-4 py-2 text-right">50%</td>
+                <td className="px-4 py-2 text-green-700">Full Renewal</td>
+                <td className="px-4 py-2 text-gray-600">Same scope, same price — Best Case (GRR ceiling)</td>
+                <td className="px-4 py-2 text-right">60%</td>
                 <td className="px-4 py-2 text-right">$150K</td>
-                <td className="px-4 py-2 text-right font-medium">$75K</td>
+                <td className="px-4 py-2 text-right font-medium">$90K</td>
               </tr>
               <tr>
                 <td className="px-4 py-2 text-orange-700">Downsize</td>
                 <td className="px-4 py-2 text-gray-600">Drop one service line</td>
-                <td className="px-4 py-2 text-right">20%</td>
+                <td className="px-4 py-2 text-right">30%</td>
                 <td className="px-4 py-2 text-right">$110K</td>
-                <td className="px-4 py-2 text-right font-medium">$22K</td>
+                <td className="px-4 py-2 text-right font-medium">$33K</td>
               </tr>
               <tr>
                 <td className="px-4 py-2 text-red-700">Churn</td>
-                <td className="px-4 py-2 text-gray-600">Client leaves entirely</td>
+                <td className="px-4 py-2 text-gray-600">Client does not renew</td>
                 <td className="px-4 py-2 text-right">10%</td>
                 <td className="px-4 py-2 text-right">$0</td>
                 <td className="px-4 py-2 text-right font-medium">$0</td>
@@ -147,14 +151,18 @@ export default function ForecastingBestPractices() {
                 <td className="px-4 py-2" colSpan={2}>Expected Value (Your Call)</td>
                 <td className="px-4 py-2 text-right">100%</td>
                 <td className="px-4 py-2 text-right"></td>
-                <td className="px-4 py-2 text-right">$133K</td>
+                <td className="px-4 py-2 text-right">$123K</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p className="mt-3">
+        <p className="mt-3 text-xs text-gray-500 italic">
+          Note: Expansion and upsell scenarios are excluded from GRR forecasting. When we move to
+          net retention reporting, a fourth &ldquo;Expansion&rdquo; row will be added above Full Renewal.
+        </p>
+        <p className="mt-2">
           You don&apos;t need to calculate this formally every time, but you should be thinking
-          this way. When your manager asks &ldquo;why is your call at $133K?&rdquo; you should be
+          this way. When your manager asks &ldquo;why is your call at $123K?&rdquo; you should be
           able to articulate the scenarios and your confidence level in each.
         </p>
       </SubSection>
@@ -199,8 +207,13 @@ export default function ForecastingBestPractices() {
               <p className="mt-1 text-sm text-gray-600">
                 Every RM updates their Best / Worst / Call for all renewals in the active
                 forecast window. Review every account — even the ones you think are locked.
-                Update notes on any changes from the prior week. Flag accounts that need
-                escalation or support.
+                Flag accounts that need escalation or support.
+              </p>
+              <p className="mt-2 text-sm text-gray-600">
+                When updating notes, answer two questions: <strong>why is there risk</strong> on
+                this account, and <strong>what is being done about it</strong>? A note that only
+                logs activity (&ldquo;left voicemail,&rdquo; &ldquo;call next week&rdquo;) is not useful.
+                A note that explains the situation and the action plan is.
               </p>
             </div>
           </div>
@@ -221,7 +234,7 @@ export default function ForecastingBestPractices() {
           </div>
           <div className="flex items-start gap-4 p-4">
             <div className="shrink-0 w-28 text-center">
-              <p className="text-xs font-semibold text-gray-400 uppercase">Wed–Thu</p>
+              <p className="text-xs font-semibold text-gray-400 uppercase">Tue–Thu</p>
               <p className="text-lg font-bold font-heading text-db-dark">1:1s</p>
             </div>
             <div>
@@ -232,6 +245,25 @@ export default function ForecastingBestPractices() {
                 where the real deal coaching happens — come prepared with your top 3 accounts
                 that need attention.
               </p>
+              <p className="mt-2 text-sm text-gray-600">
+                <strong>Come with notes that explain the risk, not just the activity.</strong> &ldquo;Call scheduled
+                for Tuesday&rdquo; is not a note — it&apos;s a calendar entry. A useful note tells the story:
+                <em> why</em> is this account at risk, and <em>what is actively being done about it</em>?
+                The goal is for anyone reading your Salesforce notes to understand the situation without
+                having to ask you. If you can&apos;t articulate the risk and the action, you&apos;re not
+                ready for the 1:1.
+              </p>
+              <div className="mt-3 rounded-md bg-gray-50 border border-gray-200 p-3 text-xs text-gray-600 space-y-2">
+                <p className="font-semibold text-gray-500 uppercase tracking-wide text-[10px]">Note quality examples</p>
+                <div className="flex gap-2">
+                  <span className="text-red-500 font-bold shrink-0">✗</span>
+                  <span className="italic">&ldquo;Called client, left voicemail. Follow-up scheduled.&rdquo;</span>
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-green-600 font-bold shrink-0">✓</span>
+                  <span className="italic">&ldquo;CFO flagged Drawbridge as discretionary spend in Q2 budget review. CCO is our champion but doesn&apos;t control the budget. Scheduled call with CCO to prep a cost-of-risk conversation before CFO review on 4/15.&rdquo;</span>
+                </div>
+              </div>
             </div>
           </div>
           <div className="flex items-start gap-4 p-4">
