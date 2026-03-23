@@ -129,6 +129,13 @@ export const CATEGORIES: CategoryConfig[] = [
         icon: '💬',
         group: 'SVR Meetings',
       },
+      {
+        id: 'churn-reasons',
+        title: 'Churn Reason Tagging',
+        description:
+          'The seven-tag churn taxonomy, when to use each tag, the Quick Decision Guide, and the 1:1 review process.',
+        icon: '📉',
+      },
     ],
   },
   {
@@ -298,6 +305,9 @@ const TOPIC_COMPONENTS: Record<TopicId, ComponentType> = {
   ),
   'ai-security-bundle': dynamic(
     () => import('./content/ai-training/ai-security-bundle'),
+  ),
+  'churn-reasons': dynamic(
+    () => import('./content/workflows/churn-reasons'),
   ),
 };
 

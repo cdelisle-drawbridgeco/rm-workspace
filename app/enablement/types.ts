@@ -26,7 +26,8 @@ export type TopicId =
   | 'ai-cyber-risk'
   | 'ai-in-alts'
   | 'genai-assessments'
-  | 'ai-security-bundle';
+  | 'ai-security-bundle'
+  | 'churn-reasons';
 
 export type NavState = {
   view: 'landing' | 'topic';
