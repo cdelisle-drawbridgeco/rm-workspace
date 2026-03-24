@@ -349,14 +349,24 @@ export default function ClientEngagement() {
         </div>
       </SubSection>
 
-      <DrawbridgeAngle
-        title="Engagement Is the Moat"
-        points={[
-          'Clients who feel genuinely advised — not just serviced — are far less likely to shop alternatives at renewal. The RM who knows the client\'s fund structure, regulatory exposure, and business pressures is not interchangeable.',
-          'The best outreach angle right now is AI: every firm is navigating GenAI risk without a clear framework. Drawbridge has a perspective. Use it to get in front of executives who aren\'t currently in your contact list.',
-          'When a client eventually does receive a competitive pitch, what you\'ve built at the executive level is what makes them say "we\'re not switching." That relationship is built over 12 months of consistent, high-quality engagement — not the renewal call.',
-        ]}
-      />
+      <DrawbridgeAngle>
+        <p>
+          Clients who feel genuinely advised — not just serviced — are far less likely to shop
+          alternatives at renewal. The RM who knows the client&apos;s fund structure, regulatory
+          exposure, and business pressures is not interchangeable.
+        </p>
+        <p>
+          The best outreach angle right now is AI: every firm is navigating GenAI risk without a
+          clear framework. Drawbridge has a perspective. Use it to get in front of executives who
+          aren&apos;t currently in your contact list.
+        </p>
+        <p>
+          When a client eventually does receive a competitive pitch, what you&apos;ve built at the
+          executive level is what makes them say &ldquo;we&apos;re not switching.&rdquo; That
+          relationship is built over 12 months of consistent, high-quality engagement — not the
+          renewal call.
+        </p>
+      </DrawbridgeAngle>
     </>
   );
 }
