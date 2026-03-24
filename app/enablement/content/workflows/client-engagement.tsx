@@ -55,7 +55,7 @@ export default function ClientEngagement() {
       {/* What Counts */}
       <SubSection icon="✅" title="What Counts as a Qualifying Interaction">
         <p>
-          Not every email or Slack message counts. A qualifying interaction is one where you&apos;re
+          Not every email counts. A qualifying interaction is one where you&apos;re
           creating a touchpoint that the client would recognize as meaningful. There are four types:
         </p>
         <div className="mt-3 overflow-hidden rounded-lg border border-gray-200">
@@ -70,8 +70,8 @@ export default function ClientEngagement() {
             <tbody className="divide-y divide-gray-100">
               <tr className="bg-white">
                 <td className="px-4 py-3 font-medium text-db-dark align-top">Meeting / Call</td>
-                <td className="px-4 py-3 text-gray-600 align-top">Scheduled or unscheduled live conversation</td>
-                <td className="px-4 py-3 text-gray-500 align-top">SVR, QBR, intro call, ad-hoc check-in, renewal conversation</td>
+                <td className="px-4 py-3 text-gray-600 align-top">Scheduled live conversation — Teams calls and meetings that actually took place</td>
+                <td className="px-4 py-3 text-gray-500 align-top">Quarterly review, scheduled check-in, renewal conversation, intro call</td>
               </tr>
               <tr className="bg-gray-50/50">
                 <td className="px-4 py-3 font-medium text-db-dark align-top">Email Outreach</td>
@@ -85,8 +85,8 @@ export default function ClientEngagement() {
               </tr>
               <tr className="bg-gray-50/50">
                 <td className="px-4 py-3 font-medium text-db-dark align-top">Introduction / Expansion</td>
-                <td className="px-4 py-3 text-gray-600 align-top">Connecting to a new stakeholder or broadening the relationship</td>
-                <td className="px-4 py-3 text-gray-500 align-top">Intro to CFO or COO, connecting a client to the technical team, peer intro</td>
+                <td className="px-4 py-3 text-gray-600 align-top">Connecting a client contact to someone new — either at Drawbridge or within their own firm</td>
+                <td className="px-4 py-3 text-gray-500 align-top">Introducing a client to Chris or Eric, bringing a new stakeholder at the client into the relationship, facilitating a peer intro between clients</td>
               </tr>
             </tbody>
           </table>
@@ -115,9 +115,9 @@ export default function ClientEngagement() {
                 <td className="px-4 py-3 align-top">
                   <span className="inline-flex items-center rounded-full bg-db-aqua/15 px-2 py-0.5 text-xs font-semibold text-db-aqua-dark">Tier 1</span>
                 </td>
-                <td className="px-4 py-3 font-medium text-db-dark align-top">Executive sponsor (CFO, COO, CRO, Managing Partner)</td>
+                <td className="px-4 py-3 font-medium text-db-dark align-top">Executive sponsor (CFO, CCO, Managing Partner)</td>
                 <td className="px-4 py-3 text-gray-600 align-top">This person controls budget and will ultimately make or break the renewal. If they only know Drawbridge through your day-to-day contact, the renewal is at risk.</td>
-                <td className="px-4 py-3 text-gray-500 align-top">At minimum quarterly — every SVR</td>
+                <td className="px-4 py-3 text-gray-500 align-top">At minimum quarterly</td>
               </tr>
               <tr className="bg-gray-50/50">
                 <td className="px-4 py-3 align-top">
@@ -142,9 +142,9 @@ export default function ClientEngagement() {
           <p className="text-xs font-semibold text-amber-700">Path to Executive</p>
           <p className="mt-1 text-xs text-gray-700">
             For every account where you don&apos;t yet have a Tier 1 relationship, you should have an
-            active plan for how to get there. Who is the bridge? What&apos;s the right moment — an SVR,
-            a regulatory update, a new initiative? Log this in Salesforce and bring it to your 1:1.
-            Executive access is too important to leave to chance.
+            active plan for how to get there. Who is the bridge? What&apos;s the right moment — a
+            regulatory update, a new initiative, an intro from Chris or Eric? Log this in Salesforce
+            and flag it in your weekly review. Executive access is too important to leave to chance.
           </p>
         </div>
       </SubSection>
@@ -185,6 +185,10 @@ export default function ClientEngagement() {
           <div className="rounded-md border border-gray-200 bg-gray-50 p-3">
             <p className="text-xs font-semibold text-db-dark">Peer Benchmarking</p>
             <p className="mt-1 text-xs text-gray-600">Clients care what peers are doing. &ldquo;Most funds your size are doing X&rdquo; is a powerful frame for both urgency and reassurance.</p>
+          </div>
+          <div className="rounded-md border border-db-aqua/20 bg-db-aqua/5 p-3">
+            <p className="text-xs font-semibold text-db-aqua-dark">Introductions to Drawbridge Leadership</p>
+            <p className="mt-1 text-xs text-gray-600">Offering to connect a client with Chris or Eric signals that the relationship matters beyond the transactional. Use this at key moments — ahead of renewal, when there&apos;s a strategic conversation to have, or to strengthen a Tier 1 relationship you&apos;re building.</p>
           </div>
         </div>
       </div>
@@ -260,53 +264,44 @@ export default function ClientEngagement() {
       {/* Weekly Rhythm */}
       <SectionHeading>Weekly Rhythm</SectionHeading>
       <p className="text-sm text-gray-700 leading-relaxed">
-        Building toward 20 interactions per week is easier when you build it into a consistent
-        rhythm rather than sprinting on Fridays. Here&apos;s a cadence that works:
+        The 20-interaction target is easier to hit when you plan 1–2 weeks ahead rather than filling
+        your week as you go. Scheduled meetings need lead time — which means your outreach queue
+        should always be rolling forward, not reactive to whatever is in front of you today.
       </p>
-      <div className="mt-3 grid grid-cols-5 gap-2">
-        {[
-          {
-            day: 'Monday',
-            focus: 'Plan the week',
-            detail: 'Review your book. Identify which accounts need a touch this week. Queue outreach for Tue–Thu.',
-            color: 'border-gray-200 bg-gray-50',
-            labelColor: 'text-gray-500',
-          },
-          {
-            day: 'Tuesday',
-            focus: 'Outreach block',
-            detail: 'Primary outreach day. Aim for 5–8 meaningful contacts — calls, emails, strategic shares.',
-            color: 'border-db-aqua/30 bg-db-aqua/5',
-            labelColor: 'text-db-aqua-dark',
-          },
-          {
-            day: 'Wednesday',
-            focus: 'Outreach + 1:1 prep',
-            detail: 'Continue outreach. Afternoon: prep for Thursday 1:1 — update forecasts, flag risks, draft account notes.',
-            color: 'border-db-aqua/30 bg-db-aqua/5',
-            labelColor: 'text-db-aqua-dark',
-          },
-          {
-            day: 'Thursday',
-            focus: 'Outreach + 1:1',
-            detail: '1:1 with your manager. Morning outreach before. Log everything same-day.',
-            color: 'border-db-aqua/30 bg-db-aqua/5',
-            labelColor: 'text-db-aqua-dark',
-          },
-          {
-            day: 'Friday',
-            focus: 'Wrap + log',
-            detail: 'Catch-up logging, async follow-ups, pipeline review. Set yourself up for a strong Monday.',
-            color: 'border-gray-200 bg-gray-50',
-            labelColor: 'text-gray-500',
-          },
-        ].map(({ day, focus, detail, color, labelColor }) => (
-          <div key={day} className={`rounded-lg border p-3 ${color}`}>
-            <p className={`text-xs font-semibold uppercase tracking-wide ${labelColor}`}>{day}</p>
-            <p className="mt-1 text-sm font-medium text-db-dark">{focus}</p>
-            <p className="mt-1 text-xs text-gray-600 leading-relaxed">{detail}</p>
-          </div>
-        ))}
+      <div className="mt-3 grid grid-cols-3 gap-3">
+        <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
+          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Start of Week</p>
+          <p className="mt-1 text-sm font-medium text-db-dark">Plan &amp; Schedule</p>
+          <p className="mt-2 text-xs text-gray-600 leading-relaxed">
+            Review your rolling 2-week outreach plan. Which accounts need a touch this week or next?
+            Any meetings to schedule before your window closes? Prioritize accounts approaching
+            renewal, with open items, or that have gone quiet.
+          </p>
+        </div>
+        <div className="rounded-lg border border-db-aqua/30 bg-db-aqua/5 p-4">
+          <p className="text-xs font-semibold text-db-aqua-dark uppercase tracking-wide">Mid-Week</p>
+          <p className="mt-1 text-sm font-medium text-db-dark">Execute Outreach</p>
+          <p className="mt-2 text-xs text-gray-600 leading-relaxed">
+            Primary execution window. Calls, Teams meetings, emails, strategic shares. Aim to hit
+            the bulk of your 20 interactions before Friday. Log same-day while context is fresh.
+          </p>
+        </div>
+        <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
+          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">End of Week</p>
+          <p className="mt-1 text-sm font-medium text-db-dark">Wrap, Log &amp; Look Ahead</p>
+          <p className="mt-2 text-xs text-gray-600 leading-relaxed">
+            Catch up on any outstanding logging. Update your rolling plan for the next 1–2 weeks.
+            Flag any account risks or open items for your weekly review.
+          </p>
+        </div>
+      </div>
+      <div className="mt-3 rounded-lg border border-blue-200 bg-blue-50 p-3">
+        <p className="text-xs font-semibold text-blue-700">Rolling vs. reactive</p>
+        <p className="mt-1 text-xs text-gray-700">
+          If you wait until Monday to figure out who to contact that week, meetings won&apos;t get
+          scheduled in time and email outreach fills the gap. The goal is a queue that&apos;s always
+          populated 1–2 weeks out — so you&apos;re executing a plan, not improvising one.
+        </p>
       </div>
 
       {/* What Good Looks Like */}
