@@ -136,6 +136,13 @@ export const CATEGORIES: CategoryConfig[] = [
           'The seven-tag churn taxonomy, when to use each tag, the Quick Decision Guide, and the 1:1 review process.',
         icon: '📉',
       },
+      {
+        id: 'client-engagement',
+        title: 'Client Engagement Process',
+        description:
+          'Weekly cadence, contact tier model, outreach angles, Salesforce logging, and what good looks like.',
+        icon: '🤝',
+      },
     ],
   },
   {
@@ -308,6 +315,9 @@ const TOPIC_COMPONENTS: Record<TopicId, ComponentType> = {
   ),
   'churn-reasons': dynamic(
     () => import('./content/workflows/churn-reasons'),
+  ),
+  'client-engagement': dynamic(
+    () => import('./content/workflows/client-engagement'),
   ),
 };
 

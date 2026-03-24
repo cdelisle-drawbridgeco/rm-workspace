@@ -27,7 +27,8 @@ export type TopicId =
   | 'ai-in-alts'
   | 'genai-assessments'
   | 'ai-security-bundle'
-  | 'churn-reasons';
+  | 'churn-reasons'
+  | 'client-engagement';
 
 export type NavState = {
   view: 'landing' | 'topic';
