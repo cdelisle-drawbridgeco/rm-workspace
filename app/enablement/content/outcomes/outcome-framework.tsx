@@ -56,6 +56,33 @@ export default function OutcomeFramework() {
         </p>
       </SubSection>
 
+      {/* Brand Journey */}
+      <div className="mt-6 rounded-xl border border-db-dark/80 bg-db-dark p-5">
+        <p className="text-xs font-semibold text-db-aqua uppercase tracking-widest mb-4">The Drawbridge Brand Journey</p>
+        <div className="flex items-start gap-0">
+          <div className="flex-1 text-center px-2">
+            <p className="text-sm font-bold text-white">Raise Your Guard</p>
+            <p className="text-xs text-db-aqua/60 mt-1 leading-snug">Protect the firm — reduce exposure, build resilience</p>
+            <p className="text-xs text-gray-500 mt-2">Outcomes 3 &amp; 5</p>
+          </div>
+          <span className="text-db-aqua text-xl pt-0.5 shrink-0">→</span>
+          <div className="flex-1 text-center px-2">
+            <p className="text-sm font-bold text-white">Raise Your Score</p>
+            <p className="text-xs text-db-aqua/60 mt-1 leading-snug">Measure progress — benchmarking, proof, regulatory readiness</p>
+            <p className="text-xs text-gray-500 mt-2">Outcomes 1 &amp; 2</p>
+          </div>
+          <span className="text-db-aqua text-xl pt-0.5 shrink-0">→</span>
+          <div className="flex-1 text-center px-2">
+            <p className="text-sm font-bold text-white">Raise Your Bar</p>
+            <p className="text-xs text-db-aqua/60 mt-1 leading-snug">Improve continuously — competitive advantage, AI, scale</p>
+            <p className="text-xs text-gray-500 mt-2">Outcomes 4 &amp; 6</p>
+          </div>
+        </div>
+        <p className="mt-4 text-xs text-gray-500 border-t border-white/10 pt-3">
+          This is Drawbridge&apos;s brand framework — and it maps directly to the journey every client takes with us. The six outcomes below are how we deliver each phase.
+        </p>
+      </div>
+
       {/* Outcome 1 */}
       <SectionHeading>The Six Outcomes</SectionHeading>
 
@@ -539,21 +566,23 @@ export default function OutcomeFramework() {
 
       <DrawbridgeAngle>
         <p>
-          This framework is the foundation for how we talk about value — externally and
-          internally. Every service we deliver, every assessment we run, every policy we
-          write should tie back to one or more of these six outcomes. If it doesn&apos;t,
-          we need to ask why we&apos;re doing it.
+          Drawbridge is trusted by <strong>1,000+ alternative investment funds</strong> managing{' '}
+          <strong>$1.7T+ in assets</strong>, and has supported over <strong>2,000 successful ODD reviews</strong>.
+          That track record exists because we are independent, dedicated, and intelligence-led — not a
+          generalist IT firm with a cybersecurity module bolted on. No other provider sits at the centre
+          of the alternative investment ecosystem the way we do, and that proprietary vantage point is
+          the foundation of everything in this framework.
         </p>
         <p>
-          Over time, we&apos;ll build detailed value narratives under each outcome — the
-          specific stories, data points, and proof that bring each outcome to life in
-          client conversations. We&apos;ll also map our service catalog (SKUs) to outcomes
-          so every proposal can be framed as &ldquo;here&apos;s how we deliver Outcome X&rdquo; rather
-          than &ldquo;here&apos;s a list of things we do.&rdquo;
+          Every service we deliver, every assessment we run, every policy we write should tie back to one
+          or more of these six outcomes. If it doesn&apos;t, we need to ask why we&apos;re doing it. The
+          Raise Your Guard → Raise Your Score → Raise Your Bar journey is not just a marketing tagline —
+          it&apos;s the progression every client should be moving through, and it&apos;s how we measure
+          whether our programs are actually delivering value.
         </p>
         <p>
-          Start using the framework now. Pick one client this week and reframe your
-          next conversation around outcomes instead of deliverables. See what happens.
+          Start using the framework now. Pick one client this week and reframe your next conversation
+          around outcomes instead of deliverables. The shift in how they respond will tell you everything.
         </p>
       </DrawbridgeAngle>
 

@@ -257,6 +257,40 @@ export default function ClientEngagement() {
         </p>
       </div>
 
+      {/* Persona Messaging */}
+      <SectionHeading>Know Who You&apos;re Talking To</SectionHeading>
+      <p className="text-sm text-gray-700 leading-relaxed">
+        Drawbridge&apos;s three primary decision-making personas each have a distinct mindset and motivation.
+        Leading with the right angle — not your default pitch — is the difference between a conversation
+        that goes somewhere and one that doesn&apos;t.
+      </p>
+      <div className="mt-3 grid grid-cols-3 gap-3">
+        <div className="rounded-lg border border-gray-200 bg-white p-4">
+          <p className="text-xs font-semibold text-db-dark uppercase tracking-wide">CTO — &ldquo;Knows It All&rdquo;</p>
+          <p className="mt-1.5 text-xs text-gray-500">Confident in existing tech controls. Sceptical of external warnings. Doesn&apos;t think they have meaningful gaps.</p>
+          <p className="mt-2.5 text-xs font-medium text-db-dark italic border-l-2 border-db-aqua pl-2 leading-snug">
+            &ldquo;You may already be strong — here&apos;s how you prove it to your investors and regulators.&rdquo;
+          </p>
+          <p className="mt-2 text-xs text-gray-500">Lead with peer benchmarking data. Show them where they rank across 1,000+ firms. Turn their confidence into a provable story.</p>
+        </div>
+        <div className="rounded-lg border border-gray-200 bg-white p-4">
+          <p className="text-xs font-semibold text-db-dark uppercase tracking-wide">CFO / CCO — &ldquo;Has It All&rdquo;</p>
+          <p className="mt-1.5 text-xs text-gray-500">Thinks current setup meets requirements. Wants cyber off their plate. Treats it as a compliance box-tick.</p>
+          <p className="mt-2.5 text-xs font-medium text-db-dark italic border-l-2 border-db-aqua pl-2 leading-snug">
+            &ldquo;Outsource your cyber headaches to a trusted partner who delivers measurable investor confidence.&rdquo;
+          </p>
+          <p className="mt-2 text-xs text-gray-500">Lead with the cost of non-compliance, LP capital risk, and reputational exposure. Offer to own the problem end-to-end.</p>
+        </div>
+        <div className="rounded-lg border border-gray-200 bg-white p-4">
+          <p className="text-xs font-semibold text-db-dark uppercase tracking-wide">COO — &ldquo;Wants It All-in-One&rdquo;</p>
+          <p className="mt-1.5 text-xs text-gray-500">Assumes the MSP or IT provider has cybersecurity handled. Doesn&apos;t see the conflict of interest in letting IT police itself.</p>
+          <p className="mt-2.5 text-xs font-medium text-db-dark italic border-l-2 border-db-aqua pl-2 leading-snug">
+            &ldquo;Your IT runs the systems. We make sure those systems are safe.&rdquo;
+          </p>
+          <p className="mt-2 text-xs text-gray-500">Lead with independent verification and what a conflicted provider is motivated to overlook. This is where Drawbridge&apos;s independence is the differentiator.</p>
+        </div>
+      </div>
+
       {/* Outreach Angles */}
       <SectionHeading>Outreach Angles — What to Say</SectionHeading>
       <p className="text-sm text-gray-700 leading-relaxed">
@@ -454,24 +488,23 @@ export default function ClientEngagement() {
 
       <DrawbridgeAngle>
         <p>
-          Every client conversation is a chance to demonstrate that Drawbridge understands this
-          industry at a depth no generalist firm can match. The RM who shows up with a perspective
-          on how new SEC enforcement priorities affect a specific fund structure — or what GenAI
-          adoption is doing to the risk profiles of firms raising LP capital — is building something
-          that a competitor cannot easily replicate: a reputation as the firm that actually knows
-          this space.
+          Every client conversation is a chance to demonstrate that Drawbridge understands this industry
+          at a depth no generalist firm can match — backed by intelligence from over{' '}
+          <strong>1,000 alternative investment funds</strong> managing <strong>$1.7T+ in assets</strong>.
+          When you open with &ldquo;we&apos;re seeing across our client base that...&rdquo; you are speaking
+          from a proprietary vantage point that no competitor can replicate. That is your edge. Use it.
         </p>
         <p>
-          The best outreach angle right now is AI: every firm is navigating GenAI risk without a
-          clear framework, and executives want to talk about it. Use that as your door-opener — not
-          just with your day-to-day contact, but with the CFOs and CCOs who control the budget and
-          make the renewal decision. That is a thought leadership conversation, not a service call.
+          The best outreach angle right now is AI: every firm is navigating GenAI risk without a clear
+          framework, and executives want to talk about it. Use it as your door-opener — not just with
+          your day-to-day contact, but with the CFOs and CCOs who control the budget and make the renewal
+          decision. That is a thought leadership conversation, not a service call.
         </p>
         <p>
-          When a client eventually does receive a competitive pitch, the relationship you have built
-          at the executive level — based on twelve months of consistent, high-quality engagement —
-          is what makes them say &ldquo;we&apos;re not switching.&rdquo; That kind of loyalty is
-          earned by showing up like a trusted advisor long before the renewal conversation starts.
+          When a client eventually does receive a competitive pitch, the relationship you have built at
+          the executive level — based on consistent, high-quality engagement over twelve months — is what
+          makes them say &ldquo;we&apos;re not switching.&rdquo; Raise your guard. Raise your bar.
+          That is the standard we hold ourselves to, and it is the standard clients come to expect from us.
         </p>
       </DrawbridgeAngle>
     </>

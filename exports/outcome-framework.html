@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Business Outcome Framework — Drawbridge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Variables ── */
+    :root {
+      --db-dark:      #111821;
+      --db-aqua:      #86C8BC;
+      --db-aqua-dark: #489E8E;
+      --db-aqua-light:#D6E6E3;
+      --db-orange:    #FF6900;
+    }
+
+    /* ── Reset / Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #374151;
+      background: #fff;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 48px;
+    }
+    h1, h2, h3, h4, .heading { font-family: 'Archivo', system-ui, sans-serif; }
+    strong { font-weight: 600; }
+    p + p { margin-top: 10px; }
+
+    /* ── DRAFT Watermark ── */
+    body::before {
+      content: 'DRAFT';
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-35deg);
+      font-family: 'Archivo', system-ui, sans-serif;
+      font-size: 130px;
+      font-weight: 700;
+      color: rgba(134, 200, 188, 0.10);
+      letter-spacing: 0.15em;
+      pointer-events: none;
+      z-index: 0;
+      white-space: nowrap;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(to right, var(--db-dark), #1a2535);
+      border-radius: 12px;
+      padding: 32px;
+      color: #fff;
+      margin-bottom: 4px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero .icon { font-size: 36px; display: block; margin-bottom: 10px; }
+    .hero h2 { font-size: 22px; font-weight: 700; color: #fff; }
+    .hero p  { font-size: 13px; color: #d1d5db; margin-top: 6px; }
+
+    /* ── Draft Badge ── */
+    .draft-badge {
+      display: inline-block;
+      margin-top: 10px;
+      background: rgba(255,105,0,0.15);
+      border: 1px solid rgba(255,105,0,0.4);
+      color: var(--db-orange);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    /* ── Last Updated ── */
+    .last-updated {
+      font-size: 11px;
+      color: #9ca3af;
+      text-align: right;
+      margin-top: 6px;
+      margin-bottom: 4px;
+    }
+
+    /* ── Section Heading ── */
+    .section-heading {
+      font-family: 'Archivo', system-ui, sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--db-dark);
+      margin-top: 32px;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Body text ── */
+    .body-text { font-size: 13px; color: #374151; line-height: 1.6; position: relative; z-index: 1; }
+    .body-text + .body-text { margin-top: 10px; }
+
+    /* ── SubSection ── */
+    .subsection {
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      background: #fff;
+      padding: 20px;
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .subsection-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .subsection-header .icon { font-size: 18px; }
+    .subsection-header h4 {
+      font-family: 'Archivo', system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--db-dark);
+    }
+    .subsection-body { font-size: 13px; color: #374151; line-height: 1.6; }
+    .subsection-body p + p { margin-top: 10px; }
+    .subsection-body ul { padding-left: 20px; }
+    .subsection-body li { margin-bottom: 6px; }
+
+    /* ── Overview Grid ── */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .overview-card {
+      border-radius: 8px;
+      border: 1px solid rgba(134,200,188,0.3);
+      background: rgba(134,200,188,0.05);
+      padding: 16px;
+      text-align: center;
+    }
+    .overview-card .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--db-aqua);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .overview-card .title {
+      font-family: 'Archivo', system-ui, sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--db-dark);
+      margin-top: 8px;
+      line-height: 1.35;
+    }
+    .overview-card .desc { font-size: 11px; color: #6b7280; margin-top: 4px; }
+
+    /* ── Outcome Cards ── */
+    .outcome-card {
+      margin-top: 24px;
+      border-radius: 10px;
+      border: 2px solid var(--db-aqua);
+      background: #fff;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
+    .outcome-card-header {
+      background: rgba(134,200,188,0.08);
+      padding: 16px 24px;
+      border-bottom: 1px solid rgba(134,200,188,0.2);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .outcome-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: rgba(134,200,188,0.2);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--db-aqua-dark);
+      font-family: 'Archivo', system-ui, sans-serif;
+    }
+    .outcome-card-header h3 {
+      font-family: 'Archivo', system-ui, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--db-dark);
+    }
+    .outcome-card-header .sub { font-size: 12px; color: #6b7280; margin-top: 2px; }
+    .outcome-card-body { padding: 20px 24px; display: flex; flex-direction: column; gap: 16px; }
+    .outcome-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+    .outcome-label-aqua { color: var(--db-aqua-dark); }
+    .outcome-card-body p { font-size: 13px; color: #374151; line-height: 1.55; }
+    .outcome-card-body ul { padding-left: 0; list-style: none; }
+    .outcome-card-body li { font-size: 13px; color: #374151; padding: 2px 0; }
+    .outcome-card-body li::before { content: '• '; color: var(--db-aqua-dark); }
+
+    /* ── Client-Speak Tags ── */
+    .tag-group { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+    .ctag {
+      border-radius: 999px;
+      background: rgba(134,200,188,0.08);
+      border: 1px solid rgba(134,200,188,0.25);
+      padding: 3px 10px;
+      font-size: 11px;
+      color: var(--db-dark);
+    }
+
+    /* ── Coming Soon box ── */
+    .coming-soon {
+      border-radius: 6px;
+      background: #f9fafb;
+      border: 1px solid #f3f4f6;
+      padding: 10px 14px;
+    }
+    .coming-soon .cs-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #9ca3af;
+    }
+    .coming-soon p { font-size: 11px; color: #9ca3af; font-style: italic; margin-top: 2px; }
+
+    /* ── AI mini-grid ── */
+    .ai-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
+    .ai-tile { border-radius: 6px; border: 1px solid #e5e7eb; background: #f9fafb; padding: 12px; }
+    .ai-tile .ai-label { font-size: 11px; font-weight: 600; color: var(--db-aqua-dark); }
+    .ai-tile p { font-size: 11px; color: #4b5563; margin-top: 4px; line-height: 1.45; }
+
+    /* ── Conversation boxes ── */
+    .conv-bad  { border-radius: 6px; background: #fef2f2; border: 1px solid #fecaca; padding: 12px 14px; margin-top: 8px; }
+    .conv-bad p  { font-size: 13px; color: #b91c1c; font-style: italic; }
+    .conv-good { border-radius: 6px; background: #f0fdf4; border: 1px solid #bbf7d0; padding: 12px 14px; margin-top: 8px; }
+    .conv-good p { font-size: 13px; color: #15803d; font-style: italic; }
+
+    /* ── Table ── */
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead { background: #f9fafb; }
+    th { padding: 8px 14px; text-align: left; font-weight: 500; color: #6b7280; }
+    td { padding: 8px 14px; }
+    tbody tr { border-top: 1px solid #f3f4f6; }
+    .table-wrap { border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; margin-top: 12px; }
+
+    /* ── Measurement list ── */
+    .measure-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+    .measure-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      border-radius: 6px;
+      border: 1px solid #e5e7eb;
+      background: #fff;
+      padding: 10px 14px;
+    }
+    .measure-num { flex-shrink: 0; font-weight: 700; color: var(--db-aqua-dark); font-size: 13px; }
+    .measure-row .m-title { font-size: 13px; font-weight: 500; color: var(--db-dark); }
+    .measure-row .m-meta  { font-size: 11px; color: #6b7280; margin-top: 2px; }
+
+    /* ── Drawbridge Angle ── */
+    .db-angle {
+      margin-top: 28px;
+      border-left: 4px solid var(--db-orange);
+      background: #fff7ed;
+      border-radius: 6px;
+      padding: 18px 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .db-angle .db-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--db-orange);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 8px;
+    }
+    .db-angle p { font-size: 13px; color: #374151; line-height: 1.6; }
+    .db-angle p + p { margin-top: 8px; }
+
+    /* ── Print ── */
+    @media print {
+      body { padding: 20px 28px; font-size: 12px; }
+      body::before {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .hero { padding: 22px 26px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .hero h2 { font-size: 20px; }
+      .section-heading { margin-top: 22px; page-break-after: avoid; }
+      .subsection, .outcome-card, .overview-grid { page-break-inside: avoid; }
+      .overview-grid, .overview-card, .outcome-card-header, .ai-grid, .conv-bad, .conv-good {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .db-angle { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      a { text-decoration: none; color: inherit; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <div class="hero">
+    <span class="icon">🎯</span>
+    <h2>Business Outcome Framework</h2>
+    <p>Stop selling features. Start solving business problems. Six outcomes that define the value we deliver — in our clients' language.</p>
+    <span class="draft-badge">Draft</span>
+  </div>
+  <p class="last-updated">Last updated: February 24, 2026</p>
+
+  <!-- Why Outcomes -->
+  <h3 class="section-heading">Why Outcomes, Not Features</h3>
+  <p class="body-text">No client wakes up thinking "I need a cybersecurity assessment." They wake up thinking "How do I keep my investors confident?" or "How do I make sure we pass our next SEC exam?" or "How do I protect what we've built?"</p>
+  <p class="body-text">When we talk about features and deliverables — assessments, policies, monitoring — we're speaking <em>our</em> language. When we talk about outcomes — capital confidence, regulatory readiness, operational resilience — we're speaking <em>their</em> language. The shift is subtle but powerful: it moves us from vendor to strategic partner.</p>
+  <p class="body-text">This framework defines <strong>six business outcomes</strong> that every Drawbridge engagement should map to. Use them in renewal conversations, QBRs, proposals, and internal planning.</p>
+
+  <!-- How to Use -->
+  <div class="subsection">
+    <div class="subsection-header">
+      <span class="icon">💡</span>
+      <h4>How to Use This Framework</h4>
+    </div>
+    <div class="subsection-body">
+      <p><strong>In renewal conversations:</strong> "This year, we helped you achieve [Outcome] by [specific evidence]. Here's how we'll continue driving that value next year."</p>
+      <p><strong>In proposals:</strong> Lead with the outcome, then explain how specific services deliver it. Not "we'll provide 4 assessments and 12 policy reviews" — instead, "we'll ensure you're exam-ready year-round, which includes…"</p>
+      <p><strong>In QBRs:</strong> Organize the review around outcomes, not task lists. Show progress against each outcome with evidence and metrics.</p>
+      <p><strong>In your client's language:</strong> Every outcome below includes a "how your client says it" section. Listen for these phrases — they're buying signals that map directly to an outcome you can solve.</p>
+    </div>
+  </div>
+
+  <!-- Brand Journey -->
+  <div style="margin-top:24px;background:var(--db-dark);border-radius:12px;padding:22px 28px;">
+    <p style="font-size:10px;font-weight:700;color:var(--db-aqua);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:16px;">The Drawbridge Brand Journey</p>
+    <div style="display:flex;align-items:flex-start;gap:0;">
+      <div style="flex:1;text-align:center;padding:0 12px;">
+        <p style="font-size:13px;font-weight:700;color:#fff;font-family:'Archivo',sans-serif;">Raise Your Guard</p>
+        <p style="font-size:11px;color:rgba(134,200,188,0.65);margin-top:4px;line-height:1.4;">Protect the firm — reduce exposure, build resilience</p>
+        <p style="font-size:10px;color:rgba(156,163,175,0.7);margin-top:6px;">Outcomes 3 &amp; 5</p>
+      </div>
+      <span style="color:var(--db-aqua);font-size:18px;padding-top:2px;flex-shrink:0;">→</span>
+      <div style="flex:1;text-align:center;padding:0 12px;">
+        <p style="font-size:13px;font-weight:700;color:#fff;font-family:'Archivo',sans-serif;">Raise Your Score</p>
+        <p style="font-size:11px;color:rgba(134,200,188,0.65);margin-top:4px;line-height:1.4;">Measure progress — benchmarking, proof, regulatory readiness</p>
+        <p style="font-size:10px;color:rgba(156,163,175,0.7);margin-top:6px;">Outcomes 1 &amp; 2</p>
+      </div>
+      <span style="color:var(--db-aqua);font-size:18px;padding-top:2px;flex-shrink:0;">→</span>
+      <div style="flex:1;text-align:center;padding:0 12px;">
+        <p style="font-size:13px;font-weight:700;color:#fff;font-family:'Archivo',sans-serif;">Raise Your Bar</p>
+        <p style="font-size:11px;color:rgba(134,200,188,0.65);margin-top:4px;line-height:1.4;">Improve continuously — competitive advantage, AI, scale</p>
+        <p style="font-size:10px;color:rgba(156,163,175,0.7);margin-top:6px;">Outcomes 4 &amp; 6</p>
+      </div>
+    </div>
+    <p style="margin-top:16px;font-size:11px;color:rgba(156,163,175,0.7);border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;">This is Drawbridge's brand framework — and it maps directly to the journey every client takes with us. The six outcomes below are how we deliver each phase.</p>
+  </div>
+
+  <!-- Six Outcomes -->
+  <h3 class="section-heading">The Six Outcomes</h3>
+
+  <!-- Overview Grid -->
+  <div class="overview-grid">
+    <div class="overview-card">
+      <span class="num">1</span>
+      <p class="title">Raise &amp; Retain Capital with Confidence</p>
+      <p class="desc">Investor trust through operational excellence</p>
+    </div>
+    <div class="overview-card">
+      <span class="num">2</span>
+      <p class="title">Navigate Regulatory Complexity</p>
+      <p class="desc">Stay ahead of evolving regulations</p>
+    </div>
+    <div class="overview-card">
+      <span class="num">3</span>
+      <p class="title">Protect the Firm from Disruption</p>
+      <p class="desc">Be ready for the incident that hasn't happened yet</p>
+    </div>
+    <div class="overview-card">
+      <span class="num">4</span>
+      <p class="title">Make Security a Competitive Advantage</p>
+      <p class="desc">Turn a cost center into a differentiator</p>
+    </div>
+    <div class="overview-card">
+      <span class="num">5</span>
+      <p class="title">Scale Without Adding Headcount</p>
+      <p class="desc">Enterprise security without the enterprise team</p>
+    </div>
+    <div class="overview-card">
+      <span class="num">6</span>
+      <p class="title">Get AI-Ready, Stay AI-Safe</p>
+      <p class="desc">Adopt AI with confidence — training, assessments &amp; governance</p>
+    </div>
+  </div>
+
+  <!-- Outcome 1 -->
+  <div class="outcome-card">
+    <div class="outcome-card-header">
+      <span class="outcome-num">1</span>
+      <div>
+        <h3>Raise &amp; Retain Capital with Confidence</h3>
+        <p class="sub">Investor trust is earned through operational excellence — not just performance.</p>
+      </div>
+    </div>
+    <div class="outcome-card-body">
+      <div>
+        <p class="outcome-label">Why It Matters</p>
+        <p>Allocators commit capital to managers they trust — and trust increasingly requires demonstrating operational and cybersecurity maturity. A single failed DDQ response, an incomplete ODD review, or a data breach headline can cost a firm hundreds of millions in commitments. For PE firms in fundraising cycles and hedge funds with open-ended redemption structures, investor confidence is existential.</p>
+      </div>
+      <div>
+        <p class="outcome-label">The Business Impact</p>
+        <ul>
+          <li>Faster DDQ turnaround with higher-quality, consistent responses</li>
+          <li>Smoother LP due diligence cycles with fewer follow-up requests</li>
+          <li>Confidence to pursue new allocator relationships knowing the program is solid</li>
+          <li>Reduced risk of capital loss from operational deficiency concerns</li>
+        </ul>
+      </div>
+      <div>
+        <p class="outcome-label outcome-label-aqua">How Your Client Says It</p>
+        <div class="tag-group">
+          <span class="ctag">"Our LPs keep asking about cybersecurity"</span>
+          <span class="ctag">"DDQ season is killing us"</span>
+          <span class="ctag">"We're raising a new fund"</span>
+          <span class="ctag">"Our consultant flagged our security program"</span>
+          <span class="ctag">"We need to look institutional"</span>
+        </div>
+      </div>
+      <div class="coming-soon">
+        <p class="cs-label">Value Narratives &amp; SKU Mapping</p>
+        <p>Coming soon — detailed narratives and service mapping will be added here.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Outcome 2 -->
+  <div class="outcome-card">
+    <div class="outcome-card-header">
+      <span class="outcome-num">2</span>
+      <div>
+        <h3>Navigate Regulatory Complexity</h3>
+        <p class="sub">Stay ahead of evolving regulations without building a compliance department.</p>
+      </div>
+    </div>
+    <div class="outcome-card-body">
+      <div>
+        <p class="outcome-label">Why It Matters</p>
+        <p>The regulatory landscape is expanding and accelerating — Reg S-P amendments, SEC exam priorities, DORA in Europe, state privacy laws, and new disclosure requirements. Keeping up is a full-time job that most alternative managers don't have the headcount for. The cost of non-compliance isn't just fines — it's reputational damage, LP concern, and management distraction.</p>
+      </div>
+      <div>
+        <p class="outcome-label">The Business Impact</p>
+        <ul>
+          <li>Exam-ready posture maintained year-round — not scrambled before a visit</li>
+          <li>Proactive compliance with new rules before enforcement begins</li>
+          <li>Reduced legal and consulting spend on regulatory interpretation</li>
+          <li>Confidence that the firm won't be caught off guard by a rule change</li>
+        </ul>
+      </div>
+      <div>
+        <p class="outcome-label outcome-label-aqua">How Your Client Says It</p>
+        <div class="tag-group">
+          <span class="ctag">"What do the new SEC rules mean for us?"</span>
+          <span class="ctag">"We got an exam notification"</span>
+          <span class="ctag">"Our outside counsel says we need to update our policies"</span>
+          <span class="ctag">"We have European investors now"</span>
+          <span class="ctag">"We just want to stay out of trouble"</span>
+        </div>
+      </div>
+      <div class="coming-soon">
+        <p class="cs-label">Value Narratives &amp; SKU Mapping</p>
+        <p>Coming soon — detailed narratives and service mapping will be added here.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Outcome 3 -->
+  <div class="outcome-card">
+    <div class="outcome-card-header">
+      <span class="outcome-num">3</span>
+      <div>
+        <h3>Protect the Firm from Disruption</h3>
+        <p class="sub">Be ready for the incident that hasn't happened yet — and recover fast when it does.</p>
+      </div>
+    </div>
+    <div class="outcome-card-body">
+      <div>
+        <p class="outcome-label">Why It Matters</p>
+        <p>Cyber incidents aren't theoretical — they're statistical certainties. The question is not <em>if</em> but <em>when</em> and <em>how bad</em>. A ransomware attack can shut down operations for weeks. A BEC scam can move millions in minutes. A data breach can trigger regulatory action, LP redemptions, and lasting reputational harm. The firms that survive these events are the ones that prepared for them.</p>
+      </div>
+      <div>
+        <p class="outcome-label">The Business Impact</p>
+        <ul>
+          <li>Reduced likelihood and blast radius of security incidents</li>
+          <li>Faster detection and response when incidents occur</li>
+          <li>Tested recovery procedures that actually work under pressure</li>
+          <li>Lower financial and reputational cost of incidents</li>
+        </ul>
+      </div>
+      <div>
+        <p class="outcome-label outcome-label-aqua">How Your Client Says It</p>
+        <div class="tag-group">
+          <span class="ctag">"What happens if we get hit?"</span>
+          <span class="ctag">"Our peer firm just had a breach"</span>
+          <span class="ctag">"We need someone to call at 2am"</span>
+          <span class="ctag">"We're worried about ransomware"</span>
+          <span class="ctag">"Do we have a plan if something happens?"</span>
+        </div>
+      </div>
+      <div class="coming-soon">
+        <p class="cs-label">Value Narratives &amp; SKU Mapping</p>
+        <p>Coming soon — detailed narratives and service mapping will be added here.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Outcome 4 -->
+  <div class="outcome-card">
+    <div class="outcome-card-header">
+      <span class="outcome-num">4</span>
+      <div>
+        <h3>Make Security a Competitive Advantage</h3>
+        <p class="sub">Turn a cost center into a differentiator that wins capital, talent, and trust.</p>
+      </div>
+    </div>
+    <div class="outcome-card-body">
+      <div>
+        <p class="outcome-label">Why It Matters</p>
+        <p>Most firms think of cybersecurity as a cost — something they have to do. The best-run firms think of it as a competitive weapon. In a market where allocators are choosing between managers with similar strategies and returns, the firm with the best operational infrastructure wins the allocation. A mature, well-documented security program signals professionalism, institutional quality, and respect for investor capital.</p>
+      </div>
+      <div>
+        <p class="outcome-label">The Business Impact</p>
+        <ul>
+          <li>Differentiation in competitive fundraising situations</li>
+          <li>Faster LP onboarding with pre-built compliance evidence</li>
+          <li>Ability to win larger, more sophisticated institutional allocators</li>
+          <li>Talent attraction — top candidates want to join well-run firms</li>
+        </ul>
+      </div>
+      <div>
+        <p class="outcome-label outcome-label-aqua">How Your Client Says It</p>
+        <div class="tag-group">
+          <span class="ctag">"We want to look best-in-class"</span>
+          <span class="ctag">"How do we compare to our peers?"</span>
+          <span class="ctag">"We're going after bigger LPs"</span>
+          <span class="ctag">"Our competitor just got SOC 2 certified"</span>
+          <span class="ctag">"We need to level up our operations"</span>
+        </div>
+      </div>
+      <div class="coming-soon">
+        <p class="cs-label">Value Narratives &amp; SKU Mapping</p>
+        <p>Coming soon — detailed narratives and service mapping will be added here.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Outcome 5 -->
+  <div class="outcome-card">
+    <div class="outcome-card-header">
+      <span class="outcome-num">5</span>
+      <div>
+        <h3>Scale Without Adding Headcount</h3>
+        <p class="sub">Grow the firm, launch funds, and expand operations without building an internal security team.</p>
+      </div>
+    </div>
+    <div class="outcome-card-body">
+      <div>
+        <p class="outcome-label">Why It Matters</p>
+        <p>Alternative managers are lean by design — every headcount dollar that goes to non-investment functions is a dollar not generating alpha. But as firms grow, the security demands grow with them: more employees, more vendors, more data, more regulatory surface area. Hiring a CISO ($300K–$500K+ fully loaded) plus a security team is prohibitive for most firms. They need enterprise-grade security that scales with their business — without the enterprise headcount.</p>
+      </div>
+      <div>
+        <p class="outcome-label">The Business Impact</p>
+        <ul>
+          <li>Full security program at a fraction of the cost of building in-house</li>
+          <li>Instant access to specialized expertise (IR, pen testing, regulatory) on demand</li>
+          <li>Security that grows automatically with new funds, offices, and portfolio companies</li>
+          <li>Free up COO / CCO time to focus on running the business</li>
+        </ul>
+      </div>
+      <div>
+        <p class="outcome-label outcome-label-aqua">How Your Client Says It</p>
+        <div class="tag-group">
+          <span class="ctag">"We don't have a CISO and don't want to hire one"</span>
+          <span class="ctag">"Our COO is stretched thin"</span>
+          <span class="ctag">"We just launched a new fund"</span>
+          <span class="ctag">"We're opening a London office"</span>
+          <span class="ctag">"We need this handled — I don't have the bandwidth"</span>
+        </div>
+      </div>
+      <div class="coming-soon">
+        <p class="cs-label">Value Narratives &amp; SKU Mapping</p>
+        <p>Coming soon — detailed narratives and service mapping will be added here.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Outcome 6 -->
+  <div class="outcome-card">
+    <div class="outcome-card-header">
+      <span class="outcome-num">6</span>
+      <div>
+        <h3>Get AI-Ready, Stay AI-Safe</h3>
+        <p class="sub">Adopt AI with confidence — with the training, assessments, and governance to minimize risk.</p>
+      </div>
+    </div>
+    <div class="outcome-card-body">
+      <div>
+        <p class="outcome-label">Why It Matters</p>
+        <p>Every firm is being asked about AI — by LPs, by regulators, and by their own teams. Employees are already using AI tools, often without oversight. The SEC is paying attention to AI governance, and allocators are starting to ask "what's your AI policy?" in DDQs. Firms that wait to address AI readiness will find themselves reacting to incidents, regulatory gaps, and reputational risk. The firms that get ahead will have clear policies, trained teams, and a framework for evaluating and governing AI tools — turning a source of anxiety into a managed capability.</p>
+      </div>
+      <div>
+        <p class="outcome-label">The Business Impact</p>
+        <ul>
+          <li>Employee AI training that reduces risk of data leakage and misuse</li>
+          <li>LLM and AI tool assessments that identify exposure before it becomes a problem</li>
+          <li>Clear, documented AI acceptable use policies that satisfy regulators and LPs</li>
+          <li>Governance framework for evaluating, approving, and monitoring AI tools</li>
+          <li>Confidence to adopt AI where it adds value — without creating new attack surfaces</li>
+        </ul>
+      </div>
+      <div>
+        <p class="outcome-label outcome-label-aqua">How Your Client Says It</p>
+        <div class="tag-group">
+          <span class="ctag">"Our team is using ChatGPT — should we be worried?"</span>
+          <span class="ctag">"LPs are asking about our AI policy"</span>
+          <span class="ctag">"We don't know what tools people are using"</span>
+          <span class="ctag">"The SEC mentioned AI in their exam priorities"</span>
+          <span class="ctag">"We want to use AI but don't know where to start"</span>
+        </div>
+      </div>
+      <div>
+        <p class="outcome-label" style="margin-bottom:6px;">What This Looks Like</p>
+        <div class="ai-grid">
+          <div class="ai-tile">
+            <p class="ai-label">AI Training</p>
+            <p>Role-based training on safe AI usage, data handling, and recognizing risks like prompt injection and data leakage.</p>
+          </div>
+          <div class="ai-tile">
+            <p class="ai-label">LLM &amp; Tool Assessments</p>
+            <p>Evaluate which AI tools are in use (sanctioned and shadow), assess data exposure risk, and map AI to existing risk frameworks.</p>
+          </div>
+          <div class="ai-tile">
+            <p class="ai-label">Policy &amp; Governance</p>
+            <p>Create AI acceptable use policies, approval workflows for new tools, and ongoing monitoring and review cadences.</p>
+          </div>
+        </div>
+      </div>
+      <div class="coming-soon">
+        <p class="cs-label">Value Narratives &amp; SKU Mapping</p>
+        <p>Coming soon — detailed narratives and service mapping will be added here.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Putting It All Together -->
+  <h3 class="section-heading">Putting It All Together</h3>
+
+  <div class="subsection">
+    <div class="subsection-header">
+      <span class="icon">🗣️</span>
+      <h4>The Outcome-Led Conversation</h4>
+    </div>
+    <div class="subsection-body">
+      <p>Here's the shift in practice. Instead of walking into a renewal and saying:</p>
+      <div class="conv-bad">
+        <p>"This year we completed 4 assessments, updated 12 policies, ran 2 tabletop exercises, and responded to 47 DDQs. Here's the renewal for the same scope."</p>
+      </div>
+      <p style="margin-top:12px">You say:</p>
+      <div class="conv-good">
+        <p>"This year, we helped you raise your new fund with confidence — your ODD reviews went smoothly and your DDQ turnaround time dropped from 3 weeks to 5 days. We kept you exam-ready with current policies and a tested IR plan. We got ahead of AI risk with training and policies before the SEC asked about it. And we did it all without you having to hire a single security person. Looking ahead, here's how we continue driving those outcomes as you grow."</p>
+      </div>
+      <p style="margin-top:12px">Same services. Same deliverables. Completely different conversation. The first sounds like a vendor reporting tasks. The second sounds like a partner demonstrating impact.</p>
+    </div>
+  </div>
+
+  <div class="subsection" style="margin-top:16px">
+    <div class="subsection-header">
+      <span class="icon">🔄</span>
+      <h4>Mapping Outcomes to Client Priorities</h4>
+    </div>
+    <div class="subsection-body">
+      <p>Not every outcome matters equally to every client. Part of being a strategic advisor is knowing which outcomes to lead with based on who you're talking to:</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Client Type</th>
+              <th>Lead With</th>
+              <th>Support With</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:500;color:var(--db-dark)">Hedge Fund (fundraising)</td>
+              <td style="color:#4b5563">1. Raise &amp; Retain Capital</td>
+              <td style="color:#4b5563">2. Regulatory + 4. Competitive Advantage</td>
+            </tr>
+            <tr>
+              <td style="font-weight:500;color:var(--db-dark)">Hedge Fund (steady state)</td>
+              <td style="color:#4b5563">2. Regulatory Complexity</td>
+              <td style="color:#4b5563">3. Protection + 6. AI Readiness</td>
+            </tr>
+            <tr>
+              <td style="font-weight:500;color:var(--db-dark)">PE Firm (GP level)</td>
+              <td style="color:#4b5563">1. Raise &amp; Retain Capital</td>
+              <td style="color:#4b5563">5. Scale + 6. AI Readiness (portco)</td>
+            </tr>
+            <tr>
+              <td style="font-weight:500;color:var(--db-dark)">PE Portfolio Company</td>
+              <td style="color:#4b5563">3. Protect from Disruption</td>
+              <td style="color:#4b5563">2. Regulatory + 6. AI Readiness</td>
+            </tr>
+            <tr>
+              <td style="font-weight:500;color:var(--db-dark)">Family Office</td>
+              <td style="color:#4b5563">3. Protect from Disruption</td>
+              <td style="color:#4b5563">5. Scale (no headcount)</td>
+            </tr>
+            <tr>
+              <td style="font-weight:500;color:var(--db-dark)">Firm with EU exposure</td>
+              <td style="color:#4b5563">2. Regulatory (DORA)</td>
+              <td style="color:#4b5563">4. Competitive Advantage</td>
+            </tr>
+            <tr>
+              <td style="font-weight:500;color:var(--db-dark)">Post-incident firm</td>
+              <td style="color:#4b5563">3. Protect from Disruption</td>
+              <td style="color:#4b5563">1. Capital Confidence (LP recovery)</td>
+            </tr>
+            <tr>
+              <td style="font-weight:500;color:var(--db-dark)">Firm adopting AI tools</td>
+              <td style="color:#4b5563">6. AI Readiness</td>
+              <td style="color:#4b5563">2. Regulatory + 3. Protection</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection" style="margin-top:16px">
+    <div class="subsection-header">
+      <span class="icon">📏</span>
+      <h4>Measuring Outcome Delivery</h4>
+    </div>
+    <div class="subsection-body">
+      <p>Each outcome should have observable evidence. When you prepare for a QBR or renewal, gather proof points for the outcomes that matter most to that client:</p>
+      <div class="measure-list">
+        <div class="measure-row">
+          <span class="measure-num">1</span>
+          <div>
+            <p class="m-title">Capital Confidence</p>
+            <p class="m-meta">DDQs completed &amp; avg. turnaround time, ODD reviews supported, LP-facing reports delivered, allocator retention rate</p>
+          </div>
+        </div>
+        <div class="measure-row">
+          <span class="measure-num">2</span>
+          <div>
+            <p class="m-title">Regulatory Readiness</p>
+            <p class="m-meta">Policies updated &amp; current, exam readiness score, regulatory changes addressed, deficiency findings (zero is the goal)</p>
+          </div>
+        </div>
+        <div class="measure-row">
+          <span class="measure-num">3</span>
+          <div>
+            <p class="m-title">Protection &amp; Resilience</p>
+            <p class="m-meta">Risk score trend, vulnerabilities identified &amp; remediated, IR plan tested (date), incidents detected &amp; contained, phishing test results</p>
+          </div>
+        </div>
+        <div class="measure-row">
+          <span class="measure-num">4</span>
+          <div>
+            <p class="m-title">Competitive Advantage</p>
+            <p class="m-meta">Peer benchmarking position, new capabilities implemented, certifications or frameworks achieved, LP feedback quality</p>
+          </div>
+        </div>
+        <div class="measure-row">
+          <span class="measure-num">5</span>
+          <div>
+            <p class="m-title">Scale &amp; Efficiency</p>
+            <p class="m-meta">Cost vs. in-house equivalent, COO/CCO hours saved, new entities covered (funds, offices, portcos), services consumed per dollar</p>
+          </div>
+        </div>
+        <div class="measure-row">
+          <span class="measure-num">6</span>
+          <div>
+            <p class="m-title">AI Readiness</p>
+            <p class="m-meta">AI policy in place &amp; current, employees trained (% completion), AI tools inventoried &amp; assessed, shadow AI tools identified, governance review cadence established</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Drawbridge Angle -->
+  <div class="db-angle">
+    <p class="db-label">What This Means for Drawbridge</p>
+    <p>Drawbridge is trusted by <strong>1,000+ alternative investment funds</strong> managing <strong>$1.7T+ in assets</strong>, and has supported over <strong>2,000 successful ODD reviews</strong>. That track record exists because we are independent, dedicated, and intelligence-led — not a generalist IT firm with a cybersecurity module bolted on. No other provider sits at the centre of the alternative investment ecosystem the way we do, and that proprietary vantage point is the foundation of everything in this framework.</p>
+    <p>Every service we deliver, every assessment we run, every policy we write should tie back to one or more of these six outcomes. If it doesn't, we need to ask why we're doing it. The Raise Your Guard → Raise Your Score → Raise Your Bar journey is not just a marketing tagline — it's the progression every client should be moving through, and it's how we measure whether our programs are actually delivering value.</p>
+    <p>Start using the framework now. Pick one client this week and reframe your next conversation around outcomes instead of deliverables. The shift in how they respond will tell you everything.</p>
+  </div>
+
+  <!-- Footer -->
+  <p style="margin-top:40px;font-size:11px;color:#9ca3af;text-align:center;border-top:1px solid #e5e7eb;padding-top:16px;">
+    Drawbridge RM Team &nbsp;|&nbsp; Business Outcome Framework &nbsp;|&nbsp; February 2026 &nbsp;|&nbsp; <span style="color:var(--db-orange);font-weight:600;">DRAFT</span>
+  </p>
+
+</body>
+</html>
