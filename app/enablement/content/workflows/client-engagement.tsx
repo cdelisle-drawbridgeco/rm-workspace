@@ -22,16 +22,62 @@ export default function ClientEngagement() {
       {/* Why This Matters */}
       <SectionHeading>Why Consistent Engagement Matters</SectionHeading>
       <p className="text-sm text-gray-700 leading-relaxed">
-        Renewals are won or lost long before the conversation about price happens. Clients who feel
-        consistently supported, strategically advised, and connected to Drawbridge&apos;s value renew
-        at higher rates and with less friction. Clients who only hear from us around renewal tend to
-        treat it as a transaction — and transactions are easier to cancel.
+        Every interaction you have with a client is a brand moment for Drawbridge. The way you show
+        up — how informed you are, how proactively you share relevant intelligence, how well you
+        understand their business — is how clients form their opinion of Drawbridge as a firm. You
+        are not just managing an account. You are the face of the brand.
       </p>
       <p className="mt-3 text-sm text-gray-700 leading-relaxed">
-        The engagement cadence below isn&apos;t a compliance checklist — it&apos;s the activity pattern
-        that correlates with strong retention. Think of it the same way you think about your forecast:
-        a discipline that keeps you ahead of problems instead of reacting to them.
+        The goal of consistent engagement is to earn the title of <strong>trusted advisor</strong> —
+        not vendor. A vendor delivers services. A trusted advisor anticipates problems, brings
+        perspectives the client hasn&apos;t asked for, and becomes part of how the firm thinks about
+        its business. That status is not granted at contract signing. It&apos;s built interaction by
+        interaction, over months.
       </p>
+      <p className="mt-3 text-sm text-gray-700 leading-relaxed">
+        To be seen as a thought leader in cybersecurity for alternative asset management — someone
+        whose calls get picked up, whose emails get read, whose perspective gets shared internally —
+        requires showing up with something worth saying on a regular basis. That reputation compounds
+        over time. It also makes renewals dramatically easier, because the client already knows why
+        Drawbridge matters.
+      </p>
+
+      {/* Quarterly Is Not Enough */}
+      <div className="mt-4 rounded-lg border-l-4 border-db-orange bg-orange-50 p-4">
+        <p className="text-sm font-semibold text-db-dark">Quarterly cadence keeps you in vendor territory.</p>
+        <p className="mt-2 text-sm text-gray-700">
+          If a client hears from you four times a year — typically tied to a deliverable or a renewal
+          conversation — you haven&apos;t built a relationship. You&apos;ve established a billing cycle.
+          At that frequency, clients don&apos;t think of you as someone they trust with strategic
+          questions. They think of you as someone they hear from when something needs to get done.
+        </p>
+        <p className="mt-2 text-sm text-gray-700">
+          Trusted advisors show up between the milestones. They share something relevant without
+          being asked. They know what&apos;s happening at the firm and bring context that makes the
+          client&apos;s job easier. That can&apos;t happen on four touches a year — it requires a
+          consistent, proactive cadence that keeps you embedded in how the client thinks about their
+          security program.
+        </p>
+      </div>
+
+      {/* Impact on Renewals */}
+      <div className="mt-4 rounded-lg border border-db-aqua/30 bg-db-aqua/5 p-4">
+        <p className="text-sm font-semibold text-db-dark">Consistent engagement is what makes renewals easy.</p>
+        <p className="mt-2 text-sm text-gray-700">
+          When clients hear from you monthly — or more — renewal conversations stop feeling like a
+          negotiation and start feeling like a natural next step. There&apos;s no cold outreach, no
+          scramble to remind them what you&apos;ve done, no moment where they wonder why you&apos;re
+          suddenly calling. You&apos;re already in a conversation. Starting the renewal early becomes
+          straightforward because the relationship is warm enough to support it.
+        </p>
+        <p className="mt-2 text-sm text-gray-700">
+          Consistent value demonstration flips the dynamic entirely. When a client has seen — through
+          regular touchpoints — exactly how Drawbridge is protecting them, closing gaps, and keeping
+          them ahead of regulatory exposure, the contract extension is an afterthought. They&apos;re
+          not asking themselves whether you&apos;re worth it. They already know. The goal is to never
+          reach a renewal conversation where you&apos;re building the case from scratch.
+        </p>
+      </div>
 
       {/* Weekly Cadence Goal */}
       <SectionHeading>The Weekly Cadence Goal</SectionHeading>
@@ -41,15 +87,15 @@ export default function ClientEngagement() {
         </p>
         <p className="mt-1 text-sm text-gray-700">
           With a typical book of ~100 accounts, 20 interactions per week means you&apos;re touching
-          every client at least once a month. That&apos;s the minimum frequency needed to stay ahead
-          of risk signals and reinforce value before renewal conversations begin.
+          every client at least once a month. That&apos;s the minimum frequency to start building
+          real relationship depth — and to catch risk signals before they become churn signals.
         </p>
       </div>
       <p className="mt-3 text-sm text-gray-700 leading-relaxed">
-        This is a goal, not a ceiling. Accounts that are at risk, approaching renewal, or in the
-        middle of a significant deliverable should get more attention. Use the 20-per-week target
-        as a baseline to ensure no account goes dark — and let judgment drive where you spend
-        additional time.
+        Monthly touchpoints are the floor, not the goal. The clients where you build the strongest
+        relationships — where you become someone they call proactively — are the ones you engage
+        more often, more substantively, and across multiple tiers of the firm. Use the 20-per-week
+        target to ensure no account goes dark, and let judgment drive where you invest additional depth.
       </p>
 
       {/* What Counts */}
@@ -139,12 +185,15 @@ export default function ClientEngagement() {
           </table>
         </div>
         <div className="mt-3 rounded-lg border border-amber-200 bg-amber-50 p-3">
-          <p className="text-xs font-semibold text-amber-700">Path to Executive</p>
+          <p className="text-xs font-semibold text-amber-700">Building executive relationships you don&apos;t have yet</p>
           <p className="mt-1 text-xs text-gray-700">
-            For every account where you don&apos;t yet have a Tier 1 relationship, you should have an
-            active plan for how to get there. Who is the bridge? What&apos;s the right moment — a
-            regulatory update, a new initiative, an intro from Chris or Eric? Log this in Salesforce
-            and flag it in your weekly review. Executive access is too important to leave to chance.
+            If you know who the executive sponsor should be but don&apos;t yet have a relationship
+            with them, the first step is to get them into Salesforce correctly. Add them as a contact
+            on the account, tag them as an executive sponsor, and use the Executive Sponsor notes
+            field to document your plan for building that relationship — who the bridge is, what the
+            right moment might be (a regulatory update, a new initiative, an intro from Chris or Eric),
+            and where you are in the process. That keeps the gap visible and gives you something
+            concrete to work toward, rather than leaving it as a vague intention.
           </p>
         </div>
       </SubSection>
@@ -346,20 +395,24 @@ export default function ClientEngagement() {
 
       <DrawbridgeAngle>
         <p>
-          Clients who feel genuinely advised — not just serviced — are far less likely to shop
-          alternatives at renewal. The RM who knows the client&apos;s fund structure, regulatory
-          exposure, and business pressures is not interchangeable.
+          Every client conversation is a chance to demonstrate that Drawbridge understands this
+          industry at a depth no generalist firm can match. The RM who shows up with a perspective
+          on how new SEC enforcement priorities affect a specific fund structure — or what GenAI
+          adoption is doing to the risk profiles of firms raising LP capital — is building something
+          that a competitor cannot easily replicate: a reputation as the firm that actually knows
+          this space.
         </p>
         <p>
           The best outreach angle right now is AI: every firm is navigating GenAI risk without a
-          clear framework. Drawbridge has a perspective. Use it to get in front of executives who
-          aren&apos;t currently in your contact list.
+          clear framework, and executives want to talk about it. Use that as your door-opener — not
+          just with your day-to-day contact, but with the CFOs and CCOs who control the budget and
+          make the renewal decision. That is a thought leadership conversation, not a service call.
         </p>
         <p>
-          When a client eventually does receive a competitive pitch, what you&apos;ve built at the
-          executive level is what makes them say &ldquo;we&apos;re not switching.&rdquo; That
-          relationship is built over 12 months of consistent, high-quality engagement — not the
-          renewal call.
+          When a client eventually does receive a competitive pitch, the relationship you have built
+          at the executive level — based on twelve months of consistent, high-quality engagement —
+          is what makes them say &ldquo;we&apos;re not switching.&rdquo; That kind of loyalty is
+          earned by showing up like a trusted advisor long before the renewal conversation starts.
         </p>
       </DrawbridgeAngle>
     </>
