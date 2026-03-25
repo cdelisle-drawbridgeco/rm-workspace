@@ -137,6 +137,18 @@ export default function ClientEngagement() {
             </tbody>
           </table>
         </div>
+        <div className="mt-3 rounded-lg border-2 border-db-aqua/40 bg-db-aqua/5 p-3">
+          <p className="text-xs font-semibold text-db-aqua-dark">In-person visits — the highest-value interaction you can have</p>
+          <p className="mt-1 text-xs text-gray-700">
+            Getting onsite with a client is qualitatively different from any Teams call or email. It signals
+            that the relationship matters, creates space for the kind of candid conversation that doesn&apos;t
+            happen on a scheduled call, and makes you visible at a firm level — not just to the one contact
+            you usually reach. Aim to visit key accounts in person at least annually, and prioritize onsite
+            meetings for renewal conversations, relationship gaps, and accounts where you&apos;re building a
+            new Tier 1 relationship. An onsite visit counts as a qualifying interaction — but more importantly,
+            it tends to unlock the next five.
+          </p>
+        </div>
       </SubSection>
 
       {/* Who to Prioritize */}
@@ -197,6 +209,53 @@ export default function ClientEngagement() {
           </p>
         </div>
       </SubSection>
+
+      {/* RM vs CS Lane */}
+      <SectionHeading>Know Your Lane — RM vs. CS</SectionHeading>
+      <p className="text-sm text-gray-700 leading-relaxed">
+        One of the most common ways RMs lose strategic positioning is by becoming the delivery contact.
+        Client Success owns the tactical relationship — deliverable tracking, support requests, issue
+        resolution. That&apos;s their lane. Yours is the strategic conversation: business context,
+        regulatory environment, renewal, expansion, and executive relationships.
+      </p>
+      <p className="mt-3 text-sm text-gray-700 leading-relaxed">
+        If your client engagement is primarily happening in CS-owned calls — delivery updates, status
+        checks, support follow-ups — you are not building the kind of relationship that makes you a
+        trusted advisor. You&apos;re a project manager who happens to own the renewal. That&apos;s
+        a fragile position.
+      </p>
+      <div className="mt-3 grid grid-cols-2 gap-3">
+        <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
+          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">CS owns</p>
+          <ul className="space-y-1.5 text-xs text-gray-600">
+            <li className="flex gap-2"><span className="text-gray-400 mt-0.5">→</span>Deliverable execution and tracking</li>
+            <li className="flex gap-2"><span className="text-gray-400 mt-0.5">→</span>Day-to-day client support and issue resolution</li>
+            <li className="flex gap-2"><span className="text-gray-400 mt-0.5">→</span>Technical onboarding and program setup</li>
+            <li className="flex gap-2"><span className="text-gray-400 mt-0.5">→</span>Reporting cadence and status updates</li>
+            <li className="flex gap-2"><span className="text-gray-400 mt-0.5">→</span>Coordinating across Drawbridge delivery teams</li>
+          </ul>
+        </div>
+        <div className="rounded-lg border border-db-aqua/30 bg-db-aqua/5 p-4">
+          <p className="text-xs font-semibold text-db-aqua-dark uppercase tracking-wide mb-2">RM owns</p>
+          <ul className="space-y-1.5 text-xs text-gray-600">
+            <li className="flex gap-2"><span className="text-db-aqua-dark mt-0.5">→</span>The overall health and direction of the relationship</li>
+            <li className="flex gap-2"><span className="text-db-aqua-dark mt-0.5">→</span>Executive relationships and strategic conversations</li>
+            <li className="flex gap-2"><span className="text-db-aqua-dark mt-0.5">→</span>Translating program value to business outcomes</li>
+            <li className="flex gap-2"><span className="text-db-aqua-dark mt-0.5">→</span>Renewal, expansion, and commercial conversations</li>
+            <li className="flex gap-2"><span className="text-db-aqua-dark mt-0.5">→</span>Proactive outreach: regulatory, AI, industry context</li>
+          </ul>
+        </div>
+      </div>
+      <div className="mt-3 rounded-lg border border-amber-200 bg-amber-50 p-3">
+        <p className="text-xs font-semibold text-amber-700">If you&apos;re mostly meeting with the CS team — that&apos;s a warning sign.</p>
+        <p className="mt-1 text-xs text-gray-700">
+          Regular alignment with CS is important and necessary. But if the majority of your client
+          touches are happening inside CS-led calls, you don&apos;t have an independent relationship
+          with the account — CS does. Build your own reasons to reach out. Your conversations with
+          the client should add value that CS isn&apos;t providing: strategic framing, market
+          intelligence, executive access, and commercial perspective.
+        </p>
+      </div>
 
       {/* Outreach Angles */}
       <SectionHeading>Outreach Angles — What to Say</SectionHeading>
