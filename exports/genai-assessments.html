@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GenAI Security Assessments — Drawbridge RM Enablement</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --db-dark: #111821;
+      --db-aqua: #86C8BC;
+      --db-aqua-dark: #489E8E;
+      --db-orange: #FF6900;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--db-dark);
+      background: #fff;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px 40px 60px;
+      line-height: 1.6;
+    }
+
+    .hero {
+      background: var(--db-dark);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .hero-icon { font-size: 2.5rem; flex-shrink: 0; }
+    .hero h1 { font-family: 'Archivo', sans-serif; font-size: 1.6rem; font-weight: 700; color: #fff; line-height: 1.2; }
+    .hero p { margin-top: 8px; font-size: 0.875rem; color: rgba(255,255,255,0.7); }
+    .last-updated { text-align: right; font-size: 0.7rem; color: #9ca3af; margin-bottom: 28px; }
+
+    .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 24px 0 8px; }
+    .stat-card { border: 1px solid #e5e7eb; border-radius: 8px; padding: 14px; text-align: center; background: #f9fafb; }
+    .stat-card .value { font-family: 'Archivo', sans-serif; font-size: 1.25rem; font-weight: 700; color: var(--db-dark); }
+    .stat-card .label { font-size: 0.7rem; color: #6b7280; margin-top: 4px; line-height: 1.4; }
+
+    .section-heading {
+      font-family: 'Archivo', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--db-dark);
+      margin-top: 32px; margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--db-aqua);
+    }
+
+    .subsection { margin-top: 20px; }
+    .subsection-title {
+      font-family: 'Archivo', sans-serif;
+      font-size: 0.9375rem; font-weight: 600;
+      color: var(--db-dark); margin-bottom: 10px;
+    }
+
+    p { font-size: 0.875rem; color: #374151; line-height: 1.65; }
+    p + p { margin-top: 8px; }
+    strong { font-weight: 600; color: var(--db-dark); }
+    ul { padding-left: 20px; }
+    ul li { font-size: 0.875rem; color: #374151; margin-bottom: 4px; }
+
+    /* Callouts */
+    .callout-aqua {
+      background: rgba(134,200,188,0.08);
+      border: 1px solid rgba(134,200,188,0.35);
+      border-radius: 8px; padding: 14px 16px;
+    }
+    .callout-aqua .callout-title { font-size: 0.875rem; font-weight: 600; color: var(--db-dark); margin-bottom: 4px; }
+    .callout-aqua p { font-size: 0.8125rem; }
+
+    .callout-orange {
+      border-left: 4px solid var(--db-orange);
+      background: #fff7f0;
+      border-radius: 0 8px 8px 0;
+      padding: 14px 16px;
+    }
+    .callout-orange .callout-title { font-size: 0.875rem; font-weight: 700; color: var(--db-dark); margin-bottom: 8px; }
+    .callout-orange p { font-size: 0.8125rem; }
+
+    /* Risk landscape */
+    .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+    .risk-card { border: 1px solid #e5e7eb; border-radius: 8px; padding: 14px; background: #f9fafb; }
+    .risk-card h4 { font-size: 0.8125rem; font-weight: 700; color: var(--db-dark); margin-bottom: 8px; }
+    .risk-card ul { padding-left: 16px; }
+    .risk-card ul li { font-size: 0.8125rem; color: #4b5563; margin-bottom: 3px; }
+
+    /* Threat actor section */
+    .threat-card {
+      border: 1px solid #fca5a5;
+      background: #fef2f2;
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+    .threat-card h4 { font-size: 0.875rem; font-weight: 700; color: #991b1b; margin-bottom: 8px; }
+    .threat-card p { font-size: 0.8125rem; color: #374151; }
+    .threat-example {
+      background: #fff;
+      border: 1px solid #fca5a5;
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin-top: 10px;
+      font-size: 0.8125rem;
+      color: #374151;
+      font-style: italic;
+    }
+    .threat-example .ex-label { font-style: normal; font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #dc2626; margin-bottom: 4px; }
+
+    /* Product cards */
+    .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+    .product-card { border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px; background: #fff; }
+    .product-card h3 { font-family: 'Archivo', sans-serif; font-size: 0.9375rem; font-weight: 600; color: var(--db-dark); margin-bottom: 8px; }
+    .product-card p { font-size: 0.8125rem; color: #4b5563; }
+    .product-card .req { font-size: 0.75rem; font-weight: 600; color: #6b7280; margin-top: 10px; }
+
+    /* Char cards */
+    .char-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
+    .char-card { border: 1px solid #e5e7eb; border-radius: 6px; padding: 12px 14px; background: #f9fafb; }
+    .char-card h4 { font-size: 0.8125rem; font-weight: 600; color: var(--db-dark); margin-bottom: 4px; }
+    .char-card p { font-size: 0.75rem; color: #4b5563; }
+
+    .trigger-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+    .trigger-item { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; padding: 12px 14px; }
+    .trigger-item .trigger { font-size: 0.875rem; font-weight: 500; color: var(--db-dark); }
+    .trigger-item .context { font-size: 0.75rem; color: #6b7280; margin-top: 4px; }
+
+    .domain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
+    .domain-tag { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; padding: 8px 12px; font-size: 0.75rem; font-weight: 500; color: #374151; }
+    .domain-note { font-size: 0.75rem; color: #9ca3af; margin-top: 8px; }
+
+    .finding { border-radius: 8px; padding: 14px 16px; margin-top: 12px; }
+    .finding.high { border-left: 4px solid #ef4444; background: #fef2f2; }
+    .finding.moderate { border-left: 4px solid #f97316; background: #fff7ed; }
+    .finding-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .badge-high { background: #fee2e2; color: #b91c1c; font-size: 0.6875rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; }
+    .badge-mod { background: #ffedd5; color: #c2410c; font-size: 0.6875rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; }
+    .finding h4 { font-size: 0.875rem; font-weight: 600; color: #1f2937; }
+    .finding p { font-size: 0.8125rem; color: #374151; }
+    .finding .fix { font-size: 0.75rem; color: #9ca3af; font-style: italic; margin-top: 6px; }
+
+    .req-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 10px; }
+    .req-card { border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px; background: #fff; }
+    .req-card h4 { font-size: 0.8125rem; font-weight: 600; color: var(--db-dark); margin-bottom: 10px; }
+    .check-list { display: flex; flex-direction: column; gap: 8px; }
+    .check-item { display: flex; gap: 8px; font-size: 0.8125rem; color: #374151; align-items: flex-start; }
+    .check-item .check { color: var(--db-aqua-dark); flex-shrink: 0; }
+    .check-item .cross { color: #f87171; flex-shrink: 0; }
+
+    .talk-track { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; padding: 12px 14px; margin-bottom: 10px; }
+    .talk-track .label { font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--db-dark); margin-bottom: 6px; }
+    .talk-track p { font-size: 0.875rem; font-style: italic; color: #374151; }
+
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px; }
+
+    /* Ongoing advisory highlight */
+    .ongoing-card {
+      border: 2px solid rgba(134,200,188,0.5);
+      background: rgba(134,200,188,0.06);
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+    .ongoing-card .oc-label { font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--db-aqua-dark); margin-bottom: 6px; }
+    .ongoing-card h4 { font-family: 'Archivo', sans-serif; font-size: 0.9375rem; font-weight: 600; color: var(--db-dark); margin-bottom: 8px; }
+    .ongoing-card p { font-size: 0.8125rem; }
+
+    .terms-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px; }
+    .term-badge { border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px 14px; background: #f9fafb; }
+    .term-badge .term { font-size: 0.8125rem; font-weight: 700; color: var(--db-dark); margin-bottom: 4px; }
+    .term-badge .def { font-size: 0.75rem; color: #6b7280; }
+
+    .db-angle {
+      margin-top: 32px;
+      background: var(--db-dark);
+      border-radius: 10px;
+      padding: 24px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .db-angle::before {
+      content: 'THE DRAWBRIDGE ANGLE';
+      position: absolute; top: 12px; right: 20px;
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em;
+      color: var(--db-aqua); opacity: 0.7;
+    }
+    .db-angle p { font-size: 0.8125rem; color: rgba(255,255,255,0.82); line-height: 1.65; }
+    .db-angle p + p { margin-top: 10px; }
+    .db-angle strong { color: #fff; }
+
+    @media print {
+      body { padding: 20px 28px 40px; max-width: 100%; }
+      .hero, .db-angle, .stat-card, .callout-aqua, .callout-orange, .risk-card, .threat-card,
+      .char-card, .trigger-item, .domain-tag, .product-card, .req-card, .talk-track, .term-badge,
+      .finding, .ongoing-card {
+        -webkit-print-color-adjust: exact; print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="hero-icon">🔐</div>
+    <div>
+      <h1>GenAI Security Assessments</h1>
+      <p>Drawbridge's ChatGPT and Claude Security Assessments — what they are, who they're for, how to sell them, and what clients get.</p>
+    </div>
+  </div>
+  <div class="last-updated">Last updated: March 2026</div>
+
+  <div class="stat-grid">
+    <div class="stat-card"><div class="value">105</div><div class="label">Distinct clients with AI advisory discussions in the last 2 months</div></div>
+    <div class="stat-card"><div class="value">Nearly Universal</div><div class="label">Shadow AI usage found across assessments</div></div>
+    <div class="stat-card"><div class="value">Every Assessment</div><div class="label">Clients surprised by default platform settings</div></div>
+    <div class="stat-card"><div class="value">28</div><div class="label">Avg risk findings per assessment</div></div>
+  </div>
+
+  <!-- Why This Matters Now -->
+  <div class="section-heading">Why This Matters Now</div>
+  <p>AI adoption is not a future consideration — it's happening right now, at every firm we work with. Drawbridge has had advisory discussions with <strong>105 distinct clients</strong> on AI security and risk over the last two months alone. The interest is not theoretical. Clients are adopting AI tools, employees are using them whether the firm has approved them or not, and the governance frameworks to support that adoption simply haven't kept pace.</p>
+  <p>For many of the PE-backed firms we work with, AI adoption is being <strong>mandated at the sponsor level</strong>. This is not something firms can wait on. That urgency creates both an opportunity and a risk — the same acceleration that makes AI valuable also expands the attack surface faster than most security programs can respond.</p>
+
+  <div class="callout-orange" style="margin-top:16px;">
+    <div class="callout-title">Rapid adoption is a business necessity — and the risks are moving just as fast.</div>
+    <p>This is not a conversation about whether to adopt AI. That decision has already been made at most firms. The conversation is about whether they're adopting it securely, with the right controls, governance, and visibility in place. That's where Drawbridge comes in.</p>
+  </div>
+
+  <!-- The Risk Landscape -->
+  <div class="section-heading">The Risk Landscape</div>
+  <p>At most firms, AI risks are concentrated in three areas that are difficult to see and harder to manage without a structured approach:</p>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <h4>Decentralized, Ungoverned Usage</h4>
+      <ul>
+        <li>AI risks are not well known or understood across the firm</li>
+        <li>Usage is decentralized and difficult for security teams to monitor</li>
+        <li>Employees may unknowingly input confidential fund data, LP information, or proprietary strategies into external platforms</li>
+        <li>Governance frameworks have not kept pace with adoption speed</li>
+      </ul>
+    </div>
+    <div class="risk-card">
+      <h4>Permissioning & Data Exposure</h4>
+      <ul>
+        <li>Sensitive information is now incredibly easy to surface if user permissioning is not configured correctly</li>
+        <li>Enterprise AI tools connected to internal data sources (SharePoint, email, documents) can expose data across the firm</li>
+        <li>Default settings on most platforms are <em>not</em> the most secure configuration</li>
+        <li>Security teams lack visibility into how AI is being used day to day</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout-aqua" style="margin-top:12px;">
+    <div class="callout-title">Example: What imperfect permissioning looks like in practice</div>
+    <p>An employee opens an AI tool connected to internal systems and types: <em>"Search SharePoint and find me any information on company compensation."</em> With poorly scoped permissions, they receive documents they were never intended to see. This is not a theoretical scenario — it is a common finding.</p>
+  </div>
+
+  <!-- Threat Actor Angle -->
+  <div class="section-heading">AI Works Both Ways — The Threat Actor Angle</div>
+  <p>The same capabilities that make AI valuable to your clients also make it valuable to threat actors. This is a critical and often overlooked dimension of the conversation.</p>
+
+  <div class="threat-card">
+    <h4>How threat actors are using AI against your clients</h4>
+    <p>AI enables threat actors to <strong>scale phishing, malware, and social engineering</strong> at a level that was previously impossible. Campaigns that once required significant manual effort can now be generated, personalized, and deployed in minutes. But the more significant risk is what happens once a threat actor is already inside the environment.</p>
+
+    <div class="threat-example">
+      <div class="ex-label">Real-World Scenario</div>
+      Once inside a firm's environment, a threat actor with access to an AI tool can prompt: <em>"I want to send a wire request for a capital call. Can you find the contact details for firms where I have recent email communication using the words 'capital call,' pull all relevant client information, and draft an email in my normal tone of voice requesting they wire funds to this account?"</em> — The AI does it, accurately, instantly, and in a way that is nearly indistinguishable from a legitimate request.
+    </div>
+
+    <p style="margin-top:12px;">If threat actors gain access to your client's environment, AI enables them to:</p>
+    <ul style="margin-top:8px;padding-left:20px;">
+      <li style="margin-bottom:4px;">Search huge quantities of internal data for sensitive information in seconds</li>
+      <li style="margin-bottom:4px;">Draft convincing emails using the firm's own context — tone of voice, client names, transaction history, proprietary details</li>
+      <li style="margin-bottom:4px;">Identify and target the most valuable relationships and transactions within the firm</li>
+      <li style="margin-bottom:4px;">Execute highly targeted fraud at a scale that was previously manual and time-consuming</li>
+    </ul>
+  </div>
+
+  <!-- What We're Launching -->
+  <div class="section-heading">What We're Launching</div>
+  <p>Drawbridge is launching two new parallel assessment offerings — with a third (Gemini) in development:</p>
+
+  <div class="product-grid">
+    <div class="product-card">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;"><span style="font-size:1.3rem;">💬</span><h3>ChatGPT Security Assessment</h3></div>
+      <p>A structured audit of the security controls, governance processes, and operational safeguards a client has in place around the use of ChatGPT.</p>
+      <p class="req">Requires: ChatGPT Business or Enterprise</p>
+    </div>
+    <div class="product-card">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;"><span style="font-size:1.3rem;">🤖</span><h3>Claude Security Assessment</h3></div>
+      <p>A structured audit of the security controls, governance processes, and operational safeguards a client has in place around the use of Claude.</p>
+      <p class="req">Requires: Claude Enterprise</p>
+    </div>
+  </div>
+
+  <div class="callout-aqua" style="margin-top:14px;">
+    <p>Core definition: "A structured audit of AI security controls and governance — focused on preventing data leakage, misuse, and compliance gaps."</p>
+  </div>
+
+  <!-- Ongoing Advisory -->
+  <div class="ongoing-card">
+    <div class="oc-label">Beyond the Assessment</div>
+    <h4>Ongoing AI Advisory Notifications</h4>
+    <p>A one-time assessment is not enough. The AI landscape is changing rapidly — platforms update their settings, new features introduce new risks, and the regulatory environment continues to evolve. Drawbridge provides <strong>regular communications</strong> when platform settings or products change, with up-to-date guidance on what it means for the client's security posture and what actions they should take.</p>
+    <p style="margin-top:8px;">This is what separates Drawbridge from a point-in-time audit vendor. Clients get a dynamic, ongoing partner who stays on top of the AI landscape so they don't have to.</p>
+  </div>
+
+  <!-- Who to Target -->
+  <div class="section-heading">Who to Target</div>
+
+  <div class="subsection">
+    <div class="subsection-title">🎯 Strong Fit Clients</div>
+    <div class="char-grid">
+      <div class="char-card"><h4>Active ChatGPT or Claude Enterprise Users</h4><p>Firms that have already deployed ChatGPT Business/Enterprise or Claude Enterprise — these are the only clients we can assess.</p></div>
+      <div class="char-card"><h4>Regulated & Investor-Scrutinized Firms</h4><p>Firms facing SEC exams, LP due diligence, or board-level AI governance questions. The assessment provides documented evidence of oversight.</p></div>
+      <div class="char-card"><h4>Firms Handling Sensitive or Confidential Data</h4><p>Any alternative asset manager handling PII, investment strategies, LP data, or proprietary research — which is all of them.</p></div>
+      <div class="char-card"><h4>Leadership Asked to Sign Off on AI</h4><p>When a CCO, COO, or CTO is being asked to "sign off on AI" — that's a direct trigger. They need something to sign off on.</p></div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">⚡ Common Trigger Events — Listen for These</div>
+    <div class="trigger-list">
+      <div class="trigger-item"><p class="trigger">"We want to scale AI, but don't know our risk exposure"</p><p class="context">Classic trigger. They want to move fast but need guardrails first — this is exactly what the assessment provides.</p></div>
+      <div class="trigger-item"><p class="trigger">Employees using AI without clear rules (shadow AI)</p><p class="context">Often surfaced during CRA or phishing reviews. Employees self-report using tools the firm hasn't approved. Nearly universal.</p></div>
+      <div class="trigger-item"><p class="trigger">PE sponsor mandating AI adoption</p><p class="context">Many PE-backed firms are being told to onboard and integrate AI tooling as quickly as possible. Speed without governance is a risk event.</p></div>
+      <div class="trigger-item"><p class="trigger">Investor, board, or regulator questions about AI use</p><p class="context">LPs increasingly asking about AI governance during due diligence. An assessment gives them a documented answer.</p></div>
+      <div class="trigger-item"><p class="trigger">Security or compliance teams asked to "sign off" on AI</p><p class="context">When the business wants to expand AI and compliance needs to validate it — that's exactly what this assessment does.</p></div>
+    </div>
+  </div>
+
+  <!-- What the Assessment Covers -->
+  <div class="section-heading">What the Assessment Covers</div>
+  <p>Both assessments follow the same three-phase structure. Control audit areas differ slightly by platform — ChatGPT-specific (GPTs, Codex, etc.) vs. Claude-specific (Projects, Cowork, Claude Code, etc.).</p>
+
+  <div class="subsection">
+    <div class="subsection-title">1️⃣ Phase 1: Discovery & Current-State Review</div>
+    <ul style="margin-top:6px;">
+      <li>Inventory of how AI is being used across teams</li>
+      <li>Review of access controls and authentication methods</li>
+      <li>Understanding of governance policies and training coverage</li>
+    </ul>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">2️⃣ Phase 2: Platform-Specific Control Audit</div>
+    <p>Core control domains reviewed via screenshare with an admin:</p>
+    <div class="domain-grid">
+      <div class="domain-tag">Identity & Access Management</div>
+      <div class="domain-tag">Data Protection & Privacy</div>
+      <div class="domain-tag">Sharing & Collaboration Settings</div>
+      <div class="domain-tag">Integrations & Connectors</div>
+      <div class="domain-tag">Configuration Hardening</div>
+      <div class="domain-tag">AI Feature & Capability Risks</div>
+      <div class="domain-tag">Governance, Training & Oversight</div>
+      <div class="domain-tag">Session & Network Security</div>
+      <div class="domain-tag">Data Handling & Retention</div>
+    </div>
+    <p class="domain-note">ChatGPT adds: GPT Security, Codex Security. Claude adds: Claude Code, Claude in Chrome, Cowork, Skills.</p>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">3️⃣ Phase 3: Risk Findings & Remediation Roadmap</div>
+    <ul style="margin-top:6px;">
+      <li>Clear, prioritized findings rated <strong>High / Moderate / Low</strong></li>
+      <li>Each finding includes: what was found, the risk it creates, and a specific recommendation</li>
+      <li>Quick wins vs. longer-term improvements clearly separated</li>
+      <li>Next steps mapped to other Drawbridge services (policy, training, advisory)</li>
+    </ul>
+  </div>
+
+  <!-- Real-World Findings -->
+  <div class="section-heading">Real-World Findings — What We Actually See</div>
+  <p>Clients are consistently surprised by what's turned on by default. These are representative findings from actual assessments.</p>
+
+  <div class="finding high">
+    <div class="finding-header"><span class="badge-high">HIGH</span><h4>SSO Not Configured (ChatGPT)</h4></div>
+    <p>Without SSO, user access may persist after employee termination, credentials may be weak or reused, and access cannot be centrally revoked. This increases the risk of unauthorized access to sensitive prompts, files, and GPT configurations.</p>
+    <p class="fix">Fix: Enforce SSO through the corporate IdP, disable local ChatGPT passwords.</p>
+  </div>
+
+  <div class="finding high">
+    <div class="finding-header"><span class="badge-high">HIGH</span><h4>Users Can Access External GPTs (ChatGPT)</h4></div>
+    <p>If users can access GPTs created outside the organization's workspace, they may interact with tools that have unvetted prompts, external API connections, or unknown data handling practices. Sensitive information may be shared with third parties without the firm knowing.</p>
+    <p class="fix">Fix: Restrict users to internally approved GPTs only. Implement a formal review process for any external GPT.</p>
+  </div>
+
+  <div class="finding high">
+    <div class="finding-header"><span class="badge-high">HIGH</span><h4>Claude Code Bypass Permissions Allowed (Claude)</h4></div>
+    <p>Bypass mode enables Claude to execute arbitrary commands without oversight. Prompt injection attacks could cause Claude to exfiltrate data, modify critical files, or corrupt system state — without user knowledge.</p>
+    <p class="fix">Fix: Never enable bypass mode in production. Limit to sandboxed dev environments only.</p>
+  </div>
+
+  <div class="finding high">
+    <div class="finding-header"><span class="badge-high">HIGH</span><h4>Organization Creation Unrestricted (Claude)</h4></div>
+    <p>Without restrictions, employees can create shadow organizations outside IT visibility and security controls. Shadow organizations bypass corporate policies, audit logging, and data governance requirements entirely.</p>
+    <p class="fix">Fix: Enable organization creation restrictions for all verified domains.</p>
+  </div>
+
+  <div class="finding moderate">
+    <div class="finding-header"><span class="badge-mod">MODERATE</span><h4>SCIM Not Enabled (ChatGPT)</h4></div>
+    <p>Manual user management results in orphaned accounts, delayed deprovisioning, and inconsistent role assignments. Former employees retaining access pose a significant insider risk — especially in a firm handling sensitive fund data.</p>
+    <p class="fix">Fix: Enable SCIM provisioning so user lifecycle events automatically reflect in ChatGPT.</p>
+  </div>
+
+  <div class="finding moderate">
+    <div class="finding-header"><span class="badge-mod">MODERATE</span><h4>Connector Chat Sharing Enabled (Claude)</h4></div>
+    <p>Sharing connector-based chats could expose derived insights from sensitive data sources even if raw data isn't visible. Recipients may be able to reverse-engineer sensitive information from Claude's responses about restricted data sources.</p>
+    <p class="fix">Fix: Disable connector chat sharing unless absolutely necessary. Require data owner approval.</p>
+  </div>
+
+  <!-- How to Position -->
+  <div class="section-heading">How to Position This</div>
+
+  <div class="subsection">
+    <div class="subsection-title">🎯 Core Positioning</div>
+    <div class="char-grid">
+      <div class="char-card"><h4>Enables AI, Doesn't Slow It Down</h4><p>The goal isn't to restrict AI usage — firms can't wait on this. It's to make sure adoption happens securely and defensibly, with the right controls in place from the start.</p></div>
+      <div class="char-card"><h4>Proactive, Not Reactive</h4><p>A security audit before an incident happens — not a response to one. Frame it as the governance layer that makes fast adoption sustainable.</p></div>
+      <div class="char-card"><h4>Compliance & Investor Ready</h4><p>Gives the firm documented evidence of AI governance — something CCOs, boards, LPs, and regulators can point to when they ask the question.</p></div>
+      <div class="char-card"><h4>Ongoing, Not One-Time</h4><p>The AI landscape changes too fast for a single assessment to be sufficient. Drawbridge provides ongoing advisory notifications so clients stay current as platforms evolve.</p></div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">💬 Talk Tracks</div>
+    <div class="talk-track"><div class="label">Opening the Conversation</div><p>"A lot of firms I talk to are already using ChatGPT or Claude — but haven't had a chance to review whether those environments are configured securely. We've had this conversation with over 100 clients in the last two months. We now offer a structured assessment that reviews the full security and governance setup, and we stay with you as the platforms evolve. Is that something you've looked at?"</p></div>
+    <div class="talk-track"><div class="label">The Threat Actor Angle</div><p>"The thing that gets executives' attention: AI doesn't just create risk on your side. If a threat actor gets into your environment — even briefly — they can use your own AI tools to find sensitive data, identify your highest-value transactions, and send emails that sound exactly like you. That's not hypothetical. That's what we're seeing."</p></div>
+    <div class="talk-track"><div class="label">When They Say "We Don't Use AI"</div><p>"That's one of the most common things we hear — and in nearly every case, employees are already using AI tools the firm isn't aware of. Shadow AI is almost universal. Our assessment surfaces that exposure and helps you get ahead of it before it becomes a compliance finding."</p></div>
+    <div class="talk-track"><div class="label">When They Ask What We Actually Do</div><p>"We do a live screenshare with an admin and walk through the full security configuration — access controls, data sharing settings, integrations, governance policies. You get a report with every finding rated High, Moderate, or Low, with specific remediation guidance. And then we stay on top of it — when platforms change settings or release new features, we let you know what it means and what to do."</p></div>
+  </div>
+
+  <!-- Requirements & Scope -->
+  <div class="section-heading">Requirements & Scope</div>
+  <div class="req-grid">
+    <div class="req-card">
+      <h4>Requirements to Perform the Assessment</h4>
+      <div class="check-list">
+        <div class="check-item"><span class="check">✓</span><span>An enterprise version of the AI tool being assessed (ChatGPT Business/Enterprise or Claude Enterprise)</span></div>
+        <div class="check-item"><span class="check">✓</span><span>An AI tool administrator who has access to all security configurations</span></div>
+        <div class="check-item"><span class="check">✓</span><span>Dedicated time for a screenshare with the client</span></div>
+      </div>
+    </div>
+    <div class="req-card">
+      <h4>Scope Guardrails</h4>
+      <p style="font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#6b7280;margin-bottom:6px;">Included</p>
+      <div class="check-list" style="margin-bottom:12px;">
+        <div class="check-item"><span class="check">✓</span><span>Audit of controls via screenshare/interview</span></div>
+        <div class="check-item"><span class="check">✓</span><span>Risk findings and remediation report</span></div>
+        <div class="check-item"><span class="check">✓</span><span>Ongoing advisory notifications as platform settings and features change</span></div>
+      </div>
+      <p style="font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#6b7280;margin-bottom:6px;">Not Included</p>
+      <div class="check-list">
+        <div class="check-item"><span class="cross">✗</span><span>Implementing technical controls</span></div>
+        <div class="check-item"><span class="cross">✗</span><span>Acting as platform administrator</span></div>
+        <div class="check-item"><span class="cross">✗</span><span>Continuous monitoring</span></div>
+        <div class="check-item"><span class="cross">✗</span><span>AI pentesting or prompt injection testing (yet)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Services Alignment -->
+  <div class="section-heading">Services Alignment — Natural Next Steps</div>
+  <p>The assessment is designed as an entry point. Every report generates next steps that map directly to other Drawbridge services.</p>
+  <div class="services-grid">
+    <div class="char-card"><h4>AI Security Awareness Training</h4><p>Train employees on AI-specific cyber risks — phishing, data leakage, shadow AI behavior, deepfake demonstrations.</p></div>
+    <div class="char-card"><h4>AI Policy Development</h4><p>Dedicated AI policies covering approved tools, prohibited uses, data handling rules, and employee responsibilities.</p></div>
+    <div class="char-card"><h4>AI-Focused Tabletop Exercises</h4><p>Simulate AI misuse scenarios — most IR plans don't account for these yet.</p></div>
+    <div class="char-card"><h4>Vendor Risk Assessment</h4><p>Formal due diligence on AI vendors (OpenAI, Anthropic) — required for most regulatory frameworks.</p></div>
+    <div class="char-card"><h4>CRA & Cloud Assessments</h4><p>The AI assessment validates cyber governance controls that also appear in the CRA — SSO, least privilege, authentication.</p></div>
+    <div class="char-card"><h4>Phishing Campaigns</h4><p>AI-generated phishing simulations test whether employees can identify increasingly sophisticated, AI-crafted lures.</p></div>
+  </div>
+
+  <div class="db-angle">
+    <p>Drawbridge has had AI security advisory discussions with <strong>105 distinct clients in the last two months</strong>. The demand is not emerging — it's here. Every alternative asset manager using ChatGPT or Claude Enterprise is operating with a security and governance footprint that almost certainly has misconfigured defaults, insufficient access controls, and gaps in policy coverage.</p>
+    <p>The most important framing shift: this is no longer a conversation about whether to adopt AI. That decision has been made. <strong>The conversation is about whether adoption is happening securely</strong> — and whether the firm has a partner who will stay on top of it as the landscape continues to change. A point-in-time assessment that sits on a shelf is not good enough. Clients need ongoing advisory support to keep pace with how fast these platforms are evolving.</p>
+    <p><strong>The key insight for your conversations:</strong> clients are always surprised by what they find. Default settings expose more than anyone realizes. And the threat actor angle — what happens when someone is already inside and turns the firm's own AI tools against it — is what gets executives to act.</p>
+  </div>
+
+  <div class="section-heading">Key Terms</div>
+  <div class="terms-grid">
+    <div class="term-badge"><div class="term">Shadow AI</div><div class="def">Unsanctioned use of AI tools by employees without organizational approval or oversight — a near-universal finding in assessments.</div></div>
+    <div class="term-badge"><div class="term">SSO (Single Sign-On)</div><div class="def">Centralized authentication that ties AI platform access to corporate identity management, enabling instant deprovisioning when employees leave.</div></div>
+    <div class="term-badge"><div class="term">SCIM</div><div class="def">System for Cross-domain Identity Management — automates user provisioning and deprovisioning so AI access stays in sync with HR records.</div></div>
+    <div class="term-badge"><div class="term">GPT (Custom GPT)</div><div class="def">A custom version of ChatGPT configured with specific instructions, files, and capabilities. External GPTs can expose sensitive firm data to unvetted third parties.</div></div>
+    <div class="term-badge"><div class="term">Claude Code / Cowork</div><div class="def">Advanced Claude features that can access local files and execute code — powerful capabilities that require strict governance to prevent unintended data exposure.</div></div>
+    <div class="term-badge"><div class="term">Connector</div><div class="def">An integration that connects an AI platform to external data sources (e.g., SharePoint, email). Connectors significantly expand the AI's access to sensitive firm data — and require tight permissioning.</div></div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Security & Governance Bundle — Drawbridge RM Enablement</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --db-dark: #111821;
+      --db-aqua: #86C8BC;
+      --db-aqua-dark: #489E8E;
+      --db-orange: #FF6900;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--db-dark);
+      background: #fff;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px 40px 60px;
+      line-height: 1.6;
+    }
+
+    .hero {
+      background: var(--db-dark);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .hero-icon { font-size: 2.5rem; flex-shrink: 0; }
+    .hero h1 { font-family: 'Archivo', sans-serif; font-size: 1.6rem; font-weight: 700; color: #fff; line-height: 1.2; }
+    .hero p { margin-top: 8px; font-size: 0.875rem; color: rgba(255,255,255,0.7); }
+    .last-updated { text-align: right; font-size: 0.7rem; color: #9ca3af; margin-bottom: 28px; }
+
+    .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 24px 0 8px; }
+    .stat-card { border: 1px solid #e5e7eb; border-radius: 8px; padding: 14px; text-align: center; background: #f9fafb; }
+    .stat-card .value { font-family: 'Archivo', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--db-dark); }
+    .stat-card .label { font-size: 0.7rem; color: #6b7280; margin-top: 4px; line-height: 1.4; }
+
+    .section-heading {
+      font-family: 'Archivo', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--db-dark);
+      margin-top: 32px; margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--db-aqua);
+    }
+
+    .subsection { margin-top: 20px; }
+    .subsection-title {
+      font-family: 'Archivo', sans-serif;
+      font-size: 0.9375rem; font-weight: 600;
+      color: var(--db-dark); margin-bottom: 10px;
+    }
+
+    p { font-size: 0.875rem; color: #374151; line-height: 1.65; }
+    p + p { margin-top: 8px; }
+    strong { font-weight: 600; color: var(--db-dark); }
+    ul { padding-left: 20px; }
+    ul li { font-size: 0.8125rem; color: #374151; margin-bottom: 4px; }
+
+    /* Callouts */
+    .callout-orange {
+      border-left: 4px solid var(--db-orange);
+      background: #fff7f0;
+      border-radius: 0 8px 8px 0;
+      padding: 14px 16px;
+      margin-top: 16px;
+    }
+    .callout-orange .callout-title { font-size: 0.875rem; font-weight: 700; color: var(--db-dark); margin-bottom: 8px; }
+    .callout-orange p { font-size: 0.8125rem; }
+
+    .callout-aqua {
+      background: rgba(134,200,188,0.08);
+      border: 1px solid rgba(134,200,188,0.35);
+      border-radius: 8px; padding: 14px 16px;
+    }
+    .callout-aqua .callout-title { font-size: 0.875rem; font-weight: 600; color: var(--db-dark); margin-bottom: 4px; }
+    .callout-aqua p { font-size: 0.8125rem; }
+
+    .callout-amber { background: #fffbeb; border: 1px solid #fcd34d; border-radius: 8px; padding: 12px 14px; }
+    .callout-amber p { font-size: 0.8125rem; color: #92400e; }
+
+    /* Risk landscape */
+    .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+    .risk-card { border: 1px solid #e5e7eb; border-radius: 8px; padding: 14px; background: #f9fafb; }
+    .risk-card h4 { font-size: 0.8125rem; font-weight: 700; color: var(--db-dark); margin-bottom: 8px; }
+    .risk-card ul { padding-left: 16px; }
+    .risk-card ul li { font-size: 0.8125rem; color: #4b5563; margin-bottom: 3px; }
+
+    /* Threat actor */
+    .threat-card {
+      border: 1px solid #fca5a5;
+      background: #fef2f2;
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+    .threat-card h4 { font-size: 0.875rem; font-weight: 700; color: #991b1b; margin-bottom: 8px; }
+    .threat-card p { font-size: 0.8125rem; color: #374151; }
+    .threat-example {
+      background: #fff;
+      border: 1px solid #fca5a5;
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin-top: 10px;
+      font-size: 0.8125rem;
+      color: #374151;
+      font-style: italic;
+    }
+    .threat-example .ex-label { font-style: normal; font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #dc2626; margin-bottom: 4px; }
+
+    /* Bundle */
+    .bundle-wrap {
+      margin-top: 16px;
+      border: 1px solid rgba(134,200,188,0.35);
+      background: rgba(134,200,188,0.06);
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .bundle-tagline { font-size: 0.875rem; font-weight: 600; color: var(--db-dark); text-align: center; margin-bottom: 16px; }
+    .bundle-services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .bundle-service { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 14px; }
+    .bundle-service h3 { font-family: 'Archivo', sans-serif; font-size: 0.875rem; font-weight: 600; color: var(--db-dark); margin-bottom: 6px; }
+    .bundle-service p { font-size: 0.75rem; color: #4b5563; }
+    .bundle-service .sub { font-size: 0.7rem; font-weight: 600; color: var(--db-aqua-dark); margin-top: 8px; }
+    .bundle-service.highlight { border-color: rgba(134,200,188,0.4); background: rgba(134,200,188,0.04); }
+
+    /* Service cards */
+    .service-card { border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px; background: #fff; margin-top: 16px; }
+    .service-card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+    .service-card-header h3 { font-family: 'Archivo', sans-serif; font-size: 1rem; font-weight: 600; color: var(--db-dark); }
+    .service-card > p { font-size: 0.8125rem; color: #374151; margin-bottom: 14px; }
+    .service-card.highlight { border-color: rgba(134,200,188,0.4); background: rgba(134,200,188,0.03); }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .col-label { font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #6b7280; margin-bottom: 8px; }
+
+    .platform-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .platform-tag { background: #f3f4f6; border: 1px solid #e5e7eb; border-radius: 999px; padding: 3px 10px; font-size: 0.75rem; color: #374151; }
+
+    .domain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 8px; }
+    .domain-tag { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; padding: 7px 10px; font-size: 0.75rem; color: #374151; }
+
+    .check-list { display: flex; flex-direction: column; gap: 6px; }
+    .check-item { display: flex; gap: 8px; font-size: 0.8125rem; color: #374151; align-items: flex-start; }
+    .check-item .ic { color: var(--db-aqua-dark); flex-shrink: 0; }
+    .check-item .arrow { color: var(--db-aqua); flex-shrink: 0; }
+
+    .note-box { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; padding: 10px 12px; margin-top: 10px; }
+    .note-box p { font-size: 0.8125rem; }
+
+    .char-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
+    .char-card { border: 1px solid #e5e7eb; border-radius: 6px; padding: 12px 14px; background: #f9fafb; }
+    .char-card h4 { font-size: 0.8125rem; font-weight: 600; color: var(--db-dark); margin-bottom: 4px; }
+    .char-card p { font-size: 0.75rem; color: #4b5563; }
+
+    .trigger-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+    .trigger-item { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; padding: 12px 14px; }
+    .trigger-item .trigger { font-size: 0.875rem; font-weight: 500; color: var(--db-dark); }
+    .trigger-item .context { font-size: 0.75rem; color: #6b7280; margin-top: 4px; }
+
+    .bundle-logic { display: flex; flex-direction: column; gap: 8px; }
+    .logic-item { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; padding: 12px 14px; }
+    .logic-item h4 { font-size: 0.875rem; font-weight: 600; color: var(--db-dark); margin-bottom: 4px; }
+    .logic-item p { font-size: 0.75rem; color: #6b7280; }
+
+    .talk-track { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; padding: 12px 14px; margin-bottom: 10px; }
+    .talk-track .label { font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--db-dark); margin-bottom: 6px; }
+    .talk-track p { font-size: 0.875rem; font-style: italic; color: #374151; }
+
+    .comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+    .comp-card { border: 1px solid #e5e7eb; border-radius: 8px; padding: 14px; background: #fff; }
+    .comp-card h4 { font-size: 0.8125rem; font-weight: 600; color: var(--db-dark); margin-bottom: 8px; }
+    .comp-card p { font-size: 0.8125rem; color: #4b5563; }
+    .diff-card { border: 1px solid rgba(134,200,188,0.35); background: rgba(134,200,188,0.06); border-radius: 8px; padding: 14px; margin-top: 12px; }
+    .diff-card h4 { font-size: 0.8125rem; font-weight: 600; color: var(--db-dark); margin-bottom: 10px; }
+    .diff-inner { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .diff-item h5 { font-size: 0.8125rem; font-weight: 600; color: var(--db-dark); margin-bottom: 4px; }
+    .diff-item p { font-size: 0.75rem; color: #4b5563; }
+    .bullet-list { display: flex; flex-direction: column; gap: 4px; }
+    .bullet-item { display: flex; gap: 6px; align-items: flex-start; font-size: 0.8125rem; color: #374151; }
+    .bullet-dot { width: 6px; height: 6px; background: #9ca3af; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+
+    .expansion-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px; }
+
+    .referral-box { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 14px 16px; margin-top: 12px; }
+    .referral-box p { font-size: 0.875rem; }
+
+    .terms-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px; }
+    .term-badge { border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px 14px; background: #f9fafb; }
+    .term-badge .term { font-size: 0.8125rem; font-weight: 700; color: var(--db-dark); margin-bottom: 4px; }
+    .term-badge .def { font-size: 0.75rem; color: #6b7280; }
+
+    .db-angle {
+      margin-top: 32px;
+      background: var(--db-dark);
+      border-radius: 10px;
+      padding: 24px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .db-angle::before {
+      content: 'THE DRAWBRIDGE ANGLE';
+      position: absolute; top: 12px; right: 20px;
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em;
+      color: var(--db-aqua); opacity: 0.7;
+    }
+    .db-angle p { font-size: 0.8125rem; color: rgba(255,255,255,0.82); line-height: 1.65; }
+    .db-angle p + p { margin-top: 10px; }
+    .db-angle strong { color: #fff; }
+
+    @media print {
+      body { padding: 20px 28px 40px; max-width: 100%; }
+      .hero, .db-angle, .stat-card, .bundle-wrap, .bundle-service, .callout-amber, .callout-aqua,
+      .callout-orange, .service-card, .char-card, .trigger-item, .domain-tag, .platform-tag,
+      .logic-item, .talk-track, .comp-card, .diff-card, .term-badge, .referral-box, .note-box,
+      .risk-card, .threat-card {
+        -webkit-print-color-adjust: exact; print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="hero-icon">🛡️</div>
+    <div>
+      <h1>AI Security &amp; Governance Bundle</h1>
+      <p>Drawbridge's end-to-end AI program — Adoption Enablement, Awareness & Training, and Ongoing Advisory. What each service is, how they fit together, who to target, and how to sell the bundle.</p>
+    </div>
+  </div>
+  <div class="last-updated">Last updated: March 2026</div>
+
+  <div class="stat-grid">
+    <div class="stat-card"><div class="value">#1</div><div class="label">Most demanded offering right now</div></div>
+    <div class="stat-card"><div class="value">105</div><div class="label">Distinct clients with AI advisory discussions in the last 2 months</div></div>
+    <div class="stat-card"><div class="value">JP Morgan, AirGC</div><div class="label">Referral partners already routing clients</div></div>
+    <div class="stat-card"><div class="value">3</div><div class="label">Services in the program</div></div>
+  </div>
+
+  <!-- The Opportunity -->
+  <div class="section-heading">The Market Opportunity — Act Now</div>
+  <p>This is the most demanded product offering Drawbridge has right now. In the last two months, we've had AI security advisory discussions with <strong>105 distinct clients</strong>. Referral partners are routing clients our way and asking for collateral to share. The window to establish Drawbridge as the go-to AI governance partner for alternative asset management is open — but it won't stay that way.</p>
+  <p>Every alternative asset manager is somewhere on the AI adoption curve. Critically, many of the PE-backed firms we work with are being <strong>mandated by their sponsors to onboard and integrate AI tooling as quickly as possible</strong>. This is not something firms can risk waiting on. Rapid adoption is a business necessity — and the risks are moving just as fast as the adoption.</p>
+
+  <div class="callout-orange">
+    <div class="callout-title">The window to act is now — for your clients and for Drawbridge.</div>
+    <p>Competitors (Salus, Optima, Gotham, Aponix, MSPs) are all moving toward AI governance services. The conversations are already happening. Clients and prospects just need someone who can deliver a complete, ongoing solution built specifically for this industry.</p>
+  </div>
+
+  <!-- The Risk Landscape -->
+  <div class="section-heading">The Risk Landscape</div>
+  <p>At most firms, AI adoption has outpaced the governance and security programs designed to manage it. The gap is predictable, widespread, and creating real exposure right now.</p>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <h4>Ungoverned, Decentralized Usage</h4>
+      <ul>
+        <li>AI risks are not well known or understood at most firms</li>
+        <li>Usage is decentralized and difficult for security teams to monitor</li>
+        <li>Employees may unknowingly input confidential fund data, LP information, or proprietary strategies into external platforms</li>
+        <li>Governance frameworks have not kept pace with adoption speed</li>
+        <li>Security teams lack visibility into how AI is actually being used</li>
+      </ul>
+    </div>
+    <div class="risk-card">
+      <h4>Data Exposure & Permissioning Gaps</h4>
+      <ul>
+        <li>Sensitive information is now incredibly easy to surface if user permissioning is not configured correctly</li>
+        <li>Enterprise AI tools connected to internal data sources can surface data across the firm</li>
+        <li>Default settings on most platforms are not the most secure configuration</li>
+        <li>A single misconfigured permission can expose compensation data, LP terms, deal documents, and more</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout-aqua" style="margin-top:12px;">
+    <div class="callout-title">Example: What imperfect permissioning looks like in practice</div>
+    <p>An employee opens an AI tool connected to internal systems and types: <em>"Search SharePoint and find me any information on company compensation."</em> With poorly scoped permissions, they receive documents they were never intended to see. This is not a theoretical scenario — it is a common finding across assessments.</p>
+  </div>
+
+  <!-- Threat Actor Section -->
+  <div class="section-heading">AI Works Both Ways — The Threat Actor Angle</div>
+  <p>The same capabilities that make AI valuable to your clients also make it valuable to threat actors. This is a critical dimension of the conversation that tends to land with executives in a way that standard risk framing does not.</p>
+
+  <div class="threat-card">
+    <h4>How threat actors are using AI against your clients</h4>
+    <p>AI enables threat actors to <strong>scale phishing, malware, and social engineering</strong> at a level that was previously impossible. But the more significant risk is what happens once a threat actor is already inside the environment — because AI makes them dramatically more effective once they're in.</p>
+
+    <div class="threat-example">
+      <div class="ex-label">Real-World Scenario — Capital Call Fraud</div>
+      Once inside a firm's environment, a threat actor with access to the firm's AI tools can prompt: <em>"I want to send a wire request for a capital call. Can you find the contact details for firms where I have recent email communication using the words 'capital call,' pull all relevant client information, and draft an email in my normal tone of voice requesting they wire funds to this account?"</em> — The AI does it, accurately, instantly, and in a way that is nearly indistinguishable from a legitimate request.
+    </div>
+
+    <p style="margin-top:12px;">If a threat actor gains access to a client's environment, AI enables them to:</p>
+    <ul style="margin-top:8px;padding-left:20px;">
+      <li style="margin-bottom:4px;">Search huge quantities of internal data for sensitive information in seconds</li>
+      <li style="margin-bottom:4px;">Draft convincing emails using the firm's own context — tone of voice, client names, transaction history, proprietary details</li>
+      <li style="margin-bottom:4px;">Identify and target the most valuable relationships and transactions within the firm</li>
+      <li style="margin-bottom:4px;">Execute targeted fraud at a scale that was previously manual and time-consuming</li>
+    </ul>
+  </div>
+
+  <!-- The Three Services -->
+  <div class="section-heading">The Program — Three Services, One Framework</div>
+  <p>Drawbridge provides a structured, end-to-end framework that enables firms to adopt AI securely, manage risk, and demonstrate control. The three services are designed to build on each other — sold individually they each stand alone; together they form a complete AI governance program.</p>
+
+  <div class="bundle-wrap">
+    <div class="bundle-tagline">Adopt securely → Equip your people → Stay current as the landscape evolves</div>
+    <div class="bundle-services">
+      <div class="bundle-service">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;"><span>🔍</span><h3>AI Adoption Enablement</h3></div>
+        <p>A practical framework to safely adopt generative AI tools — ChatGPT, Claude, Copilot, Gemini. Includes a structured security assessment, governance review, and remediation roadmap.</p>
+        <p class="sub">Typical entry point</p>
+      </div>
+      <div class="bundle-service">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;"><span>🎓</span><h3>AI Awareness &amp; Training</h3></div>
+        <p>Hands-on education for teams and leadership on emerging AI risks — including deepfake demonstrations and responsible AI usage tailored to the firm's approved tools.</p>
+        <p class="sub">Makes the policy stick</p>
+      </div>
+      <div class="bundle-service highlight">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;"><span>📡</span><h3>Ongoing AI Advisory</h3></div>
+        <p>Regular communications when platform settings or products change — with up-to-date guidance on what it means for security and what actions to take. A one-time review is not enough.</p>
+        <p class="sub">The ongoing partnership</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout-amber" style="margin-top:12px;">
+    <p><strong>Also in the pipeline:</strong> AI Consulting (ongoing advisory) and AI Pen Testing are additional services in development. Flag these for clients who complete the program and want to go deeper.</p>
+  </div>
+
+  <!-- Service Deep-Dives -->
+  <div class="section-heading">Service Deep-Dives</div>
+  <p>You need to understand each service well enough to have a credible conversation — not just hand over a one-pager. Here's what you need to know about each one.</p>
+
+  <!-- Adoption Enablement -->
+  <div class="service-card">
+    <div class="service-card-header"><span style="font-size:1.3rem;">🔍</span><h3>AI Adoption Enablement</h3></div>
+    <p>A structured audit of security controls, governance processes, and operational safeguards around the firm's use of AI. Designed as a point-in-time exercise that produces clear, actionable findings and a remediation roadmap — not a lengthy consulting engagement. The goal is to enable the firm to adopt AI confidently and defensibly.</p>
+    <div class="two-col" style="margin-top:12px;">
+      <div>
+        <div class="col-label">Platforms in Scope</div>
+        <div class="platform-tags">
+          <span class="platform-tag">ChatGPT (Business/Enterprise)</span>
+          <span class="platform-tag">Claude (Enterprise)</span>
+          <span class="platform-tag">Microsoft Copilot</span>
+          <span class="platform-tag">Gemini</span>
+        </div>
+      </div>
+      <div>
+        <div class="col-label">Requirement</div>
+        <p style="font-size:0.8125rem;">Client must have an <strong>enterprise version</strong> of the AI tool being assessed and an admin with access to all security configurations.</p>
+      </div>
+    </div>
+    <div style="margin-top:14px;">
+      <div class="col-label">What the Assessment Covers</div>
+      <div class="domain-grid">
+        <div class="domain-tag">Identity & Access Management</div>
+        <div class="domain-tag">Session & Network Security</div>
+        <div class="domain-tag">Data Protection & Privacy</div>
+        <div class="domain-tag">Integrations & Connectors</div>
+        <div class="domain-tag">Governance & Training</div>
+        <div class="domain-tag">Configuration Hardening</div>
+        <div class="domain-tag">Data Handling & Retention</div>
+        <div class="domain-tag">Collaboration & Sharing</div>
+        <div class="domain-tag">AI Functionality & Features</div>
+      </div>
+    </div>
+    <div style="margin-top:14px;">
+      <div class="col-label">What the Client Gets</div>
+      <div class="check-list">
+        <div class="check-item"><span class="ic">✓</span><span>Inventory of AI use cases across departments</span></div>
+        <div class="check-item"><span class="ic">✓</span><span>Control audit via screenshare with an admin</span></div>
+        <div class="check-item"><span class="ic">✓</span><span>Risk findings rated High / Moderate / Low with specific remediation guidance</span></div>
+        <div class="check-item"><span class="ic">✓</span><span>Prioritized roadmap separating quick wins from long-term controls</span></div>
+        <div class="check-item"><span class="ic">✓</span><span>Next-step options mapped to policy, training, and ongoing advisory</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Awareness & Training -->
+  <div class="service-card">
+    <div class="service-card-header"><span style="font-size:1.3rem;">🎓</span><h3>AI Awareness &amp; Training</h3></div>
+    <p>Live, instructor-led training that equips teams and leadership with hands-on education about emerging AI risks. Includes deepfake demonstrations and practical guidance on responsible AI usage — tailored to the firm's approved tools and risk profile.</p>
+    <div class="two-col" style="margin-top:12px;">
+      <div>
+        <div class="col-label">What the Training Covers</div>
+        <ul style="font-size:0.8125rem;margin-top:0;">
+          <li><strong>AI Foundations:</strong> What GenAI is, how LLMs work, limitations</li>
+          <li><strong>Key Risk Areas:</strong> Data leakage, deepfakes, hallucinations, prompt injection, shadow AI</li>
+          <li><strong>Governance & Safe Use:</strong> Approved vs. prohibited use cases, data handling, human review expectations</li>
+          <li><strong>Real-World Scenarios:</strong> Live deepfake demo, AI chatbot data leakage, practical "what would you do?" examples</li>
+        </ul>
+      </div>
+      <div>
+        <div class="col-label">Delivery Options</div>
+        <div class="check-list" style="margin-bottom:12px;">
+          <div class="check-item"><span class="arrow">→</span><span>Live instructor-led training</span></div>
+          <div class="check-item"><span class="arrow">→</span><span>Management-focused session</span></div>
+          <div class="check-item"><span class="arrow">→</span><span>Firm-wide employee awareness sessions</span></div>
+          <div class="check-item"><span class="arrow">→</span><span>Content tailored to approved tools and policies</span></div>
+        </div>
+        <div class="col-label">What the Client Gets</div>
+        <div class="check-list">
+          <div class="check-item"><span class="ic">✓</span><span>Reduced risk of data leakage and policy violations</span></div>
+          <div class="check-item"><span class="ic">✓</span><span>Clear expectations for employee AI use</span></div>
+          <div class="check-item"><span class="ic">✓</span><span>Defensible, documented AI training program</span></div>
+          <div class="check-item"><span class="ic">✓</span><span>Alignment with regulatory and investor expectations</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ongoing AI Advisory -->
+  <div class="service-card highlight">
+    <div class="service-card-header"><span style="font-size:1.3rem;">📡</span><h3>Ongoing AI Advisory Notifications</h3></div>
+    <p>The AI landscape is changing rapidly. Platform settings change, new features introduce new risks, and the regulatory environment continues to evolve. Drawbridge provides <strong>regular communications</strong> when settings or products change — with up-to-date information on what it means for the client's security posture and specific recommended actions.</p>
+    <p>A one-time assessment is not sufficient. The firms we work with require a dynamic, ongoing partner — not a report that sits on a shelf until the next review cycle. This is what distinguishes Drawbridge from a point-in-time audit vendor.</p>
+    <div style="margin-top:14px;">
+      <div class="col-label">What Clients Get</div>
+      <div class="check-list">
+        <div class="check-item"><span class="ic">✓</span><span>Proactive notifications when AI platform settings, features, or configurations change</span></div>
+        <div class="check-item"><span class="ic">✓</span><span>Clear guidance on what each change means for the client's security posture</span></div>
+        <div class="check-item"><span class="ic">✓</span><span>Recommended configuration and usage guidance based on each change</span></div>
+        <div class="check-item"><span class="ic">✓</span><span>A partner who stays current on the AI landscape so the client doesn't have to</span></div>
+      </div>
+    </div>
+    <div class="note-box" style="margin-top:12px;">
+      <p><strong>Key positioning point:</strong> This is the answer to the question every client will eventually ask: "We did the assessment — what do we do when things change?" The ongoing advisory service is how Drawbridge builds a durable, year-round relationship around AI security.</p>
+    </div>
+  </div>
+
+  <!-- Who to Target -->
+  <div class="section-heading">Who to Target</div>
+
+  <div class="subsection">
+    <div class="subsection-title">🎯 Strong Fit — These Are Your Buyers</div>
+    <div class="char-grid">
+      <div class="char-card"><h4>Firms Actively Using Enterprise AI</h4><p>Any client or prospect using ChatGPT Business/Enterprise, Claude Enterprise, Microsoft Copilot, or Gemini — especially if they rolled it out without a formal governance process.</p></div>
+      <div class="char-card"><h4>PE-Backed Firms Under Adoption Mandates</h4><p>PE sponsors are mandating AI adoption at portfolio companies. Speed without governance is a risk event — the program gives them the structure to move fast safely.</p></div>
+      <div class="char-card"><h4>Regulated Firms Under Investor Scrutiny</h4><p>Hedge funds, PE firms, and family offices facing SEC exams, LP due diligence, or board-level AI governance questions. The bundle gives them documented evidence of oversight.</p></div>
+      <div class="char-card"><h4>Leadership Asked to Sign Off on AI</h4><p>When a CCO, COO, or CTO is being asked to "sign off on AI" — that's a direct trigger. They need an assessment to know what they're signing off on, policy to sign, and training to enforce it.</p></div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">⚡ Common Trigger Events — Listen for These</div>
+    <div class="trigger-list">
+      <div class="trigger-item"><p class="trigger">"We want to scale AI but need to make sure we're doing it safely"</p><p class="context">Classic trigger. The program positions perfectly here — enable adoption, train your people, stay current as things change.</p></div>
+      <div class="trigger-item"><p class="trigger">"Our PE sponsor is mandating AI adoption"</p><p class="context">Speed without governance is a risk event. Offer the program as the governance layer that enables the rollout to happen safely.</p></div>
+      <div class="trigger-item"><p class="trigger">"Our employees are using AI tools we haven't approved"</p><p class="context">Shadow AI is nearly universal. The assessment surfaces the scope, policy sets the rules, training changes the behavior.</p></div>
+      <div class="trigger-item"><p class="trigger">"Our LPs / regulators are asking about our AI governance"</p><p class="context">A complete program gives them a documented answer: we assessed our environment, we have a policy, and our employees are trained. That's defensible.</p></div>
+      <div class="trigger-item"><p class="trigger">"We need an AI policy"</p><p class="context">Don't just sell the policy. Ask what's driving the need — a regulatory ask, an LP question, an incident? Then position the full program around that context.</p></div>
+    </div>
+  </div>
+
+  <!-- How to Position -->
+  <div class="section-heading">How to Position the Program</div>
+
+  <div class="subsection">
+    <div class="subsection-title">🎯 Why the Full Program — Not Just Individual Services</div>
+    <div class="bundle-logic">
+      <div class="logic-item"><h4>Assessment alone isn't enough</h4><p>A report full of findings is only useful if you have policy to fix them and training to ensure employees follow the new rules. Without those, you have a risk report that sits on a shelf.</p></div>
+      <div class="logic-item"><h4>Training without an ongoing anchor doesn't hold</h4><p>The AI landscape changes too fast. Employees and leadership need current guidance — not a one-time session tied to a configuration that may have changed six months later.</p></div>
+      <div class="logic-item"><h4>The full program = a complete, defensible answer</h4><p>When an LP or regulator asks "how are you governing AI?" — the client can answer: we assessed our environment, we have a policy, our people are trained, and we have an ongoing partner keeping us current. That's complete.</p></div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">💬 Talk Tracks</div>
+    <div class="talk-track"><div class="label">Opening the Conversation</div><p>"AI governance is the number one thing I'm hearing about right now — we've had this conversation with over 100 clients in the last two months alone. A lot of firms have adopted AI without the governance layer to match. We've built a structured program — adoption enablement, training, and ongoing advisory — specifically for firms like yours. Have you had a chance to formally review your AI setup?"</p></div>
+    <div class="talk-track"><div class="label">The Threat Actor Angle</div><p>"What gets executives' attention: AI doesn't just create risk for your firm — it creates tools for the people trying to attack it. If someone gets into your environment, they can use your own AI to find your most sensitive data, identify your biggest transactions, and draft emails that sound exactly like you. That's not hypothetical. That's what we're seeing."</p></div>
+    <div class="talk-track"><div class="label">When They Want Just the Assessment</div><p>"The assessment is a great starting point — and most firms find the findings point directly to gaps in policy and training. We can start there. But I'd also flag that the AI landscape changes fast — what we configure today may look different in six months. The ongoing advisory piece is how we stay ahead of that together."</p></div>
+    <div class="talk-track"><div class="label">When They Already Have a Policy</div><p>"Great — do you know how well the current policy maps to the actual tools your employees are using? And is there a process for updating it when the platforms change? That's often where the gap is. The assessment tells us if the policy is being enforced at the platform level, and the ongoing advisory keeps it current."</p></div>
+    <div class="talk-track"><div class="label">When They Say They Don't Use AI</div><p>"That's one of the most common things we hear — and in nearly every case, employees are already using AI tools the firm hasn't formally approved. Shadow AI is almost universal. The assessment surfaces that exposure and gives leadership the clarity to decide what to do about it."</p></div>
+    <div class="talk-track"><div class="label">When They Ask What Makes Us Different</div><p>"We specialize in alternative asset management — we know the regulatory environment, the LP scrutiny, the operational constraints. And unlike a one-time audit vendor, we stay with you as the AI landscape evolves. That ongoing advisory relationship is something our competitors aren't offering in a structured way."</p></div>
+  </div>
+
+  <!-- Competitive Awareness -->
+  <div class="section-heading">Competitive Awareness</div>
+  <p>The window to own this space is open but not permanent. Drawbridge's differentiation is alt asset specialization, advisory-led delivery, and an ongoing partnership model — not a point-in-time checkbox exercise.</p>
+
+  <div class="comp-grid">
+    <div class="comp-card">
+      <h4>Named Competitors</h4>
+      <div class="bullet-list">
+        <div class="bullet-item"><span class="bullet-dot"></span>Salus</div>
+        <div class="bullet-item"><span class="bullet-dot"></span>Optima</div>
+        <div class="bullet-item"><span class="bullet-dot"></span>Gotham</div>
+        <div class="bullet-item"><span class="bullet-dot"></span>Aponix</div>
+      </div>
+    </div>
+    <div class="comp-card">
+      <h4>MSPs as Competitors</h4>
+      <p>MSPs are increasingly pitching AI governance services. Use the independence argument — the same way we position against MSP-run cyber programs generally. Regulators expect independent oversight of AI governance, not self-review by the firm's managed service provider.</p>
+    </div>
+  </div>
+
+  <div class="diff-card">
+    <h4>Our Differentiation</h4>
+    <div class="diff-inner">
+      <div class="diff-item"><h5>Alt Asset Specialization</h5><p>Built for hedge funds, PE firms, and family offices — not generic enterprises. We know the regulatory environment, the LP scrutiny, and the operational constraints.</p></div>
+      <div class="diff-item"><h5>Advisory-Led Delivery</h5><p>Delivered by Caleb Beaver's team — experienced cybersecurity advisors, not a checklist tool or a junior analyst. Clients get expert judgment, not just a report.</p></div>
+      <div class="diff-item"><h5>Ongoing Partnership</h5><p>We don't walk away after the assessment. Ongoing AI Advisory Notifications keep clients current as platforms evolve — something point-in-time competitors can't match.</p></div>
+    </div>
+  </div>
+
+  <!-- Natural Expansion -->
+  <div class="section-heading">Natural Expansion — What Comes Next</div>
+  <p>The program is both complete and an entry point. Every engagement generates follow-on conversations.</p>
+  <div class="expansion-grid">
+    <div class="char-card"><h4>AI Consulting (Advisory)</h4><p>Ongoing AI advisory partnership — staying current as tools, threats, and regulations evolve. A natural follow-on for clients who want deeper expert guidance post-program.</p></div>
+    <div class="char-card"><h4>AI Pen Testing</h4><p>Prompt injection, model manipulation, and AI-specific attack simulation. Coming soon — flag for clients in tech-forward or high-risk environments.</p></div>
+    <div class="char-card"><h4>Cyber Risk Assessment (CRA)</h4><p>The AI assessment validates several controls that also appear in the broader CRA — SSO, least privilege, authentication. Bundle clients often have CRA gaps to address.</p></div>
+    <div class="char-card"><h4>Tabletop Exercises (AI-Focused)</h4><p>Simulate AI misuse scenarios — deepfake fraud, data exfiltration via AI tool, shadow AI incident. Most IR plans don't account for AI threats yet.</p></div>
+    <div class="char-card"><h4>Vendor Risk Assessments</h4><p>Formal due diligence on AI vendors (OpenAI, Anthropic, Microsoft). Required for most regulatory frameworks and increasingly expected by LPs.</p></div>
+    <div class="char-card"><h4>Phishing Campaigns</h4><p>AI-generated phishing simulations test whether employees can identify increasingly sophisticated, AI-crafted lures — a natural complement to AI security training.</p></div>
+  </div>
+
+  <!-- Referral Partners -->
+  <div class="section-heading">Referral Partner Context</div>
+  <p>JP Morgan and AirGC have already told Nate Ford they have clients in need of this and asked for collateral to share. This is not a hypothetical pipeline — referral partners are actively routing opportunities. When you get an inbound from a referral partner on AI, treat it as a warm lead and move quickly.</p>
+  <div class="referral-box">
+    <p><strong>What to send referral partners:</strong> The client-facing one-pager (being produced by Lacewing Media / Kate dos Santos) is the asset to use here. Do not send internal documents. Ask your manager for the one-pager when it's ready.</p>
+  </div>
+
+  <div class="db-angle">
+    <p>Drawbridge has had AI security advisory discussions with <strong>105 distinct clients in the last two months</strong>. This is the most demanded product offering we have right now — and the window is open, but not permanent. The differentiator is not just having a product. It's speed, specialization, and being the firm that delivers an <strong>ongoing partnership</strong>, not a point-in-time review that becomes stale the moment platforms update.</p>
+    <p>The right frame for every conversation: AI adoption is not going to slow down. For many PE-backed firms, it's being mandated. Drawbridge helps them get the governance layer in place so they can move fast with confidence — with their LPs, their regulators, and their own leadership aligned. And when the platforms change next month, we're the ones telling them what to do about it.</p>
+    <p><strong>Lead with the threat actor angle when you're talking to executives.</strong> The capital call scenario — where a threat actor uses the firm's own AI to draft a fraudulent wire request in the RM's voice — lands in a way that abstract risk framing doesn't. Use it.</p>
+  </div>
+
+  <div class="section-heading">Key Terms</div>
+  <div class="terms-grid">
+    <div class="term-badge"><div class="term">Shadow AI</div><div class="def">Unsanctioned use of AI tools by employees without organizational approval or oversight — nearly universal in alternative asset management and a primary driver of assessment conversations.</div></div>
+    <div class="term-badge"><div class="term">Generative AI (GenAI)</div><div class="def">AI systems that generate content (text, images, code, audio) based on prompts. Includes ChatGPT, Claude, Copilot, and Gemini — the platforms covered by the assessment.</div></div>
+    <div class="term-badge"><div class="term">AI Governance</div><div class="def">The policies, oversight structures, and accountability frameworks that determine how a firm uses AI — what's allowed, who approves it, how it's monitored, and how risks are managed.</div></div>
+    <div class="term-badge"><div class="term">Prompt Injection</div><div class="def">An attack where malicious instructions are embedded in AI inputs to manipulate the model's behavior — a key risk for firms using AI with access to sensitive internal data sources.</div></div>
+    <div class="term-badge"><div class="term">Hallucination</div><div class="def">When an AI model generates confident-sounding but factually incorrect output. A governance risk for firms using AI in research, analysis, or client-facing communications.</div></div>
+    <div class="term-badge"><div class="term">Deepfake</div><div class="def">AI-generated synthetic audio, video, or image content used to impersonate individuals. A growing threat for executive fraud and social engineering attacks targeting financial firms.</div></div>
+  </div>
+
+</body>
+</html>

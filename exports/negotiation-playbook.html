@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Renewal Negotiation Playbook — Drawbridge RM Enablement</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --db-dark: #111821;
+      --db-aqua: #86C8BC;
+      --db-aqua-dark: #489E8E;
+      --db-orange: #FF6900;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f9fafb;
+      color: #374151;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 32px 24px 64px;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--db-dark) 0%, #1e2d3d 100%);
+      border-radius: 16px;
+      padding: 36px 40px;
+      color: white;
+      margin-bottom: 8px;
+    }
+    .hero-icon { font-size: 36px; margin-bottom: 12px; display: block; }
+    .hero h1 { font-family: 'Archivo', sans-serif; font-size: 28px; font-weight: 800; color: white; margin-bottom: 8px; }
+    .hero p { font-size: 14px; color: #94a3b8; max-width: 640px; line-height: 1.6; }
+
+    .last-updated { font-size: 11px; color: #9ca3af; margin: 8px 0 24px; }
+
+    .section-heading {
+      font-family: 'Archivo', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--db-dark);
+      margin: 32px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #e5e7eb;
+    }
+
+    .subsection {
+      margin: 16px 0;
+      padding: 16px 20px;
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+    }
+    .subsection-title {
+      font-family: 'Archivo', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--db-dark);
+      margin-bottom: 8px;
+    }
+    .subsection p { font-size: 13px; color: #4b5563; margin-bottom: 8px; line-height: 1.65; }
+    .subsection p:last-child { margin-bottom: 0; }
+
+    .body-text { font-size: 13px; color: #4b5563; line-height: 1.65; margin: 8px 0; }
+
+    /* Callouts */
+    .callout-aqua {
+      background: rgba(134,200,188,0.07);
+      border: 1px solid rgba(134,200,188,0.3);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin: 10px 0;
+    }
+    .callout-aqua p { font-size: 13px; color: #374151; margin: 0; }
+
+    /* Two-col mindset grid */
+    .mindset-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 10px 0; }
+    .mindset-card { border-radius: 10px; padding: 16px 20px; }
+    .mindset-card ul { list-style: none; padding: 0; margin-top: 8px; }
+    .mindset-card li { font-size: 13px; margin-bottom: 6px; line-height: 1.5; }
+    .mindset-bad { border: 2px solid #fecaca; background: #fef2f2; }
+    .mindset-bad .card-title { font-family: 'Archivo', sans-serif; font-weight: 700; color: #991b1b; }
+    .mindset-bad li { color: #b91c1c; }
+    .mindset-good { border: 2px solid #bbf7d0; background: #f0fdf4; }
+    .mindset-good .card-title { font-family: 'Archivo', sans-serif; font-weight: 700; color: #166534; }
+    .mindset-good li { color: #15803d; }
+
+    /* Data grid (score/value/context/health) */
+    .data-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0; }
+    .data-card { border: 1px solid #e5e7eb; background: white; border-radius: 8px; padding: 14px; }
+    .data-card-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--db-aqua-dark); margin-bottom: 6px; }
+    .data-card ul { list-style: none; padding: 0; }
+    .data-card li { font-size: 13px; color: #374151; margin-bottom: 4px; }
+    .data-card li::before { content: "• "; }
+
+    /* Timeline */
+    .timeline { margin: 12px 0; display: flex; flex-direction: column; gap: 10px; }
+    .timeline-item { border: 2px solid #e5e7eb; border-radius: 10px; overflow: hidden; background: white; }
+    .timeline-header { background: #f9fafb; padding: 12px 18px; border-bottom: 1px solid #e5e7eb; display: flex; align-items: center; gap: 12px; }
+    .timeline-badge {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; flex-shrink: 0;
+    }
+    .badge-gray { background: rgba(134,200,188,0.2); color: var(--db-aqua-dark); }
+    .badge-green { background: #dcfce7; color: #166534; }
+    .badge-blue { background: #dbeafe; color: #1d4ed8; }
+    .badge-amber { background: #fef3c7; color: #92400e; }
+    .badge-red { background: #fee2e2; color: #991b1b; }
+    .timeline-header-text .title { font-family: 'Archivo', sans-serif; font-size: 13px; font-weight: 700; color: var(--db-dark); }
+    .timeline-header-text .sub { font-size: 11px; color: #6b7280; }
+    .timeline-body { padding: 14px 18px; }
+    .timeline-body ul { list-style: none; padding: 0; }
+    .timeline-body li { font-size: 13px; color: #374151; margin-bottom: 5px; }
+    .timeline-body li::before { content: "• "; }
+    .timeline-goal {
+      margin-top: 10px;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 12px;
+    }
+    .goal-gray { background: rgba(134,200,188,0.07); border: 1px solid rgba(134,200,188,0.25); color: var(--db-aqua-dark); }
+    .goal-green { background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; }
+    .goal-blue { background: #eff6ff; border: 1px solid #bfdbfe; color: #1d4ed8; }
+    .goal-amber { background: #fffbeb; border: 1px solid #fde68a; color: #92400e; }
+
+    /* Score cards */
+    .score-stack { display: flex; flex-direction: column; gap: 10px; margin: 10px 0; }
+    .score-card { border-radius: 8px; padding: 14px 16px; }
+    .score-card p { font-size: 13px; color: #374151; margin-top: 6px; line-height: 1.55; }
+    .score-card p + p { margin-top: 4px; }
+    .score-card .score-title { font-size: 13px; font-weight: 700; margin-bottom: 0; }
+    .score-good { border: 1px solid #bbf7d0; background: #f0fdf4; }
+    .score-good .score-title { color: #166534; }
+    .score-amber { border: 1px solid #fde68a; background: #fffbeb; }
+    .score-amber .score-title { color: #92400e; }
+    .score-red { border: 1px solid #fecaca; background: #fef2f2; }
+    .score-red .score-title { color: #991b1b; }
+
+    /* Persona cards */
+    .persona-stack { display: flex; flex-direction: column; gap: 12px; margin: 12px 0; }
+    .persona-card { border: 1px solid #e5e7eb; background: white; border-radius: 10px; padding: 16px 18px; }
+    .persona-title { font-family: 'Archivo', sans-serif; font-size: 13px; font-weight: 700; color: var(--db-dark); margin-bottom: 10px; }
+    .persona-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .persona-block-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #9ca3af; margin-bottom: 4px; }
+    .persona-block p { font-size: 13px; color: #374151; line-height: 1.55; }
+
+    /* Tables */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+      font-size: 13px;
+      margin: 10px 0;
+    }
+    .data-table thead tr { background: var(--db-dark); }
+    .data-table th { padding: 10px 14px; text-align: left; font-weight: 600; color: white; font-size: 12px; }
+    .data-table td { padding: 10px 14px; vertical-align: top; border-bottom: 1px solid #f3f4f6; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tbody tr:nth-child(odd) { background: white; }
+    .data-table tbody tr:nth-child(even) { background: #fafafa; }
+    .data-table .cell-label { font-weight: 600; color: var(--db-dark); }
+
+    /* Stall table (lighter header) */
+    .stall-table thead tr { background: #f9fafb; }
+    .stall-table th { color: #6b7280; font-size: 12px; border-bottom: 1px solid #e5e7eb; }
+
+    .churn-badge { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; }
+    .churn-healthy { background: #dcfce7; color: #166534; }
+    .churn-watch { background: #fef3c7; color: #92400e; }
+    .churn-risk { background: #fee2e2; color: #991b1b; }
+
+    /* Concession trades */
+    .trade-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 8px 0; }
+    .trade-item { background: #f9fafb; border-radius: 6px; padding: 8px 10px; font-size: 12px; color: #374151; }
+
+    /* Cardinal rules list */
+    .rules-list { list-style: disc; margin-left: 20px; }
+    .rules-list li { font-size: 13px; color: #374151; margin-bottom: 10px; line-height: 1.6; }
+
+    /* Uplift framework cards */
+    .uplift-stack { display: flex; flex-direction: column; gap: 10px; margin: 12px 0; }
+    .uplift-card { border: 1px solid #e5e7eb; background: white; border-radius: 10px; padding: 16px 18px; }
+    .uplift-card-title { font-family: 'Archivo', sans-serif; font-size: 13px; font-weight: 700; color: var(--db-dark); margin-bottom: 8px; }
+    .uplift-card p { font-size: 13px; color: #374151; margin-bottom: 6px; line-height: 1.6; }
+    .uplift-card p:last-child { margin-bottom: 0; }
+    .uplift-card ul { list-style: none; padding: 0; margin-top: 6px; }
+    .uplift-card li { font-size: 13px; color: #374151; margin-bottom: 4px; }
+    .uplift-card li::before { content: "• "; }
+
+    /* Multi-year grid */
+    .multiyear-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 10px 0; }
+    .multiyear-client { border: 1px solid #bbf7d0; background: #f0fdf4; border-radius: 8px; padding: 14px; }
+    .multiyear-client .title { font-family: 'Archivo', sans-serif; font-size: 13px; font-weight: 700; color: #166534; margin-bottom: 8px; }
+    .multiyear-db { border: 1px solid var(--db-aqua); background: rgba(134,200,188,0.06); border-radius: 8px; padding: 14px; }
+    .multiyear-db .title { font-family: 'Archivo', sans-serif; font-size: 13px; font-weight: 700; color: var(--db-aqua-dark); margin-bottom: 8px; }
+    .multiyear-client ul, .multiyear-db ul { list-style: none; padding: 0; }
+    .multiyear-client li, .multiyear-db li { font-size: 13px; color: #374151; margin-bottom: 4px; }
+    .multiyear-client li::before, .multiyear-db li::before { content: "• "; }
+
+    /* Expansion characteristic cards */
+    .expansion-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0; }
+    .expansion-card { border: 1px solid #e5e7eb; background: white; border-radius: 8px; padding: 14px; }
+    .expansion-card .title { font-family: 'Archivo', sans-serif; font-size: 13px; font-weight: 700; color: var(--db-dark); margin-bottom: 6px; }
+    .expansion-card p { font-size: 13px; color: #4b5563; line-height: 1.55; }
+
+    /* When they say / you say */
+    .dialog-stack { display: flex; flex-direction: column; gap: 10px; margin: 10px 0; }
+    .dialog-card { border: 1px solid #e5e7eb; background: white; border-radius: 8px; padding: 14px 16px; }
+    .dialog-trigger { font-size: 13px; font-weight: 600; color: #b91c1c; margin-bottom: 8px; }
+    .dialog-response { font-size: 13px; color: #374151; line-height: 1.6; }
+    .dialog-aside { display: block; margin-top: 6px; font-size: 11px; color: #6b7280; font-style: italic; }
+
+    /* RESET save framework */
+    .reset-stack { display: flex; flex-direction: column; gap: 8px; margin: 10px 0; }
+    .reset-card { border: 1px solid #e5e7eb; background: white; border-radius: 8px; padding: 14px 16px; }
+    .reset-card .title { font-family: 'Archivo', sans-serif; font-size: 13px; font-weight: 700; color: var(--db-dark); margin-bottom: 6px; }
+    .reset-card p { font-size: 13px; color: #374151; line-height: 1.6; }
+
+    /* Save tactics */
+    .save-stack { display: flex; flex-direction: column; gap: 8px; margin: 10px 0; }
+    .save-card { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 14px 16px; }
+    .save-card .title { font-family: 'Archivo', sans-serif; font-size: 13px; font-weight: 700; color: var(--db-dark); margin-bottom: 6px; }
+    .save-card p { font-size: 13px; color: #374151; line-height: 1.6; }
+
+    /* Checklist */
+    .checklist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 10px 0; }
+    .checklist-item { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; padding: 8px 10px; font-size: 13px; color: #374151; }
+
+    /* DrawbridgeAngle */
+    .db-angle {
+      margin-top: 28px;
+      border-left: 4px solid var(--db-orange);
+      background: #fff7f0;
+      border-radius: 0 10px 10px 0;
+      padding: 16px 20px;
+    }
+    .db-angle-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--db-orange); margin-bottom: 10px; }
+    .db-angle p { font-size: 13px; color: #374151; margin-bottom: 8px; line-height: 1.65; }
+    .db-angle p:last-child { margin-bottom: 0; }
+
+    @media print {
+      body { background: white; }
+      .page { padding: 16px; }
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Hero -->
+  <div class="hero">
+    <span class="hero-icon">🤝</span>
+    <h1>Renewal Negotiation Playbook</h1>
+    <p>You're not an order-taker. You're a strategic advisor who protects and grows revenue through disciplined, proactive negotiation.</p>
+  </div>
+  <div class="last-updated">Last updated: March 10, 2026</div>
+
+  <!-- Mindset -->
+  <div class="section-heading">The RM Mindset Shift</div>
+  <div class="mindset-grid">
+    <div class="mindset-card mindset-bad">
+      <div class="card-title">Order-Taker</div>
+      <ul>
+        <li>"The client said they want a discount, so I gave them 15%."</li>
+        <li>"They asked to drop a service, so I removed it."</li>
+        <li>"They haven't responded to my email, so I'm waiting."</li>
+        <li>"They said they're happy, so the renewal should be fine."</li>
+        <li>Reacts to client requests. Accepts the first offer. Avoids difficult conversations.</li>
+      </ul>
+    </div>
+    <div class="mindset-card mindset-good">
+      <div class="card-title">Strategic Advisor</div>
+      <ul>
+        <li>"They asked for a discount — I asked what's driving the request and proposed a multi-year instead."</li>
+        <li>"They want to drop a service — I showed them the risk exposure and offered a restructured package."</li>
+        <li>"No response in 5 days — I called, texted, and looped in their COO."</li>
+        <li>"They say they're happy — great, let's talk about what else we can help with."</li>
+        <li>Drives the conversation. Controls the timeline. Creates value.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">💡 The Core Principle: You Own the Renewal</div>
+    <p>The single biggest mistake RMs make is treating a renewal as something that <strong>happens to them</strong> rather than something they <strong>drive</strong>. You set the timeline. You frame the conversation. You present the proposal. You control the pace. If the client is dictating every term of the renewal, you've already lost the negotiation.</p>
+    <p>This doesn't mean being aggressive or adversarial — it means being <strong>proactive, prepared, and purposeful</strong>. The best RMs are the ones clients <em>trust</em> to guide them, not the ones who simply do what they're told.</p>
+  </div>
+
+  <!-- Pre-Renewal Preparation -->
+  <div class="section-heading">Pre-Renewal Preparation: Your Data Is Your Playbook</div>
+  <p class="body-text">If you've been maintaining consistent client engagement, you already have everything you need to walk into a renewal conversation with confidence. Every data point you've gathered, every conversation you've had, every piece of value you've articulated feeds directly into how you position the renewal.</p>
+
+  <div class="subsection">
+    <div class="subsection-title">📋 The Data You Already Have</div>
+    <p>Before you start a renewal conversation, pull these from your most recent account review and CS briefing. If you don't have them, that's a sign your engagement prep needs work.</p>
+    <div class="data-grid-2">
+      <div class="data-card">
+        <div class="data-card-label">Score &amp; Posture</div>
+        <ul>
+          <li>CRA baseline score vs. current score</li>
+          <li>Year-over-year score trajectory (multi-year clients)</li>
+          <li>Items remediated since last review</li>
+          <li>Outstanding items and projected score impact</li>
+          <li>Remediation velocity — are items closing or stacking up?</li>
+        </ul>
+      </div>
+      <div class="data-card">
+        <div class="data-card-label">Value Delivered</div>
+        <ul>
+          <li>DDQs turned around (count, turnaround time)</li>
+          <li>Policies updated and board-approved</li>
+          <li>Training completion rates</li>
+          <li>Phishing simulation improvements</li>
+          <li>Tabletop exercises run, IR plan documented</li>
+          <li>Vendor risk assessments completed</li>
+        </ul>
+      </div>
+      <div class="data-card">
+        <div class="data-card-label">Client Context</div>
+        <ul>
+          <li>Primary outcome the client cares about</li>
+          <li>Client persona (COO, CCO, Founder)</li>
+          <li>Business changes (fundraise, growth, new fund)</li>
+          <li>Upcoming regulatory events (exam, DORA deadline)</li>
+          <li>Competitive dynamics (evaluating alternatives?)</li>
+        </ul>
+      </div>
+      <div class="data-card">
+        <div class="data-card-label">Health Signals</div>
+        <ul>
+          <li>Engagement level (active, passive, disengaged)</li>
+          <li>Services purchased vs. utilized</li>
+          <li>Champion stability (same contact? new?)</li>
+          <li>Any friction, complaints, or escalations</li>
+          <li>Churn signals present (0, 1, 2+)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout-aqua">
+      <p><strong>The principle:</strong> If you walk into a renewal conversation without this data, you're winging it. And when you wing it, you react to what the client says instead of driving the conversation to where you want it to go.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">🎯 The Score Is Your Negotiation Anchor</div>
+    <p>Your client's Drawbridge score is the most powerful asset in a renewal conversation. It's concrete, measurable, and directly tied to business outcomes. Use it differently depending on the trajectory:</p>
+    <div class="score-stack">
+      <div class="score-card score-good">
+        <p class="score-title">Score improved significantly (10+ points from baseline)</p>
+        <p><strong>Your position is strong.</strong> Lead with the progress: "When we started, your score was 58. Today it's 76. That improvement didn't happen by accident — it's the result of 14 remediated items, a documented IR plan, and quarterly training. That trajectory is exactly what your LPs want to see."</p>
+        <p><strong>Negotiation lever:</strong> Use the score to justify the uplift. "The program is delivering measurable results. The standard adjustment reflects the expanded scope and deeper coverage we've built together."</p>
+      </div>
+      <div class="score-card score-amber">
+        <p class="score-title">Score flat or modest improvement (3–9 points)</p>
+        <p><strong>Acknowledge honestly, then pivot to what's next.</strong> "We've made progress, but there's more to do. The top 3 planned items would push you into the 80s. Renewing gives us the continuity to finish what we started — and switching providers would reset you to zero on institutional knowledge."</p>
+        <p><strong>Negotiation lever:</strong> Frame the renewal as completing the journey. Offer to front-load the high-impact items in the next quarter as part of the renewal commitment.</p>
+      </div>
+      <div class="score-card score-red">
+        <p class="score-title">Score stalled or flat from baseline</p>
+        <p><strong>This is a value delivery problem first, negotiation problem second.</strong> Don't try to negotiate a renewal on a stalled score — the client knows the program hasn't moved the needle. Instead, lead with honesty and a plan: "Your score hasn't moved the way either of us wanted. Here's my hypothesis on what's blocking progress, and here's what I'd change in the next 90 days. I want to earn the renewal by showing you results, not just asking you to sign."</p>
+        <p><strong>Negotiation lever:</strong> Consider a restructured scope, a shorter renewal term with a check-in, or a performance milestone. Show you're willing to be accountable.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 120-Day Timeline -->
+  <div class="section-heading">The 120-Day Renewal Timeline</div>
+  <p class="body-text">Renewals don't start when the contract expires — they start <strong>4 months before</strong>. This timeline integrates your engagement cadence, CS coordination, and negotiation strategy into a single workflow.</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <div class="timeline-badge badge-gray">120d</div>
+        <div class="timeline-header-text">
+          <div class="title">Day 120: Data Gathering &amp; Prep</div>
+          <div class="sub">4 months before renewal</div>
+        </div>
+      </div>
+      <div class="timeline-body">
+        <ul>
+          <li>Request CS Brief — get the full picture on delivery, engagement, and value story</li>
+          <li>Pull score data: baseline, current, trajectory, planned items</li>
+          <li>Review Salesforce: prior call notes, expansion history, support tickets</li>
+          <li>Identify churn signals (use the churn signal checklist)</li>
+          <li>Research: firm news, fundraising activity, regulatory calendar</li>
+        </ul>
+        <div class="timeline-goal goal-gray"><strong>Goal:</strong> Know the full account picture before any renewal conversation happens.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <div class="timeline-badge badge-green">90d</div>
+        <div class="timeline-header-text">
+          <div class="title">Day 90: The Pre-Renewal Review</div>
+          <div class="sub">3 months before renewal</div>
+        </div>
+      </div>
+      <div class="timeline-body">
+        <ul>
+          <li>Run a full account review — this is the most important touchpoint of the year</li>
+          <li>Present the score story, value delivered, and forward recommendations</li>
+          <li>Use strategic questions to understand what's ahead for the firm</li>
+          <li>Listen carefully for budget signals, competitive pressure, or scope questions</li>
+          <li><strong>Do NOT discuss pricing yet</strong> — this meeting is about value, not cost</li>
+        </ul>
+        <div class="timeline-goal goal-green"><strong>Goal:</strong> Anchor the renewal in value delivered and value ahead. The client should leave this meeting feeling like Drawbridge is essential — before they ever see a price.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <div class="timeline-badge badge-blue">60d</div>
+        <div class="timeline-header-text">
+          <div class="title">Day 60: Proposal &amp; Opening Position</div>
+          <div class="sub">2 months before renewal</div>
+        </div>
+      </div>
+      <div class="timeline-body">
+        <ul>
+          <li>Send the renewal proposal — anchored at standard 7% uplift with expansion if applicable</li>
+          <li>Reference the review: "Based on our conversation last month, here's the program for the coming year"</li>
+          <li>Include a one-page value summary (score progress, key deliverables, forward plan)</li>
+          <li>If expansion is on the table, bundle it into the renewal proposal — not a separate conversation</li>
+          <li>Schedule a follow-up within 1 week to discuss</li>
+        </ul>
+        <div class="timeline-goal goal-blue"><strong>Goal:</strong> Get the proposal in front of the right people with enough time for internal review. Never send a proposal without a follow-up date locked in.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <div class="timeline-badge badge-amber">30d</div>
+        <div class="timeline-header-text">
+          <div class="title">Day 30: Negotiation &amp; Close</div>
+          <div class="sub">1 month before renewal</div>
+        </div>
+      </div>
+      <div class="timeline-body">
+        <ul>
+          <li>Handle objections, negotiate terms, trade concessions</li>
+          <li>If stalling, diagnose the reason and apply the appropriate response</li>
+          <li>Multi-thread if needed — reach out to additional stakeholders</li>
+          <li>Push for signature with constructive urgency (gap in coverage, rate certainty)</li>
+          <li>If at-risk, escalate now — don't wait until the last week</li>
+        </ul>
+        <div class="timeline-goal goal-amber"><strong>Goal:</strong> Signed contract before expiration. If it's not going to happen, you should know why by now — not be surprised on the last day.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <div class="timeline-badge badge-red">0d</div>
+        <div class="timeline-header-text">
+          <div class="title">Renewal Date: Confirm &amp; Kick Off</div>
+          <div class="sub">Contract renewal</div>
+        </div>
+      </div>
+      <div class="timeline-body">
+        <ul>
+          <li>Confirm signed contract and internal processing</li>
+          <li>Send a "thank you + here's what's ahead" note to the client</li>
+          <li>Brief CS on any scope changes, expansion items, or commitments made</li>
+          <li>Update Salesforce with final terms, uplift %, and next renewal date</li>
+          <li>If multi-year, note the review cadence (e.g., annual check-in even without renewal)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Negotiating by Persona -->
+  <div class="section-heading">Negotiating by Persona</div>
+  <p class="body-text">Who you're negotiating with changes everything — the same program, the same value, the same price lands completely differently depending on who's across the table. Tailor your negotiation approach to the primary persona.</p>
+
+  <div class="persona-stack">
+    <div class="persona-card">
+      <div class="persona-title">🏢 COO — Peace of Mind &amp; Efficiency</div>
+      <div class="persona-grid">
+        <div class="persona-block">
+          <div class="persona-block-label">What They Care About</div>
+          <p>Operational risk is covered. Nothing falls through the cracks. Their time is freed up for higher-value work. The board is satisfied.</p>
+        </div>
+        <div class="persona-block">
+          <div class="persona-block-label">How to Frame the Renewal</div>
+          <p>"We're handling your entire cyber program so you don't have to. The alternative is hiring a CISO and a security analyst — that's $450K+ before you add tools and overhead. We're a fraction of that cost with deeper expertise."</p>
+        </div>
+        <div class="persona-block">
+          <div class="persona-block-label">What Triggers Pushback</div>
+          <p>Feels like they're managing the vendor too much. Deliverables are late or require chasing. They don't see the program running itself.</p>
+        </div>
+        <div class="persona-block">
+          <div class="persona-block-label">Concession They'll Trade For</div>
+          <p>More hands-off experience. "If we commit to a 2-year term, I'll ensure quarterly proactive briefings so you never have to chase us."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="persona-card">
+      <div class="persona-title">⚖️ CCO — Regulatory Readiness &amp; Exam Risk</div>
+      <div class="persona-grid">
+        <div class="persona-block">
+          <div class="persona-block-label">What They Care About</div>
+          <p>SEC exam readiness. Current policies on file. Documented evidence they can point to. No surprises from regulators. DORA compliance if applicable.</p>
+        </div>
+        <div class="persona-block">
+          <div class="persona-block-label">How to Frame the Renewal</div>
+          <p>"Reg S-P just got harder. SEC exam priorities added AI governance and vendor oversight. Your policies are current, your IR plan is documented, and your training records are clean — because of this program. Dropping it means rebuilding that evidence from scratch."</p>
+        </div>
+        <div class="persona-block">
+          <div class="persona-block-label">What Triggers Pushback</div>
+          <p>Doesn't see Drawbridge as connected to their compliance obligations. Thinks their outside counsel handles it.</p>
+        </div>
+        <div class="persona-block">
+          <div class="persona-block-label">Concession They'll Trade For</div>
+          <p>Regulatory-specific deliverables. "I'll include a Reg S-P readiness assessment in the renewal scope — that's something you can hand directly to your examiner."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="persona-card">
+      <div class="persona-title">👤 Founder / CEO — Reputation &amp; Capital</div>
+      <div class="persona-grid">
+        <div class="persona-block">
+          <div class="persona-block-label">What They Care About</div>
+          <p>Firm reputation. LP confidence. Not being the fund that gets breached. Looking sophisticated and institutional to allocators.</p>
+        </div>
+        <div class="persona-block">
+          <div class="persona-block-label">How to Frame the Renewal</div>
+          <p>"Your LPs see a firm with a mature cyber program that benchmarks in the top quartile. That's a competitive advantage when you're raising capital — one your peers don't have."</p>
+        </div>
+        <div class="persona-block">
+          <div class="persona-block-label">What Triggers Pushback</div>
+          <p>Feels like cybersecurity is a "check the box" exercise that doesn't connect to their real priorities (fundraising, performance, growth).</p>
+        </div>
+        <div class="persona-block">
+          <div class="persona-block-label">Concession They'll Trade For</div>
+          <p>Status and positioning. "I'd like to feature your firm as a case study — anonymized or named, your choice. It positions you as a leader in cyber governance."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pushing Conversations Forward -->
+  <div class="section-heading">Pushing Conversations Forward</div>
+
+  <div class="subsection">
+    <div class="subsection-title">🚀 The 48-Hour Rule</div>
+    <p>No renewal conversation should go <strong>more than 48 business hours</strong> without a next action. If you sent a proposal Monday, you should have a follow-up scheduled for Wednesday. Silence is not a strategy — it's how deals die.</p>
+    <ul class="rules-list" style="margin-top:8px;">
+      <li><strong>Always end meetings with a next step</strong> — Never leave a conversation without a specific follow-up date and action. "I'll send the proposal by Thursday and let's plan to discuss it next Tuesday at 2pm."</li>
+      <li><strong>Use calendar invites, not promises</strong> — Send the invite before you hang up. A commitment without a calendar hold is just a wish.</li>
+      <li><strong>Multi-thread your communication</strong> — If the primary contact goes dark, reach out to another stakeholder. "Hi Sarah, I sent the renewal proposal to John last week but haven't heard back — do you know if the team has had a chance to review?"</li>
+      <li><strong>Create constructive urgency</strong> — Reference real deadlines: renewal date, budget cycle, regulatory timelines. "To ensure there's no gap in coverage before your Q2 renewal date, we should finalize terms by March 15."</li>
+      <li><strong>Change the medium</strong> — If email isn't working, pick up the phone. Different people respond to different channels.</li>
+    </ul>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">🛑 When the Client Stalls — Diagnosis &amp; Response</div>
+    <p>Stalling almost always means one of five things. Diagnose the real reason before choosing your response:</p>
+    <table class="data-table stall-table" style="margin-top:10px;">
+      <thead>
+        <tr>
+          <th>Stall Reason</th>
+          <th>Signals</th>
+          <th>Response</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="cell-label">Price Sensitivity</td>
+          <td>"We need to review the budget" / "Can you sharpen the pencil?"</td>
+          <td>Don't drop price — explore value. Restructure scope, offer multi-year, or reframe ROI.</td>
+        </tr>
+        <tr>
+          <td class="cell-label">Competing Priority</td>
+          <td>Genuine busyness, delayed responses, "crazy quarter"</td>
+          <td>Reduce friction — pre-fill paperwork, offer a 15-min call, handle everything on your side.</td>
+        </tr>
+        <tr>
+          <td class="cell-label">Internal Misalignment</td>
+          <td>Champion is on board but "needs to get approval" / "legal is reviewing"</td>
+          <td>Arm your champion. Provide an internal justification doc, ROI summary, or offer to brief the decision-maker directly.</td>
+        </tr>
+        <tr>
+          <td class="cell-label">Evaluating Alternatives</td>
+          <td>Asking for competitive comparisons, new RFP language, unusual questions</td>
+          <td>Address head-on. "Are you evaluating other options? I'd love the chance to address any concerns directly."</td>
+        </tr>
+        <tr>
+          <td class="cell-label">Low Perceived Value</td>
+          <td>Low engagement all year, "we haven't really used it", questioning necessity</td>
+          <td>This is a value delivery problem, not a negotiation problem. Re-engage with a business review showing usage data and risk impact.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Price Pressure -->
+  <div class="section-heading">Handling Price Pressure</div>
+
+  <div class="subsection">
+    <div class="subsection-title">💰 The Cardinal Rules of Pricing</div>
+    <ul class="rules-list">
+      <li><strong>Never discount without a reason.</strong> If a client asks for a discount and you immediately say yes, you've told them two things: the original price was inflated, and they should ask for more. Always ask <em>why</em> first: "Help me understand what's driving the budget conversation — is this a firmwide initiative or specific to our engagement?"</li>
+      <li><strong>Never concede without getting something back.</strong> Every concession should come with a trade:
+        <div class="trade-grid" style="margin-top:6px;">
+          <div class="trade-item">Client wants: 10% discount → You get: 3-year term commitment</div>
+          <div class="trade-item">Client wants: drop a service → You get: case study + reference</div>
+          <div class="trade-item">Client wants: delayed start → You get: upfront annual payment</div>
+          <div class="trade-item">Client wants: price hold → You get: auto-renewal clause</div>
+        </div>
+      </li>
+      <li><strong>Anchor high, not low.</strong> Your opening proposal should include a modest price increase or expansion. If you anchor at the current price, the only direction the negotiation can go is down. Anchor 5–10% above to have room to "meet in the middle."</li>
+      <li><strong>Reframe the conversation from cost to risk.</strong> "I understand budget is a concern. Let me share what a regulatory deficiency finding or a data breach would cost in comparison. We're not a cost line — we're risk mitigation."</li>
+      <li><strong>Use silence.</strong> After you present your price, stop talking. Often the "objection" you were bracing for never comes.</li>
+    </ul>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">🔧 Restructure, Don't Reduce</div>
+    <p>When a client genuinely cannot afford the current scope, <strong>restructure the engagement rather than simply cutting the price</strong>:</p>
+    <ul class="rules-list" style="margin-top:6px;">
+      <li><strong>Tiered approach</strong> — "We can move to our core package this year and layer back the advanced services when budget allows."</li>
+      <li><strong>Phased expansion</strong> — "Let's start with firm-level coverage this year and plan to add portfolio company assessments in Q3 when the new budget cycle opens."</li>
+      <li><strong>Payment restructuring</strong> — Quarterly payments instead of annual upfront can solve cash flow problems without touching the total contract value.</li>
+      <li><strong>Scope swap</strong> — Replace a lower-value service with a higher-value one at the same price. The client feels they got something new, and you maintain revenue.</li>
+    </ul>
+  </div>
+
+  <!-- Uplift -->
+  <div class="section-heading">Negotiating Uplift (Price Increases)</div>
+
+  <div class="subsection">
+    <div class="subsection-title">📊 Why Uplift Matters — The Strategic Picture</div>
+    <p>Our standard annual uplift is 7%. In practice, most deals land somewhere between 3% and 7%. At our typical ACV of $30–50K, the dollar difference between those numbers is a few hundred to maybe a thousand dollars. <strong>This is not about fighting over a few hundred bucks.</strong></p>
+    <p>Uplift matters because it's a <em>habit</em> and a <em>signal</em>. If you consistently accept flat renewals, you're training clients to expect it — and compressing your book over time. Across 50 accounts, the difference between averaging 3% uplift and 5% uplift is real money at the portfolio level.</p>
+    <p>More importantly, <strong>how you handle the uplift conversation signals how you show up as a partner</strong>. An RM who presents uplift confidently, ties it to value, and uses it as a lever is operating strategically. An RM who apologizes for it or pre-discounts before the client pushes back is leaving value on the table.</p>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">🧭 The Uplift Framework</div>
+    <p>This isn't a rigid script — it's a way of thinking about the conversation. Every client is different and you have judgment. The framework helps you <strong>think through your approach before the conversation</strong>, not box you in during it.</p>
+    <div class="uplift-stack">
+      <div class="uplift-card">
+        <div class="uplift-card-title">1. Always Start at Standard</div>
+        <p>Every proposal goes out at 7%. No pre-discounting. No "I already brought it down for you." Many clients will accept it without pushback if it's presented as standard — you don't know which ones will push back until they do.</p>
+        <p>Present it as a line item, not a talking point. Call it an "annual adjustment" or "standard rate update" — not a "price increase." Language shapes perception.</p>
+      </div>
+      <div class="uplift-card">
+        <div class="uplift-card-title">2. When They Push Back — Lead with Value, Not Apology</div>
+        <p>Your first move is to tie the increase to something real:</p>
+        <ul>
+          <li>"The regulatory landscape has expanded — new Reg S-P amendments, AI governance, expanded SEC priorities. The scope of what we cover for you has grown."</li>
+          <li>"We've deepened our knowledge of your environment. That continuity has real value — a new provider would take 6 months to get up to speed."</li>
+          <li>"Platform improvements, expanded threat intelligence, faster DDQ turnaround — the service has gotten better."</li>
+        </ul>
+        <p>Often, simply explaining the "why" is enough. Many clients push back reflexively — they're checking to see if the number moves. Hold with a clear rationale and a lot of them will accept it.</p>
+      </div>
+      <div class="uplift-card">
+        <div class="uplift-card-title">3. If You Come Down — Trade for Something</div>
+        <p>Every concession should come with a trade. Whether you end up at 5% or 3% is less important than what you get in return.</p>
+        <table class="data-table stall-table" style="margin-top:8px;">
+          <thead><tr><th>You Give</th><th>You Get</th><th>Why It's Worth It</th></tr></thead>
+          <tbody>
+            <tr><td>Lower uplift</td><td class="cell-label">2-year commitment</td><td>Eliminates next year's renewal risk entirely. Revenue secured for 24 months.</td></tr>
+            <tr><td>Lower uplift</td><td class="cell-label">Auto-renewal clause</td><td>Contract continues unless cancelled. Shifts the burden from "renew" to "cancel."</td></tr>
+            <tr><td>Lower uplift</td><td class="cell-label">Expansion commitment</td><td>"I can work on the rate if we add the portco assessment we discussed for Q3."</td></tr>
+            <tr><td>Lower uplift</td><td class="cell-label">Case study / reference</td><td>Marketing asset + social proof. Worth more than the uplift delta to the business.</td></tr>
+            <tr><td>Lower uplift</td><td class="cell-label">Upfront annual payment</td><td>Cash flow improvement. A $40K check in January vs. quarterly invoices has real value.</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:8px;">The <strong>2-year deal is your best lever</strong> — reach for it first. Both sides win: the client gets rate certainty, you get guaranteed revenue and remove renewal risk from your pipeline.</p>
+      </div>
+      <div class="uplift-card">
+        <div class="uplift-card-title">4. Know When It's Not Worth the Fight</div>
+        <p>On a $35K deal, the difference between 5% and 3% is $700. If the client is a strong reference, has expansion potential, or just needs an easy win to get the deal signed, it may not be worth two more calls. <strong>Your time is an asset too.</strong> The goal is to maximize the value of your <em>book</em>, not to win every individual negotiation.</p>
+      </div>
+      <div class="uplift-card">
+        <div class="uplift-card-title">5. Flat Renewals Need a Story</div>
+        <p>Sometimes the right answer is 0% — a strategic account in a save situation, a client going through genuine hardship. That's fine, but it should be a <strong>deliberate decision with a plan</strong>, not a default. You should be able to articulate: <em>why this client</em>, <em>what you're getting in return</em>, and <em>what the plan is to get uplift next year</em>.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">🧠 The Real Skill: Reading the Situation</div>
+    <p>The best uplift negotiators don't rely on a script. They read the client and adjust. Here are the patterns to recognize:</p>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px;">
+      <div class="reset-card">
+        <div class="title">The Reflexive Pushback</div>
+        <p><strong>What it sounds like:</strong> "Can you do anything on the price?" — asked casually, almost out of habit. They haven't looked at the numbers.</p>
+        <p><strong>What to do:</strong> Hold. Explain the value. Most of the time, this resolves itself. If you immediately offer a discount, you've rewarded the test and they'll do it harder next year.</p>
+      </div>
+      <div class="reset-card">
+        <div class="title">The Budget Reality</div>
+        <p><strong>What it sounds like:</strong> "Our COO said all vendor renewals need to come in at X% or flat." There's a real number. Someone above them set it.</p>
+        <p><strong>What to do:</strong> Work with it. Take 3–5% and trade for multi-year or another concession. If it's 0%, explore restructuring or offer to help them build the internal case.</p>
+      </div>
+      <div class="reset-card">
+        <div class="title">The Competitive Lever</div>
+        <p><strong>What it sounds like:</strong> "We got a quote from another provider at $X" or "We're evaluating options."</p>
+        <p><strong>What to do:</strong> Don't panic and don't match blindly. Shift to switching costs and continuity: "Switching providers means 3–6 months of onboarding, losing institutional knowledge, and starting over on LP reporting. The uplift is a fraction of that disruption cost." Then offer the multi-year trade.</p>
+      </div>
+      <div class="reset-card">
+        <div class="title">The Value Question</div>
+        <p><strong>What it sounds like:</strong> "Why should we pay more when we didn't use everything?"</p>
+        <p><strong>What to do:</strong> This is a delivery and engagement problem, not a pricing problem. Schedule a business review and show the value. Address the root cause, then the renewal conversation gets much easier.</p>
+      </div>
+      <div class="reset-card">
+        <div class="title">The Hard Line</div>
+        <p><strong>What it sounds like:</strong> "We're renewing at the old price or we're not renewing." Firm. Not negotiating.</p>
+        <p><strong>What to do:</strong> Use the "leadership approval" frame to buy time and add weight: "A flat renewal isn't something I can approve on my own — let me take this back to my leadership with a case for it. If we can get a 2-year commitment, that gives me something to work with."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">🤝 The Multi-Year Play — Your Best Tool</div>
+    <p>The 2-year deal is your most versatile lever. It works because both sides genuinely benefit:</p>
+    <div class="multiyear-grid">
+      <div class="multiyear-client">
+        <div class="title">Client Gets</div>
+        <ul>
+          <li>Rate certainty for 24 months</li>
+          <li>No renewal negotiation next year</li>
+          <li>Budget predictability — easier internal approval</li>
+          <li>Commitment to continued service levels</li>
+        </ul>
+      </div>
+      <div class="multiyear-db">
+        <div class="title">Drawbridge Gets</div>
+        <ul>
+          <li>Guaranteed revenue for 2 years</li>
+          <li>One less renewal to manage next year</li>
+          <li>Deeper relationship and switching cost</li>
+          <li>Better forecasting accuracy</li>
+        </ul>
+      </div>
+    </div>
+    <p class="body-text">Frame it as a partnership move: "A 2-year agreement means we can plan a longer-horizon program together — more proactive, less reactive. It also takes this negotiation off both our plates next year so we can focus on the work."</p>
+  </div>
+
+  <div class="db-angle">
+    <div class="db-angle-label">What This Means for Drawbridge</div>
+    <p>The uplift conversation is a skill, not a policy. The percentages are guidelines. What matters is <strong>how you show up</strong>: confident, prepared, and focused on the relationship. An RM who consistently lands 3–5% with multi-year terms and strong client relationships is doing exactly the right thing.</p>
+    <p>Think of uplift as a muscle. The more you practice it, the more natural it feels. Start by presenting 7% confidently on your next renewal and see what happens. You'll be surprised how often the answer is just "okay."</p>
+  </div>
+
+  <!-- ROI Ammunition -->
+  <div class="section-heading">ROI Ammunition for Negotiation</div>
+  <p class="body-text">When a client pushes on price, abstract arguments don't work. Concrete numbers do. Use these ROI frameworks to shift the conversation from "what does it cost?" to "what does it cost <em>not</em> to have it?"</p>
+  <table class="data-table" style="margin-top:10px;">
+    <thead>
+      <tr>
+        <th>Framework</th>
+        <th>When to Use</th>
+        <th>The Line</th>
+        <th>Typical ROI</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="cell-label">Capital Protected</td>
+        <td>Client is fundraising, has LP concentration risk, or LPs are asking about cyber in ODD</td>
+        <td>"A failed ODD due to cyber gaps costs you the allocation — that's $X in management fees at risk. Our annual fee is a rounding error compared to one lost LP."</td>
+        <td style="font-weight:600;color:#166534;">25–50x</td>
+      </tr>
+      <tr>
+        <td class="cell-label">Enforcement Avoided</td>
+        <td>Client is compliance-focused, has an exam coming, or their CCO is the decision-maker</td>
+        <td>"Average SEC cyber enforcement is $1.5M+ before legal fees. Our program costs less than what their lawyers charge for a single deficiency response."</td>
+        <td style="font-weight:600;color:#166534;">15–70x</td>
+      </tr>
+      <tr>
+        <td class="cell-label">Breach Cost</td>
+        <td>Peer firm was breached, client had a near-miss, or their team is lean and exposed</td>
+        <td>"Average breach in financial services: $5.9M. Even at a 5% annual probability, the expected cost is $295K/year. Our program is a fraction of that."</td>
+        <td style="font-weight:600;color:#166534;">3–9x</td>
+      </tr>
+      <tr>
+        <td class="cell-label">Build vs. Buy</td>
+        <td>Client says they'll handle it in-house, is hiring a CISO, or COO is evaluating vendor consolidation</td>
+        <td>"A CISO + analyst + tools is $455K–$810K/year. We deliver broader coverage for $40K–$100K. Even if you hire internally, you still need us for the independent assessment."</td>
+        <td style="font-weight:600;color:#166534;">5–8x savings</td>
+      </tr>
+      <tr>
+        <td class="cell-label">Allocation Impact</td>
+        <td>Large fund, institutional LPs, competitive fundraise, or CEO/Founder is the persona</td>
+        <td>"A single institutional allocation won or retained because of your cyber posture is $9–15M in lifetime fees. Our program costs less than a single month of that impact."</td>
+        <td style="font-weight:600;color:#166534;">100x+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="callout-aqua" style="margin-top:10px;">
+    <p><strong>Which framework to lead with:</strong> Match to the persona. COO → Build vs. Buy. CCO → Enforcement Avoided. Founder/CEO → Capital Protected or Allocation Impact. If a peer was recently breached, lead with Breach Cost regardless of persona.</p>
+  </div>
+
+  <!-- Churn Signals -->
+  <div class="section-heading">Reading the Account: Churn Signals Shape Your Approach</div>
+  <p class="body-text">Not every renewal is the same negotiation. Use churn signals to adjust your approach <strong>before</strong> you send the proposal.</p>
+  <table class="data-table" style="margin-top:10px;">
+    <thead>
+      <tr><th>Churn Signals</th><th>Account Health</th><th>Negotiation Approach</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="font-weight:600;color:#166534;">0 signals</td>
+        <td><span class="churn-badge churn-healthy">Healthy</span></td>
+        <td>Full standard approach. Lead with value, anchor at 7%, push for multi-year and expansion. This is your opportunity to grow the account, not just retain it.</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600;color:#92400e;">1 signal</td>
+        <td><span class="churn-badge churn-watch">Watch</span></td>
+        <td>Standard approach but address the signal directly before proposing. If it's unused services, fix that first. If it's a new contact, rebuild the relationship before negotiating.</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600;color:#991b1b;">2+ signals</td>
+        <td><span class="churn-badge churn-risk">At Risk</span></td>
+        <td>Shift from negotiation mode to <strong>save mode</strong>. The goal is retention, not uplift. A flat renewal you retain is infinitely better than a churned account with 7% uplift on the proposal.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="subsection">
+    <div class="subsection-title">🔍 The Churn Signal Checklist</div>
+    <p>Review these before every renewal — and flag any account with 2+ signals immediately:</p>
+    <div class="checklist-grid">
+      <div class="checklist-item">☐ Score unchanged from CRA baseline</div>
+      <div class="checklist-item">☐ Services purchased but not utilized</div>
+      <div class="checklist-item">☐ No remediation activity in 60+ days</div>
+      <div class="checklist-item">☐ Primary contact changed</div>
+      <div class="checklist-item">☐ Low or declining platform engagement</div>
+      <div class="checklist-item">☐ Friction, complaints, or escalations</div>
+      <div class="checklist-item">☐ No response to outreach</div>
+      <div class="checklist-item">☐ Renewal approaching with no expansion discussion</div>
+    </div>
+  </div>
+
+  <!-- Expansion -->
+  <div class="section-heading">Driving Expansion</div>
+
+  <div class="subsection">
+    <div class="subsection-title">📈 Expansion Is Not Upselling — It's Problem-Solving</div>
+    <p>The worst way to expand a client is to pitch them a product they didn't ask for. The best way is to <strong>identify a problem they have and show them how Drawbridge solves it</strong>. Expansion should feel like a natural next step, not a sales push.</p>
+    <p>Expansion opportunities are everywhere — you just have to look for the signals:</p>
+  </div>
+
+  <div class="expansion-grid">
+    <div class="expansion-card">
+      <div class="title">Regulatory Trigger</div>
+      <p>New SEC rule, DORA compliance need, state privacy law. "The new Reg S-P amendments require an incident response program — let's make sure you're covered."</p>
+    </div>
+    <div class="expansion-card">
+      <div class="title">Organizational Change</div>
+      <p>New fund launch, acquisition, office expansion, key hire. "Congratulations on the new fund — let's extend your security program to cover it."</p>
+    </div>
+    <div class="expansion-card">
+      <div class="title">Incident or Near-Miss</div>
+      <p>Phishing attempt, vendor breach, industry peer hit by ransomware. "Given what happened to [peer firm], this is a good time to review your IR plan and add tabletop exercises."</p>
+    </div>
+    <div class="expansion-card">
+      <div class="title">LP / Allocator Pressure</div>
+      <p>New DDQ requirements, LP asking about specific controls. "Your allocators are asking about these areas — let us help you get ahead of it."</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">🎯 The Expansion Conversation Framework</div>
+    <p>Use this structure when you see an expansion opportunity. It takes 60 seconds and feels consultative, not salesy:</p>
+    <ol style="list-style:decimal;margin-left:20px;margin-top:8px;">
+      <li style="font-size:13px;margin-bottom:8px;line-height:1.6;"><strong>Observation</strong> — Lead with something you've noticed, not something you want to sell. "I noticed your team grew from 30 to 55 people since we started working together..."</li>
+      <li style="font-size:13px;margin-bottom:8px;line-height:1.6;"><strong>Implication</strong> — Connect it to risk or a gap. "...which means there are 25 people who haven't been through your security training program, and your access controls probably need an update."</li>
+      <li style="font-size:13px;margin-bottom:8px;line-height:1.6;"><strong>Recommendation</strong> — Offer a specific, scoped solution. "I'd recommend we add a training refresh and an access control review — that would take about 4 weeks and ensure you're covered."</li>
+      <li style="font-size:13px;margin-bottom:0;line-height:1.6;"><strong>Bridge to action</strong> — Make it easy to say yes. "I can put together a quick scope and pricing by Friday. Want me to send it over?"</li>
+    </ol>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">🔑 Portfolio Company Expansion (PE Clients)</div>
+    <p>For private equity clients, portfolio company expansion is the single biggest growth lever. A single PE firm relationship can 10x through portco coverage.</p>
+    <ul class="rules-list" style="margin-top:8px;">
+      <li><strong>Start with the firm</strong> — Deliver exceptional service at the GP level first. Your credibility with portfolio companies comes from the GP relationship.</li>
+      <li><strong>Anchor to a deal</strong> — Offer cyber due diligence on the next acquisition. Natural entry point that demonstrates value to the deal team.</li>
+      <li><strong>Create a portfolio program</strong> — Propose a standardized security baseline across all portfolio companies. "A breach at any portco is a breach on the fund's reputation with LPs."</li>
+      <li><strong>Use LP pressure</strong> — LPs are increasingly asking PE firms about portfolio-level cybersecurity. "Your LPs are asking about this in every DDQ — let's get ahead of it with a portfolio-wide program."</li>
+    </ul>
+  </div>
+
+  <!-- Tactical Toolbox -->
+  <div class="section-heading">Tactical Toolbox — When They Say... You Say...</div>
+  <div class="dialog-stack">
+    <div class="dialog-card">
+      <div class="dialog-trigger">"We need a 20% discount or we're leaving."</div>
+      <div class="dialog-response">"I hear you, and I want to make this work. Help me understand what's driving that number — is it a budget constraint or are you comparing to another option? If it's budget, let's look at restructuring the scope to fit. If it's competitive, I'd love the chance to show you what you'd be giving up."</div>
+    </div>
+    <div class="dialog-card">
+      <div class="dialog-trigger">"We're going to handle security in-house now."</div>
+      <div class="dialog-response">"That's great that you're investing in internal capabilities — who are you bringing on? Most of our clients find that even with an internal hire, they need a partner for specialized work: IR planning, pen testing, DDQ support, and regulatory expertise. What if we scoped a hybrid model where we complement your internal team instead of replacing them?"</div>
+    </div>
+    <div class="dialog-card">
+      <div class="dialog-trigger">"Our new CFO wants to cut all non-essential vendors."</div>
+      <div class="dialog-response">"I understand the pressure a new CFO brings. Let me help you make the case internally — I can put together a one-page ROI summary showing the regulatory risk of dropping your cyber program, the cost of a single SEC deficiency finding, and the LP retention risk. Would it be helpful if I also briefed your CFO directly?"</div>
+    </div>
+    <div class="dialog-card">
+      <div class="dialog-trigger">"We're happy with Drawbridge — just send over the same contract."</div>
+      <div class="dialog-response">"That's great to hear. Before I send the renewal, I want to make sure we're set up for the year ahead — a lot has changed in the regulatory landscape since we last signed. Can we do a quick 30-minute review to make sure your program covers the new Reg S-P requirements and any changes to your firm? I'd hate to find a gap during DDQ season."<span class="dialog-aside">(This is the moment most order-takers miss. "Just send the same contract" is an invitation to flat-renew. A strategic RM turns it into a value conversation that often leads to expansion.)</span></div>
+    </div>
+    <div class="dialog-card">
+      <div class="dialog-trigger">"We need to push the renewal out a few months."</div>
+      <div class="dialog-response">"I understand timing can be tricky. Two concerns with a gap: first, you'd lose continuity on your monitoring and compliance evidence, which matters if you have DDQs or an exam in that window. Second, I can't guarantee the same pricing once we re-engage — our rates are increasing next quarter. What if we do a short bridge agreement to maintain coverage while we finalize the full renewal?"</div>
+    </div>
+    <div class="dialog-card">
+      <div class="dialog-trigger">"We don't think we need cybersecurity services anymore."</div>
+      <div class="dialog-response">"That's a bold call. Can I ask — has anything changed in the regulatory landscape that makes you more comfortable? The SEC just expanded Reg S-P with mandatory incident response programs, and cybersecurity has been an exam priority for 10 straight years. Would it make sense to at least keep the foundational program in place while we figure out what a right-sized engagement looks like?"</div>
+    </div>
+  </div>
+
+  <!-- Multi-Year Play -->
+  <div class="section-heading">The Multi-Year Play — When and How</div>
+  <div class="subsection">
+    <div class="subsection-title">📅 When and How to Push Multi-Year Commitments</div>
+    <p>Multi-year agreements are the gold standard. They provide revenue predictability, reduce renewal risk, and deepen the client relationship. But you have to earn them — a client won't commit to 3 years if you haven't demonstrated 1 year of value.</p>
+    <p style="margin-top:6px;"><strong>When to propose multi-year:</strong></p>
+    <ul class="rules-list" style="margin-top:4px;">
+      <li>The client is asking for a discount — trade price for term</li>
+      <li>You have a strong champion who may leave (lock in the relationship)</li>
+      <li>Regulatory or compliance deadlines create urgency for long-term coverage</li>
+      <li>The client is in a PE fundraising cycle (they need stable operations for LP diligence)</li>
+    </ul>
+    <p style="margin-top:8px;"><strong>How to frame it:</strong></p>
+    <ul class="rules-list" style="margin-top:4px;">
+      <li>"If we can commit to a 2-year term, I can hold the current rate instead of applying the standard increase. That saves you $X over the contract."</li>
+      <li>"A multi-year agreement means we can plan a more comprehensive program on a predictable schedule. It also looks great in your LP reporting."</li>
+      <li>"Most of our enterprise clients are moving to multi-year to lock in capacity. With demand increasing around the new regulations, I'd recommend securing your slot."</li>
+    </ul>
+  </div>
+
+  <!-- Escalation -->
+  <div class="section-heading">When to Escalate</div>
+  <div class="subsection">
+    <div class="subsection-title">⬆️ Escalation Is a Strategy, Not a Failure</div>
+    <p>Bringing in a senior leader is not admitting defeat — it's a <strong>strategic move</strong> that changes the dynamic of the conversation.</p>
+    <ul class="rules-list" style="margin-top:8px;">
+      <li><strong>The decision-maker is above your contact</strong> — Offer an exec-to-exec conversation. "Would it be helpful if our VP joined the call with your CFO? Sometimes a peer-level conversation helps move things along."</li>
+      <li><strong>The negotiation is stuck on price</strong> — A senior leader can sometimes unlock budget that a mid-level contact can't. It also signals the client that we take the relationship seriously.</li>
+      <li><strong>You're being asked for a concession outside your authority</strong> — Never make a promise you can't keep. "Let me bring in my VP on that — I want to make sure I can commit to what we agree to."</li>
+      <li><strong>The client is at genuine churn risk</strong> — A save conversation from a senior leader carries more weight. It shows the client they matter to the organization, not just to one RM.</li>
+    </ul>
+    <p style="margin-top:8px;"><strong>Rule of thumb:</strong> escalate when the risk of <em>not</em> escalating is higher than the cost of asking for help. When in doubt, escalate early.</p>
+  </div>
+
+  <!-- Save Playbook -->
+  <div class="section-heading">The Save Playbook: At-Risk Accounts</div>
+  <p class="body-text">When an account is genuinely at risk — 2+ churn signals, client expressing dissatisfaction, or competitive evaluation underway — the standard negotiation playbook doesn't apply. A saved account is worth more than two new logos.</p>
+
+  <div class="subsection">
+    <div class="subsection-title">🚨 The Save Framework: RESET</div>
+    <div class="reset-stack">
+      <div class="reset-card">
+        <div class="title">R — Recognize the Risk Honestly</div>
+        <p>Don't sugarcoat it internally or externally. Name what's happening: "I think this account is at risk. Here's what I'm seeing." Flag it in your forecast and brief CS. Pretending the renewal is fine when it isn't is how accounts churn "unexpectedly."</p>
+      </div>
+      <div class="reset-card">
+        <div class="title">E — Engage Immediately and Directly</div>
+        <p>Don't wait for the client to formally cancel. Call them. Be direct: "I want to check in on how you're feeling about the program. I've noticed [specific signal] and I want to make sure we're addressing anything that's not working." Directness builds trust. Avoidance erodes it.</p>
+      </div>
+      <div class="reset-card">
+        <div class="title">S — Surface the Real Issue</div>
+        <p>The stated reason is rarely the real reason. "Budget" usually means "we don't see enough value." "We're going in-house" usually means "we feel like we could do this ourselves." Ask open questions: "If budget weren't a factor, would you still want to change? What would make this a no-brainer to keep?"</p>
+      </div>
+      <div class="reset-card">
+        <div class="title">E — Execute a Value Recovery</div>
+        <p>Once you understand the real issue, act fast. If it's low engagement — reactivate unused services within days. If it's value perception — run an emergency review showing concrete impact. The client needs to <em>feel</em> the value changing before they'll reconsider.</p>
+      </div>
+      <div class="reset-card">
+        <div class="title">T — Trade for Time, Then Earn It</div>
+        <p>If the client is leaning toward churning, your last play is a structured "prove it" period. Offer a short-term renewal (6 months, bridge quarter) with specific milestones: "Give us 90 days. Here's exactly what we'll deliver. If we don't hit these targets, you walk with no obligation." This removes the client's risk and puts the burden on you to perform.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">💡 Save Tactics That Work</div>
+    <div class="save-stack">
+      <div class="save-card">
+        <div class="title">The Executive Touch</div>
+        <p>Have a senior leader reach out directly. This signals that the client matters to the organization, not just one RM. Keep it genuine — not a hostage negotiation. "Chris mentioned you might have some concerns about the program. I wanted to hear directly from you."</p>
+      </div>
+      <div class="save-card">
+        <div class="title">The Switching Cost Conversation</div>
+        <p>Most clients underestimate what switching actually costs. Walk them through it: 3–6 months of onboarding, lost institutional knowledge, gaps in compliance evidence, disrupted DDQ responses. "You'd be starting from scratch on things that took us 18 months to build."</p>
+      </div>
+      <div class="save-card">
+        <div class="title">The Scope Restructure</div>
+        <p>If budget is genuinely the issue, restructure rather than discount. Move to a core package, defer expansion services, adjust payment terms. A smaller renewal you retain is always better than a full-price proposal the client declines. Protect the relationship — the scope can grow back.</p>
+      </div>
+      <div class="save-card">
+        <div class="title">The Peer Comparison</div>
+        <p>Use benchmarking data: "You're benchmarked against 1,200+ alternative investment firms. Walking away from that data point means your next ODD questionnaire comes without peer context — and that's increasingly what allocators are asking for."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="db-angle">
+    <div class="db-angle-label">What This Means for Drawbridge</div>
+    <p>Every dollar of ARR you protect and grow compounds across the business. A 5% average price increase across your book is worth more than a single large new deal. A churn save is worth more than two new logos. The math is simple: <strong>retention and expansion are the highest-ROI activities in the business</strong>.</p>
+    <p>Your job is to make clients feel like they <em>can't afford to leave</em> — not through lock-in, but through genuine indispensability. When you're deeply embedded in their compliance program, their DDQ process, their incident response plan, and their board reporting, Drawbridge isn't a vendor anymore — it's infrastructure. That's the goal of every renewal conversation.</p>
+  </div>
+
+</div>
+</body>
+</html>

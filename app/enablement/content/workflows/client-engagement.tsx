@@ -17,7 +17,7 @@ export default function ClientEngagement() {
         title="Client Engagement Process"
         subtitle="How to build the relationship depth that makes renewals easier — cadence, contact strategy, outreach quality, and Salesforce logging."
       />
-      <LastUpdated date="March 2026" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       {/* Why This Matters */}
       <SectionHeading>Why Consistent Engagement Matters</SectionHeading>

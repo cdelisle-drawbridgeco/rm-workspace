@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Churn Reason Tagging — Drawbridge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --db-dark:      #111821;
+      --db-aqua:      #86C8BC;
+      --db-aqua-dark: #489E8E;
+      --db-aqua-light:#D6E6E3;
+      --db-orange:    #FF6900;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #374151;
+      background: #fff;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 48px;
+    }
+    h1, h2, h3, h4, h5, .heading { font-family: 'Archivo', system-ui, sans-serif; }
+    strong { font-weight: 600; }
+    p + p { margin-top: 10px; }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(to right, var(--db-dark), #1a2535);
+      border-radius: 12px;
+      padding: 32px;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .hero .icon { font-size: 36px; display: block; margin-bottom: 10px; }
+    .hero h2 { font-size: 22px; font-weight: 700; color: #fff; }
+    .hero p  { font-size: 13px; color: #d1d5db; margin-top: 6px; }
+
+    .last-updated { font-size: 11px; color: #9ca3af; text-align: right; margin-top: 6px; margin-bottom: 4px; }
+
+    /* Section heading */
+    .section-heading {
+      font-family: 'Archivo', system-ui, sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--db-dark);
+      margin-top: 32px;
+      margin-bottom: 12px;
+    }
+
+    /* Taxonomy summary cards */
+    .taxonomy-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 14px; }
+    .tax-card { border-radius: 8px; padding: 14px; }
+    .tax-card .tax-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+    .tax-card p { font-size: 12px; color: #4b5563; line-height: 1.5; }
+    .tax-structural  { border: 1px solid #e5e7eb; background: #f9fafb; }
+    .tax-structural  .tax-label { color: #6b7280; }
+    .tax-competitive { border: 1px solid #fed7aa; background: #fff7ed; }
+    .tax-competitive .tax-label { color: #c2410c; }
+    .tax-controllable{ border: 1px solid #fecaca; background: #fef2f2; }
+    .tax-controllable .tax-label { color: #dc2626; }
+
+    /* Callout boxes */
+    .callout-aqua {
+      border: 1px solid rgba(134,200,188,0.35);
+      background: rgba(134,200,188,0.07);
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+    .callout-aqua .callout-title { font-size: 13px; font-weight: 600; color: var(--db-dark); margin-bottom: 4px; }
+    .callout-aqua p { font-size: 13px; color: #374151; }
+
+    .callout-amber {
+      border: 1px solid #fde68a;
+      background: #fffbeb;
+      border-radius: 8px;
+      padding: 14px;
+      margin-top: 12px;
+    }
+    .callout-amber .callout-label { font-size: 11px; font-weight: 600; color: #92400e; margin-bottom: 4px; }
+    .callout-amber p { font-size: 13px; color: #374151; }
+
+    /* Numbered steps */
+    .steps { list-style: none; margin-top: 12px; }
+    .step { display: flex; gap: 12px; margin-bottom: 12px; }
+    .step-num {
+      flex-shrink: 0;
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: var(--db-dark);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step-text { font-size: 13px; color: #374151; line-height: 1.6; padding-top: 2px; }
+
+    /* No Other callout */
+    .callout-warn {
+      border: 1px solid #fde68a;
+      background: #fffbeb;
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-top: 10px;
+      font-size: 13px;
+      color: #374151;
+    }
+
+    /* Tag subsection */
+    .tag-block { margin-top: 20px; }
+    .tag-header {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 8px;
+    }
+    .tag-header .icon { font-size: 17px; }
+    .tag-header h4 {
+      font-family: 'Archivo', system-ui, sans-serif;
+      font-size: 14px; font-weight: 600; color: var(--db-dark);
+    }
+    .tag-description { font-size: 13px; color: #374151; margin-bottom: 10px; line-height: 1.5; }
+    .use-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .use-card { border-radius: 8px; padding: 12px; }
+    .use-card .use-label { font-size: 11px; font-weight: 600; margin-bottom: 8px; }
+    .use-card ul { list-style: none; }
+    .use-card li { font-size: 12px; color: #374151; margin-bottom: 5px; line-height: 1.45; padding-left: 12px; position: relative; }
+    .use-card li::before { content: "•"; position: absolute; left: 0; }
+    .use-yes  { border: 1px solid #bbf7d0; background: #f0fdf4; }
+    .use-yes  .use-label { color: #15803d; }
+    .use-no   { border: 1px solid #fecaca; background: #fef2f2; }
+    .use-no   .use-label { color: #dc2626; }
+
+    /* Decision table */
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead tr { background: var(--db-dark); color: #fff; }
+    th { padding: 10px 14px; text-align: left; font-weight: 600; font-family: 'Archivo', system-ui, sans-serif; font-size: 13px; }
+    td { padding: 9px 14px; }
+    tbody tr:nth-child(odd)  { background: #fff; }
+    tbody tr:nth-child(even) { background: #f9fafb; }
+    tbody tr { border-bottom: 1px solid #f3f4f6; }
+    td:first-child { color: #374151; }
+    td:nth-child(2) { font-weight: 600; color: var(--db-dark); }
+    td:nth-child(3) { font-size: 11px; color: #9ca3af; }
+    .table-wrap { border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; margin-top: 12px; }
+
+    /* Win/Loss steps */
+    .wl-steps { margin-top: 12px; }
+    .wl-step { display: flex; gap: 10px; margin-bottom: 10px; }
+    .wl-num { flex-shrink: 0; font-weight: 700; color: var(--db-dark); font-size: 13px; width: 18px; }
+    .wl-step p { font-size: 13px; color: #374151; line-height: 1.5; }
+
+    /* Review steps */
+    .review-steps { list-style: none; margin-top: 12px; }
+    .review-step { display: flex; gap: 12px; margin-bottom: 12px; }
+
+    /* Drawbridge angle */
+    .db-angle {
+      margin-top: 28px;
+      border-left: 4px solid var(--db-orange);
+      background: #fff7ed;
+      border-radius: 6px;
+      padding: 18px 20px;
+    }
+    .db-angle .db-label {
+      font-size: 11px; font-weight: 600; color: var(--db-orange);
+      text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px;
+    }
+    .db-angle p { font-size: 13px; color: #374151; line-height: 1.6; }
+
+    /* Dividers between tags */
+    .tag-divider { border: none; border-top: 1px solid #e5e7eb; margin: 22px 0 0; }
+
+    /* Print */
+    @media print {
+      body { padding: 20px 28px; font-size: 12px; }
+      .hero { padding: 22px 26px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .hero h2 { font-size: 20px; }
+      .section-heading { margin-top: 22px; page-break-after: avoid; }
+      .tag-block, .use-grid, .taxonomy-grid { page-break-inside: avoid; }
+      .taxonomy-grid, .use-yes, .use-no, .callout-aqua, .callout-amber, .callout-warn, .db-angle,
+      thead tr, tbody tr:nth-child(even) {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <div class="hero">
+    <span class="icon">📉</span>
+    <h2>Churn Reason Tagging</h2>
+    <p>The seven-tag taxonomy, when to use each tag, the Quick Decision Guide, and the review process.</p>
+  </div>
+  <p class="last-updated">Drawbridge RM Team &nbsp;|&nbsp; March 2026</p>
+
+  <!-- Why This Matters -->
+  <h3 class="section-heading">Why This Matters</h3>
+  <p>Every time a client doesn't renew, we tag the reason in Salesforce. This isn't a paperwork exercise — it's how we build the data to understand what's driving churn, make the case for investments, and have honest coaching conversations about what's in our control.</p>
+  <p>The data is only useful if tags are consistent and accurate across the team. One RM's "Lost to Competitor" should mean the same thing as another's.</p>
+
+  <div class="taxonomy-grid">
+    <div class="tax-card tax-structural">
+      <p class="tax-label">Structural</p>
+      <p>Non-preventable churn. Business Wind-Down, M&amp;A / Org Change, Champion Departure.</p>
+    </div>
+    <div class="tax-card tax-competitive">
+      <p class="tax-label">Competitive</p>
+      <p>Lost to a competitor or client building in-house. Lost to Competitor, Brought In-House.</p>
+    </div>
+    <div class="tax-card tax-controllable">
+      <p class="tax-label">Controllable</p>
+      <p>Highest-leverage for coaching. Insufficient Value Realized, Poor Customer Experience.</p>
+    </div>
+  </div>
+
+  <!-- The Golden Rule -->
+  <h3 class="section-heading">The Golden Rule</h3>
+  <div class="callout-aqua">
+    <p class="callout-title">Tag the most proximate cause at the time of non-renewal.</p>
+    <p>When multiple factors contributed, ask: <em>what was the tipping point that made the client decide not to renew?</em> That is the tag.</p>
+  </div>
+  <div class="callout-amber" style="margin-top:10px">
+    <p class="callout-label">Example</p>
+    <p>A client's CCO left the firm six months ago. The new CCO came in and chose a competitor. The tipping point was <strong>Champion Departure</strong> — not Lost to Competitor. The competitive loss was downstream of the relationship failure.</p>
+  </div>
+
+  <!-- When to Tag -->
+  <h3 class="section-heading">When to Tag</h3>
+  <ol class="steps">
+    <li class="step"><span class="step-num">1</span><span class="step-text">You receive a non-renewal notice, or a renewal conversation ends without commitment.</span></li>
+    <li class="step"><span class="step-num">2</span><span class="step-text">Before closing the opportunity as Closed Lost in Salesforce, select a Churn Reason tag.</span></li>
+    <li class="step"><span class="step-num">3</span><span class="step-text">Complete the Win/Loss Description field — minimum 2–3 sentences. What did the client say? What do you believe the real reason was? What, if anything, could have prevented it?</span></li>
+    <li class="step"><span class="step-num">4</span><span class="step-text">Bring the tag + notes to your next 1:1 with Chris. Tags are reviewed and confirmed before they are final — do not self-finalize.</span></li>
+  </ol>
+  <div class="callout-warn">
+    <strong>No "Other" option.</strong> If you genuinely cannot determine the correct tag, leave a note in Win/Loss Description and flag it for your 1:1. Do not guess — every churn maps to one of the seven tags.
+  </div>
+
+  <!-- The Seven Tags -->
+  <h3 class="section-heading">The Seven Tags</h3>
+  <p style="font-size:13px;color:#4b5563">Choose the one tag that best describes the proximate cause.</p>
+
+  <!-- Tag 1 -->
+  <div class="tag-block">
+    <div class="tag-header"><span class="icon">⚔️</span><h4>1. Lost to Competitor</h4></div>
+    <p class="tag-description">The client selected a competing cybersecurity/compliance vendor, MSP, bundled platform, or consulting firm over Drawbridge.</p>
+    <div class="use-grid">
+      <div class="use-card use-yes">
+        <p class="use-label">Use this tag when:</p>
+        <ul>
+          <li>Client explicitly named a competitor (ACA ComplianceAlpha, an MSP, RSM, boutique cyber firm)</li>
+          <li>Client received a competing proposal and chose it on price, features, or relationship</li>
+          <li>Client chose a bundled IT/MSP solution that includes cyber over Drawbridge's pure-play offering</li>
+        </ul>
+      </div>
+      <div class="use-card use-no">
+        <p class="use-label">Do NOT use if:</p>
+        <ul>
+          <li>Client is building internally → <strong>Brought In-House</strong></li>
+          <li>Key contact left and the new person brought in a competitor → <strong>Champion Departure</strong> (relationship loss came first)</li>
+          <li>Client cited price but real issue was value → consider <strong>Insufficient Value Realized</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="tag-divider" />
+
+  <!-- Tag 2 -->
+  <div class="tag-block">
+    <div class="tag-header"><span class="icon">📉</span><h4>2. Insufficient Value Realized</h4></div>
+    <p class="tag-description">The client did not experience enough ROI, utility, or outcomes to justify renewal. Covers pricing objections, low adoption, product gaps, and budget cuts — because price is almost always a symptom of a value failure, not a standalone reason.</p>
+    <div class="use-grid">
+      <div class="use-card use-yes">
+        <p class="use-label">Use this tag when:</p>
+        <ul>
+          <li>Client said the product wasn't worth the cost or they could get "good enough" elsewhere for less</li>
+          <li>Client was a low adopter — rarely logged in, didn't complete assessments, didn't engage with advisory</li>
+          <li>Client cited a specific product gap or missing feature</li>
+          <li>Budget was cut and cyber was deprioritized (Drawbridge hadn't made itself indispensable)</li>
+          <li>Client going without any vendor at all</li>
+        </ul>
+      </div>
+      <div class="use-card use-no">
+        <p class="use-label">Do NOT use if:</p>
+        <ul>
+          <li>Client selected a specific named competitor → <strong>Lost to Competitor</strong></li>
+          <li>Client is building internal capability → <strong>Brought In-House</strong></li>
+          <li>The decision-maker who valued the relationship left → <strong>Champion Departure</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="tag-divider" />
+
+  <!-- Tag 3 -->
+  <div class="tag-block">
+    <div class="tag-header"><span class="icon">🏢</span><h4>3. Brought In-House</h4></div>
+    <p class="tag-description">The client hired or built internal cybersecurity/compliance capabilities to replace Drawbridge's outsourced services.</p>
+    <div class="use-grid">
+      <div class="use-card use-yes">
+        <p class="use-label">Use this tag when:</p>
+        <ul>
+          <li>Client hired a CISO, dedicated compliance officer, or internal cyber team</li>
+          <li>Client explicitly stated they are taking the function in-house</li>
+          <li>Client at growth stage (typically $5B+ AUM) where internal capability becomes cost-competitive</li>
+        </ul>
+      </div>
+      <div class="use-card use-no">
+        <p class="use-label">Do NOT use if:</p>
+        <ul>
+          <li>Client is moving to a competitor firm → <strong>Lost to Competitor</strong></li>
+          <li>Client just said they want to cut costs → likely <strong>Insufficient Value Realized</strong> unless internal hire is confirmed</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="tag-divider" />
+
+  <!-- Tag 4 -->
+  <div class="tag-block">
+    <div class="tag-header"><span class="icon">🔻</span><h4>4. Business Wind-Down</h4></div>
+    <p class="tag-description">The client firm, fund, or entity ceased operations — including fund liquidation, firm dissolution, voluntary wind-down, or family office conversion.</p>
+    <div class="use-grid">
+      <div class="use-card use-yes">
+        <p class="use-label">Use this tag when:</p>
+        <ul>
+          <li>Fund or firm closed, wound down, or ceased active operations</li>
+          <li>Client converted to a family office and no longer requires institutional-grade cyber compliance</li>
+          <li>Client fund was liquidated with no successor entity</li>
+        </ul>
+      </div>
+      <div class="use-card use-no">
+        <p class="use-label">Do NOT use if:</p>
+        <ul>
+          <li>Firm was acquired and acquirer chose not to continue → <strong>M&amp;A / Org Change</strong></li>
+          <li>Firm downsized but continues operating → likely <strong>Insufficient Value Realized</strong> or <strong>Lost to Competitor</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="tag-divider" />
+
+  <!-- Tag 5 -->
+  <div class="tag-block">
+    <div class="tag-header"><span class="icon">🔀</span><h4>5. M&amp;A / Organizational Change</h4></div>
+    <p class="tag-description">The client was acquired, merged, reorganized, or subject to a PE parent vendor mandate that displaced Drawbridge.</p>
+    <div class="use-grid">
+      <div class="use-card use-yes">
+        <p class="use-label">Use this tag when:</p>
+        <ul>
+          <li>Client firm was acquired and the acquirer uses a different vendor</li>
+          <li>Fund merged into another vehicle and the successor entity has existing coverage</li>
+          <li>PE sponsor or parent company mandated a different cybersecurity vendor across the portfolio</li>
+          <li>Organizational restructuring resulted in the client entity no longer being a standalone Drawbridge client</li>
+        </ul>
+      </div>
+      <div class="use-card use-no">
+        <p class="use-label">Do NOT use if:</p>
+        <ul>
+          <li>Firm simply ceased operations with no acquisition → <strong>Business Wind-Down</strong></li>
+          <li>An individual left the firm → <strong>Champion Departure</strong> (unless it triggered a broader org change)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="tag-divider" />
+
+  <!-- Tag 6 -->
+  <div class="tag-block">
+    <div class="tag-header"><span class="icon">🚪</span><h4>6. Champion Departure</h4></div>
+    <p class="tag-description">The key decision-maker or sponsor (CCO, COO, CISO, or managing partner) left the firm and the client relationship did not survive the transition.</p>
+    <div class="use-grid">
+      <div class="use-card use-yes">
+        <p class="use-label">Use this tag when:</p>
+        <ul>
+          <li>Primary contact or decision-maker departed and their replacement chose not to renew</li>
+          <li>New hire came in with a pre-existing vendor preference or competitive relationship</li>
+          <li>Relationship was person-to-person rather than institutional — and the person left</li>
+          <li>Multiple key contacts turned over in a short period and the account lost continuity</li>
+        </ul>
+      </div>
+      <div class="use-card use-no">
+        <p class="use-label">Do NOT use if:</p>
+        <ul>
+          <li>Champion left AND new person selected a specific competitor → still <strong>Champion Departure</strong>; the competitive loss was downstream</li>
+          <li>Firm reorganized broadly → consider <strong>M&amp;A / Org Change</strong> if structural change was the driver</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="tag-divider" />
+
+  <!-- Tag 7 -->
+  <div class="tag-block">
+    <div class="tag-header"><span class="icon">😤</span><h4>7. Poor Customer Experience</h4></div>
+    <p class="tag-description">The client was dissatisfied with service delivery, support responsiveness, onboarding execution, advisor quality, or overall relationship management.</p>
+    <div class="use-grid">
+      <div class="use-card use-yes">
+        <p class="use-label">Use this tag when:</p>
+        <ul>
+          <li>Client cited slow response times, dropped balls, or unmet commitments</li>
+          <li>Onboarding was rocky and the client never fully got off the ground</li>
+          <li>Client felt their advisor was unresponsive, uninformed, or not adding value</li>
+          <li>Policies delivered late, generic, or not tailored to the client's actual situation</li>
+          <li>Client felt Drawbridge was reactive rather than proactive throughout the relationship</li>
+        </ul>
+      </div>
+      <div class="use-card use-no">
+        <p class="use-label">Do NOT use if:</p>
+        <ul>
+          <li>Client didn't use the product → likely <strong>Insufficient Value Realized</strong> (adoption failure)</li>
+          <li>Client chose a competitor on features/price → <strong>Lost to Competitor</strong></li>
+          <li>Issue was a single bad interaction rather than a pattern → escalate to Chris before tagging</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Decision Guide -->
+  <h3 class="section-heading">Quick Decision Guide</h3>
+  <p style="font-size:13px;color:#4b5563;margin-bottom:12px">When you're unsure, work through these questions in order:</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Question</th>
+          <th>If YES</th>
+          <th>If NO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Did the client entity cease to exist (wind-down, liquidation)?</td>
+          <td>Business Wind-Down</td>
+          <td>Continue ↓</td>
+        </tr>
+        <tr>
+          <td>Was the client acquired, merged, or subject to a PE mandate?</td>
+          <td>M&amp;A / Org Change</td>
+          <td>Continue ↓</td>
+        </tr>
+        <tr>
+          <td>Did a key decision-maker depart and the new person not renew?</td>
+          <td>Champion Departure</td>
+          <td>Continue ↓</td>
+        </tr>
+        <tr>
+          <td>Is the client building an internal capability to replace us?</td>
+          <td>Brought In-House</td>
+          <td>Continue ↓</td>
+        </tr>
+        <tr>
+          <td>Did the client select a specific named competitor?</td>
+          <td>Lost to Competitor</td>
+          <td>Continue ↓</td>
+        </tr>
+        <tr>
+          <td>Did the client cite poor service, responsiveness, or delivery?</td>
+          <td>Poor Customer Experience</td>
+          <td>Continue ↓</td>
+        </tr>
+        <tr>
+          <td>Did the client not see enough value or ROI to justify the cost?</td>
+          <td>Insufficient Value Realized</td>
+          <td>Escalate to Chris</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Win/Loss Description -->
+  <h3 class="section-heading">Completing Win/Loss Description</h3>
+  <p style="font-size:13px;color:#374151">Required on every Closed Lost record. Minimum 2–3 sentences. Answer these three questions:</p>
+  <div class="wl-steps">
+    <div class="wl-step"><span class="wl-num">1.</span><p><strong>What did the client say?</strong> Direct quote or close paraphrase of their stated reason.</p></div>
+    <div class="wl-step"><span class="wl-num">2.</span><p><strong>What do you believe the actual reason was?</strong> Your honest read — this may differ from the stated reason.</p></div>
+    <div class="wl-step"><span class="wl-num">3.</span><p><strong>What, if anything, could have changed the outcome?</strong></p></div>
+  </div>
+  <div class="callout-aqua" style="margin-top:12px">
+    <p class="callout-title" style="font-size:11px;font-weight:600;color:#489E8E;margin-bottom:6px">Example</p>
+    <p style="font-style:italic">"Client said they were going with a competitor that offered a lower price. My read is they never saw the ROI because they didn't complete the annual assessment or engage with the advisory team after onboarding. Better adoption support in months 3–6 could have changed this."</p>
+  </div>
+
+  <!-- Review Process -->
+  <h3 class="section-heading">Review Process</h3>
+  <p style="font-size:13px;color:#374151;margin-bottom:12px">Tags are not final until reviewed with Chris in your 1:1. Here's how it works:</p>
+  <ol class="steps">
+    <li class="step"><span class="step-num">1</span><span class="step-text">Close the opportunity in Salesforce, select the tag, and complete Win/Loss Description.</span></li>
+    <li class="step"><span class="step-num">2</span><span class="step-text">Flag the account in your weekly renewal forecast update with the tag you selected.</span></li>
+    <li class="step"><span class="step-num">3</span><span class="step-text">Chris reviews the tag and notes during your 1:1 — he may ask questions or suggest a different tag.</span></li>
+    <li class="step"><span class="step-num">4</span><span class="step-text">Once confirmed, the tag is final and feeds into exec reporting.</span></li>
+  </ol>
+  <div class="callout-aqua" style="margin-top:12px">
+    <p>The review step is not about second-guessing your judgment — it's about ensuring consistency across the team so the data is meaningful. One RM's "Lost to Competitor" should mean the same thing as another's.</p>
+  </div>
+
+  <!-- Drawbridge Angle -->
+  <div class="db-angle">
+    <p class="db-label">What This Means for Drawbridge</p>
+    <p>Accurate churn tagging is how Drawbridge makes the case for what's in our control vs. what isn't — separating structural and competitive losses from the controllable churn we can coach against and reduce. The cleaner the data, the stronger the story in exec reporting and the more targeted the coaching conversations in 1:1s.</p>
+  </div>
+
+  <!-- Footer -->
+  <p style="margin-top:40px;font-size:11px;color:#9ca3af;text-align:center;border-top:1px solid #e5e7eb;padding-top:16px;">
+    Drawbridge RM Team &nbsp;|&nbsp; Churn Reason Tagging Process &nbsp;|&nbsp; March 2026
+  </p>
+
+</body>
+</html>
