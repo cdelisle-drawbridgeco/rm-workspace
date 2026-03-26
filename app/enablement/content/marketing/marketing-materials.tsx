@@ -1,6 +1,6 @@
 'use client';
 
-import { HeroSection, LastUpdated } from '../../components/shared-ui';
+import { HeroSection, DrawbridgeAngle, LastUpdated } from '../../components/shared-ui';
 
 const ONE_PAGERS = [
   {
@@ -44,7 +44,7 @@ export default function MarketingMaterials() {
         title="Marketing Materials"
         subtitle="Sales collateral, competitive intelligence, and customer-facing resources."
       />
-      <LastUpdated date="March 14, 2026" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       {/* One-Pagers */}
       <div className="mt-6">
@@ -103,6 +103,22 @@ export default function MarketingMaterials() {
           </div>
         ))}
       </div>
+
+      <DrawbridgeAngle>
+        <p>
+          Drawbridge is trusted by <strong>1,000+ alternative investment funds managing
+          $1.7T+ in assets</strong> and has supported over <strong>2,000 successful ODD
+          reviews</strong>. Every piece of collateral here is built on that proof — designed
+          to give clients and prospects confidence that they&apos;re working with the
+          purpose-built leader in alternative asset management cybersecurity.
+        </p>
+        <p className="mt-2">
+          Use these materials to anchor conversations in outcomes, not features. The
+          strongest pitch deck is the one that shows a client exactly where they are in the
+          <strong> Raise Your Guard → Raise Your Score → Raise Your Bar</strong> journey —
+          and what it costs to stay where they are.
+        </p>
+      </DrawbridgeAngle>
 
       <div className="mt-6 rounded-lg border-2 border-dashed border-db-aqua/40 bg-db-aqua/5 p-6 text-center">
         <span className="text-3xl">🔗</span>
