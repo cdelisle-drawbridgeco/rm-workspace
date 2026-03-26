@@ -17,7 +17,7 @@ export default function JourneyPEPortco() {
         title="Customer Journey — PE Portfolio Company"
         subtitle="A roadmap for portfolio companies mandated by their PE sponsor to build a security program. Start with rapid uplift, then mature toward exit readiness."
       />
-      <LastUpdated date="February 24, 2026 at 10:39 PM" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       {/* How to use */}
       <div className="mt-6 rounded-lg bg-db-dark p-5">
@@ -647,6 +647,14 @@ export default function JourneyPEPortco() {
           what you share with the portco and their PE sponsor — a clear path from baseline compliance
           to exit-ready security. The <strong>internal lifecycle</strong> is how we operate — ensuring
           clean handoffs, clear ownership, and disciplined value communication.
+        </p>
+        <p className="mt-2">
+          Drawbridge understands the PE ecosystem from both sides: we work with <strong>GP management
+          companies</strong> on LP readiness and with their <strong>portfolio companies</strong> on
+          rapid uplift and exit preparation. That dual vantage point — backed by 1,000+ fund
+          relationships and 2,000+ ODD reviews — means the RM who understands the sponsor&apos;s
+          investment thesis becomes the advisor no other vendor can replicate.
+          <strong> Raise Your Guard. Raise Your Bar.</strong>
         </p>
         <p>
           The portfolio company journey is distinct from the PE management company journey in critical

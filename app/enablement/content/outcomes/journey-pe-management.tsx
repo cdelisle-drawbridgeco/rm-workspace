@@ -17,7 +17,7 @@ export default function JourneyPEManagement() {
         title="Customer Journey — PE Management Company"
         subtitle="A roadmap for building a lasting relationship with PE firms (GPs). Start with the fundraising moment, then expand into portfolio oversight and value creation."
       />
-      <LastUpdated date="February 24, 2026 at 10:39 PM" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       {/* How to use */}
       <div className="mt-6 rounded-lg bg-db-dark p-5">
@@ -652,6 +652,13 @@ export default function JourneyPEManagement() {
           what you share externally — they show the PE firm a clear path from LP readiness to
           portfolio-wide value creation. The <strong>internal lifecycle</strong> is how we operate —
           it ensures clean handoffs, clear ownership, and disciplined value communication.
+        </p>
+        <p className="mt-2">
+          Drawbridge has supported over <strong>2,000 successful ODD reviews</strong> and is trusted
+          by PE firms managing some of the largest portfolios in alternatives. That intelligence —
+          knowing exactly what allocators ask, what gaps get flagged, and what a passing program
+          looks like — is what makes Drawbridge indispensable during fundraising.
+          <strong> Raise Your Guard. Protect Your Returns.</strong>
         </p>
         <p>
           The PE management company journey is distinct from hedge funds in two critical ways:

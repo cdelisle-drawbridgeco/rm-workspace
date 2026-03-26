@@ -10,7 +10,7 @@ export default function ROIValueMeasurement() {
         title="ROI & Value Measurement"
         subtitle="Frameworks for quantifying Drawbridge's impact in business terms — capital protected, costs avoided, and capability delivered vs. in-house alternatives."
       />
-      <LastUpdated date="March 9, 2026 at 4:00 PM" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       {/* The mindset shift */}
       <div className="mt-6 rounded-lg bg-db-dark p-6">
@@ -762,11 +762,19 @@ export default function ROIValueMeasurement() {
           If you&apos;ve delivered real outcomes, the ROI tells itself. Your job is to help them
           articulate it to their PM, their board, or their partners.
         </p>
-        <p>
+        <p className="mt-2">
           The most powerful ROI conversation is the one where the <em>client</em> does the math:
           &ldquo;We&apos;ve raised $400M since we started working with Drawbridge, and not a single
           allocator has flagged our cyber posture.&rdquo; When they say it, they believe it. When you
           say it, it&apos;s a sales pitch. Give them the data, let them tell the story.
+        </p>
+        <p className="mt-2">
+          Drawbridge brings a unique advantage to every ROI conversation: <strong>benchmarking
+          intelligence across 1,000+ alternative investment funds managing $1.7T+ in assets</strong>.
+          No internal team or generalist vendor can tell a client exactly where they stand relative
+          to their peers — and how much that gap would cost if the SEC found it first. That context
+          transforms an ROI discussion from defensive justification into a forward-looking business
+          conversation. <strong>Raise Your Guard. Raise Your Score.</strong>
         </p>
       </DrawbridgeAngle>
     </>

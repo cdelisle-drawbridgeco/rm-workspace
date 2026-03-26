@@ -17,7 +17,7 @@ export default function JourneyHedgeFund() {
         title="Customer Journey — Hedge Fund"
         subtitle="A practical roadmap for building a lasting client relationship. Start by solving their most urgent problem, then expand as their business evolves."
       />
-      <LastUpdated date="February 24, 2026 at 9:04 PM" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       {/* How to use */}
       <div className="mt-6 rounded-lg bg-db-dark p-5">
@@ -643,12 +643,18 @@ export default function JourneyHedgeFund() {
           forward. The <strong>internal lifecycle</strong> is how we operate — it ensures
           clean handoffs, clear ownership, and disciplined value communication.
         </p>
-        <p>
+        <p className="mt-2">
           The RM is the connective tissue. You bridge Discovery to Implementation by
           setting clear expectations. You bridge Implementation to Value Realization by
           gathering evidence and telling the story. You bridge Value to Strategic
           Partnership by earning trust. And you bridge Strategic Partnership to Renewal
           by making the decision obvious. Every bridge is earned, never forced.
+        </p>
+        <p className="mt-2">
+          Drawbridge is trusted by <strong>1,000+ alternative investment funds</strong> not because
+          we sell software, but because RMs like you show up as genuine partners at every stage —
+          independent, credible, and deeply embedded in the alternative investment ecosystem.
+          <strong> Raise Your Guard. Raise Your Score.</strong>
         </p>
       </DrawbridgeAngle>
 

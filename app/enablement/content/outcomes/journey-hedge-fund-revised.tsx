@@ -10,7 +10,7 @@ export default function JourneyHedgeFundRevised() {
         title="Customer Value Journey — Hedge Fund"
         subtitle="A value-first playbook for hedge fund clients. Non-linear — enter where the client's need is most urgent and expand as trust grows."
       />
-      <LastUpdated date="March 9, 2026 at 5:00 PM" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       {/* The core insight */}
       <div className="mt-6 rounded-lg bg-db-dark p-6">
@@ -743,12 +743,18 @@ export default function JourneyHedgeFundRevised() {
           follow their business priorities. The RM&apos;s job is to understand which outcome matters
           most <em>right now</em>, deliver it, and listen for the expansion signals that reveal what&apos;s next.
         </p>
-        <p>
+        <p className="mt-2">
           Three themes should surface in every conversation: <strong>independence</strong> (your cyber
           assessment can&apos;t come from the same team that built your IT), <strong>scale</strong> (enterprise-grade security
           without the enterprise headcount), and <strong>outcomes over adoption</strong> (what changed in
           their business, not what we delivered). Get these right and the renewal conversation becomes
           obvious.
+        </p>
+        <p className="mt-2">
+          Drawbridge is trusted by <strong>1,000+ alternative investment funds managing $1.7T+ in
+          assets</strong> and has supported over <strong>2,000 successful ODD reviews</strong>. That
+          track record is built one outcome at a time — exactly the journey mapped here.
+          <strong> Raise Your Guard. Raise Your Score. Raise Your Bar.</strong>
         </p>
       </DrawbridgeAngle>
     </>

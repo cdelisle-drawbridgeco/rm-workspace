@@ -10,7 +10,7 @@ export default function JourneyPERevised() {
         title="Customer Value Journey — PE Firm (Revised)"
         subtitle="A value-first playbook for PE management companies. Non-linear — enter where the firm's need is most urgent and expand across firm-level and portfolio-level outcomes."
       />
-      <LastUpdated date="March 9, 2026 at 6:00 PM" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       {/* The core insight */}
       <div className="mt-6 rounded-lg bg-db-dark p-6">
@@ -746,6 +746,12 @@ export default function JourneyPERevised() {
           The RM who understands both dimensions — and the fund lifecycle that connects them —
           becomes indispensable.
         </p>
+        <p className="mt-2">
+          Drawbridge has supported over <strong>2,000 successful ODD reviews</strong> and is trusted
+          by <strong>1,000+ alternative investment funds managing $1.7T+ in assets</strong>. In PE,
+          that depth means we know what Fund IV allocators are asking today — and how to make sure
+          your client&apos;s program is ready before they ask it.
+        </p>
         <p>
           Three themes should surface in every conversation: <strong>independence</strong> (at both GP
           and portco level — the SEC expects it, LPs demand it, and buyers verify it),
@@ -754,7 +760,7 @@ export default function JourneyPERevised() {
           exit-ready DD, and LP satisfaction — not assessments completed). The renewal conversation
           for a PE firm should sound like: &ldquo;This year, we helped you raise Fund IV, reduced
           portfolio cyber risk by 30%, and prepared two portcos for clean exits. Here&apos;s how we
-          continue that across Fund V.&rdquo;
+          continue that across Fund V.&rdquo; <strong>Raise Your Guard. Protect Your Returns.</strong>
         </p>
       </DrawbridgeAngle>
     </>
