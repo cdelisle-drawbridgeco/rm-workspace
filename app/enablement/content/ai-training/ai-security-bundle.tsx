@@ -20,7 +20,7 @@ export default function AiSecurityBundle() {
         title="AI Security & Governance Bundle"
         subtitle="Drawbridge's three-service AI offering — Assessment, Policy, and Training. What each service is, how they fit together, who to target, and how to sell the bundle."
       />
-      <LastUpdated date="March 14, 2026" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       {/* ── Why This Is the Moment ────────────────────────── */}
       <div className="mt-6 grid grid-cols-4 gap-4">
@@ -505,6 +505,14 @@ export default function AiSecurityBundle() {
           <strong>Lead with the assessment as the entry point.</strong> Use the findings
           to build the case for policy and training. The bundle sells itself once the client
           sees what an unreviewed AI environment actually looks like.
+        </p>
+        <p className="mt-2">
+          No other provider can combine Drawbridge&apos;s AI governance expertise with
+          intelligence from <strong>1,000+ alternative investment fund relationships</strong>
+          and <strong>2,000+ successful ODD reviews</strong>. The bundle isn&apos;t just a
+          product — it&apos;s the foundation of a client&apos;s AI governance story for their
+          LPs, regulators, and board. Own this conversation now.
+          <strong> Raise Your Guard. Raise Your Bar.</strong>
         </p>
       </DrawbridgeAngle>
 

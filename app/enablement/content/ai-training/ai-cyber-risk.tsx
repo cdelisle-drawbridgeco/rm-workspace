@@ -21,7 +21,7 @@ export default function AiCyberRisk() {
         title="AI & Cyber Risk"
         subtitle="How artificial intelligence is amplifying the threat landscape — and what it means for your clients."
       />
-      <LastUpdated date="February 25, 2026 at 5:14 PM" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       {/* ── Stats Row ────────────────────────────────────── */}
       <div className="mt-6 grid grid-cols-4 gap-4">
@@ -323,6 +323,15 @@ export default function AiCyberRisk() {
           it&apos;s a focused engagement that addresses an urgent, fast-moving risk area
           and gives allocators and regulators confidence that the firm is managing AI
           adoption responsibly.
+        </p>
+        <p className="mt-2">
+          With <strong>1,000+ alternative investment fund relationships</strong>, Drawbridge
+          has unmatched visibility into how AI is actually being adopted across the industry —
+          which configurations are most commonly misconfigured, which use cases create the
+          highest data exposure risk, and what &ldquo;good&rdquo; AI governance looks like for a
+          $5B hedge fund vs. a $500M PE firm. That intelligence is what separates a
+          Drawbridge AI assessment from a generic vendor checklist.
+          <strong> Raise Your Guard. Lower Your Risk.</strong>
         </p>
       </DrawbridgeAngle>
 

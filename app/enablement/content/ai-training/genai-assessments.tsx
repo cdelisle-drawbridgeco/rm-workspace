@@ -20,7 +20,7 @@ export default function GenAiAssessments() {
         title="GenAI Security Assessments"
         subtitle="Drawbridge's ChatGPT and Claude Security Assessments — what they are, who they're for, how to sell them, and what clients get."
       />
-      <LastUpdated date="March 12, 2026" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       {/* ── Why This Matters Now ─────────────────────────── */}
       <div className="mt-6 grid grid-cols-4 gap-4">
@@ -415,6 +415,13 @@ export default function GenAiAssessments() {
           surprised by what they find. Default settings expose more than anyone realizes.
           That surprise — and the clear path to fixing it — is what makes this engagement
           land well.
+        </p>
+        <p className="mt-2">
+          Drawbridge is the only cybersecurity firm purpose-built for alternative asset
+          management with both the AI assessment capability <em>and</em> the context of
+          <strong> 1,000+ fund relationships</strong> to benchmark findings against industry
+          norms. When a client asks &ldquo;Is this normal?&rdquo; — we can actually answer that.
+          <strong> Raise Your Guard. Raise Your Score.</strong>
         </p>
       </DrawbridgeAngle>
 

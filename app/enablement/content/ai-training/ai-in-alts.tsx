@@ -225,7 +225,7 @@ export default function AiInAlts() {
         title="AI in Alternatives: How Your Clients Are Using It"
         subtitle="Real-world AI adoption across hedge funds and PE firms — and the cyber risks each use case creates."
       />
-      <LastUpdated date="March 3, 2026 at 7:52 AM" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       {/* Stats */}
       <div className="mt-6 grid grid-cols-4 gap-4">
@@ -462,6 +462,13 @@ export default function AiInAlts() {
           You&apos;re helping them adopt it safely — so they get the productivity gains without
           the data leakage, regulatory exposure, and LP confidence risk. That&apos;s a conversation
           every COO, CCO, and CTO wants to have.
+        </p>
+        <p className="mt-2">
+          Drawbridge is trusted by <strong>1,000+ alternative investment funds managing
+          $1.7T+ in assets</strong> — giving us a real-time view of how AI is being adopted
+          across the industry before regulators and LPs have even finished writing the
+          frameworks. That intelligence is your advantage in every AI conversation.
+          <strong> Raise Your Guard. Raise Your Bar.</strong>
         </p>
       </DrawbridgeAngle>
 
