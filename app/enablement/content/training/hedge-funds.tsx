@@ -11,7 +11,7 @@ export default function HedgeFunds() {
         title="Hedge Funds"
         subtitle="Actively managed investment vehicles using diverse strategies across public and private markets."
       />
-      <LastUpdated date="February 24, 2026 at 9:04 PM" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       <div className="mt-6 grid grid-cols-4 gap-4">
         <StatCard label="Global Hedge Fund AUM" value="$4.3T" />
@@ -147,22 +147,25 @@ export default function HedgeFunds() {
 
       <DrawbridgeAngle>
         <p>
-          Hedge funds are Drawbridge&apos;s largest client segment. Renewals often coincide with
-          annual DDQ season (Q1), when firms are responding to allocator questionnaires and
-          need to demonstrate their security posture. Emphasize how Drawbridge simplifies
-          DDQ responses, maintains regulatory compliance evidence, and provides the ongoing
-          monitoring that allocators expect to see.
+          Hedge funds are Drawbridge&apos;s largest client segment. The open-ended fund structure
+          means LPs can redeem at any time — a security incident or failed DDQ can directly trigger
+          redemptions and AUM loss. This makes cyber risk an existential business risk, not just an
+          IT issue. <strong>Raise Your Guard. Protect Your Returns.</strong> That is the frame that
+          resonates with hedge fund executives.
         </p>
         <p>
-          The open-ended fund structure means LPs can redeem at any time — a security
-          incident or failed DDQ can directly trigger redemptions and AUM loss. This makes
-          cyber risk an existential business risk, not just an IT issue. Frame Drawbridge as
-          protecting not just data, but the fund&apos;s ability to retain and attract capital.
+          Drawbridge brings something no competitor can match: proprietary benchmarking intelligence
+          from <strong>1,000+ alternative investment funds managing $1.7T+ in assets</strong>. When
+          you tell a hedge fund CIO &ldquo;most funds your size with similar strategies have these
+          controls in place,&rdquo; that is not a sales line — it is intelligence drawn from the
+          largest dataset in the space. Use it. Renewals often coincide with annual DDQ season (Q1)
+          — emphasize how Drawbridge simplifies DDQ responses, maintains regulatory compliance
+          evidence, and provides the ongoing monitoring allocators expect.
         </p>
         <p>
-          Key renewal levers: DDQ support volume, regulatory exam readiness, incident
-          response retainer utilization, new SEC requirements addressed, and technology
-          stack security assessments (trading systems, cloud, third-party vendors).
+          Key renewal levers: DDQ support volume, regulatory exam readiness, incident response
+          retainer utilization, new SEC requirements addressed, and technology stack security
+          assessments (trading systems, cloud, third-party vendors).
         </p>
       </DrawbridgeAngle>
 

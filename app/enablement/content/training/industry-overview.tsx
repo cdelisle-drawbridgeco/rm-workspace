@@ -11,7 +11,7 @@ export default function IndustryOverview() {
         title="Alternative Asset Management — Industry Overview"
         subtitle="Understanding the landscape Drawbridge serves across hedge funds, private equity, and family offices."
       />
-      <LastUpdated date="February 24, 2026 at 9:04 PM" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       <div className="mt-6 grid grid-cols-4 gap-4">
         <StatCard label="Global AUM (Alternatives)" value="$23.2T" />
@@ -108,16 +108,24 @@ export default function IndustryOverview() {
       <DrawbridgeAngle>
         <p>
           Drawbridge is uniquely positioned at the intersection of cybersecurity and alternative
-          asset management. Our deep domain expertise lets us speak the language of fund
-          managers and COOs while delivering enterprise-grade security programs. Every renewal
-          is an opportunity to demonstrate continued value through regulatory alignment,
-          allocator satisfaction, and risk reduction.
+          asset management — trusted by <strong>1,000+ funds managing $1.7T+ in assets</strong> and
+          supporting over <strong>2,000 successful ODD reviews</strong>. No generalist cybersecurity
+          firm can offer the depth of benchmarking, peer intelligence, and regulatory expertise that
+          comes from being embedded specifically in this ecosystem. That proprietary data moat is what
+          separates Drawbridge from every alternative a client might consider.
         </p>
         <p>
           The capital lifecycle creates natural touchpoints: allocators require cyber due diligence
           <em> before</em> committing capital, <em>during</em> the investment period through ongoing
           monitoring and reporting, and <em>at re-up</em> when they decide whether to invest in
-          the next fund. Drawbridge supports managers at every stage.
+          the next fund. Drawbridge supports managers at every stage — helping them{' '}
+          <strong>Raise Your Guard</strong> against threats, <strong>Raise Your Score</strong> with
+          investors and regulators, and <strong>Raise Your Bar</strong> as their program matures.
+        </p>
+        <p>
+          Every renewal is an opportunity to demonstrate continued value through regulatory alignment,
+          allocator satisfaction, and risk reduction. Frame that value in the language of the capital
+          cycle — not the language of IT.
         </p>
       </DrawbridgeAngle>
 

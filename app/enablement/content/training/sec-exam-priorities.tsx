@@ -20,7 +20,7 @@ export default function SECExamPriorities() {
         title="SEC Cybersecurity Exam Priorities"
         subtitle="What the SEC's Division of Examinations is actively looking for — and how it directly shapes what Drawbridge clients need."
       />
-      <LastUpdated date="February 24, 2026 at 9:04 PM" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       <div className="mt-6 grid grid-cols-4 gap-4">
         <StatCard label="Cyber as Exam Priority Since" value="2014" />
@@ -300,19 +300,22 @@ export default function SECExamPriorities() {
         </p>
         <p>
           &ldquo;If the SEC sent you a document request letter tomorrow, could you respond
-          confidently within a week? Drawbridge ensures the answer is yes.&rdquo;
+          confidently within a week? Drawbridge ensures the answer is yes — backed by the
+          same exam-ready framework we maintain for <strong>1,000+ alternative investment
+          funds</strong>.&rdquo;
         </p>
         <p>
           For clients who have been examined, reference the experience — &ldquo;You saw firsthand
           what the SEC asks for. Drawbridge keeps all of that current and organized so you&apos;re
           always ready.&rdquo; For clients who haven&apos;t been examined yet, create urgency —
           &ldquo;With ~3,000 exams a year and cyber as a stated priority, it&apos;s a matter of
-          when, not if.&rdquo;
+          when, not if.&rdquo; That is not a fear tactic — it is an accurate read of the regulatory
+          environment backed by intelligence across the industry.
         </p>
         <p>
-          Key renewal levers: number of exam-ready deliverables maintained, policy updates
-          completed, training completion rates, IR plan currency, and the peace of mind
-          that comes from knowing you&apos;re prepared.
+          Key renewal levers: exam-ready deliverables maintained, policy updates completed, training
+          completion rates, IR plan currency, and the confidence that comes from knowing you&apos;re
+          prepared. <strong>Raise Your Guard. Pass the Test.</strong>
         </p>
       </DrawbridgeAngle>
 

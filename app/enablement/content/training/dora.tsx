@@ -19,7 +19,7 @@ export default function DORA() {
         title="DORA \u2014 Digital Operational Resilience Act"
         subtitle="The EU's landmark regulation for ICT risk management in financial services, and what it means for Drawbridge's clients with European operations."
       />
-      <LastUpdated date="February 24, 2026 at 9:04 PM" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       <div className="mt-6 grid grid-cols-4 gap-4">
         <StatCard label="Enacted" value="Jan 2023" />
@@ -232,12 +232,13 @@ export default function DORA() {
           <li><strong>Board Reporting</strong> → Drawbridge provides board-ready reporting on ICT risk posture, which DORA requires the management body to review</li>
         </ul>
         <p className="mt-2">
-          For renewals, DORA is a powerful conversation driver with any client that has
-          European fund structures. Many US-headquartered firms are still figuring out
-          their DORA obligations — positioning Drawbridge as a guide through DORA compliance
-          adds significant renewal and expansion value. Ask in discovery: &ldquo;Do you manage
-          any EU-domiciled funds or have European LPs? Let&apos;s talk about how DORA affects
-          your program.&rdquo;
+          For renewals, DORA is a powerful conversation driver with any client that has European
+          fund structures. Drawbridge is trusted by <strong>1,000+ alternative investment funds
+          managing $1.7T+ in assets</strong> — and as European regulatory obligations expand, that
+          cross-jurisdictional expertise becomes a meaningful differentiator. Many US-headquartered
+          firms are still figuring out their DORA obligations. Ask in discovery: &ldquo;Do you manage
+          any EU-domiciled funds or have European LPs? Let&apos;s talk about how DORA affects your
+          program and how we keep you ahead of it.&rdquo;
         </p>
       </DrawbridgeAngle>
 

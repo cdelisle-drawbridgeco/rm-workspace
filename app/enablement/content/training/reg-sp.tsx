@@ -20,7 +20,7 @@ export default function RegSP() {
         title="Regulation S-P \u2014 Deep Dive"
         subtitle="The SEC's cornerstone regulation for safeguarding customer information at financial institutions, and why it matters for every Drawbridge client."
       />
-      <LastUpdated date="February 24, 2026 at 9:04 PM" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       <div className="mt-6 grid grid-cols-4 gap-4">
         <StatCard label="Originally Adopted" value="2000" />
@@ -194,11 +194,13 @@ export default function RegSP() {
           <li>Evidence of compliance → Drawbridge Platform &amp; Reporting</li>
         </ul>
         <p className="mt-2">
-          The 2025 amendments are a major renewal tailwind. Clients who previously had
-          basic programs now need to upgrade to meet the new incident response and breach
-          notification requirements. Use this as a renewal conversation starter: &ldquo;The
-          new Reg S-P requirements took effect in December — let&apos;s review your program
-          to ensure you&apos;re compliant.&rdquo;
+          The 2025 amendments are a major renewal tailwind. Clients who previously had basic
+          programs now need to upgrade to meet the new incident response and breach notification
+          requirements. Use this as a renewal conversation starter: &ldquo;The new Reg S-P
+          requirements are now in effect — let&apos;s review your program to ensure you&apos;re
+          compliant and exam-ready.&rdquo; Drawbridge is trusted by <strong>1,000+ alternative
+          investment funds</strong> to maintain exactly this kind of current, documented evidence
+          of compliance. <strong>Raise Your Guard. Pass the Test.</strong>
         </p>
       </DrawbridgeAngle>
 

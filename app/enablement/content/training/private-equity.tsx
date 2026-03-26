@@ -11,7 +11,7 @@ export default function PrivateEquity() {
         title="Private Equity"
         subtitle="Firms that acquire, operate, and grow private companies to generate returns for institutional investors."
       />
-      <LastUpdated date="February 24, 2026 at 9:04 PM" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       <div className="mt-6 grid grid-cols-4 gap-4">
         <StatCard label="Global PE AUM" value="$8.2T" />
@@ -160,23 +160,24 @@ export default function PrivateEquity() {
 
       <DrawbridgeAngle>
         <p>
-          Private equity is Drawbridge&apos;s highest-growth segment. The portfolio company
-          angle creates natural expansion opportunities — a single PE firm renewal can
-          unlock 10–50 portfolio company engagements. During renewals, quantify the
-          portfolio-level risk reduction and emphasize Drawbridge&apos;s ability to provide
-          a unified view across the entire portfolio.
+          Private equity is Drawbridge&apos;s highest-growth segment. The portfolio company angle
+          creates natural expansion opportunities — a single PE firm renewal can unlock 10–50
+          portfolio company engagements. During renewals, quantify the portfolio-level risk
+          reduction and emphasize Drawbridge&apos;s ability to provide a unified view across the
+          entire portfolio.
         </p>
         <p>
-          The fundraising cycle creates urgency: PE firms raising a new fund will invest
-          heavily in their security posture to pass LP due diligence. Time renewal
-          conversations to fundraising timelines when possible. Additionally, cyber due
-          diligence on acquisition targets is a natural add-on service — every deal is
-          a potential Drawbridge engagement.
+          The fundraising cycle creates urgency: PE firms raising a new fund will invest heavily
+          in their security posture to pass LP due diligence. Drawbridge has supported over{' '}
+          <strong>2,000 successful ODD reviews</strong> — that track record is a differentiator
+          worth naming in every fundraising conversation. <strong>Raise Your Guard. Protect Your
+          Returns.</strong> Time renewal conversations to fundraising timelines when possible, and
+          lead with what a mature security program means for LP confidence and the next raise.
         </p>
         <p>
-          Key renewal levers: number of portfolio companies covered, M&A cyber due
-          diligence engagements completed, portfolio-wide risk score improvements,
-          LP reporting deliverables, and fundraising DD support.
+          Key renewal levers: number of portfolio companies covered, M&amp;A cyber due diligence
+          engagements completed, portfolio-wide risk score improvements, LP reporting deliverables,
+          and fundraising DD support.
         </p>
       </DrawbridgeAngle>
 

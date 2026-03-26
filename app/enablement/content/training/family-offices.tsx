@@ -11,7 +11,7 @@ export default function FamilyOffices() {
         title="Family & Home Offices"
         subtitle="Private wealth management entities serving ultra-high-net-worth families and individuals."
       />
-      <LastUpdated date="February 24, 2026 at 9:04 PM" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       <div className="mt-6 grid grid-cols-4 gap-4">
         <StatCard label="Global Family Office AUM" value="$6.0T" />
@@ -130,26 +130,25 @@ export default function FamilyOffices() {
 
       <DrawbridgeAngle>
         <p>
-          Family offices represent a growing segment where Drawbridge can deliver outsized
-          impact. These clients often need foundational security programs built from scratch —
-          policies, training, incident response plans, and ongoing monitoring. The personal
-          nature of the relationship means renewals are driven by trust and responsiveness
-          as much as by deliverables.
+          Family offices represent a growing segment where Drawbridge can deliver outsized impact —
+          and where our independence matters most. Unlike generalist IT providers, Drawbridge has no
+          conflict of interest in assessing risk; we are not the firm that installed the systems we
+          are reviewing. Lead with that: <strong>&ldquo;Your IT runs the systems. We make sure those
+          systems are safe.&rdquo;</strong>
         </p>
         <p>
-          The sales motion is different here: family offices buy based on <strong>trust and
-          personal relationships</strong>, not RFPs and procurement processes. The decision-maker
-          is often the family principal, not a compliance officer. Frame the value proposition
-          around protecting the family&apos;s legacy, privacy, and way of life — not just checking
-          regulatory boxes. Personal cybersecurity for family members (device security,
-          travel advisories, social media exposure reviews) often resonates more than
-          enterprise security language.
+          The sales motion is different here: family offices buy based on <strong>trust and personal
+          relationships</strong>, not RFPs and procurement processes. The decision-maker is often the
+          family principal, not a compliance officer. Frame the value around protecting the family&apos;s
+          legacy, privacy, and way of life — <strong>Raise Your Guard. Lower Your Risk.</strong> — not
+          just checking regulatory boxes. Personal cybersecurity for family members (device security,
+          travel advisories, social media exposure reviews) resonates far more than enterprise
+          security language here.
         </p>
         <p>
-          Key renewal levers: personal cybersecurity reviews for family members, security
-          awareness training participation, travel security briefings delivered, incident
-          response readiness, and proactive threat monitoring related to the family&apos;s
-          public profile.
+          Key renewal levers: personal cybersecurity reviews for family members, security awareness
+          training participation, travel security briefings delivered, incident response readiness,
+          and proactive threat monitoring related to the family&apos;s public profile.
         </p>
       </DrawbridgeAngle>
 
