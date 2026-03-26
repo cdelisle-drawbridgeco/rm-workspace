@@ -19,7 +19,7 @@ export default function SvrFramework() {
         title="Strategic Value Review (SVR) Framework"
         subtitle="Relationship Manager Playbook — how to run SVRs that re-anchor value, protect GRR, and plant expansion seeds."
       />
-      <LastUpdated date="February 27, 2026 at 6:49 PM" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       {/* Philosophy */}
       <SectionHeading>The Philosophy: Why SVRs Exist</SectionHeading>
@@ -827,7 +827,10 @@ export default function SvrFramework() {
         <p>
           The SVR is where Drawbridge earns the right to be called a partner &mdash; not just a
           vendor. When done well, every SVR re-anchors the client&apos;s perception of value, plants
-          expansion seeds naturally, and makes the renewal conversation a formality.
+          expansion seeds naturally, and makes the renewal conversation a formality. Drawbridge
+          has supported over <strong>2,000 successful ODD reviews</strong> and is trusted by
+          <strong> 1,000+ alternative investment funds managing $1.7T+ in assets</strong> — the
+          SVR is how we keep earning that trust, one conversation at a time.
         </p>
         <p>
           With ~100 accounts per RM, manual SVR prep doesn&apos;t scale. The near-term goal is to

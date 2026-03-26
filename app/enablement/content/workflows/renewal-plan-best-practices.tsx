@@ -18,7 +18,7 @@ export default function RenewalPlanBestPractices() {
         title="Renewal Plan Best Practices"
         subtitle="How to run your renewal pipeline with the rigor of a sales pipeline — proactive, structured, and always moving forward."
       />
-      <LastUpdated date="February 24, 2026 at 9:04 PM" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       {/* Pipeline Mindset */}
       <SectionHeading>The Pipeline Mindset</SectionHeading>
@@ -228,10 +228,13 @@ export default function RenewalPlanBestPractices() {
           memory. When every RM works their plans consistently, we get predictability as a
           business. Predictability lets us invest, hire, and grow with confidence.
         </p>
-        <p>
+        <p className="mt-2">
           Remember: a well-worked renewal plan doesn&apos;t just protect revenue — it creates
           expansion opportunities. The RMs who consistently work their plans early are the
-          ones who find upsell moments and drive net revenue growth, not just retention.
+          ones who find upsell moments and drive net revenue growth, not just retention. That
+          discipline, applied across a base of <strong>1,000+ alternative investment fund
+          clients</strong>, is what enables Drawbridge to keep raising the bar for the entire
+          industry. <strong>Raise Your Guard. Raise Your Bar.</strong>
         </p>
       </DrawbridgeAngle>
 

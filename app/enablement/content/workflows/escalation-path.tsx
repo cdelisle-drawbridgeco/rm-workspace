@@ -17,7 +17,7 @@ export default function EscalationPath() {
         title="RM ↔ Client Success Operating Model"
         subtitle="A proposed framework for how RM and CS collaborate day-to-day and route issues when they arise — designed to be refined together."
       />
-      <LastUpdated date="March 9, 2026" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       <div className="rounded-lg border border-db-aqua/30 bg-db-aqua/5 p-4 mt-2">
         <p className="text-sm text-db-dark">
@@ -1117,10 +1117,12 @@ export default function EscalationPath() {
           teams can work together most effectively, then refine it as we learn what works in
           practice.
         </p>
-        <p>
+        <p className="mt-2">
           When we get this right, clients see one coordinated team. Issues get resolved by the
           people closest to them. And both teams stay focused on what they do best — CS on
-          delivering great work, RM on building lasting client relationships.
+          delivering great work, RM on building lasting client relationships. That seamless
+          experience is what has earned Drawbridge the trust of <strong>1,000+ alternative
+          investment funds managing $1.7T+ in assets</strong>, and it&apos;s how we keep it.
         </p>
       </DrawbridgeAngle>
 

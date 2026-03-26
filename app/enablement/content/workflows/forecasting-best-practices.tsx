@@ -18,7 +18,7 @@ export default function ForecastingBestPractices() {
         title="Forecasting Best Practices"
         subtitle="How to build a disciplined, data-driven renewal forecast — treating your renewal pipeline like a sales pipeline."
       />
-      <LastUpdated date="February 24, 2026 at 9:04 PM" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       {/* Philosophy */}
       <SectionHeading>The Forecasting Mindset</SectionHeading>
@@ -450,6 +450,13 @@ export default function ForecastingBestPractices() {
           weekly call, leadership can make better decisions for the entire business. Your
           forecast isn&apos;t just a number — it&apos;s a commitment to transparency and to running
           your book of business like a professional.
+        </p>
+        <p className="mt-2">
+          Drawbridge is trusted by <strong>1,000+ alternative investment funds managing $1.7T+
+          in assets</strong>. That scale only grows sustainably if the team forecasts with
+          discipline — protecting GRR, surfacing risk early, and converting strong relationships
+          into the kind of multi-year partnerships that compound. <strong>Raise Your Guard.
+          Raise Your Bar.</strong>
         </p>
       </DrawbridgeAngle>
 

@@ -25,7 +25,7 @@ export default function SvrConversationGuide() {
         title="SVR Conversation Guide & Question Bank"
         subtitle="Turning the SVR from a presentation into a partnership &mdash; structured questions that surface intelligence and let clients articulate the value themselves."
       />
-      <LastUpdated date="February 27, 2026 at 6:36 PM" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       {/* The Mindset Shift */}
       <SectionHeading>The Mindset Shift</SectionHeading>
@@ -365,6 +365,13 @@ export default function SvrConversationGuide() {
           doesn&apos;t just run better meetings &mdash; they build deeper relationships, surface
           expansion opportunities naturally, and make clients feel like partners rather than accounts.
           Update this question bank quarterly as regulatory and market topics evolve.
+        </p>
+        <p className="mt-2">
+          Drawbridge&apos;s intelligence advantage comes from serving <strong>1,000+ alternative
+          investment funds</strong> across every strategy and jurisdiction &mdash; giving RMs
+          unparalleled benchmarking data and regulatory context to bring to every SVR conversation.
+          The best question you can ask a client is one backed by what you&apos;ve seen across the
+          entire industry. That&apos;s a differentiator no MSP or generalist can replicate.
         </p>
       </DrawbridgeAngle>
 

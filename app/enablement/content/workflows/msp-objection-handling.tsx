@@ -13,7 +13,7 @@ import {
 export default function MspObjectionHandling() {
   return (
     <article className="space-y-6 max-w-4xl">
-      <LastUpdated date="2026-03-09" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       <HeroSection
         icon="🛡️"
@@ -366,6 +366,12 @@ export default function MspObjectionHandling() {
             </p>
           </div>
         </div>
+        <p className="mt-3 text-sm text-gray-700">
+          The positioning is simple: <strong>&ldquo;Your IT runs the systems. We make sure those
+          systems are safe.&rdquo;</strong> That independence isn&apos;t a talking point — it&apos;s
+          the structural requirement that three major regulators are now codifying into law.
+          <strong> Raise Your Guard. Lower Your Risk.</strong>
+        </p>
       </DrawbridgeAngle>
 
       {/* ------------------------------------------------------------------ */}

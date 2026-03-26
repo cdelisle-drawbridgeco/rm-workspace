@@ -18,7 +18,7 @@ export default function NegotiationPlaybook() {
         title="Renewal Negotiation Playbook"
         subtitle="You're not an order-taker. You're a strategic advisor who protects and grows revenue through disciplined, proactive negotiation."
       />
-      <LastUpdated date="March 10, 2026" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       {/* Mindset */}
       <SectionHeading>The RM Mindset Shift</SectionHeading>
@@ -791,6 +791,12 @@ export default function NegotiationPlaybook() {
           Start by presenting 7% confidently on your next renewal and see what happens.
           You&apos;ll be surprised how often the answer is just &ldquo;okay.&rdquo;
         </p>
+        <p className="mt-2">
+          The value story is real: Drawbridge has supported over <strong>2,000 successful ODD
+          reviews</strong> and is trusted by <strong>1,000+ alternative investment funds</strong>
+          to maintain exam-ready, investor-ready security programs. That track record is your
+          best negotiating asset. <strong>Raise Your Guard. Raise Your Score.</strong>
+        </p>
       </DrawbridgeAngle>
 
       {/* ROI Ammunition */}
@@ -1248,6 +1254,13 @@ export default function NegotiationPlaybook() {
           embedded in their compliance program, their DDQ process, their incident
           response plan, and their board reporting, Drawbridge isn&apos;t a vendor anymore
           — it&apos;s infrastructure. That&apos;s the goal of every renewal conversation.
+        </p>
+        <p className="mt-2">
+          Drawbridge is trusted by <strong>1,000+ alternative investment funds managing
+          $1.7T+ in assets</strong>. At that scale, the RM team&apos;s collective discipline
+          — protecting ARR, growing relationships, and deepening embeddedness —
+          is what drives Drawbridge&apos;s ability to keep raising the bar for the entire
+          industry. <strong>Raise Your Guard. Raise Your Bar.</strong>
         </p>
       </DrawbridgeAngle>
 

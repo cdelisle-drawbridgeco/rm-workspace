@@ -17,7 +17,7 @@ export default function ChurnReasons() {
         title="Churn Reason Tagging"
         subtitle="How to accurately tag non-renewals in Salesforce — the framework, the seven tags, and the review process."
       />
-      <LastUpdated date="March 2026" />
+      <LastUpdated date="March 25, 2026 at 3:45 PM" />
 
       {/* Purpose */}
       <SectionHeading>Why This Matters</SectionHeading>
@@ -359,10 +359,19 @@ export default function ChurnReasons() {
       </div>
 
       <DrawbridgeAngle>
-        Accurate churn tagging is how Drawbridge makes the case for what&apos;s in our control vs.
-        what isn&apos;t — separating structural and competitive losses from the controllable churn
-        we can coach against and reduce. The cleaner the data, the stronger the story in exec
-        reporting and the more targeted the coaching conversations in 1:1s.
+        <p>
+          Accurate churn tagging is how Drawbridge makes the case for what&apos;s in our control vs.
+          what isn&apos;t — separating structural and competitive losses from the controllable churn
+          we can coach against and reduce. The cleaner the data, the stronger the story in exec
+          reporting and the more targeted the coaching conversations in 1:1s.
+        </p>
+        <p className="mt-2">
+          With <strong>1,000+ alternative investment fund relationships</strong>, Drawbridge has
+          the pattern recognition to identify where churn risk is systemic vs. isolated — which
+          products create stickiness, which client profiles churn at higher rates, and what
+          intervention timelines work. That intelligence only compounds when every RM tags
+          accurately and consistently.
+        </p>
       </DrawbridgeAngle>
     </>
   );
