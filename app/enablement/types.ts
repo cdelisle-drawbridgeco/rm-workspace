@@ -28,7 +28,8 @@ export type TopicId =
   | 'genai-assessments'
   | 'ai-security-bundle'
   | 'churn-reasons'
-  | 'client-engagement';
+  | 'client-engagement'
+  | 'trueguard';
 
 export type NavState = {
   view: 'landing' | 'topic';

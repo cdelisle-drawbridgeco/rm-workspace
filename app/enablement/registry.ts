@@ -254,6 +254,14 @@ export const CATEGORIES: CategoryConfig[] = [
           'Assessment, Policy, and Training — the full three-service AI bundle, who to target, and how to sell it.',
         icon: '🛡️',
       },
+      {
+        id: 'trueguard',
+        title: 'TrueGuard',
+        description:
+          'Continuous control validation platform — from annual attestation to real-time proof. Launch training for the RM team.',
+        icon: '🛡️',
+        group: 'New Products',
+      },
     ],
   },
 ];
@@ -318,6 +326,9 @@ const TOPIC_COMPONENTS: Record<TopicId, ComponentType> = {
   ),
   'client-engagement': dynamic(
     () => import('./content/workflows/client-engagement'),
+  ),
+  trueguard: dynamic(
+    () => import('./content/ai-training/trueguard'),
   ),
 };
 
