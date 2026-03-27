@@ -340,7 +340,7 @@
       <p>How to build the relationship depth that makes renewals easier — cadence, contact strategy, outreach quality, and Salesforce logging.</p>
     </div>
   </div>
-  <div class="last-updated">Last updated: March 25, 2026 at 3:45 PM</div>
+  <div class="last-updated">Last updated: March 27, 2026 at 12:00 PM</div>
 
   <!-- Why Consistent Engagement Matters -->
   <div class="section-heading">Why Consistent Engagement Matters</div>
@@ -558,7 +558,8 @@
   <p>We cross-reference logs against email activity through Sturdy.ai to keep our data accurate enough to stand behind at the board level. This isn't about oversight — it's about making sure our engagement numbers reflect reality, not best-case memory.</p>
 
   <div class="subsection">
-    <div class="subsection-title">📋 Required Fields — Client Touchpoint Object</div>
+    <div class="subsection-title">📋 Logging a Task in Salesforce</div>
+    <p style="margin-bottom:12px;">Log interactions as <strong>Tasks</strong> directly on the account or contact record. Fill in all required fields — a task with missing fields isn't useful to anyone picking up the account later.</p>
     <div class="table-wrap">
       <table>
         <thead>
@@ -570,19 +571,29 @@
         </thead>
         <tbody>
           <tr>
-            <td class="label">Activity Type</td>
-            <td class="desc">Meeting / Call, Email Outreach, Strategic Update, Introduction / Expansion</td>
-            <td class="note">Pick the type that best describes the primary intent of the interaction</td>
+            <td class="label">Subject</td>
+            <td class="desc">Free text</td>
+            <td class="note">Brief description of the interaction — e.g. "Q1 check-in call" or "Shared SEC enforcement update"</td>
           </tr>
           <tr>
-            <td class="label">Client Contact Name</td>
+            <td class="label">Type</td>
+            <td class="desc">Call, Email, Meeting, Onsite Visit</td>
+            <td class="note">Pick the type that best describes the primary form of the interaction</td>
+          </tr>
+          <tr>
+            <td class="label">Status</td>
+            <td class="desc">Always set to <strong>Completed</strong></td>
+            <td class="note">You're logging something that happened — not scheduling something future</td>
+          </tr>
+          <tr>
+            <td class="label">Name</td>
             <td class="desc">Lookup to Contact record</td>
-            <td class="note">The specific person you engaged — not the account</td>
+            <td class="note">The specific person you engaged — not just the account</td>
           </tr>
           <tr>
             <td class="label">Contact Tier</td>
             <td class="desc">Tier 1, Tier 2, Tier 3</td>
-            <td class="note">Auto-populated from the contact record if already set; override if needed</td>
+            <td class="note">The tier of the contact you engaged</td>
           </tr>
           <tr>
             <td class="label">Outreach Direction</td>
@@ -591,11 +602,11 @@
           </tr>
           <tr>
             <td class="label">Path to Executive</td>
-            <td class="desc">Yes / No / In Progress</td>
-            <td class="note">Was this interaction part of an intentional strategy to reach or strengthen a Tier 1 relationship?</td>
+            <td class="desc">Free text</td>
+            <td class="note">If you don't yet have a Tier 1 relationship at this account, note your current strategy for getting there</td>
           </tr>
           <tr>
-            <td class="label">Notes</td>
+            <td class="label">Comments</td>
             <td class="desc">Free text</td>
             <td class="note">What was discussed, what was the client's reaction, what are the next steps. A few good sentences beats a long summary no one reads.</td>
           </tr>
@@ -604,7 +615,7 @@
     </div>
     <div class="callout-blue" style="margin-top:12px;">
       <div class="callout-title">Email interactions</div>
-      <p>You don't need to copy every email into Salesforce. Log the email as a touchpoint with a short note on what you sent and why. The goal is a record that a colleague could read and understand — not a transcript.</p>
+      <p>You don't need to copy every email into Salesforce. Log the email as a task with a short note on what you sent and why. The goal is a record that a colleague could read and understand — not a transcript.</p>
     </div>
   </div>
 

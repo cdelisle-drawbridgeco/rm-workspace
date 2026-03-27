@@ -17,7 +17,7 @@ export default function ClientEngagement() {
         title="Client Engagement Process"
         subtitle="How to build the relationship depth that makes renewals easier — cadence, contact strategy, outreach quality, and Salesforce logging."
       />
-      <LastUpdated date="March 25, 2026 at 3:45 PM" />
+      <LastUpdated date="March 27, 2026 at 12:00 PM" />
 
       {/* Why This Matters */}
       <SectionHeading>Why Consistent Engagement Matters</SectionHeading>
@@ -349,8 +349,11 @@ export default function ClientEngagement() {
         making sure our engagement numbers reflect reality, not best-case memory.
       </p>
 
-      <SubSection icon="📋" title="Required Fields — Client Touchpoint Object">
-        <div className="overflow-hidden rounded-lg border border-gray-200">
+      <SubSection icon="📋" title="Logging a Task in Salesforce">
+        <p className="text-sm text-gray-700 leading-relaxed">
+          Log interactions as <strong>Tasks</strong> directly on the account or contact record. Fill in all required fields — a task with missing fields isn&apos;t useful to anyone picking up the account later.
+        </p>
+        <div className="mt-3 overflow-hidden rounded-lg border border-gray-200">
           <table className="w-full text-sm">
             <thead className="bg-gray-50">
               <tr>
@@ -361,19 +364,29 @@ export default function ClientEngagement() {
             </thead>
             <tbody className="divide-y divide-gray-100">
               <tr className="bg-white">
-                <td className="px-4 py-3 font-medium text-db-dark align-top">Activity Type</td>
-                <td className="px-4 py-3 text-gray-600 align-top">Meeting / Call, Email Outreach, Strategic Update, Introduction / Expansion</td>
-                <td className="px-4 py-3 text-gray-500 align-top">Pick the type that best describes the primary intent of the interaction</td>
+                <td className="px-4 py-3 font-medium text-db-dark align-top">Subject</td>
+                <td className="px-4 py-3 text-gray-600 align-top">Free text</td>
+                <td className="px-4 py-3 text-gray-500 align-top">Brief description of the interaction — e.g. &ldquo;Q1 check-in call&rdquo; or &ldquo;Shared SEC enforcement update&rdquo;</td>
               </tr>
               <tr className="bg-gray-50/50">
-                <td className="px-4 py-3 font-medium text-db-dark align-top">Client Contact Name</td>
+                <td className="px-4 py-3 font-medium text-db-dark align-top">Type</td>
+                <td className="px-4 py-3 text-gray-600 align-top">Call, Email, Meeting, Onsite Visit</td>
+                <td className="px-4 py-3 text-gray-500 align-top">Pick the type that best describes the primary form of the interaction</td>
+              </tr>
+              <tr className="bg-white">
+                <td className="px-4 py-3 font-medium text-db-dark align-top">Status</td>
+                <td className="px-4 py-3 text-gray-600 align-top">Always set to <strong>Completed</strong></td>
+                <td className="px-4 py-3 text-gray-500 align-top">You&apos;re logging something that happened — not scheduling something future</td>
+              </tr>
+              <tr className="bg-gray-50/50">
+                <td className="px-4 py-3 font-medium text-db-dark align-top">Name</td>
                 <td className="px-4 py-3 text-gray-600 align-top">Lookup to Contact record</td>
-                <td className="px-4 py-3 text-gray-500 align-top">The specific person you engaged — not the account</td>
+                <td className="px-4 py-3 text-gray-500 align-top">The specific person you engaged — not just the account</td>
               </tr>
               <tr className="bg-white">
                 <td className="px-4 py-3 font-medium text-db-dark align-top">Contact Tier</td>
                 <td className="px-4 py-3 text-gray-600 align-top">Tier 1, Tier 2, Tier 3</td>
-                <td className="px-4 py-3 text-gray-500 align-top">Auto-populated from the contact record if already set; override if needed</td>
+                <td className="px-4 py-3 text-gray-500 align-top">The tier of the contact you engaged</td>
               </tr>
               <tr className="bg-gray-50/50">
                 <td className="px-4 py-3 font-medium text-db-dark align-top">Outreach Direction</td>
@@ -382,11 +395,11 @@ export default function ClientEngagement() {
               </tr>
               <tr className="bg-white">
                 <td className="px-4 py-3 font-medium text-db-dark align-top">Path to Executive</td>
-                <td className="px-4 py-3 text-gray-600 align-top">Yes / No / In Progress</td>
-                <td className="px-4 py-3 text-gray-500 align-top">Was this interaction part of an intentional strategy to reach or strengthen a Tier 1 relationship?</td>
+                <td className="px-4 py-3 text-gray-600 align-top">Free text</td>
+                <td className="px-4 py-3 text-gray-500 align-top">If you don&apos;t yet have a Tier 1 relationship at this account, note your current strategy for getting there</td>
               </tr>
               <tr className="bg-gray-50/50">
-                <td className="px-4 py-3 font-medium text-db-dark align-top">Notes</td>
+                <td className="px-4 py-3 font-medium text-db-dark align-top">Comments</td>
                 <td className="px-4 py-3 text-gray-600 align-top">Free text</td>
                 <td className="px-4 py-3 text-gray-500 align-top">What was discussed, what was the client&apos;s reaction, what are the next steps. A few good sentences beats a long summary no one reads.</td>
               </tr>
@@ -396,7 +409,7 @@ export default function ClientEngagement() {
         <div className="mt-3 rounded-lg border border-blue-200 bg-blue-50 p-3">
           <p className="text-xs font-semibold text-blue-700">Email interactions</p>
           <p className="mt-1 text-xs text-gray-700">
-            You don&apos;t need to copy every email into Salesforce. Log the email as a touchpoint
+            You don&apos;t need to copy every email into Salesforce. Log the email as a task
             with a short note on what you sent and why. The goal is a record that a colleague
             could read and understand — not a transcript.
           </p>
