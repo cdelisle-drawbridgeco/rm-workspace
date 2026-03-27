@@ -27,8 +27,8 @@ export default function TrueGuard() {
       <div className="mt-6 grid grid-cols-4 gap-4">
         <StatCard label="Firms on the Drawbridge Platform" value="1,300+" />
         <StatCard label="Control Validation Frequency" value="Continuous" />
-        <StatCard label="DDQ Completion Time Reduction" value="Up to 80%" />
-        <StatCard label="Avg Cost of a Control Gap Breach" value="$4.88M" />
+        <StatCard label="SEC Cybersecurity Exam Priority — 5 Years Running" value="#1" />
+        <StatCard label="Most Targeted Industry for Cyberattacks — 9 Years Running (IBM X-Force)" value="Top 3" />
       </div>
 
       {/* ── What Is TrueGuard ─────────────────────────────── */}
