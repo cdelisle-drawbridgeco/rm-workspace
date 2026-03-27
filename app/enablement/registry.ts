@@ -20,6 +20,7 @@ export const CATEGORIES: CategoryConfig[] = [
           'The alternative asset management landscape — AUM, capital flows, and why cybersecurity matters.',
         icon: '🌐',
         group: 'Industry & Client Segments',
+        published: false,
       },
       {
         id: 'hedge-funds',
@@ -28,6 +29,7 @@ export const CATEGORIES: CategoryConfig[] = [
           'Strategies, capital raising, and the unique cyber risk profile of actively managed funds.',
         icon: '📈',
         group: 'Industry & Client Segments',
+        published: false,
       },
       {
         id: 'private-equity',
@@ -36,6 +38,7 @@ export const CATEGORIES: CategoryConfig[] = [
           'LBOs, portfolio company risk, and how PE fundraising cycles drive security investment.',
         icon: '🏢',
         group: 'Industry & Client Segments',
+        published: false,
       },
       {
         id: 'family-offices',
@@ -44,6 +47,7 @@ export const CATEGORIES: CategoryConfig[] = [
           'UHNW wealth management entities with lean teams and outsized cyber exposure.',
         icon: '🏠',
         group: 'Industry & Client Segments',
+        published: false,
       },
       {
         id: 'reg-sp',
@@ -52,6 +56,7 @@ export const CATEGORIES: CategoryConfig[] = [
           'The SEC\'s cornerstone privacy regulation — 2025 amendments, breach notification, and enforcement.',
         icon: '⚖️',
         group: 'Regulatory Deep-Dives',
+        published: false,
       },
       {
         id: 'dora',
@@ -60,6 +65,7 @@ export const CATEGORIES: CategoryConfig[] = [
           'The EU\'s Digital Operational Resilience Act and its impact on financial entities.',
         icon: '🇪🇺',
         group: 'Regulatory Deep-Dives',
+        published: false,
       },
       {
         id: 'sec-exam-priorities',
@@ -68,6 +74,7 @@ export const CATEGORIES: CategoryConfig[] = [
           'What SEC examiners are looking for in 2025 and how to prepare clients.',
         icon: '🔍',
         group: 'Regulatory Deep-Dives',
+        published: false,
       },
     ],
   },
@@ -84,6 +91,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Weekly cadence, Best/Worst/Call methodology, and common forecasting pitfalls.',
         icon: '📊',
+        published: false,
       },
       {
         id: 'renewal-plan-best-practices',
@@ -91,6 +99,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Stage-gate workflow, timeline management, and stakeholder alignment.',
         icon: '📋',
+        published: false,
       },
       {
         id: 'negotiation-playbook',
@@ -98,6 +107,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Strategic framework for pricing conversations, concession management, and closing.',
         icon: '🤝',
+        published: false,
       },
       {
         id: 'escalation-path',
@@ -105,6 +115,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'When and how to escalate between Relationship Management and Client Success.',
         icon: '🔄',
+        published: false,
       },
       {
         id: 'msp-objection-handling',
@@ -112,6 +123,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'When a client says they\'re moving cyber to their MSP — regulatory case for independence and talk tracks.',
         icon: '🛡️',
+        published: false,
       },
       {
         id: 'svr-framework',
@@ -120,6 +132,7 @@ export const CATEGORIES: CategoryConfig[] = [
           'The Strategic Value Review playbook — preparation, conversation flow, value translation, and churn early warning.',
         icon: '📋',
         group: 'SVR Meetings',
+        published: false,
       },
       {
         id: 'svr-conversation-guide',
@@ -128,6 +141,7 @@ export const CATEGORIES: CategoryConfig[] = [
           'Question bank and active listening cues for turning SVRs into strategic partnership conversations.',
         icon: '💬',
         group: 'SVR Meetings',
+        published: false,
       },
       {
         id: 'churn-reasons',
@@ -135,6 +149,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'The seven-tag churn taxonomy, when to use each tag, the Quick Decision Guide, and the 1:1 review process.',
         icon: '📉',
+        published: false,
       },
       {
         id: 'client-engagement',
@@ -142,6 +157,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Weekly cadence, contact tier model, outreach angles, Salesforce logging, and what good looks like.',
         icon: '🤝',
+        published: false,
       },
     ],
   },
@@ -158,6 +174,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Six business outcomes that define Drawbridge\'s value — from regulatory readiness to AI safety.',
         icon: '🏆',
+        published: false,
       },
       {
         id: 'journey-hedge-fund',
@@ -165,6 +182,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'End-to-end customer journey mapping for hedge fund clients across the lifecycle.',
         icon: '🗺️',
+        published: false,
       },
       {
         id: 'journey-hedge-fund-revised',
@@ -172,6 +190,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Value-first customer journey — mapped to the client\'s business evolution, not our internal milestones.',
         icon: '🧭',
+        published: false,
       },
       {
         id: 'journey-pe-management',
@@ -179,6 +198,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Customer journey for PE firms (GPs) — from LP due diligence to portfolio-wide value creation.',
         icon: '🏛️',
+        published: false,
       },
       {
         id: 'journey-pe-portco',
@@ -186,6 +206,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Customer journey for PE portfolio companies — from sponsor mandate to exit-ready security.',
         icon: '🏭',
+        published: false,
       },
       {
         id: 'journey-pe-revised',
@@ -193,6 +214,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Value-first PE journey — GP and portfolio outcomes mapped to fund lifecycle, not internal milestones.',
         icon: '🧭',
+        published: false,
       },
       {
         id: 'roi-value-measurement',
@@ -200,6 +222,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Five frameworks for quantifying Drawbridge\'s business impact — capital protected, costs avoided, and build vs. buy.',
         icon: '📐',
+        published: false,
       },
     ],
   },
@@ -216,6 +239,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Pitch decks, case studies, one-pagers, and battle cards for sales conversations.',
         icon: '📁',
+        published: false,
       },
     ],
   },
@@ -232,6 +256,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'How artificial intelligence is amplifying the threat landscape — and what it means for your clients.',
         icon: '🧠',
+        published: false,
       },
       {
         id: 'ai-in-alts',
@@ -239,6 +264,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'How hedge funds and PE firms are actually using AI — and the cyber risks each use case creates.',
         icon: '🏦',
+        published: false,
       },
       {
         id: 'genai-assessments',
@@ -246,6 +272,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'New ChatGPT and Claude security assessments — what they cover, who to target, and how to sell them.',
         icon: '🔐',
+        published: false,
       },
       {
         id: 'ai-security-bundle',
@@ -253,6 +280,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Assessment, Policy, and Training — the full three-service AI bundle, who to target, and how to sell it.',
         icon: '🛡️',
+        published: false,
       },
       {
         id: 'trueguard',
@@ -261,6 +289,7 @@ export const CATEGORIES: CategoryConfig[] = [
           'Continuous control validation platform — from annual attestation to real-time proof. Launch training for the RM team.',
         icon: '🛡️',
         group: 'New Products',
+        published: false,
       },
     ],
   },
@@ -338,6 +367,14 @@ export { TOPIC_COMPONENTS };
 /*  Helpers                                                            */
 /* ------------------------------------------------------------------ */
 
+export function getVisibleCategories(): CategoryConfig[] {
+  const isProd = process.env.NODE_ENV === 'production';
+  if (!isProd) return CATEGORIES;
+  return CATEGORIES
+    .map((cat) => ({ ...cat, topics: cat.topics.filter((t) => t.published === true) }))
+    .filter((cat) => cat.topics.length > 0);
+}
+
 export function getCategoryById(id: CategoryId): CategoryConfig {
-  return CATEGORIES.find((c) => c.id === id)!;
+  return getVisibleCategories().find((c) => c.id === id)!;
 }

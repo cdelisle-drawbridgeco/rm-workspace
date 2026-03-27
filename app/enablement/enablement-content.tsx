@@ -3,7 +3,7 @@
 import { useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import type { CategoryId, NavState, TopicId } from './types';
-import { CATEGORIES, TOPIC_COMPONENTS, getCategoryById } from './registry';
+import { getVisibleCategories, TOPIC_COMPONENTS, getCategoryById } from './registry';
 import CategoryLanding from './components/category-landing';
 import BackButton from './components/back-button';
 
@@ -52,7 +52,7 @@ export default function EnablementContent() {
       {/* Sidebar */}
       <aside className="w-56 shrink-0 overflow-y-auto border-r border-gray-200 bg-white">
         <nav className="p-4 space-y-1">
-          {CATEGORIES.map((cat) => (
+          {getVisibleCategories().map((cat) => (
             <button
               key={cat.id}
               onClick={() => goToCategory(cat.id)}

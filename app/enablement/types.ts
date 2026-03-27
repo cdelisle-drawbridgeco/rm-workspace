@@ -43,6 +43,7 @@ export interface TopicConfig {
   description: string;
   icon: string;
   group?: string;
+  published?: boolean;
 }
 
 export interface CategoryConfig {
