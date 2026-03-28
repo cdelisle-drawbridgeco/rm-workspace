@@ -190,7 +190,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Value-first customer journey — mapped to the client\'s business evolution, not our internal milestones.',
         icon: '🧭',
-        published: false,
+        published: true,
       },
       {
         id: 'journey-pe-management',
@@ -214,7 +214,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Value-first PE journey — GP and portfolio outcomes mapped to fund lifecycle, not internal milestones.',
         icon: '🧭',
-        published: false,
+        published: true,
       },
       {
         id: 'roi-value-measurement',
