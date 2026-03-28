@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drawbridge · TrueGuard · RM Launch Training</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --dark:        #111821;
+      --aqua:        #86C8BC;
+      --aqua-dark:   #489E8E;
+      --aqua-light:  #d4eeea;
+      --orange:      #FF6900;
+      --orange-pale: #fff3eb;
+      --amber:       #d97706;
+      --gray-50:     #f9fafb;
+      --gray-100:    #f3f4f6;
+      --gray-200:    #e5e7eb;
+      --gray-400:    #9ca3af;
+      --gray-500:    #6b7280;
+      --gray-600:    #4b5563;
+      --gray-700:    #374151;
+      --white:       #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #eef0f3;
+      color: var(--dark);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Archivo', sans-serif; }
+
+    /* ── Page wrapper ── */
+    .page {
+      max-width: 860px;
+      margin: 32px auto;
+      background: #f5f6f8;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, var(--dark) 0%, #1a2a3a 100%);
+      padding: 40px 40px 32px;
+      color: white;
+    }
+    .hero-icon { font-size: 40px; line-height: 1; }
+    .hero h1 { margin-top: 12px; font-size: 28px; font-weight: 800; letter-spacing: -0.5px; }
+    .hero p { margin-top: 8px; font-size: 14px; color: #aec6d4; max-width: 560px; }
+    .hero-meta {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .hero-badge {
+      background: rgba(134,200,188,0.2);
+      border: 1px solid rgba(134,200,188,0.4);
+      color: var(--aqua);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+    .last-updated {
+      font-size: 11px;
+      color: #6a8a9e;
+    }
+
+    /* ── Content wrapper ── */
+    .content { padding: 32px 40px 48px; }
+
+    /* ── Stat cards ── */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 0;
+    }
+    .stat-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 16px 12px;
+      text-align: center;
+    }
+    .stat-value {
+      font-family: 'Archivo', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1;
+    }
+    .stat-label {
+      margin-top: 6px;
+      font-size: 11px;
+      color: var(--gray-500);
+      line-height: 1.4;
+    }
+
+    /* ── Section heading ── */
+    .section-heading {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-top: 36px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--gray-200);
+    }
+
+    /* ── Body text ── */
+    .body-text {
+      font-size: 13px;
+      color: var(--gray-700);
+      line-height: 1.7;
+      margin-bottom: 4px;
+    }
+    .body-text + .body-text { margin-top: 10px; }
+
+    /* ── SubSection ── */
+    .subsection {
+      margin-top: 20px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .subsection-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .subsection-icon { font-size: 16px; }
+    .subsection-title {
+      font-family: 'Archivo', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    .subsection-body {
+      font-size: 13px;
+      color: var(--gray-700);
+      line-height: 1.7;
+    }
+    .subsection-body p + p { margin-top: 10px; }
+
+    /* ── 2-col / 3-col grids ── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 12px; }
+
+    /* ── Characteristic card ── */
+    .char-card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .char-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+    .char-desc {
+      font-size: 12px;
+      color: var(--gray-600);
+      line-height: 1.5;
+    }
+
+    /* ── Flow diagram ── */
+    .flow {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+      padding: 10px 0 4px;
+    }
+    .flow-step {
+      background: rgba(17,24,33,0.05);
+      border: 1px solid var(--gray-200);
+      border-radius: 6px;
+      padding: 7px 12px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--dark);
+      text-align: center;
+    }
+    .flow-arrow { color: var(--gray-400); font-size: 16px; flex-shrink: 0; }
+
+    /* ── List ── */
+    .body-list {
+      font-size: 13px;
+      color: var(--gray-700);
+      line-height: 1.7;
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+    .body-list li + li { margin-top: 6px; }
+
+    /* ── Talk track / quote boxes ── */
+    .talk-box {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-top: 10px;
+    }
+    .talk-box + .talk-box { margin-top: 8px; }
+    .talk-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--dark);
+      margin-bottom: 5px;
+    }
+    .talk-quote {
+      font-size: 13px;
+      font-style: italic;
+      color: var(--gray-700);
+      line-height: 1.6;
+    }
+
+    /* ── Core position box (dark) ── */
+    .position-box {
+      background: var(--dark);
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-top: 12px;
+    }
+    .position-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--aqua);
+      margin-bottom: 8px;
+    }
+    .position-quote {
+      font-size: 14px;
+      font-style: italic;
+      color: #d1e8e4;
+      line-height: 1.7;
+    }
+
+    /* ── Objection cards ── */
+    .objection-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 10px;
+    }
+    .objection-card + .objection-card { margin-top: 8px; }
+    .obj-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 5px;
+    }
+    .obj-text {
+      font-size: 13px;
+      font-style: italic;
+      color: var(--gray-700);
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+    .resp-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--aqua-dark);
+      margin-bottom: 5px;
+    }
+    .resp-text {
+      font-size: 13px;
+      color: var(--gray-700);
+      line-height: 1.6;
+    }
+
+    /* ── Outcomes mapping ── */
+    .outcome-row {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin-top: 8px;
+    }
+    .outcome-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+    .outcome-text {
+      font-size: 12px;
+      color: var(--gray-600);
+      line-height: 1.5;
+    }
+
+    /* ── DrawbridgeAngle ── */
+    .db-angle {
+      margin-top: 32px;
+      border-left: 4px solid var(--orange);
+      background: var(--orange-pale);
+      border-radius: 0 10px 10px 0;
+      padding: 20px 22px;
+    }
+    .db-angle-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 10px;
+    }
+    .db-angle-body {
+      font-size: 13px;
+      color: var(--gray-700);
+      line-height: 1.7;
+    }
+    .db-angle-body p + p { margin-top: 10px; }
+
+    /* ── Term badges ── */
+    .term-card {
+      background: rgba(134,200,188,0.10);
+      border: 1px solid rgba(134,200,188,0.35);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .term-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 5px;
+    }
+    .term-def {
+      font-size: 12px;
+      color: var(--gray-600);
+      line-height: 1.5;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--dark);
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-brand {
+      font-family: 'Archivo', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: 0.05em;
+    }
+    .footer-sub {
+      font-size: 11px;
+      color: #6a8a9e;
+      margin-top: 2px;
+    }
+    .footer-tag {
+      font-size: 11px;
+      color: var(--aqua);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { background: white; }
+      .page { margin: 0; border-radius: 0; box-shadow: none; max-width: 100%; }
+      .stat-card, .char-card, .subsection, .objection-card, .outcome-row, .term-card, .talk-box { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ── Hero ── -->
+  <div class="hero">
+    <div class="hero-icon">🛡️</div>
+    <h1>TrueGuard</h1>
+    <p>Continuous control validation — from annual attestation to real-time proof.</p>
+    <div class="hero-meta">
+      <span class="hero-badge">New Product Launch</span>
+      <span class="hero-badge">RM Sales Training</span>
+      <span class="last-updated">Last updated: March 27, 2026 at 10:00 AM</span>
+    </div>
+  </div>
+
+  <!-- ── Content ── -->
+  <div class="content">
+
+    <!-- Stat Cards -->
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-value">1,300+</div>
+        <div class="stat-label">Firms on the Drawbridge Platform</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">Continuous</div>
+        <div class="stat-label">Control Validation Frequency</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">#1</div>
+        <div class="stat-label">Cybersecurity Named Top SEC Exam Priority — 5 Years Running</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">Top 3</div>
+        <div class="stat-label">Financial Services Among Most Targeted Industries for Cyberattacks — IBM X-Force, 9 Years Running</div>
+      </div>
+    </div>
+
+    <!-- What Is TrueGuard -->
+    <h2 class="section-heading">What Is TrueGuard?</h2>
+    <p class="body-text">TrueGuard is Drawbridge's AI-powered continuous control validation platform. It transforms the way alternative investment firms manage and demonstrate their cybersecurity posture — shifting from <strong>periodic attestation</strong> to <strong>continuous, evidence-backed proof</strong>.</p>
+    <p class="body-text">Every year, funds go through the same ritual: fill out a DDQ, check boxes, attest that controls are in place. TrueGuard asks a harder question: <strong>"You said you have this control — is it actually operating right now?"</strong></p>
+    <p class="body-text">Traditional due diligence asks: <em>Do you have this control?</em> TrueGuard asks: <em>You said you have this control — prove it.</em> That is the difference between attestation and validation.</p>
+
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="subsection-icon">⚙️</span>
+        <span class="subsection-title">How It Works</span>
+      </div>
+      <div class="subsection-body">
+        <p>TrueGuard integrates data from across the Drawbridge service stack and validates it against what clients reported in their DDQs and assessments:</p>
+        <div class="grid-2">
+          <div class="char-card">
+            <div class="char-title">Network &amp; Endpoint Scanning</div>
+            <div class="char-desc">Continuous scanning of client infrastructure compares live configurations against reported controls — surfacing gaps in real time, not at next year's assessment.</div>
+          </div>
+          <div class="char-card">
+            <div class="char-title">Cloud Configuration Assessments</div>
+            <div class="char-desc">Cloud posture is validated against client attestations. Misconfigurations, open storage, and access control gaps are flagged immediately when they emerge.</div>
+          </div>
+          <div class="char-card">
+            <div class="char-title">Pen Testing Cross-Reference</div>
+            <div class="char-desc">Findings from penetration tests are cross-referenced with reported controls — confirming whether clients actually remediated what they said they remediated.</div>
+          </div>
+          <div class="char-card">
+            <div class="char-title">Policy &amp; Training Validation</div>
+            <div class="char-desc">Security policy versions and employee training completion records are validated against attestations — closing the 'we have a policy' vs. 'employees follow it' gap.</div>
+          </div>
+        </div>
+        <div class="flow">
+          <div class="flow-step">Client attests to controls in DDQ</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">TrueGuard ingests live data across services</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">AI cross-references attestation vs. reality</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Discrepancies surfaced instantly</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Remediation tracked to close</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="subsection-icon">🔍</span>
+        <span class="subsection-title">What TrueGuard Catches</span>
+      </div>
+      <div class="subsection-body">
+        <p>The most common — and most dangerous — discrepancies TrueGuard surfaces:</p>
+        <ul class="body-list">
+          <li><strong>Controls attested but not implemented</strong> — MFA reported as enabled on all systems; endpoint scan shows uncovered devices</li>
+          <li><strong>Vulnerability exposure</strong> — Network or endpoint vulnerabilities present despite "patching current" DDQ responses</li>
+          <li><strong>Training gaps</strong> — Employees listed as trained who have not completed required security awareness modules</li>
+          <li><strong>Policy inconsistencies</strong> — Outdated or unsigned policy documents that contradict what was attested to investors</li>
+          <li><strong>Cloud configuration drift</strong> — Settings that changed after the last assessment, exposing new attack surface without triggering any alert</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Why Now -->
+    <h2 class="section-heading">Why Now? The Market Moment</h2>
+    <p class="body-text">Alternative investment firms are under compounding pressure from three directions simultaneously. TrueGuard is a direct answer to all three.</p>
+
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="subsection-icon">⚖️</span>
+        <span class="subsection-title">Regulatory Pressure Is Accelerating</span>
+      </div>
+      <div class="subsection-body">
+        <p>The SEC's 2025 exam priorities put cybersecurity controls — and their actual implementation — front and center. Regulators are no longer satisfied with policies on paper; they want evidence that controls are <strong>operating effectively at the time of any incident</strong>. Reg S-P's 72-hour breach notification window means firms need to know their control status continuously, not quarterly.</p>
+        <p><strong>The risk:</strong> A fund that attests to strong controls during an ODD, then suffers a breach caused by a control gap that quietly drifted, faces both regulatory enforcement and LP trust destruction simultaneously.</p>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="subsection-icon">📋</span>
+        <span class="subsection-title">LP Due Diligence Is Getting Harder</span>
+      </div>
+      <div class="subsection-body">
+        <p>Institutional allocators — pension funds, endowments, fund-of-funds — have materially increased the depth and frequency of their ODD processes. DDQs that previously took 30 minutes now take days. LPs are asking not just "do you have controls" but "can you prove they work?" Funds that can demonstrate continuous validation have a meaningful fundraising advantage over firms still pointing to last year's assessment report.</p>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="subsection-icon">🤖</span>
+        <span class="subsection-title">AI Has Raised the Stakes on Both Sides</span>
+      </div>
+      <div class="subsection-body">
+        <p>AI-powered attacks move faster than annual assessment cycles. A firm that was "compliant" in January can be exposed by March due to control drift, new vulnerabilities, or shadow AI tool usage introducing new risk vectors. Point-in-time assessments create a false sense of security — TrueGuard turns security posture into a live signal, not a historical snapshot.</p>
+      </div>
+    </div>
+
+    <!-- How It Fits -->
+    <h2 class="section-heading">How TrueGuard Fits the Drawbridge Offering</h2>
+    <p class="body-text">TrueGuard is not a standalone product — it is the validation layer that sits on top of everything Drawbridge already delivers. The difference between <strong>doing the work</strong> and <strong>proving the work is actually working</strong>.</p>
+
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="subsection-icon">🔗</span>
+        <span class="subsection-title">The Integration Advantage</span>
+      </div>
+      <div class="subsection-body">
+        <div class="grid-2">
+          <div class="char-card">
+            <div class="char-title">Built on Existing Drawbridge Services</div>
+            <div class="char-desc">TrueGuard pulls from network scans, endpoint data, pen test findings, training records, and policy documents already delivered — no new integrations or onboarding burden for the client.</div>
+          </div>
+          <div class="char-card">
+            <div class="char-title">Independent Third-Party Validation</div>
+            <div class="char-desc">Because Drawbridge delivers the underlying services AND validates the controls, clients get independent proof — not self-assessed posture data, but third-party verified evidence that LPs and regulators accept.</div>
+          </div>
+          <div class="char-card">
+            <div class="char-title">Continuous vs. Point-in-Time</div>
+            <div class="char-desc">Every other provider delivers a snapshot. TrueGuard delivers a live feed. Control status doesn't quietly degrade between assessments — it's monitored and flagged in real time.</div>
+          </div>
+          <div class="char-card">
+            <div class="char-title">DDQ Ready-State</div>
+            <div class="char-desc">When an LP sends a DDQ, TrueGuard dramatically reduces completion time by surfacing validated, evidence-backed data — eliminating days of manual documentation gathering.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="subsection-icon">🎯</span>
+        <span class="subsection-title">Outcomes Framework Mapping</span>
+      </div>
+      <div class="subsection-body">
+        <p>Map TrueGuard directly to the six Drawbridge outcomes clients already care about:</p>
+        <div class="outcome-row">
+          <div class="outcome-label">Regulatory Readiness</div>
+          <div class="outcome-text">Continuous control validation means clients can demonstrate to SEC examiners that controls were operating at the time of any incident — not just at their last assessment date.</div>
+        </div>
+        <div class="outcome-row">
+          <div class="outcome-label">Investor &amp; LP Confidence</div>
+          <div class="outcome-text">LPs asking "can you prove your controls work?" get a real answer: validated, continuously updated evidence — not a PDF from last March.</div>
+        </div>
+        <div class="outcome-row">
+          <div class="outcome-label">Operational Resilience</div>
+          <div class="outcome-text">TrueGuard catches control drift and misconfigurations before attackers or auditors do — giving the operations team time to remediate proactively rather than reactively.</div>
+        </div>
+        <div class="outcome-row">
+          <div class="outcome-label">Cyber Risk Reduction</div>
+          <div class="outcome-text">Validated controls are effective controls. By closing the attestation-vs-reality gap, TrueGuard materially reduces the firm's actual exposure — not just its reported exposure.</div>
+        </div>
+        <div class="outcome-row">
+          <div class="outcome-label">Competitive Differentiation</div>
+          <div class="outcome-text">In competitive fundraising, the fund with demonstrable, continuously validated security posture wins allocations from institutional LPs with rigorous ODD mandates.</div>
+        </div>
+        <div class="outcome-row">
+          <div class="outcome-label">Time &amp; Cost Efficiency</div>
+          <div class="outcome-text">DDQ completion time drops significantly when TrueGuard surfaces evidence-backed answers — freeing up ops and compliance teams from weeks of manual documentation.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Positioning -->
+    <h2 class="section-heading">Positioning &amp; Talk Tracks</h2>
+
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="subsection-icon">💬</span>
+        <span class="subsection-title">The Core Positioning Line</span>
+      </div>
+      <div class="subsection-body">
+        <div class="position-box">
+          <div class="position-label">Lead With This</div>
+          <div class="position-quote">"Traditional due diligence asks: <em>Do you have this control?</em> TrueGuard asks: <em>You said you have this control — is it actually operating right now?</em> That's the difference between attestation and proof."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="subsection-icon">🚀</span>
+        <span class="subsection-title">Opening the Conversation</span>
+      </div>
+      <div class="subsection-body">
+        <div class="talk-box">
+          <div class="talk-label">Regulatory Angle</div>
+          <div class="talk-quote">"The SEC isn't just asking if you have a patch management policy — they want to know if patching is actually happening. TrueGuard gives you continuous evidence that your controls are operating, not just documented."</div>
+        </div>
+        <div class="talk-box">
+          <div class="talk-label">LP / Fundraising Angle</div>
+          <div class="talk-quote">"Your LPs' ODD teams are getting more sophisticated. They're not satisfied with a DDQ checkbox anymore — they want proof. TrueGuard lets you show an allocator validated, continuously monitored controls, not a PDF from last March."</div>
+        </div>
+        <div class="talk-box">
+          <div class="talk-label">Operational Angle</div>
+          <div class="talk-quote">"Right now, you have no way of knowing if a control drifted between your last assessment and today. TrueGuard closes that window — you're not flying blind between annual reviews anymore."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="subsection-icon">🔍</span>
+        <span class="subsection-title">Discovery Questions</span>
+      </div>
+      <div class="subsection-body">
+        <p>Use these to surface the pain before introducing TrueGuard:</p>
+        <ul class="body-list">
+          <li>"When an LP sends you a DDQ, how long does it typically take your team to pull together the responses? Where does most of that time go?"</li>
+          <li>"If the SEC asked you today to prove that your MFA policy is actively enforced on every endpoint — how would you demonstrate that?"</li>
+          <li>"Between your annual assessment and now, do you have visibility into whether any of your security controls have drifted or changed?"</li>
+          <li>"Have you ever completed an ODD and then received a follow-up from an LP that you couldn't answer quickly with documented evidence?"</li>
+          <li>"Are there controls you know exist on paper but would be nervous to have someone verify in real time?"</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Objection Handling -->
+    <h2 class="section-heading">Objection Handling</h2>
+
+    <div class="objection-card">
+      <div class="obj-label">Objection</div>
+      <div class="obj-text">"We already do DDQs and have a strong security questionnaire process."</div>
+      <div class="resp-label">Response</div>
+      <div class="resp-text">That's exactly why TrueGuard is valuable — it's not replacing your DDQ process, it's making your answers defensible. Right now you're attesting to controls. TrueGuard validates that those attestations are accurate, so when an LP or regulator asks for proof, you have it. The question isn't whether you fill out DDQs well — it's whether the answers hold up under scrutiny.</div>
+    </div>
+
+    <div class="objection-card">
+      <div class="obj-label">Objection</div>
+      <div class="obj-text">"We already have security tools that monitor our environment."</div>
+      <div class="resp-label">Response</div>
+      <div class="resp-text">TrueGuard isn't a security monitoring tool — it's a control validation platform. Your SIEM and EDR tell you what's happening in your environment. TrueGuard cross-references what's happening with what you've told your investors is happening. Those are different questions. One is operational; the other is governance and accountability to your LPs and regulators.</div>
+    </div>
+
+    <div class="objection-card">
+      <div class="obj-label">Objection</div>
+      <div class="obj-text">"This sounds complex. How much work is this for our team?"</div>
+      <div class="resp-label">Response</div>
+      <div class="resp-text">Because TrueGuard is built on top of Drawbridge services you already have, the heavy lifting is done on our side. We're not asking your team to instrument new data sources or manage a new platform. We pull from your existing assessments, pen tests, training records, and policy documents — and surface the validation layer on top. The complexity sits with us, not you.</div>
+    </div>
+
+    <div class="objection-card">
+      <div class="obj-label">Objection</div>
+      <div class="obj-text">"We already monitor our controls internally."</div>
+      <div class="resp-label">Response</div>
+      <div class="resp-text">Internal monitoring is valuable — but it's also self-reported. When an institutional LP or the SEC reviews your controls, an internal monitoring report carries less weight than independent, third-party validated evidence. TrueGuard gives you the independent verification that external stakeholders actually require and that your own team can't provide.</div>
+    </div>
+
+    <div class="objection-card">
+      <div class="obj-label">Objection</div>
+      <div class="obj-text">"We just passed an ODD — our controls are fine."</div>
+      <div class="resp-label">Response</div>
+      <div class="resp-text">Congratulations — that's a real win. The challenge is that passing an ODD is a point-in-time snapshot. TrueGuard protects that result by ensuring controls don't drift before your next review. The worst outcome would be passing an ODD, then having a breach six months later because a control quietly degraded. TrueGuard prevents that — and keeps the evidence fresh for your next LP conversation.</div>
+    </div>
+
+    <div class="objection-card">
+      <div class="obj-label">Objection</div>
+      <div class="obj-text">"Can TrueGuard automatically answer DDQs?"</div>
+      <div class="resp-label">Response</div>
+      <div class="resp-text">Auto-population is on the roadmap and it's a meaningful near-term capability. Where TrueGuard adds immediate value is in dramatically reducing DDQ completion time by surfacing validated, evidence-backed data your team can use directly. Instead of days of manual documentation gathering, the evidence is ready to go. Auto-population is the next layer.</div>
+    </div>
+
+    <!-- Who to Target -->
+    <h2 class="section-heading">Who to Target</h2>
+
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="subsection-icon">👤</span>
+        <span class="subsection-title">Primary Buyers</span>
+      </div>
+      <div class="subsection-body">
+        <div class="grid-3">
+          <div class="char-card">
+            <div class="char-title">COO / CTO</div>
+            <div class="char-desc">Owns the operational risk narrative. Feels the DDQ burden directly. Motivated by reducing compliance overhead and protecting the firm's fundraising position.</div>
+          </div>
+          <div class="char-card">
+            <div class="char-title">CISO / Head of IT</div>
+            <div class="char-desc">Understands the control validation gap. Wants independent proof of their team's effectiveness. TrueGuard validates their work and gives them board-ready evidence.</div>
+          </div>
+          <div class="char-card">
+            <div class="char-title">CFO / Finance Leadership</div>
+            <div class="char-desc">Concerned about regulatory cost and LP relationships. Motivated by ROI: TrueGuard reduces ODD burden, reduces enforcement risk, and protects capital allocations.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-header">
+        <span class="subsection-icon">🏦</span>
+        <span class="subsection-title">Best-Fit Client Profiles</span>
+      </div>
+      <div class="subsection-body">
+        <div class="grid-2">
+          <div class="char-card">
+            <div class="char-title">Actively Fundraising Firms</div>
+            <div class="char-desc">LPs are scrutinizing ODD more carefully than ever. A fund in market with TrueGuard-validated controls has a demonstrable edge in allocation conversations.</div>
+          </div>
+          <div class="char-card">
+            <div class="char-title">Post-ODD Clients</div>
+            <div class="char-desc">Just passed an ODD? This is the ideal moment. Protect that result — ensure controls don't drift before the next review cycle and keep the evidence fresh.</div>
+          </div>
+          <div class="char-card">
+            <div class="char-title">Firms with Recent Incidents</div>
+            <div class="char-desc">A client who has experienced a breach or near-miss understands the attestation-vs-reality gap viscerally. TrueGuard directly addresses the root cause.</div>
+          </div>
+          <div class="char-card">
+            <div class="char-title">Firms Under Regulatory Scrutiny</div>
+            <div class="char-desc">SEC-registered advisers preparing for exams or managing deficiency letters need demonstrable, continuous control evidence — exactly what TrueGuard delivers.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Drawbridge Angle -->
+    <div class="db-angle">
+      <div class="db-angle-label">What This Means for Drawbridge</div>
+      <div class="db-angle-body">
+        <p>TrueGuard is the logical evolution of what Drawbridge has always done for alternative investment firms — now with a new level of proof. Trusted by <strong>1,300+ firms</strong> across hedge funds, private equity, and institutional allocators, Drawbridge has built the deepest cybersecurity program purpose-built for this industry. Every network scan, pen test, training record, and policy review we deliver generates data. TrueGuard turns that data into <strong>continuous, validated evidence</strong> that controls are actually working — not just documented.</p>
+        <p>No other provider can offer this because no other provider has the underlying service breadth and client relationships that Drawbridge does. A standalone monitoring vendor can tell a client what's happening in their environment. Only Drawbridge can cross-reference that against what the client told their LPs and regulators — and serve as the independent third party that institutional investors actually trust.</p>
+        <p>Position TrueGuard at renewal as the natural next layer of the program: <strong>you've done the work — now let's prove the work is working.</strong> For clients who are fundraising, under exam, or managing LP relationships, this is not a nice-to-have. It's the difference between a security program and a defensible security posture. <strong>Raise Your Guard. Raise Your Score. Raise Your Bar.</strong></p>
+      </div>
+    </div>
+
+    <!-- Key Terms -->
+    <h2 class="section-heading">Key Terms</h2>
+    <div class="grid-3">
+      <div class="term-card">
+        <div class="term-name">Control Validation</div>
+        <div class="term-def">The process of verifying that a security control is not just documented, but actively operating as intended — confirmed by independent evidence, not self-attestation.</div>
+      </div>
+      <div class="term-card">
+        <div class="term-name">DDQ</div>
+        <div class="term-def">Due Diligence Questionnaire — the formal security questionnaire LPs and institutional investors send to funds before allocating capital, often covering 50–200+ controls.</div>
+      </div>
+      <div class="term-card">
+        <div class="term-name">Control Drift</div>
+        <div class="term-def">The degradation of a security control between assessment periods — e.g., MFA disabled for a contractor, a critical patch not applied, a policy document not updated after personnel changes.</div>
+      </div>
+      <div class="term-card">
+        <div class="term-name">ODD</div>
+        <div class="term-def">Operational Due Diligence — the review process institutional LPs conduct before investing, often including cybersecurity assessment as a gating requirement for capital allocation.</div>
+      </div>
+      <div class="term-card">
+        <div class="term-name">Continuous Validation</div>
+        <div class="term-def">Real-time, ongoing verification that security controls remain implemented and effective — as opposed to point-in-time assessments conducted annually or quarterly.</div>
+      </div>
+      <div class="term-card">
+        <div class="term-name">Attestation Gap</div>
+        <div class="term-def">The difference between what a firm reports in a DDQ or assessment and the actual state of their security environment — the core problem TrueGuard solves.</div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+
+  <!-- ── Footer ── -->
+  <div class="footer">
+    <div>
+      <div class="footer-brand">DRAWBRIDGE</div>
+      <div class="footer-sub">Cybersecurity for Alternative Asset Management</div>
+    </div>
+    <div class="footer-tag">TrueGuard · RM Launch Training · March 2026</div>
+  </div>
+
+</div><!-- /page -->
+
+</body>
+</html>

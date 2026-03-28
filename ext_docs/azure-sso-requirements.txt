@@ -1,0 +1,57 @@
+Azure AD / Microsoft Entra SSO — App Registration Request
+==========================================================
+
+Requesting team: Drawbridge Relationship Management
+Application name: Drawbridge RM Workspace
+Purpose: Internal web application for Drawbridge Relationship Managers. We are
+adding Microsoft SSO so that users are automatically identified when logging
+into the app — no separate username/password required.
+
+What we need
+------------
+Please register a new application in Microsoft Entra ID and provide the
+following values:
+
+  1. Application (Client) ID
+  2. Client Secret (value, not the secret ID) — please set expiry to 24 months
+  3. Directory (Tenant) ID
+
+Configuration required on your end
+------------------------------------
+Authentication type: OAuth 2.0 / OpenID Connect
+
+Redirect URIs — please add both of the following as allowed redirect URIs
+under "Web" platform:
+
+  https://rm-workspace.vercel.app/api/auth/callback/azure-ad
+  https://rm-workspace-*.vercel.app/api/auth/callback/azure-ad
+
+  (The second entry covers preview/staging deployments. If wildcard URIs are
+  not supported, we can provide a specific staging URL separately.)
+
+API permissions required:
+  - Microsoft Graph > User.Read (delegated) — to read the signed-in user's
+    name and email address
+  - No other permissions needed
+
+Token configuration (optional but helpful):
+  - Add "email" and "name" as optional claims on the ID token
+
+Supported account types:
+  - Accounts in this organizational directory only (single tenant)
+
+Who should have access:
+  - All Drawbridge employees (or we can scope to a specific group if preferred)
+
+What we will do with the credentials
+--------------------------------------
+The Client ID, Client Secret, and Tenant ID will be stored as environment
+variables in our Vercel deployment (not in code). They will be used only to
+validate Microsoft login sessions. We do not store passwords or access tokens
+beyond the active session.
+
+Questions / contact
+--------------------
+Please reply with the three values listed above and confirm the redirect URIs
+have been added. If you have questions about the application or need to scope
+access to a specific Entra group, let us know.

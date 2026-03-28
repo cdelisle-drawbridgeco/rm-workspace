@@ -11,6 +11,7 @@ export { opportunityService } from './opportunity.service';
 export { snapshotService } from './snapshot.service';
 export { renewalPlanService } from './renewal-plan.service';
 export { interactionService } from './interaction.service';
+export { engagementService } from './engagement.service';
 export { dataVersionService } from './data-version.service';
 export { forecastLockService } from './forecast-lock.service';
 
