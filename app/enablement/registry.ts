@@ -368,8 +368,8 @@ export { TOPIC_COMPONENTS };
 /* ------------------------------------------------------------------ */
 
 export function getVisibleCategories(): CategoryConfig[] {
-  const isProd = process.env.NODE_ENV === 'production';
-  if (!isProd) return CATEGORIES;
+  const gating = process.env.FEATURE_GATING === 'true';
+  if (!gating) return CATEGORIES;
   return CATEGORIES
     .map((cat) => ({ ...cat, topics: cat.topics.filter((t) => t.published === true) }))
     .filter((cat) => cat.topics.length > 0);
