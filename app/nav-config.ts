@@ -17,7 +17,7 @@ export const NAV_ITEMS: NavItem[] = [
 ];
 
 export function getVisibleNavItems(): NavItem[] {
-  const gating = process.env.NEXT_PUBLIC_FEATURE_GATING === 'true';
+  const gating = process.env.FEATURE_GATING === 'true';
   if (!gating) return NAV_ITEMS;
   return NAV_ITEMS.filter((item) => item.published);
 }

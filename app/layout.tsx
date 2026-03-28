@@ -2,6 +2,8 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { getVisibleNavItems } from './nav-config';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Drawbridge | Renewal Forecast',
   description: 'Renewal forecasting and planning'
