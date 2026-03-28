@@ -8,9 +8,9 @@ export type NavItem = {
 };
 
 export const NAV_ITEMS: NavItem[] = [
-  { href: '/',             label: 'Forecast',     published: true  },
-  { href: '/plans',        label: 'Plans',         published: true  },
-  { href: '/interactions', label: 'Interactions',  published: true  },
+  { href: '/',             label: 'Forecast',     published: false },
+  { href: '/plans',        label: 'Plans',         published: false },
+  { href: '/interactions', label: 'Interactions',  published: false },
   { href: '/dashboard',    label: 'Dashboard',     published: false },
   { href: '/enablement',   label: 'Enablement',    published: true  },
   { href: '/admin/import', label: 'Admin',         published: false, secondary: true },
