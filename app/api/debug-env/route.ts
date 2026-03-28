@@ -7,5 +7,6 @@ export async function GET() {
     DATABASE_URL_prefix: url ? url.substring(0, 25) : null,
     NODE_ENV: process.env.NODE_ENV,
     VERCEL_ENV: process.env.VERCEL_ENV,
+    FEATURE_GATING: process.env.FEATURE_GATING,
   });
 }
