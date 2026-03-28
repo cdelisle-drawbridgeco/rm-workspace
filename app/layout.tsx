@@ -1,5 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
+import { getVisibleNavItems } from './nav-config';
 
 export const metadata: Metadata = {
   title: 'Drawbridge | Renewal Forecast',
@@ -11,6 +12,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const navItems = getVisibleNavItems();
+  const primary = navItems.filter((item) => !item.secondary);
+  const secondary = navItems.filter((item) => item.secondary);
+
   return (
     <html lang="en">
       <body className="min-h-screen bg-db-gray-light text-db-dark">
@@ -20,13 +25,27 @@ export default function RootLayout({
               <a href="/" className="font-heading text-lg font-semibold text-white">
                 Drawbridge
               </a>
-              <a href="/" className="text-db-orange hover:text-white transition">Forecast</a>
-              <a href="/plans" className="text-db-orange hover:text-white transition">Plans</a>
-              <a href="/interactions" className="text-db-orange hover:text-white transition">Interactions</a>
-              <a href="/dashboard" className="text-db-orange hover:text-white transition">Dashboard</a>
-              <a href="/enablement" className="text-db-orange hover:text-white transition">Enablement</a>
+              {primary.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="text-db-orange hover:text-white transition"
+                >
+                  {item.label}
+                </a>
+              ))}
             </div>
-            <a className="text-db-orange hover:text-white transition text-xs" href="/admin/import">Admin</a>
+            <div className="flex items-center gap-4">
+              {secondary.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="text-db-orange hover:text-white transition text-xs"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
           </nav>
         </header>
         {children}
