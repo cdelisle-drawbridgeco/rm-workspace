@@ -239,7 +239,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Pitch decks, case studies, one-pagers, and battle cards for sales conversations.',
         icon: '📁',
-        published: false,
+        published: true,
       },
     ],
   },
