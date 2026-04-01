@@ -2,8 +2,8 @@
 
 import { useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import type { CategoryId, NavState, TopicId } from './types';
-import { getVisibleCategories, TOPIC_COMPONENTS, getCategoryById } from './registry';
+import type { CategoryConfig, CategoryId, NavState, TopicId } from './types';
+import { TOPIC_COMPONENTS } from './registry';
 import CategoryLanding from './components/category-landing';
 import BackButton from './components/back-button';
 
@@ -12,7 +12,7 @@ function TopicContent({ id }: { id: TopicId }) {
   return <Component />;
 }
 
-export default function EnablementContent() {
+export default function EnablementContent({ categories }: { categories: CategoryConfig[] }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const contentRef = useRef<HTMLElement>(null);
@@ -45,14 +45,14 @@ export default function EnablementContent() {
     router.back();
   }
 
-  const categoryConfig = getCategoryById(nav.category);
+  const categoryConfig = categories.find((c) => c.id === nav.category) ?? categories[0];
 
   return (
     <div className="flex h-full gap-0">
       {/* Sidebar */}
       <aside className="w-56 shrink-0 overflow-y-auto border-r border-gray-200 bg-white">
         <nav className="p-4 space-y-1">
-          {getVisibleCategories().map((cat) => (
+          {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => goToCategory(cat.id)}
