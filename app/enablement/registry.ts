@@ -206,7 +206,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Customer journey for PE portfolio companies — from sponsor mandate to exit-ready security.',
         icon: '🏭',
-        published: false,
+        published: true,
       },
       {
         id: 'journey-pe-revised',
