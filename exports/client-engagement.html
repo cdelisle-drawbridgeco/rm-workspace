@@ -3,330 +3,214 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Client Engagement Process — Drawbridge RM Enablement</title>
+  <title>Client Engagement Process — Drawbridge</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --db-dark: #111821;
-      --db-aqua: #86C8BC;
+      --db-dark:      #111821;
+      --db-aqua:      #86C8BC;
       --db-aqua-dark: #489E8E;
-      --db-orange: #FF6900;
-      --gray-50: #f9fafb;
-      --gray-100: #f3f4f6;
-      --gray-200: #e5e7eb;
-      --gray-400: #9ca3af;
-      --gray-500: #6b7280;
-      --gray-600: #4b5563;
-      --gray-700: #374151;
+      --db-aqua-light:#D6E6E3;
+      --db-orange:    #FF6900;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', system-ui, sans-serif;
       font-size: 14px;
-      color: var(--db-dark);
+      line-height: 1.6;
+      color: #374151;
       background: #fff;
       max-width: 860px;
       margin: 0 auto;
-      padding: 32px 40px 60px;
-      line-height: 1.6;
+      padding: 40px 48px;
     }
+    h1, h2, h3, h4, h5, .heading { font-family: 'Archivo', system-ui, sans-serif; }
+    strong { font-weight: 600; }
+    p + p { margin-top: 10px; }
 
     /* Hero */
     .hero {
-      background: var(--db-dark);
-      color: #fff;
+      background: linear-gradient(to right, var(--db-dark), #1a2535);
       border-radius: 12px;
-      padding: 28px 32px;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: flex-start;
-      gap: 20px;
-    }
-    .hero-icon { font-size: 2.5rem; flex-shrink: 0; }
-    .hero-text h1 {
-      font-family: 'Archivo', sans-serif;
-      font-size: 1.6rem;
-      font-weight: 700;
+      padding: 32px;
       color: #fff;
-      line-height: 1.2;
+      margin-bottom: 4px;
     }
-    .hero-text p {
-      margin-top: 8px;
-      font-size: 0.875rem;
-      color: rgba(255,255,255,0.7);
-      line-height: 1.5;
-    }
+    .hero .icon { font-size: 36px; display: block; margin-bottom: 10px; }
+    .hero h2 { font-size: 22px; font-weight: 700; color: #fff; }
+    .hero p  { font-size: 13px; color: #d1d5db; margin-top: 6px; }
 
-    .last-updated {
-      text-align: right;
-      font-size: 0.7rem;
-      color: var(--gray-400);
-      margin-bottom: 28px;
-    }
+    .last-updated { font-size: 11px; color: #9ca3af; text-align: right; margin-top: 6px; margin-bottom: 4px; }
 
     /* Section headings */
     .section-heading {
-      font-family: 'Archivo', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--db-dark);
-      margin-top: 32px;
-      margin-bottom: 10px;
-      padding-bottom: 6px;
-      border-bottom: 2px solid var(--db-aqua);
-    }
-
-    /* Body text */
-    p { font-size: 0.875rem; color: var(--gray-700); line-height: 1.65; }
-    p + p { margin-top: 10px; }
-    strong { font-weight: 600; color: var(--db-dark); }
-
-    /* Orange callout */
-    .callout-orange {
-      margin-top: 16px;
-      border-left: 4px solid var(--db-orange);
-      background: #fff7f0;
-      border-radius: 0 8px 8px 0;
-      padding: 14px 16px;
-    }
-    .callout-orange .callout-title {
-      font-size: 0.8125rem;
-      font-weight: 700;
-      color: var(--db-dark);
-      margin-bottom: 8px;
-    }
-    .callout-orange p { font-size: 0.8125rem; }
-
-    /* Aqua callout */
-    .callout-aqua {
-      border: 1px solid rgba(134,200,188,0.4);
-      background: rgba(134,200,188,0.07);
-      border-radius: 8px;
-      padding: 14px 16px;
-    }
-    .callout-aqua .callout-title {
-      font-size: 0.8125rem;
+      font-family: 'Archivo', system-ui, sans-serif;
+      font-size: 16px;
       font-weight: 600;
       color: var(--db-dark);
-      margin-bottom: 4px;
+      margin-top: 32px;
+      margin-bottom: 12px;
     }
-    .callout-aqua p { font-size: 0.8125rem; }
 
-    /* Amber callout */
+    /* SubSection */
+    .subsection { margin-top: 20px; }
+    .subsection-header {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 10px;
+    }
+    .subsection-header .icon { font-size: 16px; }
+    .subsection-header h4 {
+      font-family: 'Archivo', system-ui, sans-serif;
+      font-size: 14px; font-weight: 600; color: var(--db-dark);
+    }
+
+    /* Callout boxes */
+    .callout-orange {
+      border-left: 4px solid var(--db-orange);
+      background: #fff7ed;
+      border-radius: 6px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+    .callout-orange .callout-title { font-size: 13px; font-weight: 600; color: var(--db-dark); margin-bottom: 6px; }
+    .callout-orange p { font-size: 13px; color: #374151; }
+
+    .callout-aqua {
+      border: 1px solid rgba(134,200,188,0.35);
+      background: rgba(134,200,188,0.07);
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+    .callout-aqua .callout-title { font-size: 13px; font-weight: 600; color: var(--db-dark); margin-bottom: 6px; }
+    .callout-aqua p { font-size: 13px; color: #374151; }
+
+    .callout-aqua-strong {
+      border: 2px solid rgba(134,200,188,0.45);
+      background: rgba(134,200,188,0.07);
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 12px;
+    }
+    .callout-aqua-strong .callout-label { font-size: 11px; font-weight: 600; color: var(--db-aqua-dark); margin-bottom: 4px; }
+    .callout-aqua-strong p { font-size: 12px; color: #374151; }
+
     .callout-amber {
-      border: 1px solid #fcd34d;
+      border: 1px solid #fde68a;
       background: #fffbeb;
       border-radius: 8px;
-      padding: 12px 14px;
+      padding: 12px;
+      margin-top: 12px;
     }
-    .callout-amber .callout-title {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: #b45309;
-      margin-bottom: 4px;
-    }
-    .callout-amber p { font-size: 0.75rem; }
+    .callout-amber .callout-label { font-size: 11px; font-weight: 600; color: #92400e; margin-bottom: 4px; }
+    .callout-amber p { font-size: 12px; color: #374151; }
 
-    /* Blue callout */
     .callout-blue {
       border: 1px solid #bfdbfe;
       background: #eff6ff;
       border-radius: 8px;
-      padding: 12px 14px;
+      padding: 12px;
+      margin-top: 12px;
     }
-    .callout-blue .callout-title {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: #1d4ed8;
-      margin-bottom: 4px;
-    }
-    .callout-blue p { font-size: 0.75rem; }
-
-    /* SubSection */
-    .subsection { margin-top: 20px; }
-    .subsection-title {
-      font-family: 'Archivo', sans-serif;
-      font-size: 0.9375rem;
-      font-weight: 600;
-      color: var(--db-dark);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-    .subsection p { font-size: 0.8125rem; }
+    .callout-blue .callout-label { font-size: 11px; font-weight: 600; color: #1d4ed8; margin-bottom: 4px; }
+    .callout-blue p { font-size: 12px; color: #374151; }
 
     /* Tables */
-    .table-wrap {
-      border: 1px solid var(--gray-200);
-      border-radius: 8px;
-      overflow: hidden;
-      margin-top: 12px;
-    }
-    table { width: 100%; border-collapse: collapse; font-size: 0.8125rem; }
-    thead { background: var(--gray-50); }
-    thead th {
-      padding: 8px 14px;
-      text-align: left;
-      font-size: 0.6875rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--gray-500);
-    }
-    tbody tr:nth-child(odd) { background: #fff; }
-    tbody tr:nth-child(even) { background: var(--gray-50); }
-    tbody td {
-      padding: 10px 14px;
-      font-size: 0.8125rem;
-      vertical-align: top;
-      border-top: 1px solid var(--gray-100);
-    }
-    td.label { font-weight: 600; color: var(--db-dark); white-space: nowrap; }
-    td.desc { color: var(--gray-600); }
-    td.note { color: var(--gray-500); }
-    td.gray { color: var(--gray-500); }
+    .table-wrap { border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; margin-top: 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead tr { background: #f9fafb; }
+    th { padding: 8px 14px; text-align: left; font-weight: 600; font-family: 'Archivo', system-ui, sans-serif; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #6b7280; }
+    td { padding: 10px 14px; vertical-align: top; }
+    tbody tr:nth-child(odd)  { background: #fff; }
+    tbody tr:nth-child(even) { background: #f9fafb; }
+    tbody tr { border-bottom: 1px solid #f3f4f6; }
+    .td-label { font-weight: 600; color: var(--db-dark); }
+    .td-mid   { color: #4b5563; }
+    .td-note  { color: #6b7280; }
 
     /* Tier badges */
-    .badge-tier1 {
-      display: inline-flex; align-items: center;
-      background: rgba(134,200,188,0.15);
-      color: var(--db-aqua-dark);
-      border-radius: 999px;
-      padding: 2px 10px;
-      font-size: 0.6875rem;
-      font-weight: 700;
-    }
-    .badge-tier2 {
-      display: inline-flex; align-items: center;
-      background: #dbeafe;
-      color: #1d4ed8;
-      border-radius: 999px;
-      padding: 2px 10px;
-      font-size: 0.6875rem;
-      font-weight: 700;
-    }
-    .badge-tier3 {
-      display: inline-flex; align-items: center;
-      background: var(--gray-100);
-      color: var(--gray-600);
-      border-radius: 999px;
-      padding: 2px 10px;
-      font-size: 0.6875rem;
-      font-weight: 700;
-    }
+    .badge-tier1 { display: inline-flex; align-items: center; border-radius: 999px; padding: 2px 8px; font-size: 11px; font-weight: 600; background: rgba(134,200,188,0.15); color: var(--db-aqua-dark); }
+    .badge-tier2 { display: inline-flex; align-items: center; border-radius: 999px; padding: 2px 8px; font-size: 11px; font-weight: 600; background: #dbeafe; color: #1d4ed8; }
+    .badge-tier3 { display: inline-flex; align-items: center; border-radius: 999px; padding: 2px 8px; font-size: 11px; font-weight: 600; background: #f3f4f6; color: #4b5563; }
+
+    /* 2-col / 3-col grids */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 12px; }
+
+    .lane-card { border-radius: 8px; padding: 16px; }
+    .lane-card .lane-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+    .lane-card ul { list-style: none; }
+    .lane-card li { font-size: 12px; color: #4b5563; margin-bottom: 6px; display: flex; gap: 8px; line-height: 1.45; }
+    .lane-card li .arrow { flex-shrink: 0; margin-top: 1px; }
+    .lane-cs { border: 1px solid #e5e7eb; background: #f9fafb; }
+    .lane-cs .lane-label { color: #6b7280; }
+    .lane-cs .arrow { color: #9ca3af; }
+    .lane-rm { border: 1px solid rgba(134,200,188,0.35); background: rgba(134,200,188,0.07); }
+    .lane-rm .lane-label { color: var(--db-aqua-dark); }
+    .lane-rm .arrow { color: var(--db-aqua-dark); }
+
+    /* Persona cards */
+    .persona-card { border: 1px solid #e5e7eb; background: #fff; border-radius: 8px; padding: 16px; }
+    .persona-card .persona-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--db-dark); margin-bottom: 6px; }
+    .persona-card .persona-desc { font-size: 12px; color: #6b7280; margin-bottom: 10px; line-height: 1.5; }
+    .persona-card .persona-quote { font-size: 12px; font-weight: 500; color: var(--db-dark); font-style: italic; border-left: 2px solid var(--db-aqua); padding-left: 8px; margin-bottom: 8px; line-height: 1.4; }
+    .persona-card .persona-note { font-size: 12px; color: #6b7280; line-height: 1.5; }
 
     /* Outreach angles */
-    .outreach-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 12px;
-    }
-    .outreach-primary {
-      border: 2px solid rgba(134,200,188,0.4);
-      background: rgba(134,200,188,0.06);
-      border-radius: 8px;
-      padding: 16px;
-    }
-    .outreach-primary .angle-label {
-      font-size: 0.6875rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--db-aqua-dark);
-      margin-bottom: 8px;
-    }
-    .outreach-primary p { font-size: 0.8125rem; }
-    .outreach-primary .talk-track {
-      margin-top: 10px;
-      font-size: 0.75rem;
-      color: var(--gray-500);
-      font-style: italic;
-    }
-    .outreach-secondary { display: flex; flex-direction: column; gap: 8px; }
-    .angle-card {
-      border: 1px solid var(--gray-200);
-      background: var(--gray-50);
-      border-radius: 6px;
-      padding: 10px 12px;
-    }
-    .angle-card.aqua-card {
-      border-color: rgba(134,200,188,0.25);
-      background: rgba(134,200,188,0.06);
-    }
-    .angle-card .card-title { font-size: 0.75rem; font-weight: 700; color: var(--db-dark); margin-bottom: 4px; }
-    .angle-card.aqua-card .card-title { color: var(--db-aqua-dark); }
-    .angle-card p { font-size: 0.75rem; color: var(--gray-600); }
+    .angle-primary { border: 2px solid rgba(134,200,188,0.45); background: rgba(134,200,188,0.07); border-radius: 8px; padding: 16px; }
+    .angle-primary .angle-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--db-aqua-dark); margin-bottom: 8px; }
+    .angle-primary p { font-size: 13px; color: #374151; }
+    .angle-primary .angle-example { font-size: 12px; color: #6b7280; font-style: italic; margin-top: 8px; }
 
-    /* Weekly rhythm */
-    .rhythm-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 12px;
-      margin-top: 12px;
-    }
-    .rhythm-card {
-      border: 1px solid var(--gray-200);
-      background: var(--gray-50);
-      border-radius: 8px;
-      padding: 14px;
-    }
-    .rhythm-card.mid {
-      border-color: rgba(134,200,188,0.35);
-      background: rgba(134,200,188,0.06);
-    }
-    .rhythm-label {
-      font-size: 0.6875rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--gray-500);
-    }
-    .rhythm-card.mid .rhythm-label { color: var(--db-aqua-dark); }
-    .rhythm-card-title {
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: var(--db-dark);
-      margin-top: 4px;
-      margin-bottom: 8px;
-    }
-    .rhythm-card p { font-size: 0.75rem; color: var(--gray-600); line-height: 1.5; }
+    .angle-secondary { display: flex; flex-direction: column; gap: 8px; }
+    .angle-card { border: 1px solid #e5e7eb; background: #f9fafb; border-radius: 6px; padding: 12px; }
+    .angle-card.angle-card-aqua { border: 1px solid rgba(134,200,188,0.25); background: rgba(134,200,188,0.05); }
+    .angle-card .angle-card-label { font-size: 11px; font-weight: 600; color: var(--db-dark); margin-bottom: 4px; }
+    .angle-card.angle-card-aqua .angle-card-label { color: var(--db-aqua-dark); }
+    .angle-card p { font-size: 12px; color: #4b5563; line-height: 1.5; }
 
-    /* DrawbridgeAngle */
+    /* Weekly rhythm cards */
+    .rhythm-card { border-radius: 8px; padding: 16px; }
+    .rhythm-card .rhythm-period { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+    .rhythm-card .rhythm-title { font-size: 13px; font-weight: 600; color: var(--db-dark); margin-bottom: 8px; }
+    .rhythm-card p { font-size: 12px; color: #4b5563; line-height: 1.6; }
+    .rhythm-start { border: 1px solid #e5e7eb; background: #f9fafb; }
+    .rhythm-start .rhythm-period { color: #6b7280; }
+    .rhythm-mid   { border: 1px solid rgba(134,200,188,0.35); background: rgba(134,200,188,0.07); }
+    .rhythm-mid   .rhythm-period { color: var(--db-aqua-dark); }
+    .rhythm-end   { border: 1px solid #e5e7eb; background: #f9fafb; }
+    .rhythm-end   .rhythm-period { color: #6b7280; }
+
+    /* Drawbridge angle */
     .db-angle {
-      margin-top: 32px;
+      margin-top: 28px;
       border-left: 4px solid var(--db-orange);
       background: #fff7ed;
       border-radius: 6px;
       padding: 18px 20px;
     }
     .db-angle .db-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--db-orange);
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      margin-bottom: 8px;
+      font-size: 11px; font-weight: 600; color: var(--db-orange);
+      text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px;
     }
     .db-angle p { font-size: 13px; color: #374151; line-height: 1.6; }
-    .db-angle p + p { margin-top: 8px; }
+    .db-angle p + p { margin-top: 10px; }
 
+    /* Print */
     @media print {
-      body { padding: 20px 28px 40px; max-width: 100%; }
-      .hero { page-break-inside: avoid; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .table-wrap { page-break-inside: avoid; }
-      .db-angle { page-break-inside: avoid; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .callout-orange, .callout-aqua, .callout-amber, .callout-blue {
-        -webkit-print-color-adjust: exact; print-color-adjust: exact;
+      body { padding: 20px 28px; font-size: 12px; }
+      .hero { padding: 22px 26px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .hero h2 { font-size: 20px; }
+      .section-heading { margin-top: 22px; page-break-after: avoid; }
+      .callout-orange, .callout-aqua, .callout-aqua-strong, .callout-amber, .callout-blue,
+      .lane-cs, .lane-rm, .persona-card, .angle-primary, .angle-card, .rhythm-card, .db-angle,
+      thead tr, tbody tr:nth-child(even) {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
       }
-      thead, .rhythm-card, .angle-card, .outreach-primary, .badge-tier1, .badge-tier2, .badge-tier3 {
-        -webkit-print-color-adjust: exact; print-color-adjust: exact;
-      }
+      .grid-2, .grid-3, .subsection { page-break-inside: avoid; }
     }
   </style>
 </head>
@@ -334,359 +218,366 @@
 
   <!-- Hero -->
   <div class="hero">
-    <div class="hero-icon">🤝</div>
-    <div class="hero-text">
-      <h1>Client Engagement Process</h1>
-      <p>How to build the relationship depth that makes renewals easier — cadence, contact strategy, outreach quality, and Salesforce logging.</p>
-    </div>
+    <span class="icon">🤝</span>
+    <h2>Client Engagement Process</h2>
+    <p>How to build the relationship depth that makes renewals easier — cadence, contact strategy, outreach quality, and Salesforce logging.</p>
   </div>
-  <div class="last-updated">Last updated: March 27, 2026 at 12:00 PM</div>
+  <p class="last-updated">Last updated March 27, 2026 at 12:00 PM</p>
 
-  <!-- Why Consistent Engagement Matters -->
-  <div class="section-heading">Why Consistent Engagement Matters</div>
-
+  <!-- Why This Matters -->
+  <h3 class="section-heading">Why Consistent Engagement Matters</h3>
   <p>Every interaction you have with a client is a brand moment for Drawbridge. The way you show up — how informed you are, how proactively you share relevant intelligence, how well you understand their business — is how clients form their opinion of Drawbridge as a firm. You are not just managing an account. You are the face of the brand.</p>
-
   <p>The goal of consistent engagement is to earn the title of <strong>trusted advisor</strong> — not vendor. A vendor delivers services. A trusted advisor anticipates problems, brings perspectives the client hasn't asked for, and becomes part of how the firm thinks about its business. That status is not granted at contract signing. It's built interaction by interaction, over months.</p>
-
   <p>To be seen as a thought leader in cybersecurity for alternative asset management — someone whose calls get picked up, whose emails get read, whose perspective gets shared internally — requires showing up with something worth saying on a regular basis. That reputation compounds over time. It also makes renewals dramatically easier, because the client already knows why Drawbridge matters.</p>
 
-  <div class="callout-orange">
-    <div class="callout-title">Quarterly cadence keeps you in vendor territory.</div>
+  <div class="callout-orange" style="margin-top: 16px;">
+    <p class="callout-title">Quarterly cadence keeps you in vendor territory.</p>
     <p>If a client hears from you four times a year — typically tied to a deliverable or a renewal conversation — you haven't built a relationship. You've established a billing cycle. At that frequency, clients don't think of you as someone they trust with strategic questions. They think of you as someone they hear from when something needs to get done.</p>
-    <p style="margin-top:8px;">Trusted advisors show up between the milestones. They share something relevant without being asked. They know what's happening at the firm and bring context that makes the client's job easier. That can't happen on four touches a year — it requires a consistent, proactive cadence that keeps you embedded in how the client thinks about their security program.</p>
+    <p>Trusted advisors show up between the milestones. They share something relevant without being asked. They know what's happening at the firm and bring context that makes the client's job easier. That can't happen on four touches a year — it requires a consistent, proactive cadence that keeps you embedded in how the client thinks about their security program.</p>
   </div>
 
-  <!-- Impact on Renewals -->
-  <div class="callout-aqua" style="margin-top:16px;">
-    <div class="callout-title">Consistent engagement is what makes renewals easy.</div>
+  <div class="callout-aqua" style="margin-top: 12px;">
+    <p class="callout-title">Consistent engagement is what makes renewals easy.</p>
     <p>When clients hear from you monthly — or more — renewal conversations stop feeling like a negotiation and start feeling like a natural next step. There's no cold outreach, no scramble to remind them what you've done, no moment where they wonder why you're suddenly calling. You're already in a conversation. Starting the renewal early becomes straightforward because the relationship is warm enough to support it.</p>
-    <p style="margin-top:8px;">Consistent value demonstration flips the dynamic entirely. When a client has seen — through regular touchpoints — exactly how Drawbridge is protecting them, closing gaps, and keeping them ahead of regulatory exposure, the contract extension is an afterthought. They're not asking themselves whether you're worth it. They already know. The goal is to never reach a renewal conversation where you're building the case from scratch.</p>
+    <p>Consistent value demonstration flips the dynamic entirely. When a client has seen — through regular touchpoints — exactly how Drawbridge is protecting them, closing gaps, and keeping them ahead of regulatory exposure, the contract extension is an afterthought. They're not asking themselves whether you're worth it. They already know. The goal is to never reach a renewal conversation where you're building the case from scratch.</p>
   </div>
 
   <!-- Weekly Cadence Goal -->
-  <div class="section-heading">The Weekly Cadence Goal</div>
-
+  <h3 class="section-heading">The Weekly Cadence Goal</h3>
   <div class="callout-aqua">
-    <div class="callout-title">Target: 20 qualifying client interactions per week.</div>
+    <p class="callout-title">Target: 20 qualifying client interactions per week.</p>
     <p>With a typical book of ~100 accounts, 20 interactions per week means you're touching every client at least once a month. That's the minimum frequency to start building real relationship depth — and to catch risk signals before they become churn signals.</p>
   </div>
-
-  <p style="margin-top:12px;">Monthly touchpoints are the floor, not the goal. The clients where you build the strongest relationships — where you become someone they call proactively — are the ones you engage more often, more substantively, and across multiple tiers of the firm. Use the 20-per-week target to ensure no account goes dark, and let judgment drive where you invest additional depth.</p>
+  <p style="margin-top: 12px;">Monthly touchpoints are the floor, not the goal. The clients where you build the strongest relationships — where you become someone they call proactively — are the ones you engage more often, more substantively, and across multiple tiers of the firm. Use the 20-per-week target to ensure no account goes dark, and let judgment drive where you invest additional depth.</p>
 
   <!-- What Counts -->
   <div class="subsection">
-    <div class="subsection-title">✅ What Counts as a Qualifying Interaction</div>
+    <div class="subsection-header">
+      <span class="icon">✅</span>
+      <h4>What Counts as a Qualifying Interaction</h4>
+    </div>
     <p>Not every email counts. A qualifying interaction is one where you're creating a touchpoint that the client would recognize as meaningful. There are four types:</p>
     <div class="table-wrap">
       <table>
         <thead>
           <tr>
-            <th style="width:20%">Activity Type</th>
-            <th style="width:42%">Description</th>
-            <th style="width:38%">Examples</th>
+            <th>Activity Type</th>
+            <th>Description</th>
+            <th>Examples</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="label">Meeting / Call</td>
-            <td class="desc">Scheduled live conversation — Teams calls and meetings that actually took place</td>
-            <td class="note">Quarterly review, scheduled check-in, renewal conversation, intro call</td>
+            <td class="td-label">Meeting / Call</td>
+            <td class="td-mid">Scheduled live conversation — Teams calls and meetings that actually took place</td>
+            <td class="td-note">Quarterly review, scheduled check-in, renewal conversation, intro call</td>
           </tr>
           <tr>
-            <td class="label">Email Outreach</td>
-            <td class="desc">Intentional, personalized email — not a blast or auto-notification</td>
-            <td class="note">Sharing a relevant article, following up on a deliverable, regulatory update with commentary</td>
+            <td class="td-label">Email Outreach</td>
+            <td class="td-mid">Intentional, personalized email — not a blast or auto-notification</td>
+            <td class="td-note">Sharing a relevant article, following up on a deliverable, regulatory update with commentary</td>
           </tr>
           <tr>
-            <td class="label">Strategic Update</td>
-            <td class="desc">Proactively sharing intelligence or context the client didn't ask for</td>
-            <td class="note">SEC exam prep note, threat advisory, new Drawbridge capability relevant to their situation</td>
+            <td class="td-label">Strategic Update</td>
+            <td class="td-mid">Proactively sharing intelligence or context the client didn't ask for</td>
+            <td class="td-note">SEC exam prep note, threat advisory, new Drawbridge capability relevant to their situation</td>
           </tr>
           <tr>
-            <td class="label">Introduction / Expansion</td>
-            <td class="desc">Connecting a client contact to someone new — either at Drawbridge or within their own firm</td>
-            <td class="note">Introducing a client to Chris or Eric, bringing a new stakeholder at the client into the relationship, facilitating a peer intro between clients</td>
+            <td class="td-label">Introduction / Expansion</td>
+            <td class="td-mid">Connecting a client contact to someone new — either at Drawbridge or within their own firm</td>
+            <td class="td-note">Introducing a client to Chris or Eric, bringing a new stakeholder at the client into the relationship, facilitating a peer intro between clients</td>
           </tr>
         </tbody>
       </table>
     </div>
-  </div>
-
-  <!-- In-person visits callout -->
-  <div class="callout-aqua" style="margin-top:12px;border-width:2px;border-color:rgba(134,200,188,0.45);">
-    <div class="callout-title">In-person visits — the highest-value interaction you can have</div>
-    <p>Getting onsite with a client is qualitatively different from any Teams call or email. It signals that the relationship matters, creates space for the kind of candid conversation that doesn't happen on a scheduled call, and makes you visible at a firm level — not just to the one contact you usually reach. Aim to visit key accounts in person at least annually, and prioritize onsite meetings for renewal conversations, relationship gaps, and accounts where you're building a new Tier 1 relationship. An onsite visit counts as a qualifying interaction — but more importantly, it tends to unlock the next five.</p>
+    <div class="callout-aqua-strong">
+      <p class="callout-label">In-person visits — the highest-value interaction you can have</p>
+      <p>Getting onsite with a client is qualitatively different from any Teams call or email. It signals that the relationship matters, creates space for the kind of candid conversation that doesn't happen on a scheduled call, and makes you visible at a firm level — not just to the one contact you usually reach. Aim to visit key accounts in person at least annually, and prioritize onsite meetings for renewal conversations, relationship gaps, and accounts where you're building a new Tier 1 relationship. An onsite visit counts as a qualifying interaction — but more importantly, it tends to unlock the next five.</p>
+    </div>
   </div>
 
   <!-- Three-Tier Contact Model -->
   <div class="subsection">
-    <div class="subsection-title">🎯 Who to Prioritize — The Three-Tier Contact Model</div>
+    <div class="subsection-header">
+      <span class="icon">🎯</span>
+      <h4>Who to Prioritize — The Three-Tier Contact Model</h4>
+    </div>
     <p>Not all contacts are created equal. Each account should have representation across three tiers — and the goal is to make sure senior relationships don't depend entirely on whoever introduced you to the account.</p>
     <div class="table-wrap">
       <table>
         <thead>
           <tr>
-            <th style="width:10%">Tier</th>
-            <th style="width:25%">Who</th>
-            <th style="width:45%">Why It Matters</th>
-            <th style="width:20%">Cadence</th>
+            <th>Tier</th>
+            <th>Who</th>
+            <th>Why It Matters</th>
+            <th>Cadence</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td style="vertical-align:middle;"><span class="badge-tier1">Tier 1</span></td>
-            <td class="desc" style="font-weight:600;color:#111821;">Executive sponsor (CFO, CCO, Managing Partner)</td>
-            <td class="desc">This person controls budget and will ultimately make or break the renewal. If they only know Drawbridge through your day-to-day contact, the renewal is at risk.</td>
-            <td class="note">At minimum quarterly</td>
+            <td><span class="badge-tier1">Tier 1</span></td>
+            <td class="td-label">Executive sponsor (CFO, CCO, Managing Partner)</td>
+            <td class="td-mid">This person controls budget and will ultimately make or break the renewal. If they only know Drawbridge through your day-to-day contact, the renewal is at risk.</td>
+            <td class="td-note">At minimum quarterly</td>
           </tr>
           <tr>
-            <td style="vertical-align:middle;"><span class="badge-tier2">Tier 2</span></td>
-            <td class="desc" style="font-weight:600;color:#111821;">Day-to-day champion (COO, CCO, IT lead, CTO)</td>
-            <td class="desc">Your primary relationship — the person who receives deliverables, translates value to leadership, and advocates internally. Keep them informed and ahead of every initiative.</td>
-            <td class="note">Monthly or more frequently</td>
+            <td><span class="badge-tier2">Tier 2</span></td>
+            <td class="td-label">Day-to-day champion (COO, CCO, IT lead, CTO)</td>
+            <td class="td-mid">Your primary relationship — the person who receives deliverables, translates value to leadership, and advocates internally. Keep them informed and ahead of every initiative.</td>
+            <td class="td-note">Monthly or more frequently</td>
           </tr>
           <tr>
-            <td style="vertical-align:middle;"><span class="badge-tier3">Tier 3</span></td>
-            <td class="desc" style="font-weight:600;color:#111821;">Supporting contact (compliance analyst, IT staff, operations)</td>
-            <td class="desc">Useful for delivery coordination and ground-level intelligence about what's actually happening at the firm. Don't anchor the whole relationship here.</td>
-            <td class="note">As needed for delivery</td>
+            <td><span class="badge-tier3">Tier 3</span></td>
+            <td class="td-label">Supporting contact (compliance analyst, IT staff, operations)</td>
+            <td class="td-mid">Useful for delivery coordination and ground-level intelligence about what's actually happening at the firm. Don't anchor the whole relationship here.</td>
+            <td class="td-note">As needed for delivery</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="callout-amber" style="margin-top:12px;">
-      <div class="callout-title">Building executive relationships you don't have yet</div>
+    <div style="margin-top:12px;border-left:4px solid #111821;background-color:#f1f3f5;border-radius:8px;padding:16px;">
+      <p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#111821;margin-bottom:6px;">Operational satisfaction is not the same as executive awareness</p>
+      <p style="font-size:12px;color:#4b5563;margin-bottom:6px;">Your day-to-day champion knows the value Drawbridge delivers. But they're not the one making the renewal decision under budget pressure. Executive sponsors care about business impact — risk reduced, regulatory exposure addressed, capital protected — not delivery status. If that story hasn't reached them in their language, a well-run account can still lose at renewal.</p>
+      <p style="font-size:12px;color:#4b5563;">This is why Tier 1 engagement matters and why the SVR one-pager exists: something concise enough to get forwarded to leadership, clear enough to stand on its own in a budget conversation without you in the room. Lead with outcomes, not activity.</p>
+    </div>
+    <div class="callout-amber">
+      <p class="callout-label">Building executive relationships you don't have yet</p>
       <p>If you know who the executive sponsor should be but don't yet have a relationship with them, the first step is to get them into Salesforce correctly. Add them as a contact on the account, tag them as an executive sponsor, and use the Executive Sponsor notes field to document your plan for building that relationship — who the bridge is, what the right moment might be (a regulatory update, a new initiative, an intro from Chris or Eric), and where you are in the process. That keeps the gap visible and gives you something concrete to work toward, rather than leaving it as a vague intention.</p>
     </div>
   </div>
 
   <!-- RM vs CS Lane -->
-  <div class="section-heading">Know Your Lane — RM vs. CS</div>
+  <h3 class="section-heading">Know Your Lane — RM vs. CS</h3>
   <p>One of the most common ways RMs lose strategic positioning is by becoming the delivery contact. Client Success owns the tactical relationship — deliverable tracking, support requests, issue resolution. That's their lane. Yours is the strategic conversation: business context, regulatory environment, renewal, expansion, and executive relationships.</p>
   <p>If your client engagement is primarily happening in CS-owned calls — delivery updates, status checks, support follow-ups — you are not building the kind of relationship that makes you a trusted advisor. You're a project manager who happens to own the renewal. That's a fragile position.</p>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;">
-    <div style="border:1px solid #e5e7eb;border-radius:8px;background:#f9fafb;padding:16px;">
-      <p style="font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#6b7280;margin-bottom:10px;">CS owns</p>
-      <ul style="padding-left:0;list-style:none;display:flex;flex-direction:column;gap:6px;">
-        <li style="display:flex;gap:8px;font-size:0.8125rem;color:#4b5563;"><span style="color:#9ca3af;flex-shrink:0;">→</span>Deliverable execution and tracking</li>
-        <li style="display:flex;gap:8px;font-size:0.8125rem;color:#4b5563;"><span style="color:#9ca3af;flex-shrink:0;">→</span>Day-to-day client support and issue resolution</li>
-        <li style="display:flex;gap:8px;font-size:0.8125rem;color:#4b5563;"><span style="color:#9ca3af;flex-shrink:0;">→</span>Technical onboarding and program setup</li>
-        <li style="display:flex;gap:8px;font-size:0.8125rem;color:#4b5563;"><span style="color:#9ca3af;flex-shrink:0;">→</span>Reporting cadence and status updates</li>
-        <li style="display:flex;gap:8px;font-size:0.8125rem;color:#4b5563;"><span style="color:#9ca3af;flex-shrink:0;">→</span>Coordinating across Drawbridge delivery teams</li>
+  <div class="grid-2">
+    <div class="lane-card lane-cs">
+      <p class="lane-label">CS owns</p>
+      <ul>
+        <li><span class="arrow">→</span>Deliverable execution and tracking</li>
+        <li><span class="arrow">→</span>Day-to-day client support and issue resolution</li>
+        <li><span class="arrow">→</span>Technical onboarding and program setup</li>
+        <li><span class="arrow">→</span>Reporting cadence and status updates</li>
+        <li><span class="arrow">→</span>Coordinating across Drawbridge delivery teams</li>
       </ul>
     </div>
-    <div style="border:1px solid rgba(134,200,188,0.35);border-radius:8px;background:rgba(134,200,188,0.06);padding:16px;">
-      <p style="font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#489E8E;margin-bottom:10px;">RM owns</p>
-      <ul style="padding-left:0;list-style:none;display:flex;flex-direction:column;gap:6px;">
-        <li style="display:flex;gap:8px;font-size:0.8125rem;color:#4b5563;"><span style="color:#489E8E;flex-shrink:0;">→</span>The overall health and direction of the relationship</li>
-        <li style="display:flex;gap:8px;font-size:0.8125rem;color:#4b5563;"><span style="color:#489E8E;flex-shrink:0;">→</span>Executive relationships and strategic conversations</li>
-        <li style="display:flex;gap:8px;font-size:0.8125rem;color:#4b5563;"><span style="color:#489E8E;flex-shrink:0;">→</span>Translating program value to business outcomes</li>
-        <li style="display:flex;gap:8px;font-size:0.8125rem;color:#4b5563;"><span style="color:#489E8E;flex-shrink:0;">→</span>Renewal, expansion, and commercial conversations</li>
-        <li style="display:flex;gap:8px;font-size:0.8125rem;color:#4b5563;"><span style="color:#489E8E;flex-shrink:0;">→</span>Proactive outreach: regulatory, AI, industry context</li>
+    <div class="lane-card lane-rm">
+      <p class="lane-label">RM owns</p>
+      <ul>
+        <li><span class="arrow">→</span>The overall health and direction of the relationship</li>
+        <li><span class="arrow">→</span>Executive relationships and strategic conversations</li>
+        <li><span class="arrow">→</span>Translating program value to business outcomes</li>
+        <li><span class="arrow">→</span>Renewal, expansion, and commercial conversations</li>
+        <li><span class="arrow">→</span>Proactive outreach: regulatory, AI, industry context</li>
       </ul>
     </div>
   </div>
-
-  <div class="callout-amber" style="margin-top:12px;">
-    <div class="callout-title">If you're mostly meeting with the CS team — that's a warning sign.</div>
+  <div class="callout-amber">
+    <p class="callout-label">If you're mostly meeting with the CS team — that's a warning sign.</p>
     <p>Regular alignment with CS is important and necessary. But if the majority of your client touches are happening inside CS-led calls, you don't have an independent relationship with the account — CS does. Build your own reasons to reach out. Your conversations with the client should add value that CS isn't providing: strategic framing, market intelligence, executive access, and commercial perspective.</p>
   </div>
 
-  <!-- Know Who You're Talking To -->
-  <div class="section-heading">Know Who You're Talking To</div>
+  <!-- Persona Messaging -->
+  <h3 class="section-heading">Know Who You're Talking To</h3>
   <p>Drawbridge's three primary decision-making personas each have a distinct mindset and motivation. Leading with the right angle — not your default pitch — is the difference between a conversation that goes somewhere and one that doesn't.</p>
-  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:14px;">
-    <div style="border:1px solid var(--gray-200);border-radius:8px;padding:16px;background:#fff;">
-      <p style="font-size:10px;font-weight:700;color:var(--db-dark);text-transform:uppercase;letter-spacing:0.08em;">CTO — "Knows It All"</p>
-      <p style="font-size:11px;color:var(--gray-500);margin-top:6px;line-height:1.5;">Confident in existing tech controls. Sceptical of external warnings. Doesn't think they have meaningful gaps.</p>
-      <p style="font-size:11px;font-weight:500;color:var(--db-dark);font-style:italic;margin-top:10px;border-left:2px solid var(--db-aqua);padding-left:8px;line-height:1.5;">"You may already be strong — here's how you prove it to your investors and regulators."</p>
-      <p style="font-size:11px;color:var(--gray-500);margin-top:8px;line-height:1.5;">Lead with peer benchmarking data. Show them where they rank across 1,000+ firms. Turn their confidence into a provable story.</p>
+  <div class="grid-3">
+    <div class="persona-card">
+      <p class="persona-label">CTO — "Knows It All"</p>
+      <p class="persona-desc">Confident in existing tech controls. Sceptical of external warnings. Doesn't think they have meaningful gaps.</p>
+      <p class="persona-quote">"You may already be strong — here's how you prove it to your investors and regulators."</p>
+      <p class="persona-note">Lead with peer benchmarking data. Show them where they rank across 1,000+ firms. Turn their confidence into a provable story.</p>
     </div>
-    <div style="border:1px solid var(--gray-200);border-radius:8px;padding:16px;background:#fff;">
-      <p style="font-size:10px;font-weight:700;color:var(--db-dark);text-transform:uppercase;letter-spacing:0.08em;">CFO / CCO — "Has It All"</p>
-      <p style="font-size:11px;color:var(--gray-500);margin-top:6px;line-height:1.5;">Thinks current setup meets requirements. Wants cyber off their plate. Treats it as a compliance box-tick.</p>
-      <p style="font-size:11px;font-weight:500;color:var(--db-dark);font-style:italic;margin-top:10px;border-left:2px solid var(--db-aqua);padding-left:8px;line-height:1.5;">"Outsource your cyber headaches to a trusted partner who delivers measurable investor confidence."</p>
-      <p style="font-size:11px;color:var(--gray-500);margin-top:8px;line-height:1.5;">Lead with the cost of non-compliance, LP capital risk, and reputational exposure. Offer to own the problem end-to-end.</p>
+    <div class="persona-card">
+      <p class="persona-label">CFO / CCO — "Has It All"</p>
+      <p class="persona-desc">Thinks current setup meets requirements. Wants cyber off their plate. Treats it as a compliance box-tick.</p>
+      <p class="persona-quote">"Outsource your cyber headaches to a trusted partner who delivers measurable investor confidence."</p>
+      <p class="persona-note">Lead with the cost of non-compliance, LP capital risk, and reputational exposure. Offer to own the problem end-to-end.</p>
     </div>
-    <div style="border:1px solid var(--gray-200);border-radius:8px;padding:16px;background:#fff;">
-      <p style="font-size:10px;font-weight:700;color:var(--db-dark);text-transform:uppercase;letter-spacing:0.08em;">COO — "Wants It All-in-One"</p>
-      <p style="font-size:11px;color:var(--gray-500);margin-top:6px;line-height:1.5;">Assumes the MSP or IT provider has it covered. Doesn't see the conflict of interest in letting IT police itself.</p>
-      <p style="font-size:11px;font-weight:500;color:var(--db-dark);font-style:italic;margin-top:10px;border-left:2px solid var(--db-aqua);padding-left:8px;line-height:1.5;">"Your IT runs the systems. We make sure those systems are safe."</p>
-      <p style="font-size:11px;color:var(--gray-500);margin-top:8px;line-height:1.5;">Lead with independent verification and what a conflicted provider is motivated to overlook. Drawbridge's independence is the differentiator.</p>
+    <div class="persona-card">
+      <p class="persona-label">COO — "Wants It All-in-One"</p>
+      <p class="persona-desc">Assumes the MSP or IT provider has cybersecurity handled. Doesn't see the conflict of interest in letting IT police itself.</p>
+      <p class="persona-quote">"Your IT runs the systems. We make sure those systems are safe."</p>
+      <p class="persona-note">Lead with independent verification and what a conflicted provider is motivated to overlook. This is where Drawbridge's independence is the differentiator.</p>
     </div>
   </div>
 
   <!-- Outreach Angles -->
-  <div class="section-heading">Outreach Angles — What to Say</div>
+  <h3 class="section-heading">Outreach Angles — What to Say</h3>
   <p>The hardest part of consistent engagement is having something worth saying. Here are the angles that tend to resonate — starting with the one that's opening the most doors right now.</p>
-
-  <div class="outreach-grid">
-    <div class="outreach-primary">
-      <div class="angle-label">AI &amp; Cyber Risk — Primary Hook</div>
+  <div class="grid-2" style="align-items: start;">
+    <div class="angle-primary">
+      <p class="angle-label">AI &amp; Cyber Risk — Primary Hook</p>
       <p>Every client is trying to figure out how to use AI safely. This is the conversation that gets executives engaged — not just the compliance contact. Lead with what Drawbridge is seeing, what peers are doing, and how the risk profile is evolving.</p>
-      <p class="talk-track">"We're hearing from a lot of funds that their GPs are using ChatGPT before anyone has thought through the data exposure implications. Happy to share what we're seeing and what others are putting in place."</p>
+      <p class="angle-example">"We're hearing from a lot of funds that their GPs are using ChatGPT before anyone has thought through the data exposure implications. Happy to share what we're seeing and what others are putting in place."</p>
     </div>
-    <div class="outreach-secondary">
+    <div class="angle-secondary">
       <div class="angle-card">
-        <div class="card-title">Regulatory Updates</div>
+        <p class="angle-card-label">Regulatory Updates</p>
         <p>SEC exam themes, Reg S-P amendments, DORA, new enforcement actions. Share with your context on what it means for them specifically.</p>
       </div>
       <div class="angle-card">
-        <div class="card-title">Threat Intelligence</div>
+        <p class="angle-card-label">Threat Intelligence</p>
         <p>Relevant incidents in the alt asset space, vendor compromises, phishing campaigns targeting funds. Position Drawbridge as their early warning system.</p>
       </div>
       <div class="angle-card">
-        <div class="card-title">Deliverable Milestones</div>
+        <p class="angle-card-label">Deliverable Milestones</p>
         <p>When a scan completes, a CRA closes, or a training campaign wraps — use it as a reason to connect and translate what it means for their posture.</p>
       </div>
       <div class="angle-card">
-        <div class="card-title">Peer Benchmarking</div>
+        <p class="angle-card-label">Peer Benchmarking</p>
         <p>Clients care what peers are doing. "Most funds your size are doing X" is a powerful frame for both urgency and reassurance.</p>
       </div>
-      <div class="angle-card aqua-card">
-        <div class="card-title">Introductions to Drawbridge Leadership</div>
-        <p>Offering to connect a client with Chris or Eric signals the relationship matters beyond the transactional. Use this ahead of renewal, when there's a strategic conversation to have, or to strengthen a Tier 1 relationship.</p>
+      <div class="angle-card angle-card-aqua">
+        <p class="angle-card-label">Introductions to Drawbridge Leadership</p>
+        <p>Offering to connect a client with Chris or Eric signals that the relationship matters beyond the transactional. Use this at key moments — ahead of renewal, when there's a strategic conversation to have, or to strengthen a Tier 1 relationship you're building.</p>
       </div>
     </div>
   </div>
 
-  <!-- Logging in Salesforce -->
-  <div class="section-heading">Logging in Salesforce</div>
+  <!-- Salesforce Logging -->
+  <h3 class="section-heading">Logging in Salesforce</h3>
   <p>Salesforce is how we hold ourselves accountable to the engagement standard — and how leadership, CS, and the RM team keep a clean picture of account health across the book. Log the same day while context is fresh. It also protects you: if a situation escalates or a handoff happens, the log is your record of the relationship.</p>
   <p>We cross-reference logs against email activity through Sturdy.ai to keep our data accurate enough to stand behind at the board level. This isn't about oversight — it's about making sure our engagement numbers reflect reality, not best-case memory.</p>
 
   <div class="subsection">
-    <div class="subsection-title">📋 Logging a Task in Salesforce</div>
-    <p style="margin-bottom:12px;">Log interactions as <strong>Tasks</strong> directly on the account or contact record. Fill in all required fields — a task with missing fields isn't useful to anyone picking up the account later.</p>
+    <div class="subsection-header">
+      <span class="icon">📋</span>
+      <h4>Logging a Task in Salesforce</h4>
+    </div>
+    <p>Log interactions as <strong>Tasks</strong> directly on the account or contact record. Fill in all required fields — a task with missing fields isn't useful to anyone picking up the account later.</p>
     <div class="table-wrap">
       <table>
         <thead>
           <tr>
-            <th style="width:22%">Field</th>
-            <th style="width:38%">Options / Format</th>
-            <th style="width:40%">Notes</th>
+            <th>Field</th>
+            <th>Options / Format</th>
+            <th>Notes</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="label">Subject</td>
-            <td class="desc">Free text</td>
-            <td class="note">Brief description of the interaction — e.g. "Q1 check-in call" or "Shared SEC enforcement update"</td>
+            <td class="td-label">Subject</td>
+            <td class="td-mid">Free text</td>
+            <td class="td-note">Brief description of the interaction — e.g. "Q1 check-in call" or "Shared SEC enforcement update"</td>
           </tr>
           <tr>
-            <td class="label">Type</td>
-            <td class="desc">Call, Email, Meeting, Onsite Visit</td>
-            <td class="note">Pick the type that best describes the primary form of the interaction</td>
+            <td class="td-label">Due Date</td>
+            <td class="td-mid">Date picker</td>
+            <td class="td-note">Set to the date the interaction took place — not today's date unless they're the same</td>
           </tr>
           <tr>
-            <td class="label">Status</td>
-            <td class="desc">Always set to <strong>Completed</strong></td>
-            <td class="note">You're logging something that happened — not scheduling something future</td>
+            <td class="td-label">Type</td>
+            <td class="td-mid">Call, Email, Meeting, Onsite Visit</td>
+            <td class="td-note">Pick the type that best describes the primary form of the interaction</td>
           </tr>
           <tr>
-            <td class="label">Name</td>
-            <td class="desc">Lookup to Contact record</td>
-            <td class="note">The specific person you engaged — not just the account</td>
+            <td class="td-label">Status</td>
+            <td class="td-mid">Always set to <strong>Completed</strong></td>
+            <td class="td-note">You're logging something that happened — not scheduling something future</td>
           </tr>
           <tr>
-            <td class="label">Contact Tier</td>
-            <td class="desc">Tier 1, Tier 2, Tier 3</td>
-            <td class="note">The tier of the contact you engaged</td>
+            <td class="td-label">Name</td>
+            <td class="td-mid">Lookup to Contact record</td>
+            <td class="td-note">The specific person you engaged — not just the account</td>
           </tr>
           <tr>
-            <td class="label">Outreach Direction</td>
-            <td class="desc">Inbound, Outbound</td>
-            <td class="note">Inbound = client reached out first. Outbound = you initiated.</td>
+            <td class="td-label">Contact Tier</td>
+            <td class="td-mid">Tier 1, Tier 2, Tier 3</td>
+            <td class="td-note">The tier of the contact you engaged</td>
           </tr>
           <tr>
-            <td class="label">Path to Executive</td>
-            <td class="desc">Free text</td>
-            <td class="note">If you don't yet have a Tier 1 relationship at this account, note your current strategy for getting there</td>
+            <td class="td-label">Outreach Direction</td>
+            <td class="td-mid">Inbound, Outbound</td>
+            <td class="td-note">Inbound = client reached out first. Outbound = you initiated.</td>
           </tr>
           <tr>
-            <td class="label">Comments</td>
-            <td class="desc">Free text</td>
-            <td class="note">What was discussed, what was the client's reaction, what are the next steps. A few good sentences beats a long summary no one reads.</td>
+            <td class="td-label">Path to Executive</td>
+            <td class="td-mid">Free text</td>
+            <td class="td-note">If you don't yet have a Tier 1 relationship at this account, note your current strategy for getting there</td>
+          </tr>
+          <tr>
+            <td class="td-label">Comments</td>
+            <td class="td-mid">Free text</td>
+            <td class="td-note">What was discussed, what was the client's reaction, what are the next steps. A few good sentences beats a long summary no one reads.</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="callout-blue" style="margin-top:12px;">
-      <div class="callout-title">Email interactions</div>
+    <div class="callout-blue">
+      <p class="callout-label">Email interactions</p>
       <p>You don't need to copy every email into Salesforce. Log the email as a task with a short note on what you sent and why. The goal is a record that a colleague could read and understand — not a transcript.</p>
     </div>
   </div>
 
   <!-- Weekly Rhythm -->
-  <div class="section-heading">Weekly Rhythm</div>
+  <h3 class="section-heading">Weekly Rhythm</h3>
   <p>The 20-interaction target is easier to hit when you plan 1–2 weeks ahead rather than filling your week as you go. Scheduled meetings need lead time — which means your outreach queue should always be rolling forward, not reactive to whatever is in front of you today.</p>
-
-  <div class="rhythm-grid">
-    <div class="rhythm-card">
-      <div class="rhythm-label">Start of Week</div>
-      <div class="rhythm-card-title">Plan &amp; Schedule</div>
+  <div class="grid-3">
+    <div class="rhythm-card rhythm-start">
+      <p class="rhythm-period">Start of Week</p>
+      <p class="rhythm-title">Plan &amp; Schedule</p>
       <p>Review your rolling 2-week outreach plan. Which accounts need a touch this week or next? Any meetings to schedule before your window closes? Prioritize accounts approaching renewal, with open items, or that have gone quiet.</p>
     </div>
-    <div class="rhythm-card mid">
-      <div class="rhythm-label">Mid-Week</div>
-      <div class="rhythm-card-title">Execute Outreach</div>
+    <div class="rhythm-card rhythm-mid">
+      <p class="rhythm-period">Mid-Week</p>
+      <p class="rhythm-title">Execute Outreach</p>
       <p>Primary execution window. Calls, Teams meetings, emails, strategic shares. Aim to hit the bulk of your 20 interactions before Friday. Log same-day while context is fresh.</p>
     </div>
-    <div class="rhythm-card">
-      <div class="rhythm-label">End of Week</div>
-      <div class="rhythm-card-title">Wrap, Log &amp; Look Ahead</div>
-      <p>Catch up on any outstanding logging. Update your rolling plan for the next 1–2 weeks. Flag any account risks or open items for your weekly review.</p>
+    <div class="rhythm-card rhythm-end">
+      <p class="rhythm-period">End of Week</p>
+      <p class="rhythm-title">Wrap, Log &amp; Look Ahead</p>
+      <p>Catch up on any outstanding logging. Update your rolling plan for the next 1–2 weeks. Note any follow-ups that need to land early next week so they don't slip.</p>
     </div>
   </div>
-
-  <div class="callout-blue" style="margin-top:12px;">
-    <div class="callout-title">Rolling vs. reactive</div>
+  <div class="callout-blue" style="margin-top: 12px;">
+    <p class="callout-label">Rolling vs. reactive</p>
     <p>If you wait until Monday to figure out who to contact that week, meetings won't get scheduled in time and email outreach fills the gap. The goal is a queue that's always populated 1–2 weeks out — so you're executing a plan, not improvising one.</p>
   </div>
 
   <!-- What Good Looks Like -->
   <div class="subsection">
-    <div class="subsection-title">⭐ What Good Looks Like</div>
+    <div class="subsection-header">
+      <span class="icon">⭐</span>
+      <h4>What Good Looks Like</h4>
+    </div>
     <p>Volume matters, but so does quality. Here's how to tell the difference between an interaction that builds the relationship and one that just checks a box:</p>
     <div class="table-wrap">
       <table>
         <thead>
           <tr>
-            <th style="width:50%">Instead of…</th>
-            <th style="width:50%">Try…</th>
+            <th style="width: 50%;">Instead of…</th>
+            <th style="width: 50%;">Try…</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="gray">"Just checking in — anything you need?"</td>
-            <td class="desc">Referencing something specific about their situation: an open item, an upcoming CRA, a regulatory update that applies to them</td>
+            <td style="color: #9ca3af; vertical-align: top; padding: 10px 14px;">"Just checking in — anything you need?"</td>
+            <td class="td-mid">Referencing something specific about their situation: an open item, an upcoming CRA, a regulatory update that applies to them</td>
           </tr>
           <tr>
-            <td class="gray">Sending a generic article or product announcement</td>
-            <td class="desc">One sentence on why this is relevant to them specifically — SEC exam season, a new fund they're raising, a risk you've discussed</td>
+            <td style="color: #9ca3af; vertical-align: top; padding: 10px 14px;">Sending a generic article or product announcement</td>
+            <td class="td-mid">One sentence on why this is relevant to them specifically — SEC exam season, a new fund they're raising, a risk you've discussed</td>
           </tr>
           <tr>
-            <td class="gray">Logging "Email sent re: renewal"</td>
-            <td class="desc">Logging what you said, how they responded, and what the next step is — enough context that someone else could pick it up</td>
+            <td style="color: #9ca3af; vertical-align: top; padding: 10px 14px;">Logging "Email sent re: renewal"</td>
+            <td class="td-mid">Logging what you said, how they responded, and what the next step is — enough context that someone else could pick it up</td>
           </tr>
           <tr>
-            <td class="gray">Only engaging the day-to-day contact</td>
-            <td class="desc">Using every deliverable milestone as an opportunity to brief a senior stakeholder — not just the person who received it</td>
+            <td style="color: #9ca3af; vertical-align: top; padding: 10px 14px;">Only engaging the day-to-day contact</td>
+            <td class="td-mid">Using every deliverable milestone as an opportunity to brief a senior stakeholder — not just the person who received it</td>
           </tr>
           <tr>
-            <td class="gray">Waiting for the client to ask a question</td>
-            <td class="desc">Proactively flagging something coming up — CRA timeline, training deadline, regulatory calendar — before they have to ask</td>
+            <td style="color: #9ca3af; vertical-align: top; padding: 10px 14px;">Waiting for the client to ask a question</td>
+            <td class="td-mid">Proactively flagging something coming up — CRA timeline, training deadline, regulatory calendar — before they have to ask</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 
-  <!-- DrawbridgeAngle -->
+  <!-- Drawbridge Angle -->
   <div class="db-angle">
-    <p class="db-label">What This Means for Drawbridge</p>
+    <p class="db-label">The Drawbridge Angle</p>
     <p>Every client conversation is a chance to demonstrate that Drawbridge understands this industry at a depth no generalist firm can match — backed by intelligence from over <strong>1,000 alternative investment funds</strong> managing <strong>$1.7T+ in assets</strong>. When you open with "we're seeing across our client base that..." you are speaking from a proprietary vantage point that no competitor can replicate. That is your edge. Use it.</p>
     <p>The best outreach angle right now is AI: every firm is navigating GenAI risk without a clear framework, and executives want to talk about it. Use it as your door-opener — not just with your day-to-day contact, but with the CFOs and CCOs who control the budget and make the renewal decision. That is a thought leadership conversation, not a service call.</p>
     <p>When a client eventually does receive a competitive pitch, the relationship you have built at the executive level — based on consistent, high-quality engagement over twelve months — is what makes them say "we're not switching." Raise your guard. Raise your bar. That is the standard we hold ourselves to, and it is the standard clients come to expect from us.</p>

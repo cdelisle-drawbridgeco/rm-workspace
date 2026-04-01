@@ -196,6 +196,20 @@ export default function ClientEngagement() {
             </tbody>
           </table>
         </div>
+        <div className="mt-3 rounded-lg border-l-4 border-db-dark bg-db-dark/5 p-4">
+          <p className="text-xs font-semibold text-db-dark uppercase tracking-wide mb-1">Operational satisfaction is not the same as executive awareness</p>
+          <p className="mt-1 text-xs text-gray-600">
+            Your day-to-day champion knows the value Drawbridge delivers. But they&apos;re not the one making the renewal
+            decision under budget pressure. Executive sponsors care about business impact — risk reduced, regulatory
+            exposure addressed, capital protected — not delivery status. If that story hasn&apos;t reached them in
+            their language, a well-run account can still lose at renewal.
+          </p>
+          <p className="mt-2 text-xs text-gray-600">
+            This is why Tier 1 engagement matters and why the SVR one-pager exists: something concise enough to
+            get forwarded to leadership, clear enough to stand on its own in a budget conversation without you in the room.
+            Lead with outcomes, not activity.
+          </p>
+        </div>
         <div className="mt-3 rounded-lg border border-amber-200 bg-amber-50 p-3">
           <p className="text-xs font-semibold text-amber-700">Building executive relationships you don&apos;t have yet</p>
           <p className="mt-1 text-xs text-gray-700">
@@ -367,6 +381,11 @@ export default function ClientEngagement() {
                 <td className="px-4 py-3 font-medium text-db-dark align-top">Subject</td>
                 <td className="px-4 py-3 text-gray-600 align-top">Free text</td>
                 <td className="px-4 py-3 text-gray-500 align-top">Brief description of the interaction — e.g. &ldquo;Q1 check-in call&rdquo; or &ldquo;Shared SEC enforcement update&rdquo;</td>
+              </tr>
+              <tr className="bg-gray-50/50">
+                <td className="px-4 py-3 font-medium text-db-dark align-top">Due Date</td>
+                <td className="px-4 py-3 text-gray-600 align-top">Date picker</td>
+                <td className="px-4 py-3 text-gray-500 align-top">Set to the date the interaction took place — not today&apos;s date unless they&apos;re the same</td>
               </tr>
               <tr className="bg-gray-50/50">
                 <td className="px-4 py-3 font-medium text-db-dark align-top">Type</td>
