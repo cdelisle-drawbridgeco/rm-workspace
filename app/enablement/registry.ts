@@ -301,7 +301,7 @@ export const CATEGORIES: CategoryConfig[] = [
           'How analysts at hedge funds are actually using Claude — 4 alpha-generating use cases, how-to, and risk profile for each.',
         icon: '📈',
         group: 'AI in Practice',
-        published: false,
+        published: true,
       },
       {
         id: 'ai-cyber-risk',
