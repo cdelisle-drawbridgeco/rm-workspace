@@ -174,7 +174,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Six business outcomes that define Drawbridge\'s value — from regulatory readiness to AI safety.',
         icon: '🏆',
-        published: false,
+        published: true,
       },
       {
         id: 'journey-hedge-fund',
@@ -222,7 +222,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Five frameworks for quantifying Drawbridge\'s business impact — capital protected, costs avoided, and build vs. buy.',
         icon: '📐',
-        published: false,
+        published: true,
       },
     ],
   },
