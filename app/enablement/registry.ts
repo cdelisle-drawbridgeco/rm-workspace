@@ -250,6 +250,15 @@ export const CATEGORIES: CategoryConfig[] = [
     subtitle: 'Deep dives on Drawbridge products — how they work, how to sell them, and how to run client conversations.',
     topics: [
       {
+        id: 'trend-analysis',
+        title: 'Trend Analysis',
+        description:
+          'How to use and talk about the new Trend Analysis feature — turning historical CRA data into a client progress story.',
+        icon: '📊',
+        group: 'Features',
+        published: false,
+      },
+      {
         id: 'vendor-profile',
         title: 'Vendor Profile',
         description:
@@ -392,6 +401,9 @@ const TOPIC_COMPONENTS: Record<TopicId, ComponentType> = {
   ),
   'claude-hedge-funds': dynamic(
     () => import('./content/ai-training/claude-hedge-funds'),
+  ),
+  'trend-analysis': dynamic(
+    () => import('./content/product-enablement/trend-analysis'),
   ),
 };
 
