@@ -258,6 +258,33 @@ export const CATEGORIES: CategoryConfig[] = [
         group: 'Products',
         published: false,
       },
+      {
+        id: 'trueguard',
+        title: 'TrueGuard',
+        description:
+          'Continuous control validation platform — from annual attestation to real-time proof. Launch training for the RM team.',
+        icon: '🛡️',
+        group: 'Products',
+        published: false,
+      },
+      {
+        id: 'genai-assessments',
+        title: 'GenAI Security Assessments',
+        description:
+          'New ChatGPT and Claude security assessments — what they cover, who to target, and how to sell them.',
+        icon: '🔐',
+        group: 'Services',
+        published: false,
+      },
+      {
+        id: 'ai-security-bundle',
+        title: 'AI Security & Governance Bundle',
+        description:
+          'Assessment, Policy, and Training — the full three-service AI bundle, who to target, and how to sell it.',
+        icon: '🛡️',
+        group: 'Services',
+        published: false,
+      },
     ],
   },
   {
@@ -281,31 +308,6 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'How hedge funds and PE firms are actually using AI — and the cyber risks each use case creates.',
         icon: '🏦',
-        published: false,
-      },
-      {
-        id: 'genai-assessments',
-        title: 'GenAI Security Assessments',
-        description:
-          'New ChatGPT and Claude security assessments — what they cover, who to target, and how to sell them.',
-        icon: '🔐',
-        published: false,
-      },
-      {
-        id: 'ai-security-bundle',
-        title: 'AI Security & Governance Bundle',
-        description:
-          'Assessment, Policy, and Training — the full three-service AI bundle, who to target, and how to sell it.',
-        icon: '🛡️',
-        published: false,
-      },
-      {
-        id: 'trueguard',
-        title: 'TrueGuard',
-        description:
-          'Continuous control validation platform — from annual attestation to real-time proof. Launch training for the RM team.',
-        icon: '🛡️',
-        group: 'New Products',
         published: false,
       },
     ],
