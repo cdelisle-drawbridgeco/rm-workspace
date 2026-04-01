@@ -295,6 +295,15 @@ export const CATEGORIES: CategoryConfig[] = [
       'How AI is reshaping cyber threats and how Drawbridge helps clients stay protected.',
     topics: [
       {
+        id: 'claude-hedge-funds',
+        title: 'Claude for Hedge Funds',
+        description:
+          'How analysts at hedge funds are actually using Claude — 4 alpha-generating use cases, how-to, and risk profile for each.',
+        icon: '📈',
+        group: 'AI in Practice',
+        published: false,
+      },
+      {
         id: 'ai-cyber-risk',
         title: 'AI & Cyber Risk',
         description:
@@ -380,6 +389,9 @@ const TOPIC_COMPONENTS: Record<TopicId, ComponentType> = {
   ),
   'vendor-profile': dynamic(
     () => import('./content/product-enablement/vendor-profile'),
+  ),
+  'claude-hedge-funds': dynamic(
+    () => import('./content/ai-training/claude-hedge-funds'),
   ),
 };
 

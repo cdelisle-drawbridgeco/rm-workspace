@@ -30,7 +30,8 @@ export type TopicId =
   | 'churn-reasons'
   | 'client-engagement'
   | 'trueguard'
-  | 'vendor-profile';
+  | 'vendor-profile'
+  | 'claude-hedge-funds';
 
 export type NavState = {
   view: 'landing' | 'topic';
