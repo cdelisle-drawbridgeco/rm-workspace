@@ -390,7 +390,7 @@ export { TOPIC_COMPONENTS };
 /* ------------------------------------------------------------------ */
 
 export function getVisibleCategories(): CategoryConfig[] {
-  const gating = process.env.FEATURE_GATING === 'true';
+  const gating = process.env.NODE_ENV === 'production';
   if (!gating) return CATEGORIES;
   return CATEGORIES
     .map((cat) => ({ ...cat, topics: cat.topics.filter((t) => t.published === true) }))
