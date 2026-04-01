@@ -256,7 +256,7 @@ export const CATEGORIES: CategoryConfig[] = [
           'Third-party risk management — the DCA model, how the DDQ works, platform features, and client Q&A.',
         icon: '🔗',
         group: 'Drawbridge Cyber Intelligence Platform',
-        published: false,
+        published: true,
       },
       {
         id: 'trueguard',
@@ -265,7 +265,7 @@ export const CATEGORIES: CategoryConfig[] = [
           'Continuous control validation platform — from annual attestation to real-time proof. Launch training for the RM team.',
         icon: '🛡️',
         group: 'Drawbridge Cyber Intelligence Platform',
-        published: false,
+        published: true,
       },
       {
         id: 'genai-assessments',
@@ -274,7 +274,7 @@ export const CATEGORIES: CategoryConfig[] = [
           'New ChatGPT and Claude security assessments — what they cover, who to target, and how to sell them.',
         icon: '🔐',
         group: 'Offerings',
-        published: false,
+        published: true,
       },
       {
         id: 'ai-security-bundle',
@@ -283,7 +283,7 @@ export const CATEGORIES: CategoryConfig[] = [
           'Assessment, Policy, and Training — the full three-service AI bundle, who to target, and how to sell it.',
         icon: '🛡️',
         group: 'Offerings',
-        published: false,
+        published: true,
       },
     ],
   },
@@ -300,7 +300,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'How artificial intelligence is amplifying the threat landscape — and what it means for your clients.',
         icon: '🧠',
-        published: false,
+        published: true,
       },
       {
         id: 'ai-in-alts',
@@ -308,7 +308,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'How hedge funds and PE firms are actually using AI — and the cyber risks each use case creates.',
         icon: '🏦',
-        published: false,
+        published: true,
       },
     ],
   },
