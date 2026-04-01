@@ -294,6 +294,15 @@ export const CATEGORIES: CategoryConfig[] = [
         group: 'Offerings',
         published: true,
       },
+      {
+        id: 'pe-portco-solution',
+        title: 'PE Portfolio Company Cyber Services',
+        description:
+          'End-to-end cyber risk intelligence for PE sponsors — from acquisition due diligence through exit readiness.',
+        icon: '🏭',
+        group: 'Offerings',
+        published: false,
+      },
     ],
   },
   {
@@ -404,6 +413,9 @@ const TOPIC_COMPONENTS: Record<TopicId, ComponentType> = {
   ),
   'trend-analysis': dynamic(
     () => import('./content/product-enablement/trend-analysis'),
+  ),
+  'pe-portco-solution': dynamic(
+    () => import('./content/product-enablement/pe-portco-solution'),
   ),
 };
 
