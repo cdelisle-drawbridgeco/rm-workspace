@@ -20,7 +20,7 @@ export const CATEGORIES: CategoryConfig[] = [
           'The alternative asset management landscape — AUM, capital flows, and why cybersecurity matters.',
         icon: '🌐',
         group: 'Industry & Client Segments',
-        published: false,
+        published: true,
       },
       {
         id: 'hedge-funds',
@@ -29,7 +29,7 @@ export const CATEGORIES: CategoryConfig[] = [
           'Strategies, capital raising, and the unique cyber risk profile of actively managed funds.',
         icon: '📈',
         group: 'Industry & Client Segments',
-        published: false,
+        published: true,
       },
       {
         id: 'private-equity',
@@ -38,7 +38,7 @@ export const CATEGORIES: CategoryConfig[] = [
           'LBOs, portfolio company risk, and how PE fundraising cycles drive security investment.',
         icon: '🏢',
         group: 'Industry & Client Segments',
-        published: false,
+        published: true,
       },
       {
         id: 'family-offices',
@@ -47,7 +47,7 @@ export const CATEGORIES: CategoryConfig[] = [
           'UHNW wealth management entities with lean teams and outsized cyber exposure.',
         icon: '🏠',
         group: 'Industry & Client Segments',
-        published: false,
+        published: true,
       },
       {
         id: 'reg-sp',
@@ -56,7 +56,7 @@ export const CATEGORIES: CategoryConfig[] = [
           'The SEC\'s cornerstone privacy regulation — 2025 amendments, breach notification, and enforcement.',
         icon: '⚖️',
         group: 'Regulatory Deep-Dives',
-        published: false,
+        published: true,
       },
       {
         id: 'dora',
@@ -65,7 +65,7 @@ export const CATEGORIES: CategoryConfig[] = [
           'The EU\'s Digital Operational Resilience Act and its impact on financial entities.',
         icon: '🇪🇺',
         group: 'Regulatory Deep-Dives',
-        published: false,
+        published: true,
       },
       {
         id: 'sec-exam-priorities',
@@ -74,7 +74,7 @@ export const CATEGORIES: CategoryConfig[] = [
           'What SEC examiners are looking for in 2025 and how to prepare clients.',
         icon: '🔍',
         group: 'Regulatory Deep-Dives',
-        published: false,
+        published: true,
       },
     ],
   },
@@ -91,7 +91,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Weekly cadence, Best/Worst/Call methodology, and common forecasting pitfalls.',
         icon: '📊',
-        published: false,
+        published: true,
       },
       {
         id: 'renewal-plan-best-practices',
@@ -99,7 +99,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Stage-gate workflow, timeline management, and stakeholder alignment.',
         icon: '📋',
-        published: false,
+        published: true,
       },
       {
         id: 'negotiation-playbook',
@@ -107,7 +107,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Strategic framework for pricing conversations, concession management, and closing.',
         icon: '🤝',
-        published: false,
+        published: true,
       },
       {
         id: 'escalation-path',
@@ -123,7 +123,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'When a client says they\'re moving cyber to their MSP — regulatory case for independence and talk tracks.',
         icon: '🛡️',
-        published: false,
+        published: true,
       },
       {
         id: 'svr-framework',
@@ -149,7 +149,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'The seven-tag churn taxonomy, when to use each tag, the Quick Decision Guide, and the 1:1 review process.',
         icon: '📉',
-        published: false,
+        published: true,
       },
       {
         id: 'client-engagement',
@@ -157,7 +157,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Weekly cadence, contact tier model, outreach angles, Salesforce logging, and what good looks like.',
         icon: '🤝',
-        published: false,
+        published: true,
       },
     ],
   },
