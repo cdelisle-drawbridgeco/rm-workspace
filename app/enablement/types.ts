@@ -1,4 +1,4 @@
-export type CategoryId = 'training' | 'workflows' | 'outcomes' | 'marketing' | 'ai-training';
+export type CategoryId = 'training' | 'workflows' | 'outcomes' | 'marketing' | 'ai-training' | 'product-enablement';
 
 export type TopicId =
   | 'industry-overview'
@@ -29,7 +29,8 @@ export type TopicId =
   | 'ai-security-bundle'
   | 'churn-reasons'
   | 'client-engagement'
-  | 'trueguard';
+  | 'trueguard'
+  | 'vendor-profile';
 
 export type NavState = {
   view: 'landing' | 'topic';

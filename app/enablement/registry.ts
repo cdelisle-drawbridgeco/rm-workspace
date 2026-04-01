@@ -244,6 +244,23 @@ export const CATEGORIES: CategoryConfig[] = [
     ],
   },
   {
+    id: 'product-enablement',
+    label: 'Product Enablement',
+    icon: '🔗',
+    subtitle: 'Deep dives on Drawbridge products — how they work, how to sell them, and how to run client conversations.',
+    topics: [
+      {
+        id: 'vendor-profile',
+        title: 'Vendor Profile',
+        description:
+          'Third-party risk management — the DCA model, how the DDQ works, platform features, and client Q&A.',
+        icon: '🔗',
+        group: 'Products',
+        published: false,
+      },
+    ],
+  },
+  {
     id: 'ai-training',
     label: 'AI Training',
     icon: '🤖',
@@ -358,6 +375,9 @@ const TOPIC_COMPONENTS: Record<TopicId, ComponentType> = {
   ),
   trueguard: dynamic(
     () => import('./content/ai-training/trueguard'),
+  ),
+  'vendor-profile': dynamic(
+    () => import('./content/product-enablement/vendor-profile'),
   ),
 };
 
