@@ -255,7 +255,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Third-party risk management — the DCA model, how the DDQ works, platform features, and client Q&A.',
         icon: '🔗',
-        group: 'Products',
+        group: 'Drawbridge Cyber Intelligence Platform',
         published: false,
       },
       {
@@ -264,7 +264,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Continuous control validation platform — from annual attestation to real-time proof. Launch training for the RM team.',
         icon: '🛡️',
-        group: 'Products',
+        group: 'Drawbridge Cyber Intelligence Platform',
         published: false,
       },
       {
@@ -273,7 +273,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'New ChatGPT and Claude security assessments — what they cover, who to target, and how to sell them.',
         icon: '🔐',
-        group: 'Services',
+        group: 'Offerings',
         published: false,
       },
       {
@@ -282,7 +282,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Assessment, Policy, and Training — the full three-service AI bundle, who to target, and how to sell it.',
         icon: '🛡️',
-        group: 'Services',
+        group: 'Offerings',
         published: false,
       },
     ],
