@@ -256,7 +256,7 @@ export const CATEGORIES: CategoryConfig[] = [
           'How to use and talk about the new Trend Analysis feature — turning historical CRA data into a client progress story.',
         icon: '📊',
         group: 'Features',
-        published: false,
+        published: true,
       },
       {
         id: 'vendor-profile',
@@ -301,7 +301,7 @@ export const CATEGORIES: CategoryConfig[] = [
           'End-to-end cyber risk intelligence for PE sponsors — from acquisition due diligence through exit readiness.',
         icon: '🏭',
         group: 'Offerings',
-        published: false,
+        published: true,
       },
     ],
   },
