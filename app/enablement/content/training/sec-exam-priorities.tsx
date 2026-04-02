@@ -16,7 +16,7 @@ export default function SECExamPriorities() {
   return (
     <>
       <HeroSection
-        icon="\uD83D\uDD0D"
+        icon="🔍"
         title="SEC Cybersecurity Exam Priorities"
         subtitle="What the SEC's Division of Examinations is actively looking for — and how it directly shapes what Drawbridge clients need."
       />
@@ -26,7 +26,7 @@ export default function SECExamPriorities() {
         <StatCard label="Cyber as Exam Priority Since" value="2014" />
         <StatCard label="Exams Conducted Annually" value="~3,000" />
         <StatCard label="% Citing Cyber Deficiencies" value="~25%" />
-        <StatCard label="Avg. Exam Duration" value="4\u20138 Weeks" />
+        <StatCard label="Avg. Exam Duration" value="4–8 Weeks" />
       </div>
 
       {/* What Is the Exam Program */}
@@ -61,7 +61,7 @@ export default function SECExamPriorities() {
         ]}
       />
 
-      <SubSection icon="\uD83D\uDCEC" title="The Exam Lifecycle">
+      <SubSection icon="📬" title="The Exam Lifecycle">
         <p>
           Exams typically follow a predictable pattern, though the SEC can also conduct
           &ldquo;sweep&rdquo; exams targeting specific topics across many firms simultaneously:
@@ -106,7 +106,7 @@ export default function SECExamPriorities() {
         service capabilities.
       </p>
 
-      <SubSection icon="\uD83D\uDCDD" title="1. Governance & Written Policies">
+      <SubSection icon="📝" title="1. Governance & Written Policies">
         <p>
           Examiners want to see that cybersecurity is <strong>governed at the senior
           level</strong>, not buried in IT. They look for:
@@ -123,7 +123,7 @@ export default function SECExamPriorities() {
         </p>
       </SubSection>
 
-      <SubSection icon="\uD83D\uDEA8" title="2. Incident Response Preparedness">
+      <SubSection icon="🚨" title="2. Incident Response Preparedness">
         <p>
           With the 2025 Reg S-P amendments mandating incident response programs, this
           area has moved from &ldquo;best practice&rdquo; to <strong>regulatory requirement</strong>.
@@ -141,7 +141,7 @@ export default function SECExamPriorities() {
         </p>
       </SubSection>
 
-      <SubSection icon="\uD83D\uDD10" title="3. Access Controls & Identity Management">
+      <SubSection icon="🔐" title="3. Access Controls & Identity Management">
         <p>
           Unauthorized access is a leading cause of breaches in financial services.
           Examiners focus heavily on:
@@ -158,7 +158,7 @@ export default function SECExamPriorities() {
         </p>
       </SubSection>
 
-      <SubSection icon="\uD83D\uDCE7" title="4. Email Security & Phishing Prevention">
+      <SubSection icon="📧" title="4. Email Security & Phishing Prevention">
         <p>
           Email remains the #1 attack vector for financial services firms. The SEC has
           brought <strong>multiple enforcement actions</strong> against firms that suffered
@@ -176,7 +176,7 @@ export default function SECExamPriorities() {
         </p>
       </SubSection>
 
-      <SubSection icon="\uD83C\uDFE2" title="5. Third-Party / Vendor Risk Management">
+      <SubSection icon="🏢" title="5. Third-Party / Vendor Risk Management">
         <p>
           Financial firms rely on dozens of third-party vendors — fund administrators,
           cloud providers, IT managed service providers, trading platforms. Examiners
@@ -194,7 +194,7 @@ export default function SECExamPriorities() {
         </p>
       </SubSection>
 
-      <SubSection icon="\uD83D\uDD04" title="6. Data Loss Prevention & Encryption">
+      <SubSection icon="🔄" title="6. Data Loss Prevention & Encryption">
         <p>
           Protecting sensitive data — both at rest and in transit — is a core exam focus:
         </p>
@@ -210,7 +210,7 @@ export default function SECExamPriorities() {
         </p>
       </SubSection>
 
-      <SubSection icon="\uD83C\uDFD7\uFE0F" title="7. Business Continuity & Disaster Recovery">
+      <SubSection icon="🏗️" title="7. Business Continuity & Disaster Recovery">
         <p>
           Operational resilience has become increasingly important, especially after
           COVID exposed gaps in many firms&apos; BCP/DR programs:
@@ -227,7 +227,7 @@ export default function SECExamPriorities() {
         </p>
       </SubSection>
 
-      <SubSection icon="\uD83D\uDCCA" title="8. Emerging Technology & AI Risks">
+      <SubSection icon="📊" title="8. Emerging Technology & AI Risks">
         <p>
           The SEC has signaled increasing attention to risks from new technologies:
         </p>
@@ -323,13 +323,13 @@ export default function SECExamPriorities() {
       <div className="grid grid-cols-3 gap-3">
         <TermBadge term="Division of Examinations" definition="The SEC division (formerly OCIE) responsible for conducting compliance examinations of registered entities. Publishes annual exam priorities." />
         <TermBadge term="Exam Priorities" definition="Annual publication by the Division of Examinations identifying the topics and risk areas examiners will focus on in the coming year." />
-        <TermBadge term="Deficiency Letter" definition="Written communication from SEC examiners identifying compliance shortcomings — requires a written remediation response within 30\u201360 days." />
+        <TermBadge term="Deficiency Letter" definition="Written communication from SEC examiners identifying compliance shortcomings — requires a written remediation response within 30–60 days." />
         <TermBadge term="Sweep Exam" definition="A targeted exam conducted simultaneously across many firms to assess industry-wide compliance on a specific topic (e.g., email security, ransomware readiness)." />
         <TermBadge term="Risk Alert" definition="Public notice from the Division of Examinations highlighting common deficiencies observed during exams — serves as a warning to the industry." />
         <TermBadge term="MFA" definition="Multi-Factor Authentication — requiring two or more verification methods to access systems. Absence of MFA is one of the most commonly cited exam deficiencies." />
         <TermBadge term="DMARC" definition="Domain-based Message Authentication — email security protocol that prevents domain spoofing. Increasingly checked by SEC examiners as a baseline email security control." />
         <TermBadge term="Shadow IT" definition="Technology tools and services used by employees without organizational approval — creates unmonitored security risks that examiners increasingly scrutinize." />
-        <TermBadge term="Document Request List" definition="The initial list of documents and records the SEC requests at the start of an examination — typically 30\u201350 specific items for cybersecurity-focused exams." />
+        <TermBadge term="Document Request List" definition="The initial list of documents and records the SEC requests at the start of an examination — typically 30–50 specific items for cybersecurity-focused exams." />
       </div>
 
     </>

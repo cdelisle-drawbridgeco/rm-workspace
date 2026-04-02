@@ -16,8 +16,8 @@ export default function RegSP() {
   return (
     <>
       <HeroSection
-        icon="\u2696\uFE0F"
-        title="Regulation S-P \u2014 Deep Dive"
+        icon="⚖️"
+        title="Regulation S-P — Deep Dive"
         subtitle="The SEC's cornerstone regulation for safeguarding customer information at financial institutions, and why it matters for every Drawbridge client."
       />
       <LastUpdated date="March 25, 2026 at 3:45 PM" />
@@ -52,7 +52,7 @@ export default function RegSP() {
       {/* Key Requirements */}
       <SectionHeading>Key Requirements</SectionHeading>
 
-      <SubSection icon="\uD83D\uDCDC" title="The Safeguards Rule (Rule 30(a))">
+      <SubSection icon="📜" title="The Safeguards Rule (Rule 30(a))">
         <p>
           The Safeguards Rule is the heart of Reg S-P for Drawbridge&apos;s clients. It requires
           every covered institution to adopt <strong>written policies and procedures</strong> that
@@ -71,7 +71,7 @@ export default function RegSP() {
         </p>
       </SubSection>
 
-      <SubSection icon="\uD83C\uDD95" title="2025 Amendments \u2014 What Changed">
+      <SubSection icon="🆕" title="2025 Amendments — What Changed">
         <p>
           The SEC&apos;s 2025 amendments to Reg S-P represent the most significant update in
           the regulation&apos;s history. Key changes include:
@@ -110,7 +110,7 @@ export default function RegSP() {
         </ul>
       </SubSection>
 
-      <SubSection icon="\uD83D\uDC65" title="Who Does Reg S-P Apply To?">
+      <SubSection icon="👥" title="Who Does Reg S-P Apply To?">
         <p>Reg S-P applies to every entity registered with the SEC, including:</p>
         <ul className="list-disc ml-5 space-y-1">
           <li><strong>Registered Investment Advisers (RIAs)</strong> — This covers most hedge fund and PE fund managers, since the GP entity is typically registered as an investment adviser</li>
@@ -150,7 +150,7 @@ export default function RegSP() {
 
       {/* SEC Enforcement */}
       <SectionHeading>SEC Enforcement — The Stakes Are Real</SectionHeading>
-      <SubSection icon="\uD83D\uDD28" title="How the SEC Enforces Reg S-P">
+      <SubSection icon="🔨" title="How the SEC Enforces Reg S-P">
         <p>
           The SEC enforces Reg S-P through two primary mechanisms:
         </p>

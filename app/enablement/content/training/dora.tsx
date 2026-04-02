@@ -15,8 +15,8 @@ export default function DORA() {
   return (
     <>
       <HeroSection
-        icon="\uD83C\uDDEA\uD83C\uDDFA"
-        title="DORA \u2014 Digital Operational Resilience Act"
+        icon="🇪🇺"
+        title="DORA — Digital Operational Resilience Act"
         subtitle="The EU's landmark regulation for ICT risk management in financial services, and what it means for Drawbridge's clients with European operations."
       />
       <LastUpdated date="March 25, 2026 at 3:45 PM" />
@@ -59,7 +59,7 @@ export default function DORA() {
         DORA is organized around five core pillars, each with detailed requirements.
       </p>
 
-      <SubSection icon="1\uFE0F\u20E3" title="Pillar 1: ICT Risk Management">
+      <SubSection icon="1️⃣" title="Pillar 1: ICT Risk Management">
         <p>
           Financial entities must establish a <strong>comprehensive ICT risk management
           framework</strong> that is documented, reviewed annually, and approved by the
@@ -75,7 +75,7 @@ export default function DORA() {
         </ul>
       </SubSection>
 
-      <SubSection icon="2\uFE0F\u20E3" title="Pillar 2: ICT Incident Reporting">
+      <SubSection icon="2️⃣" title="Pillar 2: ICT Incident Reporting">
         <p>
           DORA establishes a <strong>harmonized incident reporting framework</strong> across
           the EU, replacing the patchwork of national reporting requirements. Key requirements:
@@ -87,7 +87,7 @@ export default function DORA() {
         </ul>
       </SubSection>
 
-      <SubSection icon="3\uFE0F\u20E3" title="Pillar 3: Digital Operational Resilience Testing">
+      <SubSection icon="3️⃣" title="Pillar 3: Digital Operational Resilience Testing">
         <p>
           DORA requires regular testing of ICT systems and tools, going well beyond
           traditional penetration testing:
@@ -99,7 +99,7 @@ export default function DORA() {
         </ul>
       </SubSection>
 
-      <SubSection icon="4\uFE0F\u20E3" title="Pillar 4: Third-Party ICT Risk Management">
+      <SubSection icon="4️⃣" title="Pillar 4: Third-Party ICT Risk Management">
         <p>
           This is arguably DORA&apos;s most groundbreaking pillar — and the most relevant
           to Drawbridge. DORA creates a <strong>comprehensive framework for managing
@@ -133,7 +133,7 @@ export default function DORA() {
         </ul>
       </SubSection>
 
-      <SubSection icon="5\uFE0F\u20E3" title="Pillar 5: Information Sharing">
+      <SubSection icon="5️⃣" title="Pillar 5: Information Sharing">
         <p>
           DORA encourages (but does not mandate) financial entities to share cyber
           threat intelligence with each other through trusted information-sharing
@@ -145,7 +145,7 @@ export default function DORA() {
 
       {/* Who Does DORA Apply To */}
       <SectionHeading>Who Does DORA Apply To?</SectionHeading>
-      <SubSection icon="\uD83C\uDFAF" title="Scope of Application">
+      <SubSection icon="🎯" title="Scope of Application">
         <p>DORA applies to <strong>21 categories</strong> of financial entities, including:</p>
         <ul className="list-disc ml-5 space-y-1">
           <li>Credit institutions (banks)</li>
