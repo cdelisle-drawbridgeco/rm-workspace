@@ -279,9 +279,9 @@ export const CATEGORIES: CategoryConfig[] = [
       },
       {
         id: 'ai-security-bundle',
-        title: 'AI Security & Governance Bundle',
+        title: 'AI Risk Intelligence',
         description:
-          'Assessment, Policy, and Training — the full three-service AI bundle, who to target, and how to sell it.',
+          'Drawbridge\'s end-to-end AI security solution — Consult, Assess, Govern, and Train. Who to target, how to sell it, and how to position against competitors.',
         icon: '🛡️',
         group: 'Offerings',
         published: true,

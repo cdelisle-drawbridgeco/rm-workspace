@@ -192,11 +192,11 @@ export default function AiCyberRisk() {
       {/* ── Talking to Clients ──────────────────────────── */}
       <SectionHeading>Talking to Clients: Claude &amp; ChatGPT Assessments</SectionHeading>
       <p className="text-sm text-gray-700 leading-relaxed">
-        Drawbridge offers a comprehensive <strong>AI assessment program</strong> that goes
-        beyond a simple checklist. We review how clients are actually using AI platforms
-        like ChatGPT and Claude, ensure their enterprise configurations follow cyber best
-        practices, and help them build the policies, training, and vendor oversight needed
-        to adopt AI safely.
+        Drawbridge offers <strong>AI Risk Intelligence</strong> — a structured, end-to-end
+        framework combining advisory, assessment, governance, and training. We review how
+        clients are actually using AI platforms like ChatGPT and Claude, ensure their
+        enterprise configurations follow cyber best practices, and help them build the
+        policies, training, and vendor oversight needed to adopt AI safely.
       </p>
 
       <SubSection icon="📋" title="What Drawbridge Delivers">
@@ -303,7 +303,7 @@ export default function AiCyberRisk() {
       {/* ── Drawbridge Angle ────────────────────────────── */}
       <DrawbridgeAngle>
         <p>
-          Drawbridge&apos;s AI assessment program is a hands-on, end-to-end service —
+          Drawbridge&apos;s AI Risk Intelligence program is a hands-on, end-to-end service —
           not a checkbox exercise. We <strong>review ChatGPT and Claude enterprise
           configurations</strong> to ensure they follow cyber best practices,
           <strong> update policies</strong> to account for AI adoption,
@@ -325,7 +325,7 @@ export default function AiCyberRisk() {
           adoption responsibly.
         </p>
         <p className="mt-2">
-          With <strong>1,000+ alternative investment fund relationships</strong>, Drawbridge
+          With <strong>1,200+ alternative investment firm relationships</strong>, Drawbridge
           has unmatched visibility into how AI is actually being adopted across the industry —
           which configurations are most commonly misconfigured, which use cases create the
           highest data exposure risk, and what &ldquo;good&rdquo; AI governance looks like for a
