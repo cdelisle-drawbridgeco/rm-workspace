@@ -249,7 +249,7 @@ export default function VendorProfile() {
         <div className="space-y-2">
           {[
             { context: 'Fundraising / LP pressure', line: '"LPs are increasingly asking about third-party risk in ODD. What does your answer look like today?"' },
-            { context: 'Regulatory focus', line: '"If a vendor touching your investor data has a breach, you have a Reg S-P notification obligation within 30 days. Do you know which vendors are in that category?"' },
+            { context: 'Regulatory focus', line: '"If a vendor touching your investor data has a breach, you have a Reg S-P notification obligation within 30 days. Do you know which vendors are in that category? Vendors with access to sensitive information actually face an even stricter 72-hour requirement — which makes maintaining visibility into their policies and procedures more important than ever."' },
             { context: 'Operational risk', line: '"What would it take for one of your vendors to take you offline? Have you looked at their security posture recently?"' },
             { context: 'Lean team / efficiency', line: '"How much time is your team spending on vendor questionnaires — and how confident are you in the results?"' },
           ].map(({ context, line }, i) => (
