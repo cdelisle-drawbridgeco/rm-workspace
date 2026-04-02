@@ -314,6 +314,14 @@ export const CATEGORIES: CategoryConfig[] = [
         published: true,
       },
       {
+        id: 'rm-resource-hub',
+        title: 'RM Resource Hub',
+        description:
+          'Curated websites and feeds for threat intelligence, regulatory updates, and alternative investment news.',
+        icon: '🔖',
+        published: true,
+      },
+      {
         id: 'msp-objection-handling',
         title: 'MSP Objection Handling',
         description:
@@ -437,6 +445,9 @@ const TOPIC_COMPONENTS: Record<TopicId, ComponentType> = {
   ),
   'baker-hostetler-dsir-2026': dynamic(
     () => import('./content/industry-intel/baker-hostetler-dsir-2026'),
+  ),
+  'rm-resource-hub': dynamic(
+    () => import('./content/industry-intel/rm-resource-hub'),
   ),
 };
 
