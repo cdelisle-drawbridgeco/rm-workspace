@@ -158,7 +158,7 @@ export default function RegSP() {
           <li>
             <strong>Examinations (OCIE/EXAMS)</strong> — The SEC&apos;s Division of Examinations
             conducts routine and for-cause examinations of registered entities. Cybersecurity
-            has been a <strong>stated exam priority every year since 2020</strong>. Examiners
+            has been a <strong>stated exam priority every year since 2014</strong>. Examiners
             request and review written policies, incident logs, vendor contracts, training
             records, and evidence of ongoing monitoring. Deficiencies result in deficiency
             letters that require remediation.

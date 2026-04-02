@@ -43,7 +43,7 @@ export default function SECExamPriorities() {
         signaling to the industry what topics examiners will focus on. Cybersecurity and
         operational resilience have been <strong>explicitly named as a priority every year
         since 2014</strong> — and the depth and specificity of the cyber-related priorities
-        has increased dramatically. For Drawbridge clients, understanding these priorities
+        have increased dramatically. For Drawbridge clients, understanding these priorities
         is essential because they represent exactly what an examiner will ask for during
         a visit.
       </p>
