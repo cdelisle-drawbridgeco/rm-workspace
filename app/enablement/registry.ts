@@ -118,14 +118,6 @@ export const CATEGORIES: CategoryConfig[] = [
         published: false,
       },
       {
-        id: 'msp-objection-handling',
-        title: 'MSP Objection Handling',
-        description:
-          'When a client says they\'re moving cyber to their MSP — regulatory case for independence and talk tracks.',
-        icon: '🛡️',
-        published: true,
-      },
-      {
         id: 'svr-framework',
         title: 'SVR Framework',
         description:
@@ -239,7 +231,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Pitch decks, case studies, one-pagers, and battle cards for sales conversations.',
         icon: '📁',
-        published: true,
+        published: false,
       },
     ],
   },
@@ -319,6 +311,14 @@ export const CATEGORIES: CategoryConfig[] = [
           'Key findings from the 2026 Data Security Incident Response Report — vendor risk, Reg S-P enforcement, and AI-enabled attacks.',
         icon: '📋',
         group: '2026 Reports',
+        published: true,
+      },
+      {
+        id: 'msp-objection-handling',
+        title: 'MSP Objection Handling',
+        description:
+          'When a client says they\'re moving cyber to their MSP — regulatory case for independence and talk tracks.',
+        icon: '🛡️',
         published: true,
       },
     ],
