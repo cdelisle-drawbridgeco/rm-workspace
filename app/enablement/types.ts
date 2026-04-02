@@ -34,7 +34,8 @@ export type TopicId =
   | 'claude-hedge-funds'
   | 'trend-analysis'
   | 'pe-portco-solution'
-  | 'baker-hostetler-dsir-2026';
+  | 'baker-hostetler-dsir-2026'
+  | 'rm-resource-hub';
 
 export type NavState = {
   view: 'landing' | 'topic';
