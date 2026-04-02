@@ -1,4 +1,4 @@
-export type CategoryId = 'training' | 'workflows' | 'outcomes' | 'marketing' | 'ai-training' | 'product-enablement';
+export type CategoryId = 'training' | 'workflows' | 'outcomes' | 'marketing' | 'ai-training' | 'product-enablement' | 'industry-intel';
 
 export type TopicId =
   | 'industry-overview'
@@ -33,7 +33,8 @@ export type TopicId =
   | 'vendor-profile'
   | 'claude-hedge-funds'
   | 'trend-analysis'
-  | 'pe-portco-solution';
+  | 'pe-portco-solution'
+  | 'baker-hostetler-dsir-2026';
 
 export type NavState = {
   view: 'landing' | 'topic';
