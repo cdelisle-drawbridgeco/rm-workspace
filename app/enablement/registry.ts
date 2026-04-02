@@ -306,6 +306,24 @@ export const CATEGORIES: CategoryConfig[] = [
     ],
   },
   {
+    id: 'industry-intel',
+    label: 'Industry Intel',
+    icon: '📰',
+    subtitle:
+      'Summaries of key industry reports, threat research, and market intelligence — translated for Drawbridge client conversations.',
+    topics: [
+      {
+        id: 'baker-hostetler-dsir-2026',
+        title: 'BakerHostetler 2026 DSIR Report',
+        description:
+          'Key findings from the 2026 Data Security Incident Response Report — vendor risk, Reg S-P enforcement, and AI-enabled attacks.',
+        icon: '📋',
+        group: '2026 Reports',
+        published: true,
+      },
+    ],
+  },
+  {
     id: 'ai-training',
     label: 'AI Training',
     icon: '🤖',
@@ -416,6 +434,9 @@ const TOPIC_COMPONENTS: Record<TopicId, ComponentType> = {
   ),
   'pe-portco-solution': dynamic(
     () => import('./content/product-enablement/pe-portco-solution'),
+  ),
+  'baker-hostetler-dsir-2026': dynamic(
+    () => import('./content/industry-intel/baker-hostetler-dsir-2026'),
   ),
 };
 
