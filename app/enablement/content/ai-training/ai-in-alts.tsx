@@ -432,12 +432,12 @@ export default function AiInAlts() {
             </thead>
             <tbody className="divide-y divide-gray-100">
               {[
-                ['Proprietary data in AI tools', 'Enterprise configuration review — ensure data sharing, retention, and access controls are locked down'],
-                ['No AI policy in place', 'AI policy development — acceptable use, approved tools, data handling, employee responsibilities'],
-                ['Shadow AI usage', 'AI assessment — discover what tools are in use, by whom, and what data is flowing through them'],
-                ['Employees unaware of risks', 'AI cybersecurity training — safe usage, data leakage risks, recognizing AI-generated threats'],
-                ['AI vendor not vetted', 'AI vendor due diligence — SOC reports, data practices, contractual protections, regulatory compliance'],
-                ['AI integrations not tested', 'Penetration testing of AI vendors — prompt injection, data exfiltration, API misconfigurations'],
+                ['Don\'t know how AI is being used', 'Consult — deployment consultation to inventory AI tools, workflows, and high-risk exposure scenarios'],
+                ['Proprietary data in AI tools', 'Assess — enterprise configuration review ensuring data sharing, retention, and access controls are locked down'],
+                ['No AI policy in place', 'Govern — AI policy development covering acceptable use, approved tools, data handling, and employee responsibilities'],
+                ['Employees unaware of risks', 'Train — AI security training on safe usage, data leakage risks, and recognizing AI-generated threats'],
+                ['AI vendor not vetted', 'Vendor Risk Assessments — SOC reports, data practices, contractual protections, regulatory compliance'],
+                ['AI integrations not tested', 'AI Pen Testing — prompt injection, data exfiltration, API misconfigurations'],
               ].map(([risk, service], i) => (
                 <tr key={i}>
                   <td className="px-3 py-2 text-gray-700 font-medium text-xs">{risk}</td>
@@ -464,11 +464,13 @@ export default function AiInAlts() {
           every COO, CCO, and CTO wants to have.
         </p>
         <p className="mt-2">
-          Drawbridge is trusted by <strong>1,000+ alternative investment funds managing
-          $1.7T+ in assets</strong> — giving us a real-time view of how AI is being adopted
-          across the industry before regulators and LPs have even finished writing the
-          frameworks. That intelligence is your advantage in every AI conversation.
-          <strong> Raise Your Guard. Raise Your Bar.</strong>
+          Drawbridge is trusted by <strong>1,200+ alternative investment firms</strong> globally —
+          giving us a real-time view of how AI is being adopted across the industry before
+          regulators and LPs have even finished writing the frameworks. That intelligence is
+          your advantage in every AI conversation. Position Drawbridge&apos;s{' '}
+          <strong>AI Risk Intelligence</strong> program as the governance layer that enables
+          clients to adopt AI with confidence — Consult, Assess, Govern, Train.
+          <strong> Adopt AI with confidence.</strong>
         </p>
       </DrawbridgeAngle>
 

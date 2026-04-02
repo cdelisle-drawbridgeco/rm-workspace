@@ -419,9 +419,11 @@ export default function GenAiAssessments() {
         <p className="mt-2">
           Drawbridge is the only cybersecurity firm purpose-built for alternative asset
           management with both the AI assessment capability <em>and</em> the context of
-          <strong> 1,000+ fund relationships</strong> to benchmark findings against industry
+          <strong> 1,200+ firm relationships</strong> to benchmark findings against industry
           norms. When a client asks &ldquo;Is this normal?&rdquo; — we can actually answer that.
-          <strong> Raise Your Guard. Raise Your Score.</strong>
+          The Assess pillar is one part of the complete <strong>AI Risk Intelligence</strong> program —
+          Consult, Assess, Govern, Train — built for firms that want the full answer, not just a report.
+          <strong> Adopt AI with confidence.</strong>
         </p>
       </DrawbridgeAngle>
 

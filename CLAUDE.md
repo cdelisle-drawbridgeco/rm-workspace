@@ -1,5 +1,9 @@
 # rm-workspace — Claude Instructions
 
+## Brand & Marketing Reference
+
+Always consult `ext_docs/Drawbridge Brand/` for official brand and marketing materials before writing any client-facing content, training docs, or product descriptions. This folder contains the authoritative source for Drawbridge messaging, positioning, and terminology — use it to stay on message.
+
 ## SVR Client One-Pagers
 
 ### What these are
