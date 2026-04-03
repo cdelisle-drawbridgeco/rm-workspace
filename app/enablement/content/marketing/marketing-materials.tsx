@@ -1,141 +1,126 @@
 'use client';
 
-import { HeroSection, DrawbridgeAngle, LastUpdated } from '../../components/shared-ui';
+import { HeroSection, SectionHeading, DrawbridgeAngle, LastUpdated } from '../../components/shared-ui';
 
-const ONE_PAGERS = [
+type Material = {
+  title: string;
+  description: string;
+  filename: string;
+  tag?: string;
+};
+
+function MaterialCard({ title, description, filename, tag }: Material) {
+  const href = `/api/marketing/${encodeURIComponent(filename)}`;
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group flex items-start justify-between rounded-lg border border-gray-200 bg-white p-4 hover:shadow-md hover:border-db-aqua/40 transition-all"
+    >
+      <div className="flex items-start gap-3 flex-1 min-w-0">
+        <span className="text-xl mt-0.5 shrink-0">📄</span>
+        <div className="min-w-0">
+          <div className="flex items-center gap-2 flex-wrap">
+            <p className="font-medium text-db-dark text-sm group-hover:text-db-aqua-dark transition-colors">
+              {title}
+            </p>
+            {tag && (
+              <span className="rounded-full bg-db-aqua/20 px-2 py-0.5 text-xs font-semibold text-db-aqua-dark shrink-0">
+                {tag}
+              </span>
+            )}
+          </div>
+          <p className="text-xs text-gray-500 mt-0.5">{description}</p>
+          <p className="text-xs text-gray-300 mt-1 truncate">{filename}</p>
+        </div>
+      </div>
+      <span className="text-gray-400 group-hover:text-db-aqua-dark transition-colors text-sm ml-4 shrink-0 mt-0.5">↗</span>
+    </a>
+  );
+}
+
+const OVERVIEW_DOCS: Material[] = [
   {
-    title: 'AI Security & Governance Bundle',
-    description:
-      'Client-facing overview of the Assessment, Policy, and Training bundle. Designed for sharing with prospects and referral partners.',
-    href: '/marketing/ai-bundle',
+    title: 'Drawbridge Solutions 2026',
+    description: 'Full company overview — the complete Drawbridge platform, service lines, and value proposition for alternative investment firms.',
+    filename: 'Drawbridge Solutions 2026.pdf',
+  },
+  {
+    title: 'AI Risk Intelligence Overview',
+    description: 'Official client-facing overview of AI Risk Intelligence — secure AI adoption for alternative investment firms. Use with prospects and referral partners.',
+    filename: 'Drawbridge - AI Security Overview.pdf',
     tag: 'New',
+  },
+  {
+    title: 'Vendor Risk Assessment Overview',
+    description: 'One-pager on Drawbridge Vendor Cyber Risk Services — the DCA model, third-party risk management, and what clients get.',
+    filename: 'Drawbridge - Vendor Risk Assessment Overview.pdf',
+  },
+  {
+    title: 'PE Portfolio Company Cyber Risk Intelligence',
+    description: 'Overview of Drawbridge\'s PE PortCo solution — cyber risk intelligence for PE sponsors across the deal lifecycle.',
+    filename: 'Drawbridge - PE PortCo Cyber Risk Intelligence Overview.pdf',
+  },
+];
+
+const BATTLE_CARDS: Material[] = [
+  {
+    title: 'TrueGuard Battle Card',
+    description: 'Competitive positioning and objection handling for TrueGuard — continuous control validation vs. annual attestation.',
+    filename: 'Drawbridge True Guard Battle Card.pdf',
+  },
+  {
+    title: 'PE Cyber Audit Battle Card',
+    description: 'Positioning guide for PE portfolio company cyber audits — how to frame the conversation with sponsors and portfolio management teams.',
+    filename: 'PE Cyber Audit Battlecard v2.pdf',
   },
 ];
 
 export default function MarketingMaterials() {
-  const categories = [
-    {
-      icon: '📊',
-      title: 'Pitch Decks',
-      description:
-        'Company overview and solution pitch decks for prospects and partner meetings.',
-      count: 12,
-    },
-    {
-      icon: '📋',
-      title: 'Case Studies',
-      description:
-        'Client success stories demonstrating measurable security improvements and ROI.',
-      count: 8,
-    },
-    {
-      icon: '⚔️',
-      title: 'Battle Cards',
-      description:
-        'Competitive positioning guides with objection handling and differentiation points.',
-      count: 6,
-    },
-  ];
-
   return (
     <>
       <HeroSection
         icon="📁"
         title="Marketing Materials"
-        subtitle="Sales collateral, competitive intelligence, and customer-facing resources."
+        subtitle="Official Drawbridge sales collateral — overviews, one-pagers, and battle cards. All materials are served directly from the approved brand library."
       />
-      <LastUpdated date="March 25, 2026 at 3:45 PM" />
+      <LastUpdated date="April 3, 2026 at 9:00 AM" />
 
-      {/* One-Pagers */}
-      <div className="mt-6">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="text-lg">📄</span>
-          <h2 className="font-semibold text-db-dark">One-Pagers</h2>
-        </div>
-        <div className="space-y-2">
-          {ONE_PAGERS.map((item) => (
-            <a
-              key={item.title}
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-4 hover:shadow-md hover:border-db-aqua/40 transition-all group"
-            >
-              <div className="flex items-start gap-3">
-                <span className="text-xl mt-0.5">📄</span>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <p className="font-medium text-db-dark text-sm group-hover:text-db-aqua-dark transition-colors">
-                      {item.title}
-                    </p>
-                    {item.tag && (
-                      <span className="rounded-full bg-db-aqua/20 px-2 py-0.5 text-xs font-semibold text-db-aqua-dark">
-                        {item.tag}
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-xs text-gray-500 mt-0.5">{item.description}</p>
-                </div>
-              </div>
-              <span className="text-gray-400 group-hover:text-db-aqua-dark transition-colors text-sm ml-4">↗</span>
-            </a>
-          ))}
-        </div>
+      <div className="mt-4 rounded-lg border border-db-aqua/30 bg-db-aqua/5 px-4 py-3">
+        <p className="text-xs text-gray-600">
+          <strong className="text-db-dark">Opens in browser:</strong> Click any file to view the PDF in a new tab. Right-click → Save As to download. These are the approved versions — always use these rather than saved local copies.
+        </p>
       </div>
 
-      {/* Other categories */}
-      <div className="mt-6 grid grid-cols-3 gap-4">
-        {categories.map((cat) => (
-          <div
-            key={cat.title}
-            className="rounded-lg border border-gray-200 bg-white p-5"
-          >
-            <div className="flex items-start gap-3">
-              <span className="text-2xl">{cat.icon}</span>
-              <div className="flex-1">
-                <p className="font-semibold text-db-dark text-sm">{cat.title}</p>
-                <p className="mt-1 text-xs text-gray-600">{cat.description}</p>
-                <p className="mt-3 text-xs text-gray-400">
-                  {cat.count} files available
-                </p>
-              </div>
-            </div>
-          </div>
+      <SectionHeading>Overviews & One-Pagers</SectionHeading>
+      <div className="space-y-2">
+        {OVERVIEW_DOCS.map((m) => (
+          <MaterialCard key={m.filename} {...m} />
+        ))}
+      </div>
+
+      <SectionHeading>Battle Cards</SectionHeading>
+      <div className="space-y-2">
+        {BATTLE_CARDS.map((m) => (
+          <MaterialCard key={m.filename} {...m} />
         ))}
       </div>
 
       <DrawbridgeAngle>
         <p>
-          Drawbridge is trusted by <strong>1,000+ alternative investment funds managing
-          $1.7T+ in assets</strong> and has supported over <strong>2,000 successful ODD
-          reviews</strong>. Every piece of collateral here is built on that proof — designed
-          to give clients and prospects confidence that they&apos;re working with the
-          purpose-built leader in alternative asset management cybersecurity.
+          Drawbridge is trusted by <strong>1,200+ alternative investment firms</strong> and
+          has supported over <strong>2,000 successful ODD reviews</strong>. Every piece of
+          collateral here is built on that proof — designed to give clients and prospects
+          confidence they&apos;re working with the purpose-built leader in alternative asset
+          management cybersecurity.
         </p>
         <p className="mt-2">
           Use these materials to anchor conversations in outcomes, not features. The
-          strongest pitch deck is the one that shows a client exactly where they are in the
-          <strong> Raise Your Guard → Raise Your Score → Raise Your Bar</strong> journey —
-          and what it costs to stay where they are.
+          strongest pitch is the one that shows a client exactly where they are —
+          and what it costs to stay there.
         </p>
       </DrawbridgeAngle>
-
-      <div className="mt-6 rounded-lg border-2 border-dashed border-db-aqua/40 bg-db-aqua/5 p-6 text-center">
-        <span className="text-3xl">🔗</span>
-        <p className="mt-2 font-semibold text-db-dark font-heading">
-          Connect to SharePoint
-        </p>
-        <p className="mt-1 text-sm text-gray-500">
-          Link your organization&apos;s SharePoint library to access and sync marketing
-          materials directly within Drawbridge.
-        </p>
-        <button
-          disabled
-          className="mt-4 rounded-md bg-db-aqua/30 px-5 py-2 text-sm font-medium text-db-dark cursor-not-allowed"
-        >
-          Coming Soon
-        </button>
-      </div>
     </>
   );
 }

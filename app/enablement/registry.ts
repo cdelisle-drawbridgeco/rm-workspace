@@ -229,9 +229,9 @@ export const CATEGORIES: CategoryConfig[] = [
         id: 'marketing-materials',
         title: 'Browse Materials',
         description:
-          'Pitch decks, case studies, one-pagers, and battle cards for sales conversations.',
+          'Official Drawbridge overviews, one-pagers, and battle cards — served directly from the approved brand library.',
         icon: '📁',
-        published: false,
+        published: true,
       },
     ],
   },
