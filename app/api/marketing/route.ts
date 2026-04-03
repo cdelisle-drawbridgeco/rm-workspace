@@ -13,13 +13,10 @@ const ALLOWED_FILES = new Set([
   'PE Cyber Audit Battlecard v2.pdf',
 ]);
 
-export async function GET(
-  _req: NextRequest,
-  { params }: { params: { filename: string } },
-) {
-  const filename = decodeURIComponent(params.filename);
+export async function GET(req: NextRequest) {
+  const filename = req.nextUrl.searchParams.get('file');
 
-  if (!ALLOWED_FILES.has(filename)) {
+  if (!filename || !ALLOWED_FILES.has(filename)) {
     return new NextResponse('Not found', { status: 404 });
   }
 
@@ -34,7 +31,8 @@ export async function GET(
         'Cache-Control': 'private, max-age=3600',
       },
     });
-  } catch {
-    return new NextResponse('Not found', { status: 404 });
+  } catch (err) {
+    console.error('[marketing] readFile error:', err);
+    return new NextResponse('File not found', { status: 404 });
   }
 }

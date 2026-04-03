@@ -10,7 +10,7 @@ type Material = {
 };
 
 function MaterialCard({ title, description, filename, tag }: Material) {
-  const href = `/api/marketing/${encodeURIComponent(filename)}`;
+  const href = `/api/marketing?file=${encodeURIComponent(filename)}`;
   return (
     <a
       href={href}
