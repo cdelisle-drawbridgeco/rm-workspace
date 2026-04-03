@@ -231,7 +231,7 @@ export const CATEGORIES: CategoryConfig[] = [
         description:
           'Official Drawbridge overviews, one-pagers, and battle cards — served directly from the approved brand library.',
         icon: '📁',
-        published: false,
+        published: true,
       },
     ],
   },
